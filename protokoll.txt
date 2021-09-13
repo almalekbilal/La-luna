@@ -1,0 +1,50 @@
+# Meeting Agenda
+
+Group:La luna
+Date:2021/09/06
+Chair: Deaa Khankan
+Participants: Deaa Khankan, Ali Alkhaled, Ali Malla, Bilal Al Malek
+
+
+## Objectives (5 min) 
+
+- Bestämma applikationens ide
+- Tänka på applikationens funktioner med prioritering 
+- bestämma arbetsmetodik
+- när vi ska träffa nästa gång
+- persona
+- installera trello 
+
+
+
+## Reports (15 min) from previous meeting
+
+
+
+- första mötet
+
+
+## Discussion items (35 min)
+
+- iterative and incremental
+
+-income/outcome controll applikationen där man kan bestämma bestämma en budget för hur mycket man vill spendera varje månad.
+Där budgeten delas till olika kategorier. Statistik kommer att användas för att visualisera spendningen, mm.
+Användaren registerar själv sina rörliga utgifter när hen vill. Fasta utgifter räknas automatiskt.
+- persona 18-50
+
+-funktioner med prioritering : 
+
+
+	1:Användaren kan lägga till sina egna kategorier med några defaulta.
+ 	2:Användaren kan lägga till en huvud budget/ budget till varje kategori
+	3:Statistk till spendering kommer att visas till användaren
+	4:Användaren får mata in sina inkomster där applikationen räknar sparande.
+	5:Man får en notifkation/varning när man överstiger budgeten.
+	6:man får en rapport varje månad samt några rekommendationer för att planera inför nästa månad
+
+
+
+## Wrap up
+
+- Nästa mötet är på torsdag klockan 16:00 
