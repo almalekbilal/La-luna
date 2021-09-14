@@ -1,0 +1,64 @@
+#Meeting Agenda 
+
+Group: La Luna 
+
+Date: 10/09/2021 
+
+Chair: Ali Malla 
+
+Participants: Ali Malla, Ali Alkhaled, Bilal Al Malek, Deaa Khankan 
+
+ 
+
+##Objectives 
+
+-Vi behöver bestämma designen. 
+
+-Vi behöver rita en domänmodell (domain model). 
+
+-Vi behöver förbereda oss inför seminariet (14/09/2021). 
+
+-Vi behöver ett verktyg som hjälper oss att skriva user stories 
+
+ 
+
+##Reports 
+
+Vi har bestämt vilka funktioner som ska användas i vår applikation. 
+
+Discussion items 
+
+Hur kommer applikationen att se ut? 
+
+Vilka funktioner ska vi implementera? 
+
+Hur ska domänmodellen ritas? 
+
+Hur kan vi jobba med User Stories? 
+
+Outcomes and assignments 
+
+Outcomes: 
+
+Vi har bestämt hur det ska se ut och vi vill testa det först i Figma. 
+
+Vi har pratat om funktioner som vi kommer att använda i applikationen i förra mötet (se första protokollet) men idag har vi gränsat antal funktioner som ska användas. 
+
+Vi måste slutföra domänmodellen tills måndag (13/09/2021) 
+
+Vi kommer att använda Trello applikationen som är ett underbart verktyg för att skriva User Stories . 
+
+ 
+
+Assignments: 
+
+-Alla medlemmerna ska jobba med den domänmodellen tills måndag. 
+
+-Designa applikationen i Figma med prototyper. 
+
+ 
+
+
+##Wrap up 
+
+Nästa mötet är på måndag kl. 10:30 
