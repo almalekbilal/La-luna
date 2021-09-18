@@ -1,0 +1,17 @@
+Datum: Den 12:e september 2021
+
+
+Vad vi gjorde under detta möte:
+
+- Vi tog bort en funktion från applikationen vilken var att ständigt kunna höja budgeten under den aktuella månaden genom att lägga till nya intäkter.
+
+- Till följd av den borttaggna funktionen gjordes lite små ändringar på designen (layout) och en slutgiltig design på hela applikationen bestämdes därmed.
+
+- Domänmodell och förberedelser inför seminariet gjordes färdigt.
+
+- Vi delade upp oss i små grupper (två par) för att få tydligare roller och därmed nå ett effektivt arbetssätt.
+
+- Indroduktion till databaser. Databaser togs upp översiktligt och diskuterades hur de skulle tillämpas i applikationen.
+
+
+Nästa möte kommer att vara på torsdag den 16:e sepmtember
