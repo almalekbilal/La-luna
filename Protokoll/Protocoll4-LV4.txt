@@ -1,0 +1,54 @@
+#Meeting Agenda 
+
+Group: La Luna 
+
+Date: 18/09/2021 
+
+Chair: Bilal Al Malek
+
+Participants: Ali Malla, Ali Alkhaled, Bilal Al Malek, Deaa Khankan 
+
+ 
+
+##Objectives 
+
+-Vi behöver planera hur databasen ska se ut och vilka teballer ska finnas.
+-Vi behöver rita en design model för databas delen
+-Vi behöver bestämma en datahandler som kommunicerar med databasen och dess metoder
+
+ 
+
+##Reports 
+
+I förra möter har vi bestämt klart vilka funktioner som ska finnas i applikationen och börjat lite översiktligt med databasen
+ 
+
+##Discussion items 
+
+-Vilka tabeller ska finnas i databasen?
+
+-Vilka klasser i java ska finnas som ska representera items i databasen?
+
+-Vilka metoder ska databashandler innehålla
+
+
+
+
+##Outcomes and assignments 
+
+-Vi har bestämt tabellerna i databasen, de ska vara tre stycken en för utgifter och en för katergorier och en för hantering av budgeten
+
+-Vi har bestämt att det ska finnas två klasser i Java som ska representera utgift och kategori
+
+-Vi har bestämt alla metoder i datahandler som ska kommunicera med databasen (lägga till en ny utgift, hämta kategorier .......) 
+
+-Vi har ritat ett UML diagram som ska representerar klasserna och datahandler
+
+
+
+
+##Wrap up 
+
+I nästa mötet ska vi rita en design model för layouten och bestämma de tekniska delarna med layouten
+
+Den ska vara på söndag 18/09/2021
