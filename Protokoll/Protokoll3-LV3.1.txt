@@ -1,17 +1,55 @@
-Datum: Den 12:e september 2021
+#Meeting Agenda 
+
+Group: La Luna 
+
+Date: 12/09/2021 
+
+Chair: Ali Alkhaled
+
+Participants: Ali Malla, Ali Alkhaled, Bilal Al Malek, Deaa Khankan
 
 
-Vad vi gjorde under detta möte:
+##Objectives
 
-- Vi tog bort en funktion från applikationen vilken var att ständigt kunna höja budgeten under den aktuella månaden genom att lägga till nya intäkter.
+-Vi måste göra färdigt design och layout av applikationen.
 
-- Till följd av den borttaggna funktionen gjordes lite små ändringar på designen (layout) och en slutgiltig design på hela applikationen bestämdes därmed.
+-Vi behöver skapa domänmodellen.
 
-- Domänmodell och förberedelser inför seminariet gjordes färdigt.
+-Vi behöver göra fullständiga förberedelse inför seminariet.
 
-- Vi delade upp oss i små grupper (två par) för att få tydligare roller och därmed nå ett effektivt arbetssätt.
-
-- Indroduktion till databaser. Databaser togs upp översiktligt och diskuterades hur de skulle tillämpas i applikationen.
+-Vi måste bli klara med samtliga User Stories och skriva dem på Trello.
 
 
-Nästa möte kommer att vara på torsdag den 16:e sepmtember
+##Reports
+
+-Förra mötet bestämde en prototyp på Figma och testade den.
+
+
+
+##Discussion items
+
+-Vilka roller/arbetsuppgifter respektive gruppmedlem ska ha.
+
+-Hur applikationen ska kopplas till databaser.
+
+-Hur domänmodellen kommer att se ut.
+
+
+
+##Outcomes and assignments 
+
+-Vi tog bort en funktion från applikationen vilken var att kunna höja budgeten under den aktuella månaden genom att lägga till nya intäkter.
+
+-Till följd av den borttaggna funktionen gjordes lite små ändringar på designen (layout) och en slutgiltig design på hela applikationen bestämdes därmed.
+
+-Domänmodell och förberedelser inför seminariet gjordes färdigt.
+
+-Vi delade upp oss i små grupper (två par) för att få tydligare roller och därmed nå ett effektivt arbetssätt.
+
+-Indroduktion till databaser. Databaser togs upp översiktligt och diskuterades hur de skulle tillämpas i applikationen.
+
+
+
+##Wrap up
+
+-Nästa möte kommer att vara på torsdag den 16:e sepmtember
