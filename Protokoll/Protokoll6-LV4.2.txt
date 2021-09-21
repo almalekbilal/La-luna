@@ -1,0 +1,44 @@
+#Meeting Agenda 
+
+Group: La Luna 
+
+Date: 21/09/2021 
+
+Chair: Ali Alkhaled
+
+Participants: Ali Malla, Ali Alkhaled, Bilal Al Malek, Deaa Khankan
+
+
+##Objectives
+
+-Vi måste bli klara med design model.
+
+-Vi måste börja med koden.
+
+-Vi måste göra programmeringsuppdrag utifrån User Stories.
+
+
+##Reports
+
+-Förra mötet började vi rita UML class diagram.
+
+
+
+##Discussion items
+
+-Vilka andriod komponent vi ska använda i applikation.
+
+
+
+
+##Outcomes and assignments 
+
+- Vi gjorde olika tasks utifrån User Stories på Trello
+
+- Vi skrev färdigt acceptanskriterier.
+
+
+
+##Wrap up
+
+-Nästa möte kommer att vara på torsdag den 23:e sepmtember
