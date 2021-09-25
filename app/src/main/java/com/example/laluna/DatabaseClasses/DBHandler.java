@@ -23,7 +23,7 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String queryCategoryTable = "CREATE TABLE " + TABLE_CATEGORY + "(" +
-                "_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, limit INTEGER" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, limitt INTEGER," +
                 "picture_name TEXT, color TEXT, creation_date TEXT, destroyed_date TEXT );";
 
         String queryExpenseTeble = "CREATE TABLE " + TABLE_EXPENSE + "(" +
@@ -32,7 +32,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 "FOREIGN KEY(category_id) REFERENCES " + TABLE_CATEGORY + "(_id) );";
 
         String queryLimitTable = "CREATE TABLE " + TABLE_LIMITS + "(" +
-                "_id INTEGER PRIMARY KEY AUTOINCREMENT, month TEXT, category_id INTEGER," +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT, month TEXT, category_id INTEGER, limitt INTEGER, " +
                 "FOREIGN KEY(category_id) REFERENCES " + TABLE_CATEGORY + "(_id) );";
 
         db.execSQL(queryCategoryTable);
