@@ -1,10 +1,16 @@
 package com.example.laluna.DatabaseClasses;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper {
 
@@ -48,4 +54,46 @@ public class DBHandler extends SQLiteOpenHelper {
 
         onCreate(db);
     }
+
+
+    public List<Expense> getCategoryExpense (Category category){
+        SQLiteDatabase db = getWritableDatabase();
+        List <Expense> expensesList = new ArrayList<Expense>();
+        int categoryID=category.get_id();
+        String query = "SELECT *  FROM " + TABLE_EXPENSE + "WHERE category_id =" + categoryID;
+
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+
+            int expenseValue = cursor.getInt(
+                        cursor.getColumnIndex("value") );
+
+            String []dateString = cursor.getString
+                    (cursor.getColumnIndex("date")).split("-");
+
+            Date expenseDate = new Date(Integer.parseInt(dateString[0]) - 1900
+                    , Integer.parseInt(dateString[1]) -1,
+                    Integer.parseInt(dateString[2]));
+
+                expensesList.add(new Expense(expenseValue, expenseDate, category));
+                cursor.moveToNext();
+        }
+        db.close();
+        return expensesList;
+    }
+
+    public void addExpense(Expense expense){
+        ContentValues values = new ContentValues();
+        values.put("name", expense.get_name());
+        values.put("value", expense.get_value());
+        values.put("date",Date expenseDate);
+
+    }
+
+    public stringToDate(String){
+
+
+    }
+
 }
