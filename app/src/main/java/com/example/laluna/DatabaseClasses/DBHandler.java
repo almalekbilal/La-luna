@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 public class DBHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
@@ -58,6 +59,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         onCreate(db);
     }
+
 
 
     public List<Expense> getCategoryExpense (Category category){
@@ -285,6 +287,23 @@ public class DBHandler extends SQLiteOpenHelper {
     public int getTotalSpentMoney(Date date) {
 
         return 1;
+    }
+
+
+    /**
+     * A method to add a new category to the database.
+     */
+    public void addCategory(Category category){
+        ContentValues values = new ContentValues();
+        values.put("name", category.get_name());
+        values.put("limitt", category.get_limit());
+        values.put("picture_name",category.get_pictureName());
+        values.put("color",category.get_color());
+        values.put("creation_date",category.getCreationDate().toString());
+        values.put("destroyed_date", category.getDestroyedDate().toString());
+
+        db.insert(TABLE_CATEGORY,null,values);
+        db.close();
     }
 
 
