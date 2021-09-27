@@ -307,4 +307,12 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
+    /**
+     * A method to deactivate a category
+     * @param category Category that will be deactivated
+     */
+    public void deactivateCategory(Category category){
+       // db.execSQL("DELETE FROM" + TABLE_CATEGORY + "WHERE" + "_id" + "=\"" + category.get_id() + "\";");
+        db.delete(TABLE_CATEGORY, "_id=?", new String[]{Integer.toString(category.get_id())});
+    }
 }
