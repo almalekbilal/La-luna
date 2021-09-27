@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -66,6 +67,8 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
 
+            int id = cursor.getInt(cursor.getColumnIndex("_id"));
+            String name = cursor.getString(cursor.getColumnIndex("name"));
             int expenseValue = cursor.getInt(
                         cursor.getColumnIndex("value") );
 
@@ -76,7 +79,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     , Integer.parseInt(dateString[1]) -1,
                     Integer.parseInt(dateString[2]));
 
-                expensesList.add(new Expense(expenseValue, expenseDate, category));
+                expensesList.add(new Expense(id,name,expenseValue, expenseDate, category));
                 cursor.moveToNext();
         }
         db.close();
@@ -95,5 +98,104 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
     }
+
+
+    public List<Category> getCategories(Date date){
+        return null;
+    }
+
+
+    public void setCategoriesPreviousLimits(Date date){
+        List<Category> categories = getCategories(date);
+
+        for(Category cat : categories){
+            setCategoryPreviousLimit(cat,date);
+        }
+    }
+
+
+    private void setCategoryPreviousLimit(Category category, Date date){
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        ContentValues values = new ContentValues();
+        values.put("category_id", category.get_id());
+        values.put("limitt", category.get_limit());
+        values.put("month", sdf.format(date));
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLE_LIMITS, null, values);
+        db.close();
+    }
+
+    public List<Expense> getExpenses(int start, int end){
+
+        ArrayList<Expense> expenses = new ArrayList<Expense>();
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        int limit = end - start;
+        String query = "SELECT * FROM " + TABLE_EXPENSE + " LIMIT " + limit + " OFFSET " + start + ";";
+
+        Cursor c = db.rawQuery(query, null);
+        c.moveToFirst();
+
+        while(!c.isAfterLast()){
+
+            int id = c.getInt(c.getColumnIndex("_id"));
+            int value = c.getInt(c.getColumnIndex("value"));
+            String name = c.getString(c.getColumnIndex("name"));
+            String []dateString = c.getString(c.getColumnIndex("date")).split("-");
+            Date date = new Date(Integer.parseInt(dateString[0]) - 1900, Integer.parseInt(dateString[1]) -1, Integer.parseInt(dateString[2]));
+            Category cat = getCategory(c.getInt(c.getColumnIndex("category_id")));
+
+            Expense exp = new Expense(id,name,value,date,cat);
+            expenses.add(exp);
+
+            c.moveToNext();
+        }
+
+        return expenses;
+
+    }
+
+
+    private Category getCategory(int id){
+
+        String query = "SELECT * FROM " + TABLE_CATEGORY + " WHERE _id = " + id + ";";
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        Cursor c = db.rawQuery(query, null);
+
+        c.moveToFirst();
+
+        int _id = c.getInt(c.getColumnIndex("_id"));
+        int limit = c.getInt(c.getColumnIndex("limitt"));
+        String name = c.getString(c.getColumnIndex("name"));
+        String pitureName = c.getString(c.getColumnIndex("picture_name"));
+        String color = c.getString(c.getColumnIndex("color"));
+
+        String []dateStringCreation = c.getString(c.getColumnIndex("creation_date")).split("-");
+        Date creationDate;
+        if(dateStringCreation.length == 3) {
+            creationDate = new Date(Integer.parseInt(dateStringCreation[0]) - 1900, Integer.parseInt(dateStringCreation[1]) - 1, Integer.parseInt(dateStringCreation[2]));
+        }else{
+            creationDate = null;
+        }
+
+        String []dateStringDestroyed = c.getString(c.getColumnIndex("destroyed_date")).split("-");
+        Date destroyedDate;
+        if(dateStringDestroyed.length == 3) {
+            destroyedDate = new Date(Integer.parseInt(dateStringDestroyed[0]) - 1900, Integer.parseInt(dateStringDestroyed[1]) - 1, Integer.parseInt(dateStringDestroyed[2]));
+        }else{
+            destroyedDate = null;
+        }
+
+        Category category = new Category(_id,limit,name,pitureName,color,creationDate,destroyedDate);
+        db.close();
+        return category;
+    }
+
 
 }

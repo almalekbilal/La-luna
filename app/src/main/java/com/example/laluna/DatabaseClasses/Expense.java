@@ -9,7 +9,9 @@ public class Expense {
     private Date _date;
     private Category _category;
 
-    public Expense(int _value, Date _date, Category _category) {
+    public Expense(int _id ,String _name, int _value , Date _date, Category _category) {
+        this._id = _id;
+        this._name = _name;
         this._value = _value;
         this._date = _date;
         this._category = _category;

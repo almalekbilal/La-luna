@@ -12,11 +12,14 @@ public class Category {
     private String _pictureName;
     private String _color;
 
-    public Category(int _limit, String _name, String _pictureName, String _color) {
+    public Category(int _id, int _limit, String _name, String _pictureName, String _color, Date creationDate, Date destroyedDate) {
+        this._id = _id;
         this._limit = _limit;
         this._name = _name;
         this._pictureName = _pictureName;
         this._color = _color;
+        this.creationDate = creationDate;
+        this.destroyedDate = destroyedDate;
     }
 
     public int get_id() {
