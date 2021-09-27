@@ -21,6 +21,8 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String TABLE_EXPENSE = "expenses";
     private static final String TABLE_LIMITS = "limits";
 
+    private  SQLiteDatabase db = getWritableDatabase();
+
 
     public DBHandler(@Nullable Context context, @Nullable String name,
                      @Nullable SQLiteDatabase.CursorFactory factory, int version) {
@@ -58,10 +60,10 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
     public List<Expense> getCategoryExpense (Category category){
-        SQLiteDatabase db = getWritableDatabase();
         List <Expense> expensesList = new ArrayList<Expense>();
         int categoryID=category.get_id();
-        String query = "SELECT *  FROM " + TABLE_EXPENSE + "WHERE category_id =" + categoryID;
+        String query = "SELECT *  FROM " + TABLE_EXPENSE + "WHERE category_id ="
+                + categoryID + ";";
 
         Cursor cursor = db.rawQuery(query,null);
         cursor.moveToFirst();
@@ -69,15 +71,14 @@ public class DBHandler extends SQLiteOpenHelper {
 
             int id = cursor.getInt(cursor.getColumnIndex("_id"));
             String name = cursor.getString(cursor.getColumnIndex("name"));
+
             int expenseValue = cursor.getInt(
                         cursor.getColumnIndex("value") );
 
             String []dateString = cursor.getString
                     (cursor.getColumnIndex("date")).split("-");
 
-            Date expenseDate = new Date(Integer.parseInt(dateString[0]) - 1900
-                    , Integer.parseInt(dateString[1]) -1,
-                    Integer.parseInt(dateString[2]));
+            Date expenseDate = stringToDate(dateString);
 
                 expensesList.add(new Expense(id,name,expenseValue, expenseDate, category));
                 cursor.moveToNext();
@@ -86,23 +87,84 @@ public class DBHandler extends SQLiteOpenHelper {
         return expensesList;
     }
 
+
+
+
+
+
+    // Adding an expense to Data Base
     public void addExpense(Expense expense){
         ContentValues values = new ContentValues();
         values.put("name", expense.get_name());
         values.put("value", expense.get_value());
-        values.put("date",Date expenseDate);
+        values.put("date",expense.get_date().toString());
+        values.put("category_id", expense.get_category().get_id());
 
+        db.insert(TABLE_EXPENSE,null,values);
+        db.close();
     }
 
-    public stringToDate(String){
 
 
+
+
+
+    //Convert dateString to Date
+    private Date stringToDate(String dateString[] ){
+        return new Date (Integer.parseInt(dateString[0]) - 1900
+                    , Integer.parseInt(dateString[1]) -1,
+                Integer.parseInt(dateString[2]));
     }
 
 
+
+
+
+        // Not done yet
     public List<Category> getCategories(Date date){
-        return null;
+        List <Category> categories = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_CATEGORY + "WHERE" + date +
+                "BETWEEN  creation_date AND destroyed_date;";
+
+        Cursor cursor= db.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+
+             int _id =cursor.getInt(cursor.getColumnIndex("_id"));
+             int _limit = cursor.getInt(cursor.getColumnIndex("limitt"));
+
+             Date creationDate = stringToDate(cursor.getString(cursor.getColumnIndex(" creation_date")).split("-"));
+             Date destroyedDate= stringToDate(cursor.getString(cursor.getColumnIndex(" destroyed_date")).split("-"));
+             String _name = cursor.getString(cursor.getColumnIndex("name"));
+             String _pictureName = cursor.getString(cursor.getColumnIndex("picture_name"));
+             String _color = cursor.getString(cursor.getColumnIndex("color"));
+
+             categories.add(new Category(_id,_limit,_name, _pictureName, _color, creationDate, destroyedDate ));
+            cursor.moveToNext();
+        }
+        db.close();
+        return categories;
     }
+
+
+
+
+
+    //updating expenses table in the database
+    public void updateExpense(Expense expense){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("_id",expense.get_id());
+        contentValues.put("name",expense.get_name() );
+        contentValues.put("date",expense.get_date().toString());
+        contentValues.put("category_id",expense.get_category().get_id());
+        contentValues.put("id",expense.get_value());
+    }
+
+
+
+
+
 
 
     public void setCategoriesPreviousLimits(Date date){
@@ -112,6 +174,11 @@ public class DBHandler extends SQLiteOpenHelper {
             setCategoryPreviousLimit(cat,date);
         }
     }
+
+
+
+
+
 
 
     private void setCategoryPreviousLimit(Category category, Date date){
@@ -127,6 +194,10 @@ public class DBHandler extends SQLiteOpenHelper {
         db.insert(TABLE_LIMITS, null, values);
         db.close();
     }
+
+
+
+
 
     public List<Expense> getExpenses(int start, int end){
 
@@ -160,6 +231,11 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
+
+
+
+
+// Return a specific category by ID
     private Category getCategory(int id){
 
         String query = "SELECT * FROM " + TABLE_CATEGORY + " WHERE _id = " + id + ";";
