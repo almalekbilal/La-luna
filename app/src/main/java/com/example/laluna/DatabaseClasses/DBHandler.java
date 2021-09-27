@@ -94,7 +94,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
-    public stringToDate(String){
+    public Date stringToDate(String str){
 
 
     }
@@ -195,6 +195,20 @@ public class DBHandler extends SQLiteOpenHelper {
         Category category = new Category(_id,limit,name,pitureName,color,creationDate,destroyedDate);
         db.close();
         return category;
+    }
+
+
+    public void deleteExpense(Expense expense) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        final int id = expense.get_id();
+        db.delete(TABLE_EXPENSE, "_id=?", new String[]{Integer.toString(id)});
+
+    }
+
+    public int getTotalSpentMoney(Date date) {
+
+        return 1;
     }
 
 
