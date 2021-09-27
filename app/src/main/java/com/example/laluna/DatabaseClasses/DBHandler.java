@@ -21,6 +21,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String TABLE_EXPENSE = "expenses";
     private static final String TABLE_LIMITS = "limits";
 
+
     private  SQLiteDatabase db = getWritableDatabase();
 
 
@@ -276,7 +277,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void deleteExpense(Expense expense) {
 
-        SQLiteDatabase db = this.getWritableDatabase();
         final int id = expense.get_id();
         db.delete(TABLE_EXPENSE, "_id=?", new String[]{Integer.toString(id)});
 
