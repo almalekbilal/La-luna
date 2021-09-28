@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -78,10 +79,8 @@ public class DBHandler extends SQLiteOpenHelper {
             int expenseValue = cursor.getInt(
                         cursor.getColumnIndex("value") );
 
-            String []dateString = cursor.getString
-                    (cursor.getColumnIndex("date")).split("-");
 
-            Date expenseDate = stringToDate(dateString);
+            Date expenseDate = stringToDate(cursor.getString(cursor.getColumnIndex("date")));
 
                 expensesList.add(new Expense(id,name,expenseValue, expenseDate, category));
                 cursor.moveToNext();
@@ -100,6 +99,8 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("name", expense.get_name());
         values.put("value", expense.get_value());
+
+        // Fel här
         values.put("date",expense.get_date().toString());
         values.put("category_id", expense.get_category().get_id());
 
@@ -113,10 +114,15 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
     //Convert dateString to Date
-    private Date stringToDate(String dateString[] ){
-        return new Date (Integer.parseInt(dateString[0]) - 1900
-                    , Integer.parseInt(dateString[1]) -1,
-                Integer.parseInt(dateString[2]));
+    private Date stringToDate(String dateString){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = sdf.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 
 
@@ -126,6 +132,8 @@ public class DBHandler extends SQLiteOpenHelper {
         // Not done yet
     public List<Category> getCategories(Date date){
         List <Category> categories = new ArrayList<>();
+
+        // Fel här
         String query = "SELECT * FROM " + TABLE_CATEGORY + "WHERE" + date +
                 "BETWEEN  creation_date AND destroyed_date;";
 
@@ -137,8 +145,8 @@ public class DBHandler extends SQLiteOpenHelper {
              int _id =cursor.getInt(cursor.getColumnIndex("_id"));
              int _limit = cursor.getInt(cursor.getColumnIndex("limitt"));
 
-             Date creationDate = stringToDate(cursor.getString(cursor.getColumnIndex(" creation_date")).split("-"));
-             Date destroyedDate= stringToDate(cursor.getString(cursor.getColumnIndex(" destroyed_date")).split("-"));
+             Date creationDate = stringToDate(cursor.getString(cursor.getColumnIndex(" creation_date")));
+             Date destroyedDate= stringToDate(cursor.getString(cursor.getColumnIndex(" destroyed_date")));
              String _name = cursor.getString(cursor.getColumnIndex("name"));
              String _pictureName = cursor.getString(cursor.getColumnIndex("picture_name"));
              String _color = cursor.getString(cursor.getColumnIndex("color"));
@@ -219,8 +227,7 @@ public class DBHandler extends SQLiteOpenHelper {
             int id = c.getInt(c.getColumnIndex("_id"));
             int value = c.getInt(c.getColumnIndex("value"));
             String name = c.getString(c.getColumnIndex("name"));
-            String []dateString = c.getString(c.getColumnIndex("date")).split("-");
-            Date date = new Date(Integer.parseInt(dateString[0]) - 1900, Integer.parseInt(dateString[1]) -1, Integer.parseInt(dateString[2]));
+            Date date = stringToDate(c.getString(c.getColumnIndex("date")));
             Category cat = getCategory(c.getInt(c.getColumnIndex("category_id")));
 
             Expense exp = new Expense(id,name,value,date,cat);
@@ -254,22 +261,9 @@ public class DBHandler extends SQLiteOpenHelper {
         String name = c.getString(c.getColumnIndex("name"));
         String pitureName = c.getString(c.getColumnIndex("picture_name"));
         String color = c.getString(c.getColumnIndex("color"));
+        Date creationDate = stringToDate(c.getString(c.getColumnIndex("creation_date")));
+        Date destroyedDate = stringToDate(c.getString(c.getColumnIndex("destroyed_date")));
 
-        String []dateStringCreation = c.getString(c.getColumnIndex("creation_date")).split("-");
-        Date creationDate;
-        if(dateStringCreation.length == 3) {
-            creationDate = new Date(Integer.parseInt(dateStringCreation[0]) - 1900, Integer.parseInt(dateStringCreation[1]) - 1, Integer.parseInt(dateStringCreation[2]));
-        }else{
-            creationDate = null;
-        }
-
-        String []dateStringDestroyed = c.getString(c.getColumnIndex("destroyed_date")).split("-");
-        Date destroyedDate;
-        if(dateStringDestroyed.length == 3) {
-            destroyedDate = new Date(Integer.parseInt(dateStringDestroyed[0]) - 1900, Integer.parseInt(dateStringDestroyed[1]) - 1, Integer.parseInt(dateStringDestroyed[2]));
-        }else{
-            destroyedDate = null;
-        }
 
         Category category = new Category(_id,limit,name,pitureName,color,creationDate,destroyedDate);
         db.close();
@@ -299,6 +293,8 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("limitt", category.get_limit());
         values.put("picture_name",category.get_pictureName());
         values.put("color",category.get_color());
+
+        // Fel här
         values.put("creation_date",category.getCreationDate().toString());
         values.put("destroyed_date", category.getDestroyedDate().toString());
 
@@ -312,7 +308,47 @@ public class DBHandler extends SQLiteOpenHelper {
      * @param category Category that will be deactivated
      */
     public void deactivateCategory(Category category){
+
+        // Fel här
        // db.execSQL("DELETE FROM" + TABLE_CATEGORY + "WHERE" + "_id" + "=\"" + category.get_id() + "\";");
         db.delete(TABLE_CATEGORY, "_id=?", new String[]{Integer.toString(category.get_id())});
+    }
+
+
+    public int getCategoryLimit(Date date, Category category){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String query = "SELECT limitt FROM " + TABLE_LIMITS + " WHERE category_id = " + category.get_id() + " AND month = " + sdf.format(date) + " ;";
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery(query,null);
+        c.moveToFirst();
+
+        int limit = c.getInt(c.getColumnIndex("limitt"));
+
+        db.close();
+
+        return limit;
+    }
+
+    public int getTotalBudget(Date date){
+
+        int totalBudget = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String query = "SELECT limitt FROM " + TABLE_LIMITS + " WHERE month = " + sdf.format(date) + " ;";
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery(query,null);
+        c.moveToFirst();
+
+        while(!c.isAfterLast()){
+            int limit = c.getInt(c.getColumnIndex("limitt"));
+            totalBudget += limit;
+            c.moveToNext();
+        }
+
+        db.close();
+
+
+        return totalBudget;
     }
 }
