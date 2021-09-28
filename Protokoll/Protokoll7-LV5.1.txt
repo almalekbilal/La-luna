@@ -1,0 +1,24 @@
+
+group: La Luna 
+
+Date: 23/09/2021 
+
+Chair: Deaa Khankan
+
+Participants: Ali Malla, Ali Alkhaled, Bilal Al Malek, Deaa Khankan
+
+
+##Objectives
+
+- vi måste klara databas metoder 
+- vi ska vara klara med rad i helgen
+
+
+##Outcomes and assignments 
+
+Idag har vi delat databas metoder samt rad mellan oss. 
+
+
+##Wrap up
+
+-Nästa möte kommer att vara på torsdag den 28:e sepmtember
