@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,6 +21,8 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String TABLE_CATEGORY = "categories";
     private static final String TABLE_EXPENSE = "expenses";
     private static final String TABLE_LIMITS = "limits";
+
+    private SQLiteDatabase db_readable = getReadableDatabase();
 
 
     public DBHandler(@Nullable Context context, @Nullable String name,
@@ -202,14 +205,54 @@ public class DBHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         final int id = expense.get_id();
-        db.delete(TABLE_EXPENSE, "_id=?", new String[]{Integer.toString(id)});
+        db.execSQL("DELETE FROM "+ TABLE_EXPENSE + " WHERE _id=" + Integer.toString(id) + ";" );
+        db.close();
 
     }
 
     public int getTotalSpentMoney(Date date) {
 
-        return 1;
+        int totalMoneySpent = 0;
+
+        final int month = date.getMonth();
+        final int year = date.getYear();
+
+        Cursor cursor = db_readable.rawQuery("SELECT * FROM "+ TABLE_EXPENSE,null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+
+            String strDate = cursor.getString(3);
+            String [] splitDate = strDate.split("-");
+
+            if (month == Integer.parseInt(splitDate[0]) && year == Integer.parseInt(splitDate[1])) {
+                totalMoneySpent += cursor.getInt(2);
+            }
+
+            cursor.moveToNext();
+        }
+
+        db_readable.close();
+
+        return totalMoneySpent;
     }
 
 
 }
+
+
+
+ /*try {
+final Date stringToDate = new SimpleDateFormat("yyyy-mm-dd").parse(strDate);
+final String monthFormat = Integer.toString(stringToDate.getMonth());
+final String yearFormat = Integer.toString(stringToDate.getYear());
+
+        if (year.equals(yearFormat) && month.equals(monthFormat)) {
+        totalMoneySpent += cursor.getInt(2);
+
+        }
+        } catch (ParseException e) {
+        e.printStackTrace();
+        }
+
+  */
