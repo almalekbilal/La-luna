@@ -312,7 +312,43 @@ public class DBHandler extends SQLiteOpenHelper {
      * @param category Category that will be deactivated
      */
     public void deactivateCategory(Category category){
-       // db.execSQL("DELETE FROM" + TABLE_CATEGORY + "WHERE" + "_id" + "=\"" + category.get_id() + "\";");
+       // db.execSQL("DELETE FROM" + TABLE_CATEGORY + "WHERE" + "_id" + "=\"" + category.get_id() + "\";"); // This might also work
         db.delete(TABLE_CATEGORY, "_id=?", new String[]{Integer.toString(category.get_id())});
+
     }
+    /**
+     * A method to update category in database
+     * @param category Category that will be updating
+     */
+    public void updateCategory(Category category){
+        ContentValues values = new ContentValues();
+        values.put("name", category.get_name());
+        values.put("limitt", category.get_limit());
+        values.put("picture_name",category.get_pictureName());
+        values.put("color",category.get_color());
+        values.put("creation_date",category.getCreationDate().toString());
+        values.put("destroyed_date", category.getDestroyedDate().toString());
+    }
+
+    /**
+     * A method to change category name
+     * @param category Category that will be changed
+     * @param categoryName The new category name
+     */
+    public void updateCategoryName(Category category,String categoryName){
+        category.set_name(categoryName);
+        updateCategory(category);
+    }
+
+    /**
+     * A method to change category budget
+     * @param category Category that will be changed
+     * @param budget the new category budget
+     */
+    public void updateCategoryBudget(Category category, int budget){
+        category.set_limit(budget);
+        updateCategory(category);
+    }
+
+
 }
