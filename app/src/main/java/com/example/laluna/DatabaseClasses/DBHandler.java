@@ -24,9 +24,8 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String TABLE_LIMITS = "limits";
 
     private SQLiteDatabase db_readable = getReadableDatabase();
+    private SQLiteDatabase db_writeable = getWritableDatabase();
 
-
-    private  SQLiteDatabase db = getWritableDatabase();
 
 
     public DBHandler(@Nullable Context context, @Nullable String name,
@@ -71,7 +70,7 @@ public class DBHandler extends SQLiteOpenHelper {
         String query = "SELECT *  FROM " + TABLE_EXPENSE + "WHERE category_id ="
                 + categoryID + ";";
 
-        Cursor cursor = db.rawQuery(query,null);
+        Cursor cursor = db_writeable.rawQuery(query,null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
 
@@ -87,11 +86,9 @@ public class DBHandler extends SQLiteOpenHelper {
                 expensesList.add(new Expense(id,name,expenseValue, expenseDate, category));
                 cursor.moveToNext();
         }
-        db.close();
+        db_writeable.close();
         return expensesList;
     }
-
-
 
 
 
@@ -107,12 +104,9 @@ public class DBHandler extends SQLiteOpenHelper {
 
         values.put("category_id", expense.get_category().get_id());
 
-        db.insert(TABLE_EXPENSE,null,values);
-        db.close();
+        db_writeable.insert(TABLE_EXPENSE,null,values);
+        db_writeable.close();
     }
-
-
-
 
 
 
@@ -134,8 +128,6 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
-
-
         // Not done yet
     public List<Category> getCategories(Date date){
         List <Category> categories = new ArrayList<>();
@@ -143,7 +135,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         String query = "SELECT * FROM " + TABLE_CATEGORY + " ;";
 
-        Cursor cursor= db.rawQuery(query, null);
+        Cursor cursor= db_writeable.rawQuery(query, null);
         cursor.moveToFirst();
 
 
@@ -165,7 +157,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
             cursor.moveToNext();
         }
-        db.close();
+        db_writeable.close();
         return categories;
     }
 
@@ -192,8 +184,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
-
-
     //updating expenses table in the database
     public void updateExpense(Expense expense){
         ContentValues contentValues = new ContentValues();
@@ -203,13 +193,9 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("category_id",expense.get_category().get_id());
         contentValues.put("value",expense.get_value());
 
-        db.update(TABLE_EXPENSE, contentValues, "_id=?", new String[]{expense.get_id() + ""});
-        db.close();
+        db_writeable.update(TABLE_EXPENSE, contentValues, "_id=?", new String[]{expense.get_id() + ""});
+        db_writeable.close();
     }
-
-
-
-
 
 
 
@@ -220,9 +206,6 @@ public class DBHandler extends SQLiteOpenHelper {
             setCategoryPreviousLimit(cat,date);
         }
     }
-
-
-
 
 
 
@@ -240,8 +223,6 @@ public class DBHandler extends SQLiteOpenHelper {
         db.insert(TABLE_LIMITS, null, values);
         db.close();
     }
-
-
 
 
 
@@ -306,15 +287,45 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
+    /**
+     * A method for deleting an existing expense from the database.
+     * @param expense represents the expense that will be deleted.
+     */
     public void deleteExpense(Expense expense) {
-
         final int id = expense.get_id();
-        db.execSQL("DELETE FROM "+ TABLE_EXPENSE + " WHERE _id=" + id + ";" );
-        db.close();
-
+        db_writeable.execSQL("DELETE FROM "+ TABLE_EXPENSE + " WHERE _id=" + Integer.toString(id) + ";" );
+        db_writeable.close();
     }
 
-    public int getTotalSpentMoney(Date date) {
+
+    /**
+     * A method for calculating all money spent so far in a certain month.
+     * @param date represents the date in which the money was spent.
+     *             The days in the given date have no significance in the result in this case.
+     * @return Amount money spent in the whole month in the given date.
+     */
+    public int getTotalMoneySpent(Date date){
+        String query = "SELECT value, date FROM " + TABLE_EXPENSE + " ;";
+        final int totalMoney = getTotalMoney(date, query);
+        return totalMoney;
+    }
+
+    /**
+     * A method for calculating all money spent so far in a certain month within a specific category.
+     * @param date represents the date in which the money was spent.
+     *             The days in the given date have no significance in the result in this case.
+     * @param category represents the category within which the money was spent.
+     * @return Amount money spent within the given category during the given month.
+     */
+    public int getTotalSpentByCategory(Date date, Category category){
+        String query = "SELECT value, date FROM " + TABLE_EXPENSE +
+                " WHERE category_id = "+ category.get_id() + " ;";
+        final int totalMoney = getTotalMoney(date, query);
+        return totalMoney;
+    }
+
+    //Helper
+    private int getTotalMoney(Date date, String query) {
 
         int totalMoneySpent = 0;
 
@@ -322,15 +333,15 @@ public class DBHandler extends SQLiteOpenHelper {
         final int month = date.getMonth();
         final int year = date.getYear();
 
-        Cursor cursor = db_readable.rawQuery("SELECT value FROM "+ TABLE_EXPENSE,null);
+        Cursor cursor = db_readable.rawQuery(query,null);
+
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
 
-            String strDate = cursor.getString(3);
+            String strDate = cursor.getString(cursor.getColumnIndex("date"));
             String [] splitDate = strDate.split("-");
-
-            if (month == Integer.parseInt(splitDate[0]) && year == Integer.parseInt(splitDate[1])) {
+            if (year == Integer.parseInt(splitDate[0]) && month == Integer.parseInt(splitDate[1])) {
                 totalMoneySpent += cursor.getInt(cursor.getColumnIndex("value"));
             }
 
@@ -358,8 +369,8 @@ public class DBHandler extends SQLiteOpenHelper {
         }
 
 
-        db.insert(TABLE_CATEGORY,null,values);
-        db.close();
+        db_writeable.insert(TABLE_CATEGORY,null,values);
+        db_writeable.close();
     }
 
 
@@ -386,8 +397,8 @@ public class DBHandler extends SQLiteOpenHelper {
         if(category.getDestroyedDate() != null) {
             values.put("destroyed_date", dateToString(category.getDestroyedDate()));
         }
-        db.update(TABLE_CATEGORY,values,"_id=?", new String[]{category.get_id() + ""});
-        db.close();
+        db_writeable.update(TABLE_CATEGORY,values,"_id=?", new String[]{category.get_id() + ""});
+        db_writeable.close();
     }
 
 
