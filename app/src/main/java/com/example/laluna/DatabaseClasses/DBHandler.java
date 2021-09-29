@@ -23,8 +23,6 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String TABLE_EXPENSE = "expenses";
     private static final String TABLE_LIMITS = "limits";
 
-    private SQLiteDatabase db_readable = getReadableDatabase();
-    private SQLiteDatabase db_writeable = getWritableDatabase();
 
 
 
@@ -70,7 +68,8 @@ public class DBHandler extends SQLiteOpenHelper {
         String query = "SELECT *  FROM " + TABLE_EXPENSE + "WHERE category_id ="
                 + categoryID + ";";
 
-        Cursor cursor = db_writeable.rawQuery(query,null);
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery(query,null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
 
@@ -86,7 +85,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 expensesList.add(new Expense(id,name,expenseValue, expenseDate, category));
                 cursor.moveToNext();
         }
-        db_writeable.close();
+        db.close();
         return expensesList;
     }
 
@@ -98,24 +97,27 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("name", expense.get_name());
         values.put("value", expense.get_value());
-
         // Fel här
-        values.put("date",expense.get_date().toString());
-
+        values.put("date",dateToString(expense.get_date()));
         values.put("category_id", expense.get_category().get_id());
 
-        db_writeable.insert(TABLE_EXPENSE,null,values);
-        db_writeable.close();
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.insert(TABLE_EXPENSE,null,values);
+        db.close();
     }
 
 
 
     //Convert dateString to Date
     private Date stringToDate(String dateString){
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {
-            date = sdf.parse(dateString);
+            if(dateString != null) {
+                date = sdf.parse(dateString);
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -135,7 +137,9 @@ public class DBHandler extends SQLiteOpenHelper {
 
         String query = "SELECT * FROM " + TABLE_CATEGORY + " ;";
 
-        Cursor cursor= db_writeable.rawQuery(query, null);
+        SQLiteDatabase db = getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
 
 
@@ -157,7 +161,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
             cursor.moveToNext();
         }
-        db_writeable.close();
+        db.close();
         return categories;
     }
 
@@ -193,8 +197,10 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("category_id",expense.get_category().get_id());
         contentValues.put("value",expense.get_value());
 
-        db_writeable.update(TABLE_EXPENSE, contentValues, "_id=?", new String[]{expense.get_id() + ""});
-        db_writeable.close();
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.update(TABLE_EXPENSE, contentValues, "_id=?", new String[]{expense.get_id() + ""});
+        db.close();
     }
 
 
@@ -293,8 +299,10 @@ public class DBHandler extends SQLiteOpenHelper {
      */
     public void deleteExpense(Expense expense) {
         final int id = expense.get_id();
-        db_writeable.execSQL("DELETE FROM "+ TABLE_EXPENSE + " WHERE _id=" + Integer.toString(id) + ";" );
-        db_writeable.close();
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.execSQL("DELETE FROM "+ TABLE_EXPENSE + " WHERE _id=" + Integer.toString(id) + ";" );
+        db.close();
     }
 
 
@@ -333,7 +341,9 @@ public class DBHandler extends SQLiteOpenHelper {
         final int month = date.getMonth();
         final int year = date.getYear();
 
-        Cursor cursor = db_readable.rawQuery(query,null);
+        SQLiteDatabase db = getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query,null);
 
         cursor.moveToFirst();
 
@@ -348,7 +358,7 @@ public class DBHandler extends SQLiteOpenHelper {
             cursor.moveToNext();
         }
 
-        db_readable.close();
+        db.close();
 
         return totalMoneySpent;
     }
@@ -368,9 +378,10 @@ public class DBHandler extends SQLiteOpenHelper {
             values.put("creation_date", dateToString(category.getCreationDate()));
         }
 
+        SQLiteDatabase db = getWritableDatabase();
 
-        db_writeable.insert(TABLE_CATEGORY,null,values);
-        db_writeable.close();
+        db.insert(TABLE_CATEGORY,null,values);
+        db.close();
     }
 
 
@@ -397,8 +408,11 @@ public class DBHandler extends SQLiteOpenHelper {
         if(category.getDestroyedDate() != null) {
             values.put("destroyed_date", dateToString(category.getDestroyedDate()));
         }
-        db_writeable.update(TABLE_CATEGORY,values,"_id=?", new String[]{category.get_id() + ""});
-        db_writeable.close();
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.update(TABLE_CATEGORY,values,"_id=?", new String[]{category.get_id() + ""});
+        db.close();
     }
 
 
