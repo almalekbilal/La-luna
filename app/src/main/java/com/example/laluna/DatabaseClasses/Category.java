@@ -26,10 +26,6 @@ public class Category {
         return _id;
     }
 
-    public void set_id(int _id) {
-        this._id = _id;
-    }
-
     public Date getCreationDate() {
         return creationDate;
     }

@@ -65,7 +65,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public List<Expense> getCategoryExpense (Category category){
         List <Expense> expensesList = new ArrayList<Expense>();
         int categoryID=category.get_id();
-        String query = "SELECT *  FROM " + TABLE_EXPENSE + "WHERE category_id ="
+        String query = "SELECT *  FROM " + TABLE_EXPENSE + " WHERE category_id = "
                 + categoryID + ";";
 
         SQLiteDatabase db = getWritableDatabase();
@@ -82,7 +82,9 @@ public class DBHandler extends SQLiteOpenHelper {
 
             Date expenseDate = stringToDate(cursor.getString(cursor.getColumnIndex("date")));
 
-                expensesList.add(new Expense(id,name,expenseValue, expenseDate, category));
+            Category expenseCategory = getCategory(cursor.getInt(cursor.getColumnIndex("category_id")));
+
+                expensesList.add(new Expense(id,name,expenseValue, expenseDate, expenseCategory));
                 cursor.moveToNext();
         }
         db.close();
@@ -175,7 +177,7 @@ public class DBHandler extends SQLiteOpenHelper {
         }else{
             Date creationDate = stringToDate(cursor.getString(cursor.getColumnIndex("creation_date")));
             Date destroyedDate;
-            if(cursor.isNull(cursor.getColumnIndex("creation_date"))){
+            if(cursor.isNull(cursor.getColumnIndex("destroyed_date"))){
                 destroyedDate = new Date();
             }else{
                 destroyedDate = stringToDate(cursor.getString(cursor.getColumnIndex("destroyed_date")));
@@ -367,21 +369,26 @@ public class DBHandler extends SQLiteOpenHelper {
     /**
      * A method to add a new category to the database.
      */
-    public void addCategory(Category category){
+    public Category addCategory(String name, int limit, String pitureName,String color, Date creation){
         ContentValues values = new ContentValues();
-        values.put("name", category.get_name());
-        values.put("limitt", category.get_limit());
-        values.put("picture_name",category.get_pictureName());
-        values.put("color",category.get_color());
+        values.put("name", name);
+        values.put("limitt", limit);
+        values.put("picture_name",pitureName);
+        values.put("color",color);
 
-        if(category.getCreationDate() != null) {
-            values.put("creation_date", dateToString(category.getCreationDate()));
+        if(creation != null) {
+            values.put("creation_date", dateToString(creation));
         }
 
         SQLiteDatabase db = getWritableDatabase();
 
-        db.insert(TABLE_CATEGORY,null,values);
+        int id = (int)db.insert(TABLE_CATEGORY,null,values);
+
+        Category newCategory = new Category(id, limit,name,pitureName,color,creation,null);
+
         db.close();
+
+        return newCategory;
     }
 
 
