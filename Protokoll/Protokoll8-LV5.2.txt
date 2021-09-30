@@ -15,7 +15,6 @@ Participants: Ali Malla, Ali Alkhaled, Bilal Al Malek, Deaa Khankan
  
 -Vi behöver diskutera de databasmetoder som har implementerats.
 -Vi behöver bestämma en tid för att testa de databasmetoderna.
--Vi b
 
  
 
