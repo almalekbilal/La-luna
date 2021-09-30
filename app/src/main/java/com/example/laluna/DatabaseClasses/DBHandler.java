@@ -95,21 +95,23 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
     // Adding an expense to Data Base
-    public void addExpense(Expense expense){
+    public Expense addExpense(String name, int value, Date date, Category category){
         ContentValues values = new ContentValues();
-        values.put("name", expense.get_name());
-        values.put("value", expense.get_value());
-        // Fel här
-        values.put("date",dateToString(expense.get_date()));
-        values.put("category_id", expense.get_category().get_id());
+        values.put("name", name);
+        values.put("value", value);
+
+        values.put("date",dateToString(date));
+
+        values.put("category_id", category.get_id());  //Not sure!
 
         SQLiteDatabase db = getWritableDatabase();
 
-        db.insert(TABLE_EXPENSE,null,values);
+        int id = (int) db.insert(TABLE_EXPENSE, null, values);
+        Expense expense = new Expense(id,name,value,date,category);
         db.close();
+
+        return expense;
     }
-
-
 
     //Convert dateString to Date
     private Date stringToDate(String dateString){
