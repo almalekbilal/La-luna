@@ -44,7 +44,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void addCategoryTest(){
-        db.addCategory(new Category(8,2000, "Fuck junit", null,null,null,null));
+      //  db.addCategory(new Category(8,2000, "Fuck junit", null,null,null,null));
 
         List<Category> categories = db.getCategories(new Date());
 
