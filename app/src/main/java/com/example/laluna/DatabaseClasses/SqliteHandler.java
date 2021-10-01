@@ -444,7 +444,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     public int getTotalBudget(Date date){
 
         int totalBudget = 0;
-        String query = "SELECT limitt FROM " + TABLE_LIMITS + " WHERE month = " + dateToString(date) + " ;";
+        String query = "SELECT limitt FROM " + TABLE_LIMITS + " WHERE month = '" + dateToString(date) + "' ;";
 
         SQLiteDatabase db = getWritableDatabase();
         Cursor c = db.rawQuery(query,null);

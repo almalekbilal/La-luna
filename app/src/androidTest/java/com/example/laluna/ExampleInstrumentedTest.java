@@ -189,7 +189,38 @@ public class ExampleInstrumentedTest {
         assertEquals(totalMoney, 110);
     }
 
+    @Test
+    public void getTotalBudgetTest(){
+
+        db.addCategory("Mat",2000,null,null,new Date(121,5,1));
+
+        db.addCategory("Kaffe",150,null,null,new Date(121,5,1));
+
+        db.addCategory("Kläder",500,null,null,new Date(121,5,1));
+
+        db.addCategory("Snacks",200,null,null,new Date(121,5,1));
+
+        db.addCategory("Mat",1000,null,null,new Date(121,6,1));
+
+        db.addCategory("Kaffe",150,null,null,new Date(121,6,1));
+
+        db.addCategory("Kläder",500,null,null,new Date(121,6,1));
+
+        db.addCategory("Snacks",200,null,null,new Date(121,6,1));
+
+        db.setCategoriesPreviousLimits(new Date(121,5,1));
+
+        db.setCategoriesPreviousLimits(new Date(121,6,1));
+
+        int budget = db.getTotalBudget(new Date(121,5,1));
+
+        assertEquals(2850,budget);
+
+    }
+
+
 }
+
 
 
 
