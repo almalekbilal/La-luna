@@ -1,9 +1,5 @@
 package com.example.laluna;
 
-import android.content.Context;
-
-import com.example.laluna.DatabaseClasses.DBHandler;
-
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -6,11 +6,10 @@ import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.example.laluna.DatabaseClasses.Category;
-import com.example.laluna.DatabaseClasses.DBHandler;
+import com.example.laluna.DatabaseClasses.SqliteHandler;
 import com.example.laluna.DatabaseClasses.Expense;
 
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,7 +31,7 @@ public class ExampleInstrumentedTest {
 
     Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-    DBHandler db = new DBHandler(appContext, null, null, 1);
+    SqliteHandler db = new SqliteHandler(appContext, null, null, 1);
 
 
     @Before
