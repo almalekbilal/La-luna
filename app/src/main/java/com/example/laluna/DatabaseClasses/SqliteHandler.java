@@ -354,7 +354,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
             String strDate = cursor.getString(cursor.getColumnIndex("date"));
             String [] splitDate = strDate.split("-");
-            if (year == Integer.parseInt(splitDate[0]) && month == Integer.parseInt(splitDate[1])) {
+            if (year == Integer.parseInt(splitDate[0]) && month == Integer.parseInt(splitDate[1])-1) {
                 totalMoneySpent += cursor.getInt(cursor.getColumnIndex("value"));
             }
 

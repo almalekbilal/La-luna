@@ -35,7 +35,7 @@ public class ExampleInstrumentedTest {
 
 
     @Before
-    public void destoryDataBase() {
+    public void destroyDataBase() {
         appContext.deleteDatabase("laluna.db");
     }
 
@@ -147,6 +147,46 @@ public class ExampleInstrumentedTest {
         List<Expense> expenses = db.getExpenses(0,10);
         assertEquals(expenses.get(0).get_value(),400);
 
+    }
+
+    @Test
+    public void getTotalMoneySpentTest(){
+        Category c1 = db.addCategory("food",100,"pic1", "blue",new Date(120,5,1));
+        Category c2 = db.addCategory("car",500,"pic2", "red",new Date(2020,05,01));
+
+
+        db.addExpense("KFC", 45, new Date(120,5,1), c1);
+        db.addExpense("Book", 150, new Date(120, 5, 6), c2);
+        db.addExpense("Internet", 120, new Date(120, 5, 6), c2);
+        db.addExpense("Ice cream", 19, new Date(121, 5, 6), c2); // does not count
+        db.addExpense("Book", 98, new Date(120, 1, 6), c2); //does not count
+        Expense expense = db.addExpense("Clothes", 90, new Date(120, 5, 6), c2); // does not count
+        db.deleteExpense(expense);
+
+
+        int totalMoney = db.getTotalMoneySpent(new Date(2020,5,1));
+        assertEquals(totalMoney,315);
+
+    }
+
+    @Test
+    public void getTotalMoneySpentByCategoryTest() {
+        Category c = db.addCategory("food",100,"pic1", "blue",new Date(121,5,1));
+
+        db.addExpense("Book", 21, new Date(121, 5, 4), c);
+        db.addExpense("Burger", 22, new Date(121, 2, 4), c); //does not count
+        db.addExpense("Notebook", 9, new Date(121, 5, 29), c);
+        db.addExpense("Pizza", 80, new Date(121, 5, 18), c);
+        db.addExpense("Calculus", 9, new Date(121, 1, 29), c);//does not count
+        db.addExpense("Pen", 12, new Date(120, 6, 29), c);//does not count
+        Expense e = db.addExpense("rer", 30, new Date(121, 5, 3), c);
+        db.deleteExpense(e);
+
+
+
+        int totalMoney = db.getTotalSpentByCategory(new Date(2021, 5, 1), c);
+
+        assertEquals(totalMoney, 110);
     }
 
 }
