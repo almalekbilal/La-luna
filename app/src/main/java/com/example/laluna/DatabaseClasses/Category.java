@@ -46,9 +46,9 @@ public class Category {
         return _limit;
     }
 
-    /*public void set_limit(int _limit) {
+    public void set_limit(int _limit) {
         this._limit = _limit;
-    }*/
+    }
 
     public String get_name() {
         return _name;

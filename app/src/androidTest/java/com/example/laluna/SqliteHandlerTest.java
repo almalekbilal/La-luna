@@ -131,28 +131,29 @@ public class SqliteHandlerTest {
 
 
 
-    // Failed
+
     @Test
     public void getTotalMoneySpentTest(){
 
 
 
-        List<Expense> expanses = db.getExpenses(0,16);
+
+        db.addCategory("da",1400,null,null,new Date());
+        List<Category> fs = db.getCategories(new Date());
+        db.addExpense("df",500,new Date(121,10,1),fs.get(0));
+        db.addExpense("dfc",400,new Date(121,10,1),fs.get(0));
+        db.addExpense("dfg",300,new Date(121,10,1),fs.get(0));
+        db.addExpense("dfq",150,new Date(121,10,1),fs.get(0));
+
+        List<Expense> expanses = db.getExpenses(0,4);
         int spentMoney = 0;
         for(Expense expense : expanses){
             spentMoney += expense.get_value();
         }
 
-        /*List<Category> fs = db.getCategories(new Date());
-        db.addExpense("df",500,new Date(2021,6,1),fs.get(0));
-        db.addExpense("df",400,new Date(2021,6,1),fs.get(0));
-        db.addExpense("df",300,new Date(2021,6,1),fs.get(0));
-        db.addExpense("df",150,new Date(2021,6,1),fs.get(0));*/
-
-
         int getSpentMoney = db.getTotalMoneySpent(new Date(2021,10,1));
 
-        assertEquals(1350,getSpentMoney);
+        assertEquals(spentMoney,getSpentMoney);
     }
 
 
@@ -182,6 +183,53 @@ public class SqliteHandlerTest {
         assertEquals(true,allExpansesBefore.size() == allExpansesAfter.size() + 1);
 
     }
+
+
+
+    @Test
+    public void updateCategoryTest(){
+        Category food = db.addCategory("Food",200,null,null,new Date());
+
+        food.set_limit(300);
+
+        db.updateCategory(food);
+
+        assertEquals(db.getCategories(new Date()).get(0).get_limit(),300);
+    }
+
+
+    @Test
+    public void getCategoryExpense(){
+        Category book = db.addCategory("Book",500,null,null,new Date());
+
+        Expense calculus = db.addExpense("Calculus",50,new Date(),book);
+        Expense designingInterface = db.addExpense("DesigningInterface",60,new Date(),book);
+        Expense discreteMathematics = db.addExpense("DiscreteMathematics",70,new Date(),book);
+        Expense linearAlgebra = db.addExpense("LinearAlgebra",30,new Date(),book);
+
+        List <Expense> allExpansesInBook = db.getCategoryExpense(book);
+        boolean allIsTrue = allExpansesInBook.get(0).get_id() == calculus.get_id() && allExpansesInBook.get(1).get_id() == designingInterface.get_id()
+                && allExpansesInBook.get(2).get_id() == discreteMathematics.get_id()
+                && allExpansesInBook.get(3).get_id() == linearAlgebra.get_id();
+
+
+        assertEquals(true,allIsTrue);
+    }
+
+    //Failed
+    @Test
+    public void getTotalBudgetTest(){
+        Category food = db.addCategory("Food",200,null,null,new Date(2020,5,1));
+        db.addCategory("Car",100,null,null,new Date(2020,5,1));
+
+
+        int totalBudget= db.getTotalBudget(new Date(2020,5,1));
+
+
+        assertEquals(totalBudget,300);
+    }
+
+
 
 
 
