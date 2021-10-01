@@ -26,13 +26,13 @@ public class Category {
         return _id;
     }
 
-    public Date getCreationDate() {
+    /*public Date getCreationDate() {
         return creationDate;
-    }
+    }*/
 
-    public void setCreationDate(Date creationDate) {
+    /*public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
-    }
+    }*/
 
     public Date getDestroyedDate() {
         return destroyedDate;
@@ -46,31 +46,31 @@ public class Category {
         return _limit;
     }
 
-    public void set_limit(int _limit) {
+    /*public void set_limit(int _limit) {
         this._limit = _limit;
-    }
+    }*/
 
     public String get_name() {
         return _name;
     }
 
-    public void set_name(String _name) {
+    /*public void set_name(String _name) {
         this._name = _name;
-    }
+    }*/
 
     public String get_pictureName() {
         return _pictureName;
     }
 
-    public void set_pictureName(String _pictureName) {
+    /*public void set_pictureName(String _pictureName) {
         this._pictureName = _pictureName;
-    }
+    }*/
 
     public String get_color() {
         return _color;
     }
 
-    public void set_color(String _color) {
+    /*public void set_color(String _color) {
         this._color = _color;
-    }
+    }*/
 }

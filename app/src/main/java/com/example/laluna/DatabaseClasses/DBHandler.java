@@ -102,7 +102,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         values.put("date",dateToString(date));
 
-        values.put("category_id", category.get_id());  //Not sure!
+        values.put("category_id", category.get_id());
 
         SQLiteDatabase db = getWritableDatabase();
 
@@ -196,8 +196,8 @@ public class DBHandler extends SQLiteOpenHelper {
     public void updateExpense(Expense expense){
         ContentValues contentValues = new ContentValues();
         contentValues.put("name",expense.get_name() );
-        // Fel här
-        contentValues.put("date",expense.get_date().toString());
+
+        contentValues.put("date",dateToString(expense.get_date()));
         contentValues.put("category_id",expense.get_category().get_id());
         contentValues.put("value",expense.get_value());
 
@@ -222,12 +222,11 @@ public class DBHandler extends SQLiteOpenHelper {
 
     private void setCategoryPreviousLimit(Category category, Date date){
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         ContentValues values = new ContentValues();
         values.put("category_id", category.get_id());
         values.put("limitt", category.get_limit());
-        values.put("month", sdf.format(date));
+        values.put("month", dateToString(date));
 
         SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_LIMITS, null, values);
@@ -423,6 +422,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.update(TABLE_CATEGORY,values,"_id=?", new String[]{category.get_id() + ""});
         db.close();
     }
+
 
 
     public int getCategoryLimit(Date date, Category category){
