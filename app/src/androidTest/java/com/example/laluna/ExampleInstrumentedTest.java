@@ -50,12 +50,13 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void addCategoryTest() {
-        db.addCategory("food", 100, "pic1", "blue", new Date(121, 01, 01));
+        Category c1 = db.addCategory("food", 100, null, null, new Date(121, 01, 01));
         db.addCategory("car", 500, "pic2", "red", new Date(120, 01, 01));
 
         List<Category> categories = db.getCategories(new Date(121, 01, 03));
         assertEquals(categories.size(), 2);
 
+        assertEquals(true,categories.contains(c1));
     }
 
     @Test
@@ -80,9 +81,9 @@ public class ExampleInstrumentedTest {
         assertEquals(categories.size(), 1);
 
         db.deactivateCategory(category2, new Date(121, 02, 01));
-        List<Category> categories2 = db.getCategories(new Date(121, 01, 01));
+        List<Category> categories2 = db.getCategories(new Date(120, 9, 01));
 
-        assertEquals(categories.size(), 1);
+        assertEquals(categories2.size(), 1);
 
     }
 
@@ -97,17 +98,18 @@ public class ExampleInstrumentedTest {
         db.addExpense("swish",500,new Date(120,01,01), category2);
         db.addExpense("swish",500,new Date(120,01,01), category1);
         db.addExpense("swish",500,new Date(120,01,01), category2);
-        db.addExpense("swish",500,new Date(120,01,01), category1);
-        db.addExpense("swish",500,new Date(120,01,01), category2);
-        db.addExpense("swish",500,new Date(120,01,01), category1);
-        db.addExpense("swish",500,new Date(120,01,01), category2);
-        db.addExpense("swish",500,new Date(120,01,01), category1);
-        db.addExpense("swish",500,new Date(120,01,01), category2);
+        db.addExpense("swish",500,new Date(120,01,04), category1);
+        db.addExpense("swish",500,new Date(120,01,04), category2);
+        db.addExpense("swish",500,new Date(120,01,04), category1);
+        db.addExpense("swish",500,new Date(120,01,04), category2);
+        db.addExpense("swish",500,new Date(120,01,04), category1);
+        Expense expense =  db.addExpense("swish",500,new Date(120,01,04), category2);
 
 
-        List<Expense> expenses = db.getExpenses(0, 12);
+        List<Expense> expenses = db.getExpenses(0, 6);
 
-        assertEquals(expenses.size(), 12);
+        assertEquals(6, expenses.size());
+        assertEquals(true, expenses.contains(expense));
 
     }
 
@@ -126,9 +128,11 @@ public class ExampleInstrumentedTest {
 
         List<Expense> expenses = db.getExpenses(0, 10);
 
-        assertEquals(expenses.size(), 1);
+        assertEquals(1, expenses.size());
+        assertEquals(false ,expenses.contains(expense) );
 
     }
+
 
     @Test
     public void updateExpensesTest(){
@@ -171,20 +175,25 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void getTotalMoneySpentByCategoryTest() {
-        Category c = db.addCategory("food",100,"pic1", "blue",new Date(121,5,1));
+        Category c1 = db.addCategory("food",100,"pic1", "blue",new Date(121,5,1));
+        Category c2 = db.addCategory("car",100,"pic1", "blue",new Date(121,5,1));
 
-        db.addExpense("Book", 21, new Date(121, 5, 4), c);
-        db.addExpense("Burger", 22, new Date(121, 2, 4), c); //does not count
-        db.addExpense("Notebook", 9, new Date(121, 5, 29), c);
-        db.addExpense("Pizza", 80, new Date(121, 5, 18), c);
-        db.addExpense("Calculus", 9, new Date(121, 1, 29), c);//does not count
-        db.addExpense("Pen", 12, new Date(120, 6, 29), c);//does not count
-        Expense e = db.addExpense("rer", 30, new Date(121, 5, 3), c);
+        db.addExpense("Book", 21, new Date(121, 5, 4), c1);
+        db.addExpense("Burger", 22, new Date(121, 2, 4), c1); //does not count
+        db.addExpense("Notebook", 9, new Date(121, 5, 29), c1);
+        db.addExpense("Pizza", 80, new Date(121, 5, 18), c1);
+        db.addExpense("Calculus", 9, new Date(121, 1, 29), c1);//does not count
+        db.addExpense("Pen", 12, new Date(120, 6, 29), c1);//does not count
+        db.addExpense("Pen", 12, new Date(121, 5, 15), c2);//does not count
+        db.addExpense("Oil", 20, new Date(121, 5, 10), c2);//does not count
+        db.addExpense("Window", 200, new Date(121, 5, 10), c2);//does not count
+
+        Expense e = db.addExpense("rer", 30, new Date(121, 5, 3), c1);
         db.deleteExpense(e);
 
 
 
-        int totalMoney = db.getTotalSpentByCategory(new Date(2021, 5, 1), c);
+        int totalMoney = db.getTotalSpentByCategory(new Date(2021, 5, 1), c1);
 
         assertEquals(totalMoney, 110);
     }
@@ -192,33 +201,73 @@ public class ExampleInstrumentedTest {
     @Test
     public void getTotalBudgetTest(){
 
-        db.addCategory("Mat",2000,null,null,new Date(121,5,1));
+        Category c1 = db.addCategory("Mat",2000,null,null,new Date(121,5,1));
 
-        db.addCategory("Kaffe",150,null,null,new Date(121,5,1));
+        Category c2 = db.addCategory("Kaffe",150,null,null,new Date(121,5,1));
 
-        db.addCategory("Kläder",500,null,null,new Date(121,5,1));
+        Category c3 = db.addCategory("Kläder",500,null,null,new Date(121,5,1));
 
-        db.addCategory("Snacks",200,null,null,new Date(121,5,1));
+        Category c4 = db.addCategory("Snacks",200,null,null,new Date(121,5,1));
 
-        db.addCategory("Mat",1000,null,null,new Date(121,6,1));
-
-        db.addCategory("Kaffe",150,null,null,new Date(121,6,1));
-
-        db.addCategory("Kläder",500,null,null,new Date(121,6,1));
-
-        db.addCategory("Snacks",200,null,null,new Date(121,6,1));
 
         db.setCategoriesPreviousLimits(new Date(121,5,1));
 
-        db.setCategoriesPreviousLimits(new Date(121,6,1));
+        c1.set_limit(1000);
+        c2.set_limit(200);
+        c3.set_limit(600);
+        c4.set_limit(150);
 
-        int budget = db.getTotalBudget(new Date(121,5,1));
+        db.updateCategory(c1);
+        db.updateCategory(c2);
+        db.updateCategory(c3);
+        db.updateCategory(c4);
 
-        assertEquals(2850,budget);
+        assertEquals(2850,db.getTotalBudget(new Date(121,5,1)));
+        assertEquals(1950,db.getTotalBudget(new Date(121,9,1)));
 
     }
 
 
+    @Test
+    public void getCategoryExpensesTest() {
+
+        Category c1 = db.addCategory("Food",3000,null,null,null);
+        Category c2 = db.addCategory("entertainment",700,null,null,null);
+
+        //will count
+        db.addExpense("Burger", 80,new Date(121,5,1),c1);
+        db.addExpense("Fish", 80,new Date(121,5,5),c1);
+        db.addExpense("Pizza", 80,new Date(121,5,15),c1);
+        db.addExpense("Coca cola", 20,new Date(121,5,22),c1);
+
+        //does not count
+
+        db.addExpense("Counter", 80,new Date(121,5,1),c2);
+        db.addExpense("Liseberg", 500,new Date(121,5,5),c2);
+        db.addExpense("Disco", 200,new Date(121,5,15),c2);
+        db.addExpense("prostitution", 500,new Date(121,5,22),c2);
+
+        List<Expense> expenses = db.getCategoryExpense(c1);
+
+        assertEquals(4,expenses.size());
+
+    }
+
+    @Test
+    public void getCategoryLimitTest(){
+        Category c1 = db.addCategory("Food",3000,null,null,null);
+
+        db.setCategoriesPreviousLimits(new Date(121,5,5));
+
+        c1.set_limit(3500);
+        db.updateCategory(c1);
+
+        db.setCategoriesPreviousLimits(new Date(121,6,7));
+
+        assertEquals(3000,db.getCategoryLimit(new Date(121,5,1),c1));
+
+        assertEquals(3500,db.getCategoryLimit(new Date(121,6,1),c1));
+    }
 }
 
 

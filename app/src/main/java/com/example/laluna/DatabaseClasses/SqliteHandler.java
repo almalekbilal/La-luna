@@ -224,6 +224,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
 
         ContentValues values = new ContentValues();
+        date.setDate(1);
         values.put("category_id", category.get_id());
         values.put("limitt", category.get_limit());
         values.put("month", dateToString(date));
@@ -242,7 +243,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
         SQLiteDatabase db = getWritableDatabase();
 
         int limit = end - start;
-        String query = "SELECT * FROM " + TABLE_EXPENSE + " LIMIT " + limit + " OFFSET " + start + ";";
+        String query = "SELECT * FROM " + TABLE_EXPENSE + " ORDER BY _id DESC LIMIT " + limit + " OFFSET " + start + ";";
 
         Cursor c = db.rawQuery(query, null);
         c.moveToFirst();
@@ -427,7 +428,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
     public int getCategoryLimit(Date date, Category category){
 
-        String query = "SELECT limitt FROM " + TABLE_LIMITS + " WHERE category_id = " + category.get_id() + " AND month = " + dateToString(date) + " ;";
+        String query = "SELECT limitt FROM " + TABLE_LIMITS + " WHERE category_id = " + category.get_id() + " AND month = '" + dateToString(date) + "' ;";
 
         SQLiteDatabase db = getWritableDatabase();
         Cursor c = db.rawQuery(query,null);
@@ -440,10 +441,32 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
         return limit;
     }
 
-
     public int getTotalBudget(Date date){
 
+        Date thisDate = new Date();
+        if(thisDate.getYear() == date.getYear() && thisDate.getMonth() == date.getMonth()){
+            return getTotalBudgetThisMonth(date);
+        }else{
+            return getTotalBudgetPreviousMonth(date);
+        }
+
+    }
+
+    private int getTotalBudgetThisMonth(Date date){
         int totalBudget = 0;
+
+        List<Category> categories = getCategories(date);
+
+        for(Category category : categories){
+            totalBudget += category.get_limit();
+        }
+        return totalBudget;
+    }
+
+
+    private int getTotalBudgetPreviousMonth(Date date){
+        int totalBudget = 0;
+        date.setDate(1);
         String query = "SELECT limitt FROM " + TABLE_LIMITS + " WHERE month = '" + dateToString(date) + "' ;";
 
         SQLiteDatabase db = getWritableDatabase();
@@ -462,6 +485,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
         return totalBudget;
     }
 }
+
 
 
 

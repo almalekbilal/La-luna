@@ -56,4 +56,9 @@ public class Expense {
     public void set_category(Category _category) {
         this._category = _category;
     }
+
+    @Override
+    public boolean equals(Object o){
+        return this.get_id() == ((Expense)o).get_id();
+    }
 }

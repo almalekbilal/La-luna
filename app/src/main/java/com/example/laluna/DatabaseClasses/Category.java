@@ -26,13 +26,10 @@ public class Category {
         return _id;
     }
 
-    /*public Date getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
-    }*/
+    }
 
-    /*public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }*/
 
     public Date getDestroyedDate() {
         return destroyedDate;
@@ -54,20 +51,27 @@ public class Category {
         return _name;
     }
 
-    /*public void set_name(String _name) {
+    public void set_name(String _name) {
         this._name = _name;
-    }*/
+    }
 
     public String get_pictureName() {
         return _pictureName;
     }
 
-    /*public void set_pictureName(String _pictureName) {
+    public void set_pictureName(String _pictureName) {
         this._pictureName = _pictureName;
-    }*/
+    }
 
     public String get_color() {
         return _color;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        Category c2 = (Category) o;
+
+        return this._id == c2.get_id();
     }
 
     /*public void set_color(String _color) {
