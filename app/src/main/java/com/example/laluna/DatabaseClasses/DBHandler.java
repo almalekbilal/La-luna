@@ -1,13 +1,7 @@
 package com.example.laluna.DatabaseClasses;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +17,7 @@ public class DBHandler {
     }
 
     public List<Expense> getCategoryExpense (Category category){
-        return db.getCategoryExpense(category);
+        return db.getCategoryExpenseDB(category);
     }
 
 
@@ -31,33 +25,33 @@ public class DBHandler {
 
     // Adding an expense to Data Base
     public Expense addExpense(String name, int value, Date date, Category category){
-        return db.addExpense(name,value,date,category);
+        return db.addExpenseDB(name,value,date,category);
     }
 
 
 
     // Not done yet
     public List<Category> getCategories(Date date){
-        return db.getCategories(date);
+        return db.getCategoriesDB(date);
     }
 
 
     //updating expenses table in the database
     public void updateExpense(Expense expense){
-        db.updateExpense(expense);
+        db.updateExpenseDB(expense);
     }
 
 
 
     public void setCategoriesPreviousLimits(Date date){
-      db.setCategoriesPreviousLimits(date);
+      db.setCategoriesPreviousLimitsDB(date);
     }
 
 
 
 
     public List<Expense> getExpenses(int start, int end){
-        return db.getExpenses(start, end);
+        return db.getExpensesDB(start, end);
 
     }
 
@@ -67,7 +61,7 @@ public class DBHandler {
      * @param expense represents the expense that will be deleted.
      */
     public void deleteExpense(Expense expense) {
-        db.deleteExpense(expense);
+        db.deleteExpenseDB(expense);
     }
 
 
@@ -78,7 +72,7 @@ public class DBHandler {
      * @return Amount money spent in the whole month in the given date.
      */
     public int getTotalMoneySpent(Date date){
-        return db.getTotalMoneySpent(date);
+        return db.getTotalMoneySpentDB(date);
     }
 
     /**
@@ -89,7 +83,7 @@ public class DBHandler {
      * @return Amount money spent within the given category during the given month.
      */
     public int getTotalSpentByCategory(Date date, Category category){
-     return db.getTotalSpentByCategory(date, category);
+     return db.getTotalSpentByCategoryDB(date, category);
     }
 
 
@@ -98,7 +92,7 @@ public class DBHandler {
      * A method to add a new category to the database.
      */
     public Category addCategory(String name, int limit, String pitureName,String color, Date creation){
-        return db.addCategory(name,limit,pitureName,color,creation);
+        return db.addCategoryDB(name,limit,pitureName,color,creation);
     }
 
 
@@ -108,26 +102,26 @@ public class DBHandler {
      */
 
     public void deactivateCategory(Category category, Date date){
-        db.deactivateCategory(category, date);
+        db.deactivateCategoryDB(category, date);
     }
     /**
      * A method to update category in database
      * @param category Category that will be updating
      */
     public void updateCategory(Category category){
-        db.updateCategory(category);
+        db.updateCategoryDB(category);
     }
 
 
 
     public int getCategoryLimit(Date date, Category category){
 
-        return db.getCategoryLimit(date,category);
+        return db.getCategoryLimitDB(date,category);
     }
 
     public int getTotalBudget(Date date){
 
-        return db.getTotalBudget(date);
+        return db.getTotalBudgetDB(date);
     }
 }
 

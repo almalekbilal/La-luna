@@ -6,6 +6,7 @@ import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.example.laluna.DatabaseClasses.Category;
+import com.example.laluna.DatabaseClasses.DBHandler;
 import com.example.laluna.DatabaseClasses.SqliteHandler;
 import com.example.laluna.DatabaseClasses.Expense;
 
@@ -31,7 +32,7 @@ public class ExampleInstrumentedTest {
 
     Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-    SqliteHandler db = new SqliteHandler(appContext, null, null, 1);
+    DBHandler db = new DBHandler(appContext);
 
 
     @Before
@@ -278,12 +279,12 @@ public class ExampleInstrumentedTest {
     //not DONE!!!!!!!
     @Test
     public void getTotalBudgetTest(){
-        db.addCategory("food",100,"pic1", "blue",new Date(120,05,01));
-        db.addCategory("car",500,"pic2", "red",new Date(120,05,01));
-        db.addCategory("clothes",100,"pic3", "blue",new Date(120,04,01));
-        db.addCategory("other",500,"pic4", "red",new Date(120,05,01));
+        db.addCategoryDB("food",100,"pic1", "blue",new Date(120,05,01));
+        db.addCategoryDB("car",500,"pic2", "red",new Date(120,05,01));
+        db.addCategoryDB("clothes",100,"pic3", "blue",new Date(120,04,01));
+        db.addCategoryDB("other",500,"pic4", "red",new Date(120,05,01));
 
-        int totalBudget= db.getTotalBudget(new Date(120,05,01));
+        int totalBudget= db.getTotalBudgetDB(new Date(120,05,01));
         assertEquals(totalBudget,1100);
 
     }

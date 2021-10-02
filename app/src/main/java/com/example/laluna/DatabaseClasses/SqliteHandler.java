@@ -62,7 +62,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
 
 
-    public List<Expense> getCategoryExpense (Category category){
+    public List<Expense> getCategoryExpenseDB(Category category){
         List <Expense> expensesList = new ArrayList<Expense>();
         int categoryID=category.get_id();
         String query = "SELECT *  FROM " + TABLE_EXPENSE + " WHERE category_id = "
@@ -95,7 +95,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
 
     // Adding an expense to Data Base
-    public Expense addExpense(String name, int value, Date date, Category category){
+    public Expense addExpenseDB(String name, int value, Date date, Category category){
         ContentValues values = new ContentValues();
         values.put("name", name);
         values.put("value", value);
@@ -135,7 +135,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
 
         // Not done yet
-    public List<Category> getCategories(Date date){
+    public List<Category> getCategoriesDB(Date date){
         List <Category> categories = new ArrayList<>();
 
 
@@ -193,7 +193,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     }
 
     //updating expenses table in the database
-    public void updateExpense(Expense expense){
+    public void updateExpenseDB(Expense expense){
         ContentValues contentValues = new ContentValues();
         contentValues.put("name",expense.get_name() );
 
@@ -209,8 +209,8 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
 
 
-    public void setCategoriesPreviousLimits(Date date){
-        List<Category> categories = getCategories(date);
+    public void setCategoriesPreviousLimitsDB(Date date){
+        List<Category> categories = getCategoriesDB(date);
 
         for(Category cat : categories){
             setCategoryPreviousLimit(cat,date);
@@ -236,7 +236,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
 
 
-    public List<Expense> getExpenses(int start, int end){
+    public List<Expense> getExpensesDB(int start, int end){
 
         ArrayList<Expense> expenses = new ArrayList<Expense>();
 
@@ -301,7 +301,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
      * A method for deleting an existing expense from the database.
      * @param expense represents the expense that will be deleted.
      */
-    public void deleteExpense(Expense expense) {
+    public void deleteExpenseDB(Expense expense) {
         final int id = expense.get_id();
         SQLiteDatabase db = getWritableDatabase();
 
@@ -316,7 +316,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
      *             The days in the given date have no significance in the result in this case.
      * @return Amount money spent in the whole month in the given date.
      */
-    public int getTotalMoneySpent(Date date){
+    public int getTotalMoneySpentDB(Date date){
         String query = "SELECT value, date FROM " + TABLE_EXPENSE + " ;";
         final int totalMoney = getTotalMoney(date, query);
         return totalMoney;
@@ -329,7 +329,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
      * @param category represents the category within which the money was spent.
      * @return Amount money spent within the given category during the given month.
      */
-    public int getTotalSpentByCategory(Date date, Category category){
+    public int getTotalSpentByCategoryDB(Date date, Category category){
         String query = "SELECT value, date FROM " + TABLE_EXPENSE +
                 " WHERE category_id = "+ category.get_id() + " ;";
         final int totalMoney = getTotalMoney(date, query);
@@ -371,7 +371,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     /**
      * A method to add a new category to the database.
      */
-    public Category addCategory(String name, int limit, String pitureName,String color, Date creation){
+    public Category addCategoryDB(String name, int limit, String pitureName, String color, Date creation){
         ContentValues values = new ContentValues();
         values.put("name", name);
         values.put("limitt", limit);
@@ -399,16 +399,16 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
      * @param category Category that will be deactivated
      */
 
-    public void deactivateCategory(Category category, Date date){
+    public void deactivateCategoryDB(Category category, Date date){
 
         category.setDestroyedDate(date);
-        updateCategory(category);
+        updateCategoryDB(category);
     }
     /**
      * A method to update category in database
      * @param category Category that will be updating
      */
-    public void updateCategory(Category category){
+    public void updateCategoryDB(Category category){
         ContentValues values = new ContentValues();
         values.put("name", category.get_name());
         values.put("limitt", category.get_limit());
@@ -426,7 +426,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
 
 
-    public int getCategoryLimit(Date date, Category category){
+    public int getCategoryLimitDB(Date date, Category category){
 
         String query = "SELECT limitt FROM " + TABLE_LIMITS + " WHERE category_id = " + category.get_id() + " AND month = '" + dateToString(date) + "' ;";
 
@@ -441,7 +441,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
         return limit;
     }
 
-    public int getTotalBudget(Date date){
+    public int getTotalBudgetDB(Date date){
 
         Date thisDate = new Date();
         if(thisDate.getYear() == date.getYear() && thisDate.getMonth() == date.getMonth()){
@@ -455,7 +455,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     private int getTotalBudgetThisMonth(Date date){
         int totalBudget = 0;
 
-        List<Category> categories = getCategories(date);
+        List<Category> categories = getCategoriesDB(date);
 
         for(Category category : categories){
             totalBudget += category.get_limit();
