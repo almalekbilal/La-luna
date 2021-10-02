@@ -203,7 +203,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
         SQLiteDatabase db = getWritableDatabase();
 
-        db.update(TABLE_EXPENSE, contentValues, "_id=?", new String[]{expense.get_id() + ""});
+        db.update(TABLE_EXPENSE, contentValues, "_id=?", new String[]{String.valueOf(expense.get_id())});
         db.close();
     }
 

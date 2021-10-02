@@ -145,8 +145,8 @@ public class ExampleInstrumentedTest {
         Expense expense1 = db.addExpense("swish",500,new Date(120,01,01), category2);
 
 
-        expense.set_value(400);
-        db.updateExpense(expense);
+        expense1.set_value(400);
+        db.updateExpense(expense1);
 
         List<Expense> expenses = db.getExpenses(0,10);
         assertEquals(expenses.get(0).get_value(),400);
