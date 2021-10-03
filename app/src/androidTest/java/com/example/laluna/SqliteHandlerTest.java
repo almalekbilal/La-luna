@@ -216,14 +216,16 @@ public class SqliteHandlerTest {
         assertEquals(true,allIsTrue);
     }
 
-    //Failed
+
     @Test
     public void getTotalBudgetTest(){
-        Category food = db.addCategoryDB("Food",200,null,null,new Date(2020,5,1));
-        db.addCategoryDB("Car",100,null,null,new Date(2020,5,1));
+        Category food = db.addCategoryDB("Food",200,null,null,new Date(121,5,1));
+        db.addCategoryDB("Car",100,null,null,new Date(121,5,1));
 
 
-        int totalBudget= db.getTotalBudgetDB(new Date(2020,5,1));
+        db.setCategoriesPreviousLimitsDB(new Date(121,5,1));
+
+        int totalBudget= db.getTotalBudgetDB(new Date(121,5,1));
 
 
         assertEquals(totalBudget,300);
