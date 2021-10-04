@@ -6,9 +6,9 @@ import android.content.Context;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.example.laluna.DatabaseClasses.Category;
-import com.example.laluna.DatabaseClasses.SqliteHandler;
-import com.example.laluna.DatabaseClasses.Expense;
+import com.example.laluna.Model.Category;
+import com.example.laluna.Model.SqliteHandler;
+import com.example.laluna.Model.Expense;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.example.laluna.DatabaseClasses;
+package com.example.laluna.Model;
 
 import android.content.ContentValues;
 import android.content.Context;

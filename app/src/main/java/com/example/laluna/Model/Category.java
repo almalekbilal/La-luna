@@ -1,4 +1,4 @@
-package com.example.laluna.DatabaseClasses;
+package com.example.laluna.Model;
 
 import java.util.Date;
 

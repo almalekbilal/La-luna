@@ -1,7 +1,8 @@
-package com.example.laluna;
+package com.example.laluna.View.ui;
 
 import android.os.Bundle;
 
+import com.example.laluna.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
