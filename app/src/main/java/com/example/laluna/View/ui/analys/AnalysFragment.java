@@ -1,4 +1,4 @@
-package com.example.laluna.View.ui.dashboard;
+package com.example.laluna.View.ui.analys;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,14 +14,14 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.laluna.R;
 
-public class DashboardFragment extends Fragment {
+public class AnalysFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private AnalysViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
+                ViewModelProviders.of(this).get(AnalysViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         final TextView textView = root.findViewById(R.id.text_dashboard);
         dashboardViewModel.getText().observe(this, new Observer<String>() {

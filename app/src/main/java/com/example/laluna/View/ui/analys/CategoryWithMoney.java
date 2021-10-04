@@ -1,4 +1,4 @@
-package com.example.laluna.View.ui.dashboard;
+package com.example.laluna.View.ui.analys;
 
 import com.example.laluna.Model.Category;
 
