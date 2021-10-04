@@ -178,10 +178,10 @@ public class ExampleInstrumentedTest {
         Category c1 = db.addCategory("food",100,"pic1", "blue",new Date(121,5,1));
         Category c2 = db.addCategory("car",100,"pic1", "blue",new Date(121,5,1));
 
-        db.addExpense("Book", 21, new Date(121, 5, 4), c1);
+        db.addExpense("Book", 21, new Date(), c1);
         db.addExpense("Burger", 22, new Date(121, 2, 4), c1); //does not count
-        db.addExpense("Notebook", 9, new Date(121, 5, 29), c1);
-        db.addExpense("Pizza", 80, new Date(121, 5, 18), c1);
+        db.addExpense("Notebook", 9, new Date(), c1);
+        db.addExpense("Pizza", 80, new Date(), c1);
         db.addExpense("Calculus", 9, new Date(121, 1, 29), c1);//does not count
         db.addExpense("Pen", 12, new Date(120, 6, 29), c1);//does not count
         db.addExpense("Pen", 12, new Date(121, 5, 15), c2);//does not count
@@ -193,7 +193,7 @@ public class ExampleInstrumentedTest {
 
 
 
-        int totalMoney = db.getTotalSpentByCategory(new Date(2021, 5, 1), c1);
+        int totalMoney = db.getTotalSpentByCategory(new Date(), c1);
 
         assertEquals(totalMoney, 110);
     }

@@ -343,7 +343,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
 
         final int month = date.getMonth();
-        final int year = date.getYear();
+        final int year = date.getYear() + 1900;
 
         SQLiteDatabase db = getWritableDatabase();
 
