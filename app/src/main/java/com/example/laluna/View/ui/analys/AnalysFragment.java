@@ -51,7 +51,7 @@ public class AnalysFragment extends Fragment {
         analysViewModel.getTotalBudget().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
-                
+
             }
         });
         return root;

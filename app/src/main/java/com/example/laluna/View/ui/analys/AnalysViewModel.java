@@ -16,8 +16,8 @@ import java.util.List;
 public class AnalysViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
-    private MutableLiveData<Integer> totalBudget;
-    private MutableLiveData<Integer> moneySpent;
+    private MutableLiveData<Integer> totalBudget = new MutableLiveData<>();
+    private MutableLiveData<Integer> moneySpent = new MutableLiveData<>();
     private MutableLiveData<List<CategoryWithMoney>> categoriesLiveData;
     private DBHandler dbHandler;
     private Date viewMonthDate;
@@ -32,6 +32,7 @@ public class AnalysViewModel extends ViewModel {
 
         viewMonthDate = new Date();
 
+        categoriesLiveData = new MutableLiveData<>();
         totalBudget.postValue(dbHandler.getTotalBudget(viewMonthDate));
         moneySpent.postValue(dbHandler.getTotalMoneySpent(viewMonthDate));
         updateCategories();
@@ -71,6 +72,8 @@ public class AnalysViewModel extends ViewModel {
             viewMonthDate.setMonth(month - 1);
         }
 
+
+
         totalBudget.postValue(dbHandler.getTotalBudget(viewMonthDate));
         moneySpent.postValue(dbHandler.getTotalMoneySpent(viewMonthDate));
         updateCategories();
@@ -86,6 +89,8 @@ public class AnalysViewModel extends ViewModel {
         }else{
             viewMonthDate.setMonth(month + 1);
         }
+
+
 
         totalBudget.postValue(dbHandler.getTotalBudget(viewMonthDate));
         moneySpent.postValue(dbHandler.getTotalMoneySpent(viewMonthDate));
