@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AnalysViewModel extends ViewModel {
+public class AnalysisViewModel extends ViewModel {
 
     private MutableLiveData<String[]> mText;
     private MutableLiveData<Integer> totalBudget = new MutableLiveData<>();
@@ -37,7 +37,7 @@ public class AnalysViewModel extends ViewModel {
 
 
 
-    public AnalysViewModel() {
+    public AnalysisViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue(names);
         /*Category food = dbHandler.addCategory("Food",200,null,null, new Date());
