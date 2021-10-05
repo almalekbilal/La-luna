@@ -8,19 +8,54 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.laluna.Model.Category;
 import com.example.laluna.Model.DBHandler;
+import com.example.laluna.R;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AnalysViewModel extends ViewModel {
+public class AnalysisViewModel extends ViewModel {
 
     private MutableLiveData<List<Integer>> totalAndSpent = new MutableLiveData<>();
     private MutableLiveData<List<CategoryWithMoney>> categoriesLiveData;
     private DBHandler dbHandler;
     private Date viewMonthDate;
+    public int[] images;
+    public String[] names;
 
-    public AnalysViewModel() {
+    public AnalysisViewModel() {
+
+
+
+
+    images = new int[]{R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,
+            R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,
+            R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,
+            R.drawable.categorycar,R.drawable.categorycar};
+
+    names = new String[]{"$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500"};
+
+
+
+        /*Category food = dbHandler.addCategory("Food",200,null,null, new Date());
+
+        CategoryWithMoney foodWithMoney = new CategoryWithMoney(food,200,150);
+
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);*/
+
 
     }
 

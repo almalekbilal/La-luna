@@ -6,12 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.GridView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -20,49 +18,58 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnalysFragment extends Fragment {
+public class AnalysisFragment extends Fragment {
 
-    private AnalysViewModel analysViewModel;
+    private AnalysisViewModel analysisViewModel;
     private double total = 300, spent= 150;
 
-    public View onCreateView(@NonNull final LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
 
-        analysViewModel =
-                ViewModelProviders.of(this).get(AnalysViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        analysViewModel.init(getContext());
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        analysisViewModel =
+                ViewModelProviders.of(this).get(AnalysisViewModel.class);
+        final View root = inflater.inflate(R.layout.fragment_analysis, container, false);
+
+        final GridView gridViewAnalysis = root.findViewById(R.id.gridViewAnalysis);
+
+
+        final GridViewAdapter gridViewAdapter = new GridViewAdapter(analysisViewModel.names, analysisViewModel.images,
+                root.getContext());
+        gridViewAnalysis.setAdapter(gridViewAdapter);
+
+        analysisViewModel.init(getContext());
 
 
         final PieChart piechart = root.findViewById(R.id.pc_totalspent);
 
         makePie(piechart);
 
-        analysViewModel.getCategories().observe(this, new Observer<List<CategoryWithMoney>>() {
+
+        analysisViewModel.getCategories().observe(this, new Observer<List<CategoryWithMoney>>() {
             @Override
             public void onChanged(List<CategoryWithMoney> categoryWithMonies) {
 
             }
         });
 
-         analysViewModel.getTotalAndSpent().observe(this, new Observer<List<Integer>>() {
-             @Override
-             public void onChanged(List<Integer> integers) {
+
+
+
+        analysisViewModel.getTotalAndSpent().observe(this, new Observer<List<Integer>>() {
+            @Override
+            public void onChanged(List<Integer> integers) {
 
                 spent = integers.get(0);
                 total = integers.get(1);
 
                 piechart.clear();
                 makePie(piechart);
-             }
-         });
-
-
+            }
+        });
 
 
 
@@ -71,6 +78,7 @@ public class AnalysFragment extends Fragment {
 
         return root;
     }
+
 
     private void makePie(PieChart piechart){
         piechart.setUsePercentValues(true);
