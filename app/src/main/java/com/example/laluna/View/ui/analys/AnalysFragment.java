@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -24,17 +26,22 @@ public class AnalysFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         analysViewModel =
                 ViewModelProviders.of(this).get(AnalysViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
+        final View root = inflater.inflate(R.layout.fragment_analysis, container, false);
 
-        analysViewModel.getText().observe(this, new Observer<String>() {
+        final GridView gridViewAnalysis = root.findViewById(R.id.gridViewAnalysis);
+
+
+        analysViewModel.getText().observe(this, new Observer<String[]>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onChanged(String[] strings) {
+                GridViewAdapter gridViewAdapter = new GridViewAdapter(strings,analysViewModel.images,
+                        root.getContext());
+                gridViewAnalysis.setAdapter(gridViewAdapter);
             }
         });
 
-        analysViewModel.getCategories().observe(this, new Observer<List<CategoryWithMoney>>() {
+
+        /*analysViewModel.getCategories().observe(this, new Observer<List<CategoryWithMoney>>() {
             @Override
             public void onChanged(List<CategoryWithMoney> categoryWithMonies) {
 
@@ -53,7 +60,7 @@ public class AnalysFragment extends Fragment {
             public void onChanged(Integer integer) {
 
             }
-        });
+        });*/
         return root;
     }
 }
