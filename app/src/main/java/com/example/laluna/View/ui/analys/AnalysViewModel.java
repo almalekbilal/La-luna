@@ -8,27 +8,62 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.laluna.Model.Category;
 import com.example.laluna.Model.DBHandler;
+import com.example.laluna.R;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class AnalysViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<String[]> mText;
     private MutableLiveData<Integer> totalBudget = new MutableLiveData<>();
     private MutableLiveData<Integer> moneySpent = new MutableLiveData<>();
     private MutableLiveData<List<CategoryWithMoney>> categoriesLiveData;
     private DBHandler dbHandler;
     private Date viewMonthDate;
 
+
+
+
+    int[] images = {R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,
+            R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,
+            R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,
+            R.drawable.categorycar,R.drawable.categorycar};
+
+    String[] names = {"$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500"};
+
+
+
+
     public AnalysViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue(names);
+        /*Category food = dbHandler.addCategory("Food",200,null,null, new Date());
+
+        CategoryWithMoney foodWithMoney = new CategoryWithMoney(food,200,150);
+
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);
+        categoriesLiveData.getValue().add(foodWithMoney);*/
+
+
     }
 
     public void init(Context context){
         dbHandler = new DBHandler(context);
+
 
         viewMonthDate = new Date();
 
@@ -98,7 +133,7 @@ public class AnalysViewModel extends ViewModel {
 
     }
 
-    public LiveData<String> getText() {
+    public LiveData<String[]> getText() {
         return mText;
     }
 
