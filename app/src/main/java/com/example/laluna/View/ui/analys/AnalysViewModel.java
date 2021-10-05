@@ -15,16 +15,13 @@ import java.util.List;
 
 public class AnalysViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
-    private MutableLiveData<Integer> totalBudget = new MutableLiveData<>();
-    private MutableLiveData<Integer> moneySpent = new MutableLiveData<>();
+    private MutableLiveData<List<Integer>> totalAndSpent = new MutableLiveData<>();
     private MutableLiveData<List<CategoryWithMoney>> categoriesLiveData;
     private DBHandler dbHandler;
     private Date viewMonthDate;
 
     public AnalysViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+
     }
 
     public void init(Context context){
@@ -33,8 +30,10 @@ public class AnalysViewModel extends ViewModel {
         viewMonthDate = new Date();
 
         categoriesLiveData = new MutableLiveData<>();
-        totalBudget.postValue(dbHandler.getTotalBudget(viewMonthDate));
-        moneySpent.postValue(dbHandler.getTotalMoneySpent(viewMonthDate));
+        List<Integer> ts = new ArrayList<>();
+        ts.add(dbHandler.getTotalMoneySpent(viewMonthDate));
+        ts.add(dbHandler.getTotalBudget(viewMonthDate));
+        totalAndSpent.postValue(ts);
         updateCategories();
     }
 
@@ -74,8 +73,10 @@ public class AnalysViewModel extends ViewModel {
 
 
 
-        totalBudget.postValue(dbHandler.getTotalBudget(viewMonthDate));
-        moneySpent.postValue(dbHandler.getTotalMoneySpent(viewMonthDate));
+        List<Integer> ts = new ArrayList<>();
+        ts.add(dbHandler.getTotalMoneySpent(viewMonthDate));
+        ts.add(dbHandler.getTotalBudget(viewMonthDate));
+        totalAndSpent.postValue(ts);
         updateCategories();
     }
 
@@ -92,18 +93,17 @@ public class AnalysViewModel extends ViewModel {
 
 
 
-        totalBudget.postValue(dbHandler.getTotalBudget(viewMonthDate));
-        moneySpent.postValue(dbHandler.getTotalMoneySpent(viewMonthDate));
+        List<Integer> ts = new ArrayList<>();
+        ts.add(dbHandler.getTotalMoneySpent(viewMonthDate));
+        ts.add(dbHandler.getTotalBudget(viewMonthDate));
+        totalAndSpent.postValue(ts);
         updateCategories();
 
     }
 
-    public LiveData<String> getText() {
-        return mText;
-    }
+
 
     public LiveData<List<CategoryWithMoney>> getCategories(){ return categoriesLiveData; }
 
-    public LiveData<Integer> getTotalBudget(){ return totalBudget; }
-    public LiveData<Integer> getMoneySpent(){ return moneySpent; }
+    public LiveData<List<Integer>> getTotalAndSpent(){ return totalAndSpent; }
 }

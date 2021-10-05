@@ -268,6 +268,26 @@ public class ExampleInstrumentedTest {
 
         assertEquals(3500,db.getCategoryLimit(new Date(121,6,1),c1));
     }
+
+    @Test
+    public void ViewThings(){
+        Category c1 = db.addCategory("Food",3000,null,null,null);
+        Category c2 = db.addCategory("entertainment",700,null,null,null);
+
+        db.addExpense("Burger", 80,new Date(),c1);
+        db.addExpense("Fish", 80,new Date(),c1);
+        db.addExpense("Pizza", 80,new Date(),c1);
+        db.addExpense("Coca cola", 20,new Date(),c1);
+
+        //does not count
+
+        db.addExpense("Counter", 80,new Date(),c2);
+        db.addExpense("Liseberg", 500,new Date(),c2);
+        db.addExpense("Disco", 200,new Date(),c2);
+        db.addExpense("prostitution", 500,new Date(),c2);
+
+        assertEquals(3000,3000);
+    }
 }
 
 
