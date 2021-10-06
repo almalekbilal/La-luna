@@ -33,7 +33,6 @@ public class GridViewAdapter extends ArrayAdapter {
     private double spent = 150;
 
 
-  //  private int [] images;
     Context context;
     LayoutInflater layoutInflater;
 
@@ -61,10 +60,6 @@ public class GridViewAdapter extends ArrayAdapter {
 
         PieChart pc_categorySpent =(PieChart) view.findViewById(R.id.pc_categorySpent);
 
-
-      //  categorySpentMoney.setText(categoryWithMoneyList.get(i).spent);
-   //     categorySpentMoney.setText(name[i]);
-        //categoryAnalysis.setImageResource(images[i]);
 
 
         pc_categorySpent.setCenterText(categoryWithMoneyList.get(i).category.get_name());
