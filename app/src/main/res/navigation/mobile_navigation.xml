@@ -12,9 +12,9 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_analysis"
         android:name="com.example.laluna.View.ui.analys.AnalysisFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_analysis"
         tools:layout="@layout/fragment_analysis" />
 
     <fragment
