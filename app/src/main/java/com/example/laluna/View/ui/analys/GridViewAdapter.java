@@ -22,26 +22,26 @@ import java.util.List;
 public class GridViewAdapter extends BaseAdapter {
 
 
+    private double total = 300, spent= 150;
 
 
-   // private final List<CategoryWithMoney> categoryWithMoneyList;
+
+    private List<CategoryWithMoney> categoryWithMoneyList;
 
 
-    private final String [] name;
-  //  private int [] images;
+
     Context context;
     LayoutInflater layoutInflater;
 
-    public GridViewAdapter(String[] name,Context context) {
-        this.name = name;
-        //this.images = images;
+    public GridViewAdapter(List<CategoryWithMoney> categoryWithMonies,Context context) {
+
         this.context = context;
-       // this.categoryWithMoneyList = categoryWithMonies;
+        this.categoryWithMoneyList = categoryWithMonies;
     }
 
     @Override
     public int getCount() {
-        return name.length;
+        return categoryWithMoneyList.size();
     }
 
     @Override
@@ -65,17 +65,20 @@ public class GridViewAdapter extends BaseAdapter {
         }
 
 
-        //ImageView categoryAnalysis = (ImageView) view.findViewById(R.id.categoryAnalysis);
         TextView categorySpentMoney = (TextView) view.findViewById(R.id.categorySpentMoney);
 
         PieChart pc_categorySpent =(PieChart) view.findViewById(R.id.pc_categorySpent);
 
+        categorySpentMoney.setText("$"+Integer.toString(categoryWithMoneyList.get(i).spent)+".00");
 
-      //  categorySpentMoney.setText(categoryWithMoneyList.get(i).spent);
-        categorySpentMoney.setText(name[i]);
-        //categoryAnalysis.setImageResource(images[i]);
+
+        //categorySpentMoney.setText(categoryWithMoneyList.get(i).category.get_limit());
+
+        //pc_categorySpent.setCenterText(categoryWithMoneyList.get(i).category.get_name());
 
         makeCategoryPie(pc_categorySpent);
+
+
 
         return view;
     }
@@ -86,7 +89,7 @@ public class GridViewAdapter extends BaseAdapter {
         piechart.setHoleRadius(85f);
         piechart.setTransparentCircleRadius(85f);
 
-        double precent = (150.00/300.00) * 100.00;
+        double precent = (spent/total) * 100;
         List<PieEntry> value = new ArrayList<>();
         value.add(new PieEntry( (float)precent,"Spent"));
         value.add(new PieEntry((float)(100-precent),"Left"));
@@ -97,7 +100,7 @@ public class GridViewAdapter extends BaseAdapter {
         PieData pieData = new PieData(dataSet);
 
         List<Integer> colors = new ArrayList<>();
-        colors.add(Color.rgb(178, 55, 142));
+        colors.add(Color.rgb(3, 169, 241));
         colors.add(Color.rgb(203, 204, 196));
 
 
