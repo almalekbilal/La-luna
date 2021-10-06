@@ -8,13 +8,15 @@
 
     <TextView
         android:id="@+id/txv_rightArrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="332dp"
-        android:layout_marginTop="76dp"
+        android:layout_width="52dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="345dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="14dp"
         android:text="@string/rightArrow"
-        android:textColor="#B2378E"
+        android:textColor="#FFFFFF"
         android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,10 +37,10 @@
 
         app:layout_constraintBottom_toTopOf="@+id/gridViewAnalysis"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/pc_categorySpent"
-        app:layout_constraintVertical_bias="0.54"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_goneMarginBottom="80dp"></com.github.mikephil.charting.charts.PieChart>
 
     <GridView
@@ -67,24 +69,50 @@
 
     <TextView
         android:id="@+id/txv_leftArrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="76dp"
+        android:layout_width="52dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="65dp"
         android:text="@string/leftArrow"
-        android:textColor="#B2378E"
+        android:textColor="#FFFFFF"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txv_date"
+        android:layout_width="96dp"
+        android:layout_height="23dp"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="28dp"
-        android:textColor="#B2378E"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="6dp"
+        android:text="previous month"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/txv_leftArrow"
+        app:layout_constraintEnd_toStartOf="@+id/pc_categorySpent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="10dp"
+        android:text="Next month"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/txv_rightArrow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pc_categorySpent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
