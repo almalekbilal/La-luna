@@ -21,7 +21,6 @@ public class AnalysisViewModel extends ViewModel {
     private MutableLiveData<List<CategoryWithMoney>> categoriesLiveData;
     private DBHandler dbHandler;
     private Date viewMonthDate;
-    public String[] names;
 
     public AnalysisViewModel() {
 
@@ -29,7 +28,6 @@ public class AnalysisViewModel extends ViewModel {
 
 
 
-    names = new String[]{"$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500"};
 
 
 
