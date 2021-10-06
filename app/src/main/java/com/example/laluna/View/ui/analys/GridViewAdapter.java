@@ -22,11 +22,14 @@ import java.util.List;
 public class GridViewAdapter extends BaseAdapter {
 
 
-    private double total = 300, spent= 150;
 
 
 
     private List<CategoryWithMoney> categoryWithMoneyList;
+
+
+    private double total = 300;
+    private double spent = 150;
 
 
 
@@ -72,9 +75,13 @@ public class GridViewAdapter extends BaseAdapter {
         categorySpentMoney.setText("$"+Integer.toString(categoryWithMoneyList.get(i).spent)+".00");
 
 
-        //categorySpentMoney.setText(categoryWithMoneyList.get(i).category.get_limit());
 
-        //pc_categorySpent.setCenterText(categoryWithMoneyList.get(i).category.get_name());
+
+        pc_categorySpent.setCenterText(categoryWithMoneyList.get(i).category.get_name());
+
+        spent = categoryWithMoneyList.get(i).spent;
+        total = categoryWithMoneyList.get(i).limit;
+
 
         makeCategoryPie(pc_categorySpent);
 
@@ -108,8 +115,7 @@ public class GridViewAdapter extends BaseAdapter {
 
         piechart.setData(pieData);
 
-        piechart.setCenterText("Car");
-        piechart.setCenterTextSize(30);
+        piechart.setCenterTextSize(25);
         piechart.setCenterTextColor(Color.rgb(255, 255, 255));
         piechart.setHoleColor(Color.rgb(40, 43, 51));
         piechart.setDescription(null);
