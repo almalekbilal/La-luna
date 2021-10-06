@@ -28,6 +28,11 @@ public class GridViewAdapter extends ArrayAdapter {
     private List<CategoryWithMoney> categoryWithMoneyList;
 
 
+
+    private double total = 300;
+    private double spent = 150;
+
+
   //  private int [] images;
     Context context;
     LayoutInflater layoutInflater;
@@ -35,9 +40,8 @@ public class GridViewAdapter extends ArrayAdapter {
     public GridViewAdapter(List<CategoryWithMoney> categoryWithMoneyList,Context context) {
         super(context, R.layout.customcategoryanalysis_analysis,categoryWithMoneyList);
         this.categoryWithMoneyList = categoryWithMoneyList;
-        //this.images = images;
         this.context = context;
-       // this.categoryWithMoneyList = categoryWithMonies;
+
     }
 
 
@@ -62,19 +66,25 @@ public class GridViewAdapter extends ArrayAdapter {
    //     categorySpentMoney.setText(name[i]);
         //categoryAnalysis.setImageResource(images[i]);
 
-        makeCategoryPie(pc_categorySpent, categoryWithMoneyList.get(i));
+
+        pc_categorySpent.setCenterText(categoryWithMoneyList.get(i).category.get_name());
+
+        spent = categoryWithMoneyList.get(i).spent;
+        total = categoryWithMoneyList.get(i).limit;
+
+
+        makeCategoryPie(pc_categorySpent);
 
         return view;
     }
 
-    private void makeCategoryPie(PieChart piechart, CategoryWithMoney categoryWithMoney) {
+    private void makeCategoryPie(PieChart piechart) {
         piechart.setUsePercentValues(true);
 
         piechart.setHoleRadius(85f);
         piechart.setTransparentCircleRadius(85f);
 
-
-        double precent = ((double)categoryWithMoney.spent/(double) categoryWithMoney.limit) * 100.00;
+        double precent = (spent/total) * 100;
         List<PieEntry> value = new ArrayList<>();
         value.add(new PieEntry( (float)precent,"Spent"));
         value.add(new PieEntry((float)(100-precent),"Left"));
@@ -85,7 +95,7 @@ public class GridViewAdapter extends ArrayAdapter {
         PieData pieData = new PieData(dataSet);
 
         List<Integer> colors = new ArrayList<>();
-        colors.add(Color.rgb(178, 55, 142));
+        colors.add(Color.rgb(3, 169, 241));
         colors.add(Color.rgb(203, 204, 196));
 
 
@@ -93,8 +103,7 @@ public class GridViewAdapter extends ArrayAdapter {
         dataSet.setValueTextSize(0);
         piechart.setData(pieData);
 
-        piechart.setCenterText(categoryWithMoney.spent + " Kr");
-        piechart.setCenterTextSize(30);
+        piechart.setCenterTextSize(25);
         piechart.setCenterTextColor(Color.rgb(255, 255, 255));
         piechart.setHoleColor(Color.rgb(40, 43, 51));
         piechart.setDescription(null);

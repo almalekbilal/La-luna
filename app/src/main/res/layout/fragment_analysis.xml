@@ -20,15 +20,20 @@
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pc_categorySpent"
-        android:layout_width="214dp"
-        android:layout_height="200dp"
+        android:layout_width="250dp"
+        android:layout_height="180dp"
         android:layout_margin="@dimen/cardview_default_radius"
 
         android:layout_marginStart="50dp"
 
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="170dp"
-        app:layout_constraintBottom_toTopOf="parent"
+
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="30dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/gridViewAnalysis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,12 +57,13 @@
         android:id="@+id/divider"
         android:layout_width="409dp"
         android:layout_height="1dp"
-        android:layout_marginBottom="3dp"
         android:background="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/gridViewAnalysis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pc_categorySpent"
+        app:layout_constraintVertical_bias="0.923" />
 
     <TextView
         android:id="@+id/txv_leftArrow"

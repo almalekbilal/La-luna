@@ -128,7 +128,7 @@ public class AnalysisFragment extends Fragment {
         PieData pieData = new PieData(dataSet);
 
         List<Integer> colors = new ArrayList<>();
-        colors.add(Color.rgb(178, 55, 142));
+        colors.add(Color.rgb(228, 44, 100));
         colors.add(Color.rgb(203, 204, 196));
 
 

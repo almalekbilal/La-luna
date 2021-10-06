@@ -123,6 +123,8 @@ public class AnalysisViewModel extends ViewModel {
         viewMonthDate.setValue(date);
     }
 
+
+
     public LiveData<List<CategoryWithMoney>> getCategories(){ return categoriesLiveData; }
 
     public LiveData<List<Integer>> getTotalAndSpent(){ return totalAndSpent; }
