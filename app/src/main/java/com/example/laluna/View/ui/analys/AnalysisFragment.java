@@ -37,16 +37,20 @@ public class AnalysisFragment extends Fragment {
         final GridView gridViewAnalysis = root.findViewById(R.id.gridViewAnalysis);
 
 
-        final GridViewAdapter gridViewAdapter = new GridViewAdapter(analysisViewModel.names, analysisViewModel.images,
+        final GridViewAdapter gridViewAdapter = new GridViewAdapter(analysisViewModel.names,
                 root.getContext());
+
+
         gridViewAnalysis.setAdapter(gridViewAdapter);
 
         analysisViewModel.init(getContext());
 
 
-        final PieChart piechart = root.findViewById(R.id.pc_totalspent);
+        final PieChart piechart = root.findViewById(R.id.pc_categorySpent);
 
         makePie(piechart);
+
+
 
 
         analysisViewModel.getCategories().observe(this, new Observer<List<CategoryWithMoney>>() {
@@ -55,7 +59,6 @@ public class AnalysisFragment extends Fragment {
 
             }
         });
-
 
 
 
@@ -88,24 +91,39 @@ public class AnalysisFragment extends Fragment {
 
         double precent = (spent/total) * 100;
         List<PieEntry> value = new ArrayList<>();
-        value.add(new PieEntry( (float)precent, "Spenderat"));
-        value.add(new PieEntry((float)(100-precent) , "Kvar"));
+        value.add(new PieEntry( (float)precent,"Spent"));
+        value.add(new PieEntry((float)(100-precent),"Left"));
 
-        PieDataSet dataSet = new PieDataSet(value,"MoneySpent");
+        PieDataSet dataSet = new PieDataSet(value,null);
 
 
         PieData pieData = new PieData(dataSet);
 
         List<Integer> colors = new ArrayList<>();
-        colors.add(Color.rgb(255,0,0));
-        colors.add(Color.rgb(0,255,0));
+        colors.add(Color.rgb(178, 55, 142));
+        colors.add(Color.rgb(203, 204, 196));
 
 
         dataSet.setColors(colors);
 
         piechart.setData(pieData);
 
-        Log.i("PieInfo", value.get(0).getValue() + "");
+        piechart.setCenterText("$150.00");
+        piechart.setCenterTextColor(Color.rgb(255, 255, 255));
+        piechart.setHoleColor(Color.rgb(40, 43, 51));
+        piechart.setDescription(null);
+
+
+        piechart.setDrawEntryLabels(false);
+        piechart.setCenterTextSize(18);
+
+
+
+
+
+
+       // piechart.setCenterText(analysisViewModel.getTotalAndSpent().getValue().get());
+        //Log.i("PieInfo", value.get(0).getValue() + "");
 
     }
 
