@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/navigation_home"
@@ -10,6 +11,12 @@
         android:id="@+id/navigation_analysis"
         android:icon="@drawable/ic_analysis_white"
         android:title="@string/title_analysis" />
+
+    <item
+        android:id="@+id/navigation_categories"
+        android:icon="@drawable/ic_categories_white"
+        android:title="@string/title_categories" />
+
 
     <item
         android:id="@+id/navigation_notifications"

@@ -17,9 +17,17 @@
         android:label="@string/title_analysis"
         tools:layout="@layout/fragment_analysis" />
 
+
+    <fragment
+        android:id="@+id/navigation_categories"
+        android:name="com.example.laluna.View.ui.categories.CategoriesFragment"
+        android:label="@string/title_categories"
+        tools:layout="@layout/fragment_categories" />
+
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.laluna.View.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
 </navigation>
