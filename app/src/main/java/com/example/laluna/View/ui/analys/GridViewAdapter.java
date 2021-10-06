@@ -83,10 +83,10 @@ public class GridViewAdapter extends BaseAdapter {
     private void makeCategoryPie(PieChart piechart) {
         piechart.setUsePercentValues(true);
 
-        piechart.setHoleRadius(80f);
-        piechart.setTransparentCircleRadius(80f);
+        piechart.setHoleRadius(85f);
+        piechart.setTransparentCircleRadius(85f);
 
-        double precent = (150/300) * 100;
+        double precent = (150.00/300.00) * 100.00;
         List<PieEntry> value = new ArrayList<>();
         value.add(new PieEntry( (float)precent,"Spent"));
         value.add(new PieEntry((float)(100-precent),"Left"));
@@ -106,10 +106,12 @@ public class GridViewAdapter extends BaseAdapter {
         piechart.setData(pieData);
 
         piechart.setCenterText("Car");
+        piechart.setCenterTextSize(30);
         piechart.setCenterTextColor(Color.rgb(255, 255, 255));
         piechart.setHoleColor(Color.rgb(40, 43, 51));
         piechart.setDescription(null);
 
+        piechart.getLegend().setEnabled(false);
 
         piechart.setDrawEntryLabels(false);
     }

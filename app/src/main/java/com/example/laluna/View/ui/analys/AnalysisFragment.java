@@ -117,6 +117,7 @@ public class AnalysisFragment extends Fragment {
         piechart.setDrawEntryLabels(false);
         piechart.setCenterTextSize(18);
 
+        piechart.getLegend().setEnabled(false);
 
 
 
