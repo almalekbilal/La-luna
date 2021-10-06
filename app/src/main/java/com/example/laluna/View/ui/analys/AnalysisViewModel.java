@@ -21,7 +21,6 @@ public class AnalysisViewModel extends ViewModel {
     private MutableLiveData<List<CategoryWithMoney>> categoriesLiveData;
     private DBHandler dbHandler;
     private Date viewMonthDate;
-    public int[] images;
     public String[] names;
 
     public AnalysisViewModel() {
@@ -29,32 +28,9 @@ public class AnalysisViewModel extends ViewModel {
 
 
 
-    images = new int[]{R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,
-            R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,
-            R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,R.drawable.categorycar,
-            R.drawable.categorycar,R.drawable.categorycar};
 
     names = new String[]{"$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500"};
 
-
-
-        /*Category food = dbHandler.addCategory("Food",200,null,null, new Date());
-
-        CategoryWithMoney foodWithMoney = new CategoryWithMoney(food,200,150);
-
-        categoriesLiveData.getValue().add(foodWithMoney);
-        categoriesLiveData.getValue().add(foodWithMoney);
-        categoriesLiveData.getValue().add(foodWithMoney);
-        categoriesLiveData.getValue().add(foodWithMoney);
-        categoriesLiveData.getValue().add(foodWithMoney);
-        categoriesLiveData.getValue().add(foodWithMoney);
-        categoriesLiveData.getValue().add(foodWithMoney);
-        categoriesLiveData.getValue().add(foodWithMoney);
-        categoriesLiveData.getValue().add(foodWithMoney);
-        categoriesLiveData.getValue().add(foodWithMoney);
-        categoriesLiveData.getValue().add(foodWithMoney);
-        categoriesLiveData.getValue().add(foodWithMoney);
-        categoriesLiveData.getValue().add(foodWithMoney);*/
 
 
     }
