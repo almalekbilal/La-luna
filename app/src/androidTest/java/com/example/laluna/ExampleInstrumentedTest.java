@@ -273,6 +273,7 @@ public class ExampleInstrumentedTest {
     public void ViewThings(){
         Category c1 = db.addCategory("Food",3000,null,null,null);
         Category c2 = db.addCategory("entertainment",700,null,null,null);
+        Category c3 = db.addCategory("Car",500,null,null,null);
 
         db.addExpense("Burger", 80,new Date(),c1);
         db.addExpense("Fish", 80,new Date(),c1);
@@ -285,6 +286,9 @@ public class ExampleInstrumentedTest {
         db.addExpense("Liseberg", 500,new Date(),c2);
         db.addExpense("Disco", 200,new Date(),c2);
         db.addExpense("prostitution", 500,new Date(),c2);
+
+
+        db.addExpense("Diesel",80,new Date(),c3);
 
         assertEquals(3000,3000);
     }
