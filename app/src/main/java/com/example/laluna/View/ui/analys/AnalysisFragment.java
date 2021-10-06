@@ -37,14 +37,13 @@ public class AnalysisFragment extends Fragment {
         final GridView gridViewAnalysis = root.findViewById(R.id.gridViewAnalysis);
 
 
-        final GridViewAdapter gridViewAdapter = new GridViewAdapter(analysisViewModel.names,
-                root.getContext());
 
 
-        gridViewAnalysis.setAdapter(gridViewAdapter);
+
+
+
 
         analysisViewModel.init(getContext());
-
 
         final PieChart piechart = root.findViewById(R.id.pc_categorySpent);
 
@@ -56,6 +55,11 @@ public class AnalysisFragment extends Fragment {
         analysisViewModel.getCategories().observe(this, new Observer<List<CategoryWithMoney>>() {
             @Override
             public void onChanged(List<CategoryWithMoney> categoryWithMonies) {
+
+                final GridViewAdapter gridViewAdapter = new GridViewAdapter(categoryWithMonies, root.getContext());
+
+                gridViewAnalysis.setAdapter(gridViewAdapter);
+
 
             }
         });
@@ -100,7 +104,7 @@ public class AnalysisFragment extends Fragment {
         PieData pieData = new PieData(dataSet);
 
         List<Integer> colors = new ArrayList<>();
-        colors.add(Color.rgb(178, 55, 142));
+        colors.add(Color.rgb(228, 44, 100));
         colors.add(Color.rgb(203, 204, 196));
 
 
