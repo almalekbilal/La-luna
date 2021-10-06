@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,40 +20,26 @@ import com.github.mikephil.charting.data.PieEntry;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GridViewAdapter extends BaseAdapter {
+public class GridViewAdapter extends ArrayAdapter {
 
 
 
 
-   // private final List<CategoryWithMoney> categoryWithMoneyList;
+    private List<CategoryWithMoney> categoryWithMoneyList;
 
 
-    private final String [] name;
   //  private int [] images;
     Context context;
     LayoutInflater layoutInflater;
 
-    public GridViewAdapter(String[] name,Context context) {
-        this.name = name;
+    public GridViewAdapter(List<CategoryWithMoney> categoryWithMoneyList,Context context) {
+        super(context, R.layout.customcategoryanalysis_analysis,categoryWithMoneyList);
+        this.categoryWithMoneyList = categoryWithMoneyList;
         //this.images = images;
         this.context = context;
        // this.categoryWithMoneyList = categoryWithMonies;
     }
 
-    @Override
-    public int getCount() {
-        return name.length;
-    }
-
-    @Override
-    public Object getItem(int i) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return 0;
-    }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
@@ -65,28 +52,29 @@ public class GridViewAdapter extends BaseAdapter {
         }
 
 
-        //ImageView categoryAnalysis = (ImageView) view.findViewById(R.id.categoryAnalysis);
         TextView categorySpentMoney = (TextView) view.findViewById(R.id.categorySpentMoney);
+        categorySpentMoney.setText(categoryWithMoneyList.get(i).limit + " Kr");
 
         PieChart pc_categorySpent =(PieChart) view.findViewById(R.id.pc_categorySpent);
 
 
       //  categorySpentMoney.setText(categoryWithMoneyList.get(i).spent);
-        categorySpentMoney.setText(name[i]);
+   //     categorySpentMoney.setText(name[i]);
         //categoryAnalysis.setImageResource(images[i]);
 
-        makeCategoryPie(pc_categorySpent);
+        makeCategoryPie(pc_categorySpent, categoryWithMoneyList.get(i));
 
         return view;
     }
 
-    private void makeCategoryPie(PieChart piechart) {
+    private void makeCategoryPie(PieChart piechart, CategoryWithMoney categoryWithMoney) {
         piechart.setUsePercentValues(true);
 
         piechart.setHoleRadius(85f);
         piechart.setTransparentCircleRadius(85f);
 
-        double precent = (150.00/300.00) * 100.00;
+
+        double precent = ((double)categoryWithMoney.spent/(double) categoryWithMoney.limit) * 100.00;
         List<PieEntry> value = new ArrayList<>();
         value.add(new PieEntry( (float)precent,"Spent"));
         value.add(new PieEntry((float)(100-precent),"Left"));
@@ -102,10 +90,10 @@ public class GridViewAdapter extends BaseAdapter {
 
 
         dataSet.setColors(colors);
-
+        dataSet.setValueTextSize(0);
         piechart.setData(pieData);
 
-        piechart.setCenterText("Car");
+        piechart.setCenterText(categoryWithMoney.spent + " Kr");
         piechart.setCenterTextSize(30);
         piechart.setCenterTextColor(Color.rgb(255, 255, 255));
         piechart.setHoleColor(Color.rgb(40, 43, 51));
@@ -114,6 +102,8 @@ public class GridViewAdapter extends BaseAdapter {
         piechart.getLegend().setEnabled(false);
 
         piechart.setDrawEntryLabels(false);
+        piechart.setEnabled(false);
+        piechart.setEnabled(true);
     }
 
 }

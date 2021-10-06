@@ -378,6 +378,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
         values.put("picture_name",pitureName);
         values.put("color",color);
 
+        creation.setDate(1);
         if(creation != null) {
             values.put("creation_date", dateToString(creation));
         }

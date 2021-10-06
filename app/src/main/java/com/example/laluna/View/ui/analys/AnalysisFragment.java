@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,12 +20,15 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AnalysisFragment extends Fragment {
 
     private AnalysisViewModel analysisViewModel;
+    private GridViewAdapter gridViewAdapter;
     private double total = 300, spent= 150;
 
 
@@ -36,9 +40,10 @@ public class AnalysisFragment extends Fragment {
 
         final GridView gridViewAnalysis = root.findViewById(R.id.gridViewAnalysis);
 
+        final TextView dateText = root.findViewById(R.id.txv_date);
 
-        final GridViewAdapter gridViewAdapter = new GridViewAdapter(analysisViewModel.names,
-                root.getContext());
+
+        gridViewAdapter = new GridViewAdapter(new ArrayList<CategoryWithMoney>(),root.getContext());
 
 
         gridViewAnalysis.setAdapter(gridViewAdapter);
@@ -56,6 +61,8 @@ public class AnalysisFragment extends Fragment {
         analysisViewModel.getCategories().observe(this, new Observer<List<CategoryWithMoney>>() {
             @Override
             public void onChanged(List<CategoryWithMoney> categoryWithMonies) {
+                gridViewAdapter.clear();
+                gridViewAdapter.addAll(categoryWithMonies);
 
             }
         });
@@ -74,9 +81,30 @@ public class AnalysisFragment extends Fragment {
             }
         });
 
+        analysisViewModel.getDate().observe(this, new Observer<Date>() {
+            @Override
+            public void onChanged(Date date) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                dateText.setText(sdf.format(date));
+            }
+        });
 
+        TextView left = root.findViewById(R.id.txv_leftArrow);
+        TextView right = root.findViewById(R.id.txv_rightArrow);
 
+        left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                analysisViewModel.leftArrowClick();
+            }
+        });
 
+        right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                analysisViewModel.rightArrowClick();
+            }
+        });
 
 
         return root;
@@ -105,10 +133,10 @@ public class AnalysisFragment extends Fragment {
 
 
         dataSet.setColors(colors);
-
+        dataSet.setValueTextSize(0);
         piechart.setData(pieData);
 
-        piechart.setCenterText("$150.00");
+        piechart.setCenterText(spent + " Kr");
         piechart.setCenterTextColor(Color.rgb(255, 255, 255));
         piechart.setHoleColor(Color.rgb(40, 43, 51));
         piechart.setDescription(null);

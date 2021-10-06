@@ -271,13 +271,19 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void ViewThings(){
-        Category c1 = db.addCategory("Food",3000,null,null,null);
-        Category c2 = db.addCategory("entertainment",700,null,null,null);
+        Category c1 = db.addCategory("Food",3000,null,null,new Date(121,9,2));
+        Category c2 = db.addCategory("entertainment",2000,null,null,new Date(121,9,2));
+
+        Category c18 = db.addCategory("Food",1000,null,null,new Date(121,8,1));
+        Category c28 = db.addCategory("entertainment",3000,null,null,new Date(121,8,1));
 
         db.addExpense("Burger", 80,new Date(),c1);
         db.addExpense("Fish", 80,new Date(),c1);
         db.addExpense("Pizza", 80,new Date(),c1);
         db.addExpense("Coca cola", 20,new Date(),c1);
+        db.addExpense("Coca cola", 100,new Date(),c1);
+        db.addExpense("Coca cola", 300,new Date(),c1);
+        db.addExpense("Coca cola", 200,new Date(),c1);
 
         //does not count
 
@@ -285,6 +291,26 @@ public class ExampleInstrumentedTest {
         db.addExpense("Liseberg", 500,new Date(),c2);
         db.addExpense("Disco", 200,new Date(),c2);
         db.addExpense("prostitution", 500,new Date(),c2);
+
+        db.addExpense("Burger", 80,new Date(121,8,2),c18);
+        db.addExpense("Fish", 80,new Date(121,8,2),c18);
+        db.addExpense("Pizza", 80,new Date(121,8,2),c18);
+        db.addExpense("Coca cola", 20,new Date(121,8,2),c18);
+        db.addExpense("Coca cola", 100,new Date(121,8,2),c18);
+        db.addExpense("Coca cola", 300,new Date(121,8,2),c18);
+        db.addExpense("Coca cola", 200,new Date(121,8,2),c18);
+
+        //does not count
+
+        db.addExpense("Counter", 80,new Date(121,8,2),c28);
+        db.addExpense("Liseberg", 500,new Date(121,8,2),c28);
+        db.addExpense("Disco", 200,new Date(121,8,2),c28);
+        db.addExpense("prostitution", 500,new Date(121,8,2),c28);
+
+        db.addExpense("prostitution", 700,new Date(),c28);
+        db.addExpense("Coca cola", 300,new Date(),c18);
+
+        db.setCategoriesPreviousLimits(new Date(121,8,1));
 
         assertEquals(3000,3000);
     }

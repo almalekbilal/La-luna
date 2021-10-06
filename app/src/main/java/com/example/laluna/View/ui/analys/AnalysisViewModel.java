@@ -20,16 +20,11 @@ public class AnalysisViewModel extends ViewModel {
     private MutableLiveData<List<Integer>> totalAndSpent = new MutableLiveData<>();
     private MutableLiveData<List<CategoryWithMoney>> categoriesLiveData;
     private DBHandler dbHandler;
-    private Date viewMonthDate;
-    public String[] names;
+    private MutableLiveData<Date> viewMonthDate = new MutableLiveData<>();
 
     public AnalysisViewModel() {
 
 
-
-
-
-    names = new String[]{"$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500","$500"};
 
 
 
@@ -38,23 +33,20 @@ public class AnalysisViewModel extends ViewModel {
     public void init(Context context){
         dbHandler = new DBHandler(context);
 
-        viewMonthDate = new Date();
+        viewMonthDate.postValue(new Date());
+        viewMonthDate.setValue(new Date());
 
         categoriesLiveData = new MutableLiveData<>();
-        List<Integer> ts = new ArrayList<>();
-        ts.add(dbHandler.getTotalMoneySpent(viewMonthDate));
-        ts.add(dbHandler.getTotalBudget(viewMonthDate));
-        totalAndSpent.postValue(ts);
-        updateCategories();
+        updateView();
     }
 
     private void updateCategories(){
         List<CategoryWithMoney> cat = new ArrayList<>();
 
-        List<Category> categories = dbHandler.getCategories(viewMonthDate);
+        List<Category> categories = dbHandler.getCategories(viewMonthDate.getValue());
 
         for(Category category : categories){
-            cat.add(new CategoryWithMoney(category, getLimit(category,viewMonthDate) , dbHandler.getTotalSpentByCategory(viewMonthDate,category)));
+            cat.add(new CategoryWithMoney(category, getLimit(category,viewMonthDate.getValue()) , dbHandler.getTotalSpentByCategory(viewMonthDate.getValue(),category)));
         }
 
         categoriesLiveData.postValue(cat);
@@ -72,49 +64,68 @@ public class AnalysisViewModel extends ViewModel {
     }
 
     public void leftArrowClick(){
-        int month = viewMonthDate.getMonth();
+        decrementMonth();
 
-        if(month == 0){
-            int year = viewMonthDate.getYear() -1;
-            viewMonthDate.setMonth(11);
-            viewMonthDate.setYear(year);
-        }else{
-            viewMonthDate.setMonth(month - 1);
+        if(dbHandler.getCategories(viewMonthDate.getValue()).size() == 0){
+            incrementMonth();
+        }else {
+
+            updateView();
         }
-
-
-
-        List<Integer> ts = new ArrayList<>();
-        ts.add(dbHandler.getTotalMoneySpent(viewMonthDate));
-        ts.add(dbHandler.getTotalBudget(viewMonthDate));
-        totalAndSpent.postValue(ts);
-        updateCategories();
     }
 
     public void rightArrowClick(){
-        int month = viewMonthDate.getMonth();
 
-        if(month == 12){
-            int year = viewMonthDate.getYear() +1;
-            viewMonthDate.setMonth(0);
-            viewMonthDate.setYear(year);
-        }else{
-            viewMonthDate.setMonth(month + 1);
+        incrementMonth();
+
+        if(dbHandler.getCategories(viewMonthDate.getValue()).size() == 0){
+            decrementMonth();
+        }else {
+            updateView();
         }
+    }
 
 
+    private void incrementMonth(){
+        int month = viewMonthDate.getValue().getMonth();
+        Date date = new Date();
+        if(month == 12){
+            int year = viewMonthDate.getValue().getYear() +1;
+            viewMonthDate.getValue().setMonth(0);
+            viewMonthDate.getValue().setYear(year);
+        }else{
+            viewMonthDate.getValue().setMonth(month + 1);
+        }
+    }
 
-        List<Integer> ts = new ArrayList<>();
-        ts.add(dbHandler.getTotalMoneySpent(viewMonthDate));
-        ts.add(dbHandler.getTotalBudget(viewMonthDate));
-        totalAndSpent.postValue(ts);
-        updateCategories();
+    private void decrementMonth(){
+        int month = viewMonthDate.getValue().getMonth();
+
+        if(month == 0){
+            int year = viewMonthDate.getValue().getYear() -1;
+            viewMonthDate.getValue().setMonth(11);
+            viewMonthDate.getValue().setYear(year);
+        }else{
+            viewMonthDate.getValue().setMonth(month - 1);
+        }
 
     }
 
 
+    private void updateView(){
+        List<Integer> ts = new ArrayList<>();
+        ts.add(dbHandler.getTotalMoneySpent(viewMonthDate.getValue()));
+        ts.add(dbHandler.getTotalBudget(viewMonthDate.getValue()));
+        totalAndSpent.postValue(ts);
+        updateCategories();
+        Date date = viewMonthDate.getValue();
+        viewMonthDate.postValue(date);
+        viewMonthDate.setValue(date);
+    }
 
     public LiveData<List<CategoryWithMoney>> getCategories(){ return categoriesLiveData; }
 
     public LiveData<List<Integer>> getTotalAndSpent(){ return totalAndSpent; }
+
+    public LiveData<Date> getDate(){return viewMonthDate;}
 }
