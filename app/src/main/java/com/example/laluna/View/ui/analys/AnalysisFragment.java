@@ -41,6 +41,7 @@ public class AnalysisFragment extends Fragment {
         final GridView gridViewAnalysis = root.findViewById(R.id.gridViewAnalysis);
 
         final TextView dateText = root.findViewById(R.id.txv_date);
+        final TextView budgetText = root.findViewById(R.id.txv_budgetAnalysis);
 
 
         gridViewAdapter = new GridViewAdapter(new ArrayList<CategoryWithMoney>(),root.getContext());
@@ -75,6 +76,8 @@ public class AnalysisFragment extends Fragment {
 
                 spent = integers.get(0);
                 total = integers.get(1);
+
+                budgetText.setText("Your budget : " + total);
 
                 piechart.clear();
                 makePie(piechart);

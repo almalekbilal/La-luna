@@ -7,6 +7,18 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/txv_budgetAnalysis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="-20dp"
+        android:text="TextView"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/txv_rightArrow"
         android:layout_width="52dp"
         android:layout_height="49dp"
