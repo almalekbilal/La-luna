@@ -2,6 +2,15 @@ package com.example.laluna.Model;
 
 import java.util.Date;
 
+/**
+ * The category class holds information about a specific category in the database
+ *
+ *
+ * @auther (Bilal Al Malek)
+ * @auther (Deaa Khankan)
+ * @auther (Ali Malla)
+ * @auther (Ali Al Khaled)
+ */
 public class Category {
 
     private int _id;
@@ -67,6 +76,11 @@ public class Category {
         return _color;
     }
 
+    /**
+     * The method compairs the id of two categories and return true if they match
+     * @param o the other category
+     * @return true if ids equals
+     */
     @Override
     public boolean equals(Object o){
         Category c2 = (Category) o;

@@ -25,6 +25,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * View class that is responsible for showing the information to the user
+ * It communicates the AnalysisViewModel
+ *
+ *   @auther (Bilal Al Malek)
+ *   @auther (Ali Malla)
+ */
 public class AnalysisFragment extends Fragment {
 
     private AnalysisViewModel analysisViewModel;
@@ -32,6 +39,13 @@ public class AnalysisFragment extends Fragment {
     private double total = 300, spent= 150;
 
 
+    /**
+     * This method creates the view and handle the widgets in it
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         analysisViewModel =
@@ -113,6 +127,10 @@ public class AnalysisFragment extends Fragment {
         return root;
     }
 
+    /**
+     * The methods make the circle diagram (Pie chart) and sets the data and the color for it
+     * @param piechart the piechart view object
+     */
 
     private void makePie(PieChart piechart){
         piechart.setUsePercentValues(true);

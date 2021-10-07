@@ -1,8 +1,14 @@
-package com.example.laluna.Model;
+package com.example.laluna.Repository;
+
+import com.example.laluna.Model.Category;
+import com.example.laluna.Model.Expense;
 
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The interface represent the classes that is responsible for handling a database
+ */
 public interface IDatabaseHandler {
 
     List<Expense> getCategoryExpenseDB(Category category);

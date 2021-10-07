@@ -20,6 +20,14 @@ import com.github.mikephil.charting.data.PieEntry;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * The adapter that controls the gridview in the view
+ * It take the data and place them in the gridview as rows and columns
+ *
+ *   @auther (Bilal Al Malek)
+ *   @auther (Ali Malla)
+ */
 public class GridViewAdapter extends ArrayAdapter {
 
 
@@ -43,7 +51,13 @@ public class GridViewAdapter extends ArrayAdapter {
 
     }
 
-
+    /**
+     * The method create the view for one item and place the information in it
+     * @param i
+     * @param view
+     * @param viewGroup
+     * @return
+     */
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(layoutInflater == null) {
@@ -61,11 +75,12 @@ public class GridViewAdapter extends ArrayAdapter {
         PieChart pc_categorySpent =(PieChart) view.findViewById(R.id.pc_categorySpent);
 
 
-
-        pc_categorySpent.setCenterText(categoryWithMoneyList.get(i).category.get_name());
-
         spent = categoryWithMoneyList.get(i).spent;
         total = categoryWithMoneyList.get(i).limit;
+
+        pc_categorySpent.setCenterText(categoryWithMoneyList.get(i).category.get_name() + " \n" + spent + " Kr");
+
+
 
 
         makeCategoryPie(pc_categorySpent);
@@ -73,6 +88,10 @@ public class GridViewAdapter extends ArrayAdapter {
         return view;
     }
 
+    /**
+     * The method makes the circle diagram for the category and puts the information in it
+     * @param piechart
+     */
     private void makeCategoryPie(PieChart piechart) {
         piechart.setUsePercentValues(true);
 
@@ -98,7 +117,7 @@ public class GridViewAdapter extends ArrayAdapter {
         dataSet.setValueTextSize(0);
         piechart.setData(pieData);
 
-        piechart.setCenterTextSize(25);
+        piechart.setCenterTextSize(15);
         piechart.setCenterTextColor(Color.rgb(255, 255, 255));
         piechart.setHoleColor(Color.rgb(40, 43, 51));
         piechart.setDescription(null);

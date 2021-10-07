@@ -7,14 +7,20 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.laluna.Model.Category;
-import com.example.laluna.Model.DBHandler;
-import com.example.laluna.R;
+import com.example.laluna.Repository.DBHandler;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
+/**
+ * ViewModel class that is responsible for the communication with the data base handler and the logic behind the scene
+ *
+ *
+ *   @auther (Bilal Al Malek)
+ *   @auther (Ali Malla)
+ */
 public class AnalysisViewModel extends ViewModel {
 
     private MutableLiveData<List<Integer>> totalAndSpent = new MutableLiveData<>();
@@ -23,13 +29,15 @@ public class AnalysisViewModel extends ViewModel {
     private MutableLiveData<Date> viewMonthDate = new MutableLiveData<>();
 
     public AnalysisViewModel() {
-
-
-
-
-
     }
 
+    /**
+     * The method works when the class is running for the first time
+     * It update the date and sends it to the view
+     * It gets the total money spend and the budget this month from database handler and sends them to the view
+     * It gets the categories for this month from database and sends it to the view
+     * @param context the android information that is needen for the database
+     */
     public void init(Context context){
         dbHandler = new DBHandler(context);
 
@@ -40,6 +48,11 @@ public class AnalysisViewModel extends ViewModel {
         updateView();
     }
 
+    /**
+     * The method gets the categories of a specific month and sends them to the view
+     * It gets the limit of each category and sends it to the view
+     * It gets the total money spend of each category and sends it to the view
+     */
     private void updateCategories(){
         List<CategoryWithMoney> cat = new ArrayList<>();
 
@@ -53,6 +66,12 @@ public class AnalysisViewModel extends ViewModel {
 
     }
 
+    /**
+     * The method takes a category and a date that represent a month and returns the limits of the category in that month
+     * @param category
+     * @param date
+     * @return
+     */
     private int getLimit(Category category, Date date){
         Date dateNow = new Date();
 
@@ -63,6 +82,10 @@ public class AnalysisViewModel extends ViewModel {
         }
     }
 
+    /**
+     * The methods is called whenever the user clicks on the left arrow
+     * The method change the date to the previous month and updates the view
+     */
     public void leftArrowClick(){
         decrementMonth();
 
@@ -74,6 +97,10 @@ public class AnalysisViewModel extends ViewModel {
         }
     }
 
+    /**
+     * The methods is called whenever the user clicks on the right arrow
+     * The method change the date to the previous month and updates the view
+     */
     public void rightArrowClick(){
 
         incrementMonth();
@@ -85,6 +112,9 @@ public class AnalysisViewModel extends ViewModel {
         }
     }
 
+    /**
+     * The method change the date to the next month
+     */
 
     private void incrementMonth(){
         int month = viewMonthDate.getValue().getMonth();
@@ -98,6 +128,10 @@ public class AnalysisViewModel extends ViewModel {
         }
     }
 
+
+    /**
+     * The method change the date to the previous month
+     */
     private void decrementMonth(){
         int month = viewMonthDate.getValue().getMonth();
 
@@ -112,6 +146,12 @@ public class AnalysisViewModel extends ViewModel {
     }
 
 
+    /**
+     * The method takes the information from database and sends them to view
+     * It sends the date to the view
+     * It gets the total money spend and the budget this month from database handler and sends them to the view
+     * It gets the categories for this month from database and sends it to the view
+     */
     private void updateView(){
         List<Integer> ts = new ArrayList<>();
         ts.add(dbHandler.getTotalMoneySpent(viewMonthDate.getValue()));
@@ -124,10 +164,21 @@ public class AnalysisViewModel extends ViewModel {
     }
 
 
-
+    /**
+     * The method returns the categories as a LiveData object
+     * Its responsible for the communication with the view
+     */
     public LiveData<List<CategoryWithMoney>> getCategories(){ return categoriesLiveData; }
 
+    /**
+     * The method returns the total money spend and the budget as a LiveData object
+     * Its responsible for the communication with the view
+     */
     public LiveData<List<Integer>> getTotalAndSpent(){ return totalAndSpent; }
 
+    /**
+     * The method returns the the date as a LiveData object
+     * Its responsible for the communication with the view
+     */
     public LiveData<Date> getDate(){return viewMonthDate;}
 }

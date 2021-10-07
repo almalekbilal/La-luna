@@ -1,4 +1,4 @@
-package com.example.laluna.Model;
+package com.example.laluna.Repository;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,6 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.laluna.Model.Category;
+import com.example.laluna.Model.Expense;
+import com.example.laluna.Repository.IDatabaseHandler;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +19,15 @@ import java.util.Date;
 import java.util.List;
 
 
+/**
+ * A class for communication with the local Sqlite database
+ *
+ *  @auther (Bilal Al Malek)
+ *  @auther (Deaa Khankan)
+ *  @auther (Ali Malla)
+ *  @auther (Ali Al Khaled)
+ *
+ */
 public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler {
 
     private static final int DATABASE_VERSION = 1;
@@ -31,17 +44,21 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 
+    // This method creates the tables in databas
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // The first table is categories table and will hold all the categories information in it
         String queryCategoryTable = "CREATE TABLE " + TABLE_CATEGORY + "(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, limitt INTEGER," +
                 "picture_name TEXT, color TEXT, creation_date TEXT, destroyed_date TEXT );";
 
+        // The second table is expenses table and will hold all the expenses information in it
         String queryExpenseTeble = "CREATE TABLE " + TABLE_EXPENSE + "(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, value INTEGER, " +
                 "date TEXT, category_id INTEGER, " +
                 "FOREIGN KEY(category_id) REFERENCES " + TABLE_CATEGORY + "(_id) );";
 
+        // The third table will hold information about the limits of categories in previous months
         String queryLimitTable = "CREATE TABLE " + TABLE_LIMITS + "(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, month TEXT, category_id INTEGER, limitt INTEGER, " +
                 "FOREIGN KEY(category_id) REFERENCES " + TABLE_CATEGORY + "(_id) );";
@@ -61,7 +78,10 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     }
 
 
-
+    /**
+     * A method for getting all the expenses of a a specific category.
+     * @param category represents the category that the method will get all its related expenses.
+     */
     public List<Expense> getCategoryExpenseDB(Category category){
         List <Expense> expensesList = new ArrayList<Expense>();
         int categoryID=category.get_id();
@@ -94,7 +114,13 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
 
 
-    // Adding an expense to Data Base
+    /**
+     * A method that adds a new expense into the database
+     * @param name that represent the name of the new expense.
+     * @param value that represent the value of the new expense.
+     * @param date that represent the creation date of the expense
+     * @param category that represent the category which the expense will belong to
+     */
     public Expense addExpenseDB(String name, int value, Date date, Category category){
         ContentValues values = new ContentValues();
         values.put("name", name);
@@ -113,7 +139,10 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
         return expense;
     }
 
-    //Convert dateString to Date
+    /**
+     * A method that takes a string and converts it to date object
+     * The method is private and will be used only here in this class
+     */
     private Date stringToDate(String dateString){
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -128,13 +157,20 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
         return date;
     }
 
+    /**
+     * A method that takes a date object and converts it to a string value
+     * The method is private and will be used only here in this class
+     */
     private String dateToString(Date date){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(date);
     }
 
 
-        // Not done yet
+    /**
+     * A method for getting all the active categories in a specific month
+     * @param date represent the month date.
+     */
     public List<Category> getCategoriesDB(Date date){
         List <Category> categories = new ArrayList<>();
 
@@ -170,6 +206,10 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     }
 
 
+    /**
+     * The method checks if the date is between creation and destroy dates in category row
+     * The method is private and will be used only in this class
+     */
     private boolean isBetween(Date date, Cursor cursor){
 
         boolean IsBetween = false;
@@ -192,7 +232,10 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
     }
 
-    //updating expenses table in the database
+    /**
+     * A method for updating an expense in the database
+     * @param expense is the expense object that contains new values that will be updated
+     */
     public void updateExpenseDB(Expense expense){
         ContentValues contentValues = new ContentValues();
         contentValues.put("name",expense.get_name() );
@@ -208,7 +251,10 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     }
 
 
-
+    /**
+     * A method for saving the limits of the active categories for the past month
+     * @param date represent the month
+     */
     public void setCategoriesPreviousLimitsDB(Date date){
         List<Category> categories = getCategoriesDB(date);
 
@@ -235,7 +281,11 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     }
 
 
-
+    /**
+     * A method for getting expenses from the database
+     * @param start represent the row number of the Expenses table in database that the algorithm will start slicing
+     * @param end represent the row number of the Expenses table in database that the algorithm will finish slicing
+     */
     public List<Expense> getExpensesDB(int start, int end){
 
         ArrayList<Expense> expenses = new ArrayList<Expense>();
@@ -269,9 +319,13 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
 
 
+    /**
+     * A method for getting a category from database
+     * it take the category from database and transform it to java object Category
+     * its private and will be used only here in this class
+     * @param id represents the categery id in database
+     */
 
-
-// Return a specific category by ID
     private Category getCategory(int id){
 
         String query = "SELECT * FROM " + TABLE_CATEGORY + " WHERE _id = " + id + ";";
@@ -426,7 +480,11 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     }
 
 
-
+    /**
+     * A method for getting a limit of a specific category in a past month from the limits table in the database
+     * @param date represent the month
+     * @param category represent the category which limit will gets
+     */
     public int getCategoryLimitDB(Date date, Category category){
 
         String query = "SELECT limitt FROM " + TABLE_LIMITS + " WHERE category_id = " + category.get_id() + " AND month = '" + dateToString(date) + "' ;";
@@ -442,6 +500,10 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
         return limit;
     }
 
+    /**
+     * A method for getting the budget of a specific month, it gets all the category limits of the month and adding them
+     * @param date represent the month
+     */
     public int getTotalBudgetDB(Date date){
 
         Date thisDate = new Date();

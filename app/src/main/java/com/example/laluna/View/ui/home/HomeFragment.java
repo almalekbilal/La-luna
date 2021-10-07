@@ -25,11 +25,26 @@ import com.github.mikephil.charting.data.PieEntry;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * View class that is responsible for showing the information to the user
+ * It communicates the HomeViewModel
+ *
+ *   @auther (Deaa Khankan)
+ *   @auther (Ali Al Khaled)
+ */
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    final ArrayList<Expense> e = new ArrayList<Expense>();
     private double total = 300, spent= 150;
 
+    /**
+     * This method creates the view and handle the widgets in it
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -44,10 +59,10 @@ public class HomeFragment extends Fragment {
         RecyclerView recyclerView = root.findViewById(R.id.ryc_expenses);
         final TextView budgetText = root.findViewById(R.id.txv_budgetHome);
 
-        final ArrayList<Expense> e = new ArrayList<Expense>();
 
 
-        ExpensesAdapter adapter =new ExpensesAdapter(getContext(), e);
+
+        final ExpensesAdapter adapter =new ExpensesAdapter(getContext(), e);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -71,6 +86,7 @@ public class HomeFragment extends Fragment {
             public void onChanged(List<Expense> expenses) {
 
                     e.addAll(expenses);
+                    adapter.notifyDataSetChanged();
                 }
         });
 
@@ -80,6 +96,10 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    /**
+     * The methods make the circle diagram (Pie chart) and sets the data and the color for it
+     * @param piechart the piechart view object
+     */
 
     private void makePie(PieChart piechart){
         piechart.setUsePercentValues(true);
