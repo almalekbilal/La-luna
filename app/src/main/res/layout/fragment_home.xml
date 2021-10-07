@@ -6,7 +6,6 @@
     android:layout_height="match_parent">
 
 
-
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pc_categorySpent"
         android:layout_width="250dp"
@@ -15,69 +14,79 @@
 
         android:layout_marginStart="50dp"
 
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="50dp"
-
         android:paddingLeft="10dp"
+
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="30dp"
-
-        app:layout_constraintBottom_toTopOf="@+id/gridViewAnalysis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/pc_categorySpent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginBottom="80dp"></com.github.mikephil.charting.charts.PieChart>
 
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="156dp"
+        android:layout_width="108dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="263dp"
+        android:layout_marginBottom="12dp"
         android:backgroundTint="#63E969"
         android:text="@string/addNewButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/ryc_expenses"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:id="@+id/dividerHome"
         android:layout_width="409dp"
         android:layout_height="1dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginBottom="5dp"
         android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/gridViewAnalysis"
+        app:layout_constraintBottom_toTopOf="@+id/ryc_expenses"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pc_categorySpent"
-        app:layout_constraintVertical_bias="0.923" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ryc_expenses"
-        android:layout_width="409dp"
-        android:layout_height="550dp"
+        android:layout_width="407dp"
+        android:layout_height="479dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="240dp"
         android:layout_marginEnd="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pc_categorySpent"
-        app:layout_constraintVertical_bias="0.402" />
+        app:layout_constraintTop_toBottomOf="@+id/pc_categorySpent" />
 
     <TextView
         android:id="@+id/txv_budgetHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="93dp"
+        android:layout_height="54dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="-20dp"
         android:text="TextView"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="138dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="139dp"
+        android:text="YOUR SPENT MONEY"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pc_categorySpent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
