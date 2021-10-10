@@ -1,11 +1,6 @@
-package com.example.laluna.Repository;
+package com.example.laluna.Model;
 
 import android.content.Context;
-
-import com.example.laluna.Model.Category;
-import com.example.laluna.Model.Expense;
-import com.example.laluna.Repository.IDatabaseHandler;
-import com.example.laluna.Repository.SqliteHandler;
 
 import java.util.Date;
 import java.util.List;

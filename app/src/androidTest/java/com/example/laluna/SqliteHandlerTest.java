@@ -7,7 +7,7 @@ import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.example.laluna.Model.Category;
-import com.example.laluna.Repository.SqliteHandler;
+import com.example.laluna.Model.SqliteHandler;
 import com.example.laluna.Model.Expense;
 
 import org.junit.Before;

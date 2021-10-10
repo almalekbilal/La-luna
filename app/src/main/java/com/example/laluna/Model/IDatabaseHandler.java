@@ -1,4 +1,4 @@
-package com.example.laluna.Repository;
+package com.example.laluna.Model;
 
 import com.example.laluna.Model.Category;
 import com.example.laluna.Model.Expense;

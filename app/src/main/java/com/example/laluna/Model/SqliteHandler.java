@@ -1,4 +1,4 @@
-package com.example.laluna.Repository;
+package com.example.laluna.Model;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.example.laluna.Model.Category;
 import com.example.laluna.Model.Expense;
-import com.example.laluna.Repository.IDatabaseHandler;
+import com.example.laluna.Model.IDatabaseHandler;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
