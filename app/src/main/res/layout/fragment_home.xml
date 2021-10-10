@@ -34,36 +34,35 @@
         android:layout_height="54dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="263dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="4dp"
         android:backgroundTint="#63E969"
         android:text="@string/addNewButton"
-        app:layout_constraintBottom_toTopOf="@+id/ryc_expenses"
+        app:layout_constraintBottom_toBottomOf="@+id/dividerHome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:id="@+id/dividerHome"
-        android:layout_width="409dp"
+        android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="40dp"
         android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/ryc_expenses"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ryc_expenses"
-        android:layout_width="407dp"
-        android:layout_height="479dp"
+        android:layout_width="408dp"
+        android:layout_height="236dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pc_categorySpent" />
+        app:layout_constraintTop_toBottomOf="@+id/dividerHome" />
 
     <TextView
         android:id="@+id/txv_budgetHome"

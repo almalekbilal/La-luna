@@ -41,44 +41,40 @@
         android:layout_marginStart="50dp"
 
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="188dp"
-        android:paddingLeft="10dp"
 
+        android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txv_date"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginBottom="80dp"></com.github.mikephil.charting.charts.PieChart>
 
     <GridView
         android:id="@+id/gridViewAnalysis"
-        android:layout_width="415dp"
-        android:layout_height="479dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
 
-        android:layout_marginTop="209dp"
+        android:layout_marginTop="5dp"
         android:columnWidth="100dp"
         android:gravity="center"
         android:numColumns="3"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pc_categorySpent" />
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <View
         android:id="@+id/divider"
-        android:layout_width="409dp"
+        android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="40dp"
         android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/gridViewAnalysis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/txv_leftArrow"
@@ -96,7 +92,6 @@
         android:id="@+id/txv_date"
         android:layout_width="89dp"
         android:layout_height="26dp"
-        android:layout_marginEnd="160dp"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"

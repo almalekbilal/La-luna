@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         Category c1 = db.addCategory("Food",3000,R.drawable.categorycar,null,new Date(121,9,2));
-        Category c2 = db.addCategory("entertainment",2000,R.drawable.food,null,new Date(121,9,2));
 
         Category c18 = db.addCategory("Car",1000,R.drawable.food,null,new Date(121,8,1));
         Category c28 = db.addCategory("Drinks",3000,R.drawable.ic_home_black_24dp,null,new Date(121,8,1));
@@ -63,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
         //does not count
 
 
-        db.addExpense("Disco", 200,new Date(),c2);
-        db.addExpense("zip line", 500,new Date(),c2);
 
         db.addExpense("Window", 80,new Date(121,8,2),c18);
         db.addExpense("Gear", 20,new Date(121,8,2),c18);
@@ -84,8 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
         db.addExpense("Oil", 80,new Date(121,8,2),c18);
         db.addExpense("Motor", 80,new Date(121,8,2),c18);
-        db.addExpense("CS go", 80,new Date(),c2);
-        db.addExpense("Liseberg", 500,new Date(),c2);
         db.addExpense("Burger", 80,new Date(),c1);
         db.addExpense("Fish", 80,new Date(),c1);
 
