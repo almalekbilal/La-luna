@@ -1,4 +1,4 @@
-package com.example.laluna.View.ui.analys;
+package com.example.laluna.ui.analys;
 
 import android.content.Context;
 

@@ -1,4 +1,4 @@
-package com.example.laluna.View.ui;
+package com.example.laluna.ui;
 
 import android.os.Bundle;
 

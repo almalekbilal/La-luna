@@ -1,8 +1,7 @@
-package com.example.laluna.View.ui.analys;
+package com.example.laluna.ui.analys;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

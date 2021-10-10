@@ -1,4 +1,4 @@
-package com.example.laluna.View.ui.home;
+package com.example.laluna.ui.home;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.laluna.Model.Expense;
 import com.example.laluna.R;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -54,6 +55,8 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
     public void onBindViewHolder(@NonNull ExpensesAdapter.ExpenseHolder holder, int position) {
         holder.price.setText(expenses.get(position).get_value() + " Kr");
         holder.name.setText(expenses.get(position).get_name());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        holder.date.setText(sdf.format(expenses.get(position).get_date()));
     }
 
     @Override
@@ -66,7 +69,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
      */
     public class ExpenseHolder extends RecyclerView.ViewHolder {
 
-        TextView price, name;
+        TextView price, name, date;
         ImageView categoryImage;
 
         public ExpenseHolder(@NonNull View itemView) {
@@ -75,6 +78,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
             price = itemView.findViewById(R.id.txv_expensePrice);
             name = itemView.findViewById(R.id.txv_expenseName);
             categoryImage = itemView.findViewById(R.id.img_categoryImage);
+            date = itemView.findViewById(R.id.txv_dateExpense);
 
 
         }

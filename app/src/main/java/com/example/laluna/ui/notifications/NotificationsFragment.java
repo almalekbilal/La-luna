@@ -1,4 +1,4 @@
-package com.example.laluna.View.ui.notifications;
+package com.example.laluna.ui.notifications;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

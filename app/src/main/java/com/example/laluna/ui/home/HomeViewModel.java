@@ -1,4 +1,4 @@
-package com.example.laluna.View.ui.home;
+package com.example.laluna.ui.home;
 
 import android.content.Context;
 
