@@ -45,6 +45,7 @@
                 android:layout_width="102dp"
                 android:layout_height="112dp"
                 android:layout_marginStart="4dp"
+                android:background="#FFF1F1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:drawable/ic_menu_camera" />
