@@ -50,8 +50,8 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void addCategoryTest() {
-        Category c1 = db.addCategory("food", 100, null, null, new Date(121, 01, 01));
-        db.addCategory("car", 500, "pic2", "red", new Date(120, 01, 01));
+        Category c1 = db.addCategory("food", 100, 0, null, new Date(121, 01, 01));
+        db.addCategory("car", 500, 0, "red", new Date(120, 01, 01));
 
         List<Category> categories = db.getCategories(new Date(121, 01, 03));
         assertEquals(categories.size(), 2);
@@ -61,10 +61,10 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void getCategoriesTest() {
-        db.addCategory("food", 100, "pic1", "blue", new Date(120, 05, 01));
-        db.addCategory("car", 500, "pic2", "red", new Date(120, 05, 01));
-        db.addCategory("clothes", 100, "pic3", "blue", new Date(120, 04, 01));
-        db.addCategory("other", 500, "pic4", "red", new Date(120, 05, 01));
+        db.addCategory("food", 100, 0, "blue", new Date(120, 05, 01));
+        db.addCategory("car", 500, 0, "red", new Date(120, 05, 01));
+        db.addCategory("clothes", 100, 0, "blue", new Date(120, 04, 01));
+        db.addCategory("other", 500, 0, "red", new Date(120, 05, 01));
 
         List<Category> categories = db.getCategories(new Date(120, 7, 03));
         assertEquals(categories.size(), 4);
@@ -73,8 +73,8 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void deactiveCategoryTest() {
-        Category category1 = db.addCategory("food", 100, "pic1", "blue", new Date(121, 01, 01));
-        Category category2 = db.addCategory("car", 500, "pic2", "red", new Date(120, 01, 01));
+        Category category1 = db.addCategory("food", 100, 0, "blue", new Date(121, 01, 01));
+        Category category2 = db.addCategory("car", 500, 0, "red", new Date(120, 01, 01));
 
         db.deactivateCategory(category1, new Date(121, 02, 01));
         List<Category> categories = db.getCategories(new Date(121, 03, 01));
@@ -89,8 +89,8 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void addExpenseTest() {
-        Category category1 = db.addCategory("food", 100, "pic1", "blue", new Date(121, 01, 01));
-        Category category2 = db.addCategory("car", 500, "pic2", "red", new Date(120, 01, 01));
+        Category category1 = db.addCategory("food", 100, 0, "blue", new Date(121, 01, 01));
+        Category category2 = db.addCategory("car", 500, 0, "red", new Date(120, 01, 01));
 
         db.addExpense("swish",500,new Date(120,01,01), category1);
         db.addExpense("swish",500,new Date(120,01,01), category2);
@@ -116,8 +116,8 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void deleteExpenseTest() {
-        Category category1 = db.addCategory("food", 100, "pic1", "blue", new Date(121, 01, 01));
-        Category category2 = db.addCategory("car", 500, "pic2", "red", new Date(120, 01, 01));
+        Category category1 = db.addCategory("food", 100, 0, "blue", new Date(121, 01, 01));
+        Category category2 = db.addCategory("car", 500, 0, "red", new Date(120, 01, 01));
 
         Expense expense = db.addExpense("swish",500,new Date(120,01,01), category1);
         Expense expense1 =  db.addExpense("swish",500,new Date(120,01,01), category2);
@@ -136,8 +136,8 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void updateExpensesTest(){
-        Category category1 = db.addCategory("food", 100, "pic1", "blue", new Date(121, 01, 01));
-        Category category2 = db.addCategory("car", 500, "pic2", "red", new Date(120, 01, 01));
+        Category category1 = db.addCategory("food", 100, 0, "blue", new Date(121, 01, 01));
+        Category category2 = db.addCategory("car", 500, 0, "red", new Date(120, 01, 01));
 
 
 
@@ -155,8 +155,8 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void getTotalMoneySpentTest(){
-        Category c1 = db.addCategory("food",100,"pic1", "blue",new Date(120,5,1));
-        Category c2 = db.addCategory("car",500,"pic2", "red",new Date(2020,05,01));
+        Category c1 = db.addCategory("food",100,0, "blue",new Date(120,5,1));
+        Category c2 = db.addCategory("car",500,0, "red",new Date(2020,05,01));
 
 
         db.addExpense("KFC", 45, new Date(120,5,1), c1);
@@ -175,8 +175,8 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void getTotalMoneySpentByCategoryTest() {
-        Category c1 = db.addCategory("food",100,"pic1", "blue",new Date(121,5,1));
-        Category c2 = db.addCategory("car",100,"pic1", "blue",new Date(121,5,1));
+        Category c1 = db.addCategory("food",100,0, "blue",new Date(121,5,1));
+        Category c2 = db.addCategory("car",100,0, "blue",new Date(121,5,1));
 
         db.addExpense("Book", 21, new Date(), c1);
         db.addExpense("Burger", 22, new Date(121, 2, 4), c1); //does not count
@@ -201,13 +201,13 @@ public class ExampleInstrumentedTest {
     @Test
     public void getTotalBudgetTest(){
 
-        Category c1 = db.addCategory("Mat",2000,null,null,new Date(121,5,1));
+        Category c1 = db.addCategory("Mat",2000,0,null,new Date(121,5,1));
 
-        Category c2 = db.addCategory("Kaffe",150,null,null,new Date(121,5,1));
+        Category c2 = db.addCategory("Kaffe",150,0,null,new Date(121,5,1));
 
-        Category c3 = db.addCategory("Kläder",500,null,null,new Date(121,5,1));
+        Category c3 = db.addCategory("Kläder",500,0,null,new Date(121,5,1));
 
-        Category c4 = db.addCategory("Snacks",200,null,null,new Date(121,5,1));
+        Category c4 = db.addCategory("Snacks",200,0,null,new Date(121,5,1));
 
 
         db.setCategoriesPreviousLimits(new Date(121,5,1));
@@ -231,8 +231,8 @@ public class ExampleInstrumentedTest {
     @Test
     public void getCategoryExpensesTest() {
 
-        Category c1 = db.addCategory("Food",3000,null,null,null);
-        Category c2 = db.addCategory("entertainment",700,null,null,null);
+        Category c1 = db.addCategory("Food",3000,0,null,null);
+        Category c2 = db.addCategory("entertainment",700,0,null,null);
 
         //will count
         db.addExpense("Burger", 80,new Date(121,5,1),c1);
@@ -255,7 +255,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void getCategoryLimitTest(){
-        Category c1 = db.addCategory("Food",3000,null,null,null);
+        Category c1 = db.addCategory("Food",3000,0,null,null);
 
         db.setCategoriesPreviousLimits(new Date(121,5,5));
 
@@ -271,11 +271,11 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void ViewThings(){
-        Category c1 = db.addCategory("Food",3000,null,null,new Date(121,9,2));
-        Category c2 = db.addCategory("entertainment",2000,null,null,new Date(121,9,2));
+        Category c1 = db.addCategory("Food",3000,R.drawable.categorycar,null,new Date(121,9,2));
+        Category c2 = db.addCategory("entertainment",2000,R.drawable.food,null,new Date(121,9,2));
 
-        Category c18 = db.addCategory("Car",1000,null,null,new Date(121,8,1));
-        Category c28 = db.addCategory("Drinks",3000,null,null,new Date(121,8,1));
+        Category c18 = db.addCategory("Car",1000,R.drawable.food,null,new Date(121,8,1));
+        Category c28 = db.addCategory("Drinks",3000,R.drawable.ic_home_black_24dp,null,new Date(121,8,1));
 
 
         db.addExpense("Pizza", 80,new Date(),c1);

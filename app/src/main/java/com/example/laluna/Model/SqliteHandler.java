@@ -50,7 +50,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
         // The first table is categories table and will hold all the categories information in it
         String queryCategoryTable = "CREATE TABLE " + TABLE_CATEGORY + "(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, limitt INTEGER," +
-                "picture_name TEXT, color TEXT, creation_date TEXT, destroyed_date TEXT );";
+                "picture_name INTEGER, color TEXT, creation_date TEXT, destroyed_date TEXT );";
 
         // The second table is expenses table and will hold all the expenses information in it
         String queryExpenseTeble = "CREATE TABLE " + TABLE_EXPENSE + "(" +
@@ -190,7 +190,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
                 int _id = cursor.getInt(cursor.getColumnIndex("_id"));
                 int limit = cursor.getInt(cursor.getColumnIndex("limitt"));
                 String name = cursor.getString(cursor.getColumnIndex("name"));
-                String pitureName = cursor.getString(cursor.getColumnIndex("picture_name"));
+                int pitureName = cursor.getInt(cursor.getColumnIndex("picture_name"));
                 String color = cursor.getString(cursor.getColumnIndex("color"));
                 Date creationDate = stringToDate(cursor.getString(cursor.getColumnIndex("creation_date")));
                 Date destroyedDate = stringToDate(cursor.getString(cursor.getColumnIndex("destroyed_date")));
@@ -339,7 +339,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
         int _id = c.getInt(c.getColumnIndex("_id"));
         int limit = c.getInt(c.getColumnIndex("limitt"));
         String name = c.getString(c.getColumnIndex("name"));
-        String pitureName = c.getString(c.getColumnIndex("picture_name"));
+        int pitureName = c.getInt(c.getColumnIndex("picture_name"));
         String color = c.getString(c.getColumnIndex("color"));
         Date creationDate = stringToDate(c.getString(c.getColumnIndex("creation_date")));
         Date destroyedDate = stringToDate(c.getString(c.getColumnIndex("destroyed_date")));
@@ -425,7 +425,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     /**
      * A method to add a new category to the database.
      */
-    public Category addCategoryDB(String name, int limit, String pitureName, String color, Date creation){
+    public Category addCategoryDB(String name, int limit, int pitureName, String color, Date creation){
         ContentValues values = new ContentValues();
         values.put("name", name);
         values.put("limitt", limit);

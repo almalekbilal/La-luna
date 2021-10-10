@@ -58,7 +58,7 @@ public interface IDatabaseHandler {
     /**
      * A method to add a new category to the database.
      */
-     Category addCategoryDB(String name, int limit, String pitureName, String color, Date creation);
+     Category addCategoryDB(String name, int limit, int pitureName, String color, Date creation);
 
 
     /**

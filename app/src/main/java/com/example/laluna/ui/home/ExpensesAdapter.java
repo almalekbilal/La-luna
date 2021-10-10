@@ -57,6 +57,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
         holder.name.setText(expenses.get(position).get_name());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         holder.date.setText(sdf.format(expenses.get(position).get_date()));
+        holder.categoryImage.setImageResource(expenses.get(position).get_category().get_pictureName());
     }
 
     @Override

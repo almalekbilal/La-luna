@@ -18,10 +18,10 @@ public class Category {
     private Date creationDate;
     private Date destroyedDate;
     private String _name;
-    private String _pictureName;
+    private int _pictureName;
     private String _color;
 
-    public Category(int _id, int _limit, String _name, String _pictureName, String _color, Date creationDate, Date destroyedDate) {
+    public Category(int _id, int _limit, String _name, int _pictureName, String _color, Date creationDate, Date destroyedDate) {
         this._id = _id;
         this._limit = _limit;
         this._name = _name;
@@ -64,11 +64,11 @@ public class Category {
         this._name = _name;
     }
 
-    public String get_pictureName() {
+    public int get_pictureName() {
         return _pictureName;
     }
 
-    public void set_pictureName(String _pictureName) {
+    public void set_pictureName(int _pictureName) {
         this._pictureName = _pictureName;
     }
 

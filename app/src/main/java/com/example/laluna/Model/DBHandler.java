@@ -126,7 +126,7 @@ public class DBHandler {
     /**
      * A method to add a new category to the database.
      */
-    public Category addCategory(String name, int limit, String pitureName,String color, Date creation){
+    public Category addCategory(String name, int limit, int pitureName,String color, Date creation){
         return db.addCategoryDB(name,limit,pitureName,color,creation);
     }
 
