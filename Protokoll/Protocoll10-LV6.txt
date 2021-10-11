@@ -1,0 +1,48 @@
+#Meeting Agenda 
+
+Group: La Luna 
+
+Date: 3/10/2021 
+
+Chair: Bilal Al Malek
+
+Participants: Ali Malla, Ali Alkhaled, Bilal Al Malek, Deaa Khankan 
+
+ 
+
+##Objectives 
+
+-Vi behöver planera hur arbetet av användargränssnittet ska vara
+
+-Vi behöver planera hur arbetet ska delas mellan gruppmedlemmarna
+
+ 
+
+##Reports 
+
+I förra möter har vi diskuterat hur arbetet av testerna ska gå till
+ 
+
+##Discussion items 
+
+-Hur ska vy delen kommunicera med modellen
+
+-Hur ska arbetet delas mellan gruppmedlemarna
+
+
+
+
+##Outcomes and assignments 
+
+-Vi har bestämt att vi ska använda MVVM design pattern som underlättar kommunikationen mellan vyn och modellen
+
+-Vi har delat gruppen till två delar, en del jobbar med hem sidan och en grupp jobbar med analys sidan i applikationen
+
+
+
+
+
+##Wrap up 
+
+I nästa mötet kommer vi att diskutera sdd och planera arbetet med resten av gruppen
+
