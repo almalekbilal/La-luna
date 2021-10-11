@@ -1,10 +1,12 @@
 package com.example.laluna.ui.analys;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -13,7 +15,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.laluna.CategoryExpensesActivity;
 import com.example.laluna.R;
+import com.example.laluna.ui.MainActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -65,9 +69,32 @@ public class AnalysisFragment extends Fragment {
         analysisViewModel.init(getContext());
 
 
-        final PieChart piechart = root.findViewById(R.id.pc_categorySpent);
+        final PieChart piechart = root.findViewById(R.id.categoryPieCh);
 
         makePie(piechart);
+
+
+
+
+        /////// To open a new activity from analysis page.
+        gridViewAnalysis.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(root.getContext(), CategoryExpensesActivity.class);
+
+                String selectedName = analysisViewModel.getCategories().getValue().get(i).category.get_name();
+                double selectedSpent = analysisViewModel.getCategories().getValue().get(i).spent;
+                double selectedBudget = analysisViewModel.getCategories().getValue().get(i).limit;
+
+                intent.putExtra("spent",selectedSpent);
+                intent.putExtra("budget",selectedBudget);
+                intent.putExtra("name",selectedName);
+
+                startActivity(intent);
+            }
+        });
+
+
 
 
 
