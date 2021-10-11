@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".CategoryExpensesActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
