@@ -69,7 +69,7 @@ public class AnalysisFragment extends Fragment {
         analysisViewModel.init(getContext());
 
 
-        final PieChart piechart = root.findViewById(R.id.categoryPieCh);
+        final PieChart piechart = root.findViewById(R.id.pc_categorySpent);
 
         makePie(piechart);
 
