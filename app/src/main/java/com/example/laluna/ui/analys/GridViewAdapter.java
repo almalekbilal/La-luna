@@ -69,18 +69,18 @@ public class GridViewAdapter extends ArrayAdapter {
         TextView categorySpentMoney = (TextView) view.findViewById(R.id.categorySpentMoney);
         categorySpentMoney.setText(categoryWithMoneyList.get(i).limit + " Kr");
 
-        PieChart pc_categorySpent =(PieChart) view.findViewById(R.id.pc_categorySpent);
+        PieChart categoryPieCh =(PieChart) view.findViewById(R.id.categoryPieCh);
 
 
         spent = categoryWithMoneyList.get(i).spent;
         total = categoryWithMoneyList.get(i).limit;
 
-        pc_categorySpent.setCenterText(categoryWithMoneyList.get(i).category.get_name() + " \n" + spent + " Kr");
+        categoryPieCh.setCenterText(categoryWithMoneyList.get(i).category.get_name() + " \n" + spent + " Kr");
 
 
 
 
-        makeCategoryPie(pc_categorySpent);
+        makeCategoryPie(categoryPieCh);
 
         return view;
     }
