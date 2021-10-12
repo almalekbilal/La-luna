@@ -34,7 +34,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    final ArrayList<Expense> e = new ArrayList<Expense>();
+    final ArrayList<Expense> expenseArrayList = new ArrayList<Expense>();
     private double total = 300, spent= 150;
 
     /**
@@ -55,13 +55,13 @@ public class HomeFragment extends Fragment {
 
         makePie(piechart);
 
-        RecyclerView recyclerView = root.findViewById(R.id.ryc_expenses);
+        RecyclerView recyclerView = root.findViewById(R.id.categoryListView);
         final TextView budgetText = root.findViewById(R.id.txv_budgetHome);
 
 
 
 
-        final ExpensesAdapter adapter =new ExpensesAdapter(getContext(), e);
+        final ExpensesAdapter adapter =new ExpensesAdapter(getContext(), expenseArrayList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(List<Expense> expenses) {
 
-                    e.addAll(expenses);
+                    expenseArrayList.addAll(expenses);
                     adapter.notifyDataSetChanged();
                 }
         });
