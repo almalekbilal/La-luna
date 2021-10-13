@@ -10,6 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.categories.CategoriesAddActivity"
+
+            ></activity>
+
+        <activity
+            android:name=".ui.categories.CategoriesEditActivity"
+
+            ></activity>
+
+        <activity
             android:name=".CategoryExpensesActivity"
             android:exported="true" />
         <activity

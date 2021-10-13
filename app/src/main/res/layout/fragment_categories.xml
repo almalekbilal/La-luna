@@ -7,13 +7,13 @@
 
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/addCategoryButton"
         android:layout_width="108dp"
         android:layout_height="54dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="263dp"
         android:backgroundTint="#63E969"
-        android:text="@string/addNewButton"
+        android:text="ADD CATEGORY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/addCategoryButton" />
 
     <TextView
         android:id="@+id/textView6"

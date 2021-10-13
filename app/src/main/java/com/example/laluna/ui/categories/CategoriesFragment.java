@@ -1,11 +1,14 @@
 package com.example.laluna.ui.categories;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -27,6 +30,8 @@ public class CategoriesFragment extends Fragment {
     private List<Category> categoryList = new ArrayList<>();
     private CategoriesViewModel categoriesViewModel;
 
+    Button addCategoryButton;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +45,23 @@ public class CategoriesFragment extends Fragment {
 
         categoriesViewModel.init(getContext());
 
+        categoryListView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Intent intent = new Intent(getContext(), CategoriesEditActivity.class);
+                        startActivity(intent);
+                        Category category = (Category) adapterView.getItemAtPosition(i);
+                        Toast.makeText(getContext() ,category.get_name(), Toast.LENGTH_LONG).show();
+
+                    }
+                }
+
+        );
+        addCategoryButton = (Button) root.findViewById(R.id.addCategoryButton);
+
+        addButtonClicked();
+
 
         categoriesViewModel.getCategory().observe(this, new Observer<List<Category>>() {
             @Override
@@ -50,9 +72,28 @@ public class CategoriesFragment extends Fragment {
 
 
 
+
             }
         });
 
         return root;
+
+
     }
+    private void addButtonClicked(){
+
+        addCategoryButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CategoriesAddActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+    }
+
+
+
+
 }
