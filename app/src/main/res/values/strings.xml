@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">La luna</string>
+    <string name="title_home">Home</string>
+    <string name="title_analysis">Analysis</string>
+    <string name="title_categories">Categories</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="leftArrow"><![CDATA[<---]]></string>
+    <string name="rightArrow"><![CDATA[--->]]></string>
+    <string name="addNewButton">+ Add new expense</string>
+
+</resources>
