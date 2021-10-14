@@ -27,8 +27,8 @@ import java.util.List;
 public class CategoriesFragment extends Fragment {
 
 
-    private List<Category> categoryList = new ArrayList<>();
     private CategoriesViewModel categoriesViewModel;
+
 
     Button addCategoryButton;
 
@@ -39,7 +39,8 @@ public class CategoriesFragment extends Fragment {
                 ViewModelProviders.of(this).get(CategoriesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_categories, container, false);
 
-         final CategoriesAdapter categoryAdapter= new CategoriesAdapter(getContext(), categoryList);
+        final CategoriesAdapter categoryAdapter = new CategoriesAdapter
+                (getContext(), categoriesViewModel.getCategoryList());
         ListView categoryListView = (ListView)   root.findViewById(R.id.categoryListView);
         categoryListView.setAdapter(categoryAdapter);
 
@@ -50,9 +51,13 @@ public class CategoriesFragment extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Intent intent = new Intent(getContext(), CategoriesEditActivity.class);
+                        String selectedCategoryName = categoriesViewModel.getCategory().getValue().get(i).get_name();
+                        int selectedCategoryBudget = categoriesViewModel.getCategory().getValue().get(i).get_limit();
+                        int selectedCategoryId = categoriesViewModel.getCategory().getValue().get(i).get_id();
+                        intent.putExtra("categoryName",selectedCategoryName);
+                        intent.putExtra("categoryBudget",selectedCategoryBudget);
+                        intent.putExtra("categoryId",selectedCategoryId);
                         startActivity(intent);
-                        Category category = (Category) adapterView.getItemAtPosition(i);
-                        Toast.makeText(getContext() ,category.get_name(), Toast.LENGTH_LONG).show();
 
                     }
                 }
@@ -70,14 +75,10 @@ public class CategoriesFragment extends Fragment {
                 categoryAdapter.addAll(categories);
 
 
-
-
-
             }
         });
 
         return root;
-
 
     }
     private void addButtonClicked(){
