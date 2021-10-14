@@ -41,7 +41,7 @@
         </TextView>
 
         <EditText
-            android:id="@+id/editCategoryNameText"
+            android:id="@+id/addCategoryName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -72,7 +72,7 @@
         </TextView>
 
         <EditText
-            android:id="@+id/editCategoryBudgetText"
+            android:id="@+id/addCategoryBudget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -103,12 +103,12 @@
         </Button>
 
         <Button
-            android:id="@+id/addCategoryCancle"
+            android:id="@+id/addCategoryCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/holo_red_light"
-            android:text="Cancle"
+            android:text="Cancel"
             android:textSize="20sp">>
 
         </Button>
