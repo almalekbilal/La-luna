@@ -1,0 +1,47 @@
+#Meeting Agenda 
+
+Group: La Luna 
+
+Date: 29/09/2021 
+
+Chair: Bilal Al Malek
+
+Participants: Ali Malla, Ali Alkhaled, Bilal Al Malek, Deaa Khankan 
+
+ 
+
+##Objectives 
+
+-Vi behöver planera hur testerna ska gå till
+-Vi behöver dela på arbetet med testerna
+
+
+ 
+
+##Reports 
+
+I förra möter har vi diskuterat de databasmetoderna och bestämt en tid för detta möte
+ 
+
+##Discussion items 
+
+-Hur ska uppdelningen av arbetet gå till
+
+-Hur ska metoderna testas och när ska testerna vara färdiga 
+
+
+
+
+##Outcomes and assignments 
+
+-Vi har delat gruppen i två stycken alltså två stycken ska jobba med hälften av metoderna och de andra två tar resten
+
+-Vi har bestämt att testerna borde vara färdiga i slutet av denna vecka 
+
+
+
+##Wrap up 
+
+I nästa mötet ska vi bestämma hur arbetet med användargränssnitt ska vara
+
+Den ska vara på söndag 3/10/2021

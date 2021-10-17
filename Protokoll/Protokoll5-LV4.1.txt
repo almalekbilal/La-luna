@@ -1,0 +1,40 @@
+#Meeting Agenda 
+
+Group: La Luna 
+
+Date: 19/09/2021 
+
+Chair: Ali Malla
+
+Participants: Ali Malla, Ali Alkhaled, Bilal Al Malek, Deaa Khankan 
+
+ 
+
+##Objectives 
+
+-Vi behöver rita design modell för hela applikationen.
+ 
+
+##Reports 
+
+I förra möter har vi planerat hur databasen ska se ut och ritat design model för databas delen.
+ 
+
+##Discussion items 
+
+- Vilka klasser behöver vi för applikationen?
+
+
+##Outcomes and assignments 
+
+
+-Vi har ritat ett UML diagram som ska representerar klasserna.
+
+
+
+
+##Wrap up 
+
+I nästa möte kommer vi att skriva uppgifterna (tasks) och acceptanskriterier för user stories.
+
+Den ska vara på tisdag 21/09/2021

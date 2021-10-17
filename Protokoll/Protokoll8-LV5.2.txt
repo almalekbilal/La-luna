@@ -1,0 +1,45 @@
+#Meeting Agenda 
+
+Group: La Luna 
+
+Date: 28/09/2021 
+
+Chair: Ali Malla
+
+Participants: Ali Malla, Ali Alkhaled, Bilal Al Malek, Deaa Khankan 
+
+ 
+
+##Objectives 
+
+ 
+-Vi behöver diskutera de databasmetoder som har implementerats.
+-Vi behöver bestämma en tid för att testa de databasmetoderna.
+
+ 
+
+##Reports 
+
+I förra mötet delade vi databas metoder samt rad mellan oss.
+databas metoder--->Färdig
+RAD--->Färdig
+ 
+
+##Discussion items 
+
+- När ska jobba med testet?
+- Hur mycket tid behöver vi för att testa databas metoder?
+
+
+##Outcomes and assignments 
+
+
+-Vi har bestämmt att jobba med testet tills fredag.
+
+
+
+##Wrap up 
+
+I nästa möte kommer vi att skriva testet tillsamans.
+
+Den ska vara på onsdag 29/09/2021
