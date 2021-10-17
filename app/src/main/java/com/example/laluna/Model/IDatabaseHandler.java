@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface IDatabaseHandler {
 
-    List<Expense> getCategoryExpenseDB(Category category);
+    List<Expense> getCategoryExpenseDB(int categoryId);
 
 
     // Adding an expense to Data Base
