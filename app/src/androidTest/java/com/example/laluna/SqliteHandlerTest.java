@@ -6,9 +6,9 @@ import android.content.Context;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.example.laluna.Model.Category;
-import com.example.laluna.Model.SqliteHandler;
-import com.example.laluna.Model.Expense;
+import com.example.laluna.DatabaseClasses.Category;
+import com.example.laluna.DatabaseClasses.SqliteHandler;
+import com.example.laluna.DatabaseClasses.Expense;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +34,7 @@ public class SqliteHandlerTest {
     public void addCategoryTest(){
 
 
-        Category Apartment = db.addCategoryDB("Apartment", 500,0,null,new Date());
+        Category Apartment = db.addCategoryDB("Apartment", 500,null,null,new Date());
 
 
         List<Category> categories = db.getCategoriesDB(new Date());
@@ -79,7 +79,7 @@ public class SqliteHandlerTest {
 
         }
         else{
-            Category newCategory = db.addCategoryDB("Apartment",500,0,null,new Date());
+            Category newCategory = db.addCategoryDB("Apartment",500,null,null,new Date());
             expense = db.addExpenseDB("Furniture",200,new Date(),newCategory);
             apartmentExpenses = db.getCategoryExpenseDB(newCategory);
         }
@@ -103,7 +103,7 @@ public class SqliteHandlerTest {
 
     @Test
     public void getCategoryLimitTest(){
-        Category Book = db.addCategoryDB("Book",275,0,null,new Date());
+        Category Book = db.addCategoryDB("Book",275,null,null,new Date());
 
         List<Category> categories = db.getCategoriesDB(new Date());
 
@@ -121,7 +121,7 @@ public class SqliteHandlerTest {
     @Test
     public void getExpensesTest(){
         Expense expense = db.addExpenseDB("Hamburger",50,new Date(),
-                db.addCategoryDB("Food",500,0,null,new Date()));
+                db.addCategoryDB("Food",500,null,null,new Date()));
 
         List<Expense> expanses = db.getExpensesDB(0,16);
 
@@ -138,7 +138,7 @@ public class SqliteHandlerTest {
 
 
 
-        db.addCategoryDB("da",1400,0,null,new Date());
+        db.addCategoryDB("da",1400,null,null,new Date());
         List<Category> fs = db.getCategoriesDB(new Date());
         db.addExpenseDB("df",500,new Date(121,10,1),fs.get(0));
         db.addExpenseDB("dfc",400,new Date(121,10,1),fs.get(0));
@@ -159,7 +159,7 @@ public class SqliteHandlerTest {
 
     @Test
     public void deleteExpenseTest(){
-        Category Book = db.addCategoryDB("Book",275,0,null,new Date());
+        Category Book = db.addCategoryDB("Book",275,null,null,new Date());
 
         Expense calculus = db.addExpenseDB("Calculus",25,new Date(),Book);
 
@@ -188,7 +188,7 @@ public class SqliteHandlerTest {
 
     @Test
     public void updateCategoryTest(){
-        Category food = db.addCategoryDB("Food",200,0,null,new Date());
+        Category food = db.addCategoryDB("Food",200,null,null,new Date());
 
         food.set_limit(300);
 
@@ -200,7 +200,7 @@ public class SqliteHandlerTest {
 
     @Test
     public void getCategoryExpense(){
-        Category book = db.addCategoryDB("Book",500,0,null,new Date());
+        Category book = db.addCategoryDB("Book",500,null,null,new Date());
 
         Expense calculus = db.addExpenseDB("Calculus",50,new Date(),book);
         Expense designingInterface = db.addExpenseDB("DesigningInterface",60,new Date(),book);
@@ -216,14 +216,16 @@ public class SqliteHandlerTest {
         assertEquals(true,allIsTrue);
     }
 
-    //Failed
+
     @Test
     public void getTotalBudgetTest(){
-        Category food = db.addCategoryDB("Food",200,0,null,new Date(2020,5,1));
-        db.addCategoryDB("Car",100,0,null,new Date(2020,5,1));
+        Category food = db.addCategoryDB("Food",200,null,null,new Date(121,5,1));
+        db.addCategoryDB("Car",100,null,null,new Date(121,5,1));
 
 
-        int totalBudget= db.getTotalBudgetDB(new Date(2020,5,1));
+        db.setCategoriesPreviousLimitsDB(new Date(121,5,1));
+
+        int totalBudget= db.getTotalBudgetDB(new Date(121,5,1));
 
 
         assertEquals(totalBudget,300);

@@ -1,10 +1,12 @@
 package com.example.laluna.ui.home;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.laluna.Model.Expense;
 import com.example.laluna.R;
+import com.example.laluna.ui.addudateexpense.AddUpdateExpenseActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -90,10 +93,24 @@ public class HomeFragment extends Fragment {
         });
 
 
+        Button add = root.findViewById(R.id.btn_add);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               Intent intent = new Intent(root.getContext(), AddUpdateExpenseActivity.class);
+               startActivity(intent);
+            }
+        });
+
+
 
 
         return root;
     }
+
+
 
     /**
      * The methods make the circle diagram (Pie chart) and sets the data and the color for it
