@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.addudateexpense.AddUpdateExpenseActivity"
+            android:name=".ui.addudateexpense.UpdateExpenseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.addudateexpense.AddExpenseActivity"
             android:exported="false" />
         <activity android:name=".ui.categories.CategoriesAddActivity" />
         <activity android:name=".ui.categories.CategoriesEditActivity" />

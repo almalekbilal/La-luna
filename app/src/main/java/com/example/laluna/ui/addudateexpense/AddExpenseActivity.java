@@ -14,18 +14,17 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.laluna.R;
-import com.example.laluna.ui.notifications.NotificationsViewModel;
 
-public class AddUpdateExpenseActivity extends AppCompatActivity {
+public class AddExpenseActivity extends AppCompatActivity {
 
-    AddUpdateExpenseViewModel addUpdateExpenseViewModel;
+    AddExpenseViewModel addUpdateExpenseViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_update_expense);
 
         addUpdateExpenseViewModel =
-                ViewModelProviders.of(this).get(AddUpdateExpenseViewModel.class);
+                ViewModelProviders.of(this).get(AddExpenseViewModel.class);
 
         addUpdateExpenseViewModel.init(this);
 

@@ -1,7 +1,6 @@
 package com.example.laluna.ui.addudateexpense;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -9,40 +8,40 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.laluna.Model.Category;
 import com.example.laluna.Model.DBHandler;
+import com.example.laluna.Model.Expense;
 
 import java.util.Date;
 import java.util.List;
 
-public class AddUpdateExpenseViewModel extends ViewModel {
+public class UpdateExpenseViewModel extends ViewModel {
     private DBHandler dbHandler;
     private Context context;
     private List<Category> categories;
     private Category selectedCategory;
+    private Expense thisExpense;
 
     private MutableLiveData<String[]> categoriesNames;
-    public AddUpdateExpenseViewModel(){
+    public UpdateExpenseViewModel(){
 
     }
 
-    public void init(Context context){
+
+    public void init(Context context, Expense thisExpense){
         this.context = context;
+        this.thisExpense = thisExpense;
         dbHandler = new DBHandler(context);
         categoriesNames = new MutableLiveData<>();
         categoriesNames.postValue(getCategoriesNames());
     }
 
-    public void addExp(String name, int value){
-        dbHandler.addExpense(name,value,new Date(),selectedCategory);
-        Toast.makeText(context,"Expense is added", Toast.LENGTH_LONG).show();
-    }
-
-    public void setSelectedCategory(int position){
-        selectedCategory = categories.get(position);
-    }
-
     private String[] getCategoriesNames(){
 
         categories = dbHandler.getCategories(new Date());
+        if(categories.contains(thisExpense.get_category())){
+            categories.remove(thisExpense.get_category());
+        }
+        categories.add(0,thisExpense.get_category());
+
         selectedCategory = categories.get(0);
         String [] names = new String[categories.size()];
 
@@ -54,5 +53,6 @@ public class AddUpdateExpenseViewModel extends ViewModel {
     }
 
     public LiveData<String[]> getcategoriesNames(){return categoriesNames;}
+
 
 }
