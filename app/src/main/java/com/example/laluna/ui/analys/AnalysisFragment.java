@@ -15,9 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.laluna.CategoryExpensesActivity;
 import com.example.laluna.R;
-import com.example.laluna.ui.MainActivity;
+import com.example.laluna.ui.analys.categoryExpensesActivity.CategoryExpensesActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -85,10 +84,17 @@ public class AnalysisFragment extends Fragment {
                 String selectedName = analysisViewModel.getCategories().getValue().get(i).category.get_name();
                 double selectedSpent = analysisViewModel.getCategories().getValue().get(i).spent;
                 double selectedBudget = analysisViewModel.getCategories().getValue().get(i).limit;
+                int selectedCategoryId= analysisViewModel.getCategories().getValue().get(i).category.get_id();
+                int selectedCategoryMonth = analysisViewModel.getDate().getValue().getMonth();
+                int selectedCategoryYear = analysisViewModel.getDate().getValue().getYear();
 
                 intent.putExtra("spent",selectedSpent);
                 intent.putExtra("budget",selectedBudget);
                 intent.putExtra("name",selectedName);
+                intent.putExtra("id",selectedCategoryId);
+                intent.putExtra("categoryMonth",selectedCategoryMonth);
+                intent.putExtra("categoryYear",selectedCategoryYear);
+
 
                 startActivity(intent);
             }

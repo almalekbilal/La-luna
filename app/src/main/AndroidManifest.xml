@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.laluna">
+    package="com.example.laluna" >
 
     <application
         android:allowBackup="true"
@@ -8,23 +8,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
-            android:name=".ui.categories.CategoriesAddActivity"
-
-            ></activity>
-
-        <activity
-            android:name=".ui.categories.CategoriesEditActivity"
-
-            ></activity>
-
-        <activity
-            android:name=".CategoryExpensesActivity"
+            android:name=".ui.analys.categoryExpensesActivity.CategoryExpensesActivity"
             android:exported="true" />
         <activity
+            android:name=".ui.addudateexpense.UpdateExpenseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.addudateexpense.AddExpenseActivity"
+            android:exported="false" />
+        <activity android:name=".ui.categories.CategoriesAddActivity" />
+        <activity android:name=".ui.categories.CategoriesEditActivity" />
+        <activity
             android:name=".ui.MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

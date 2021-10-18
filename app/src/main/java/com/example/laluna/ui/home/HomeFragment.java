@@ -1,11 +1,14 @@
 package com.example.laluna.ui.home;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.laluna.Model.Expense;
 import com.example.laluna.R;
+import com.example.laluna.ui.addudateexpense.AddExpenseActivity;
+import com.example.laluna.ui.addudateexpense.UpdateExpenseActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -31,7 +36,7 @@ import java.util.List;
  *   @auther (Deaa Khankan)
  *   @auther (Ali Al Khaled)
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements ExpensesAdapter.onExpenseClickListener {
 
     private HomeViewModel homeViewModel;
     final ArrayList<Expense> expenseArrayList = new ArrayList<Expense>();
@@ -61,7 +66,7 @@ public class HomeFragment extends Fragment {
 
 
 
-        final ExpensesAdapter adapter =new ExpensesAdapter(getContext(), expenseArrayList);
+        final ExpensesAdapter adapter =new ExpensesAdapter(getContext(), expenseArrayList, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -90,10 +95,25 @@ public class HomeFragment extends Fragment {
         });
 
 
+        Button add = root.findViewById(R.id.btn_add);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               Intent intent = new Intent(root.getContext(), AddExpenseActivity.class);
+               startActivity(intent);
+            }
+        });
+
+
+
 
 
         return root;
     }
+
+
 
     /**
      * The methods make the circle diagram (Pie chart) and sets the data and the color for it
@@ -145,4 +165,12 @@ public class HomeFragment extends Fragment {
 
     }
 
+    @Override
+    public void onExpenseClick(Expense expense) {
+        Toast.makeText(getContext(),expense.get_name(),Toast.LENGTH_LONG).show();
+        Intent i = new Intent(getContext(), UpdateExpenseActivity.class);
+        i.putExtra("expense", expense);
+
+        startActivity(i);
+    }
 }

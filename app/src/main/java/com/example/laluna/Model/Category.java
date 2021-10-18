@@ -1,5 +1,6 @@
 package com.example.laluna.Model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
  * @auther (Ali Malla)
  * @auther (Ali Al Khaled)
  */
-public class Category {
+public class Category implements Serializable {
 
     private int _id;
     private int _limit;

@@ -31,10 +31,10 @@ public class DBHandler {
 
     /**
      * A method for getting all the expenses of a a specific category.
-     * @param category represents the category that the method will get all its related expenses.
+     * @param categoryId represents the category that the method will get all its related expenses.
      */
-    public List<Expense> getCategoryExpense (Category category){
-        return db.getCategoryExpenseDB(category);
+    public List<Expense> getCategoryExpense (int categoryId){
+        return db.getCategoryExpenseDB(categoryId);
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.laluna.ui.home;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +28,11 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
 
     List<Expense> expenses;
     Context context;
-    public ExpensesAdapter(Context context, List<Expense> expenses){
+    onExpenseClickListener listener;
+    public ExpensesAdapter(Context context, List<Expense> expenses, onExpenseClickListener listener){
         this.expenses = expenses;
         this.context = context;
+        this.listener = listener;
     }
 
     /**
@@ -43,7 +46,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
     public ExpensesAdapter.ExpenseHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.custom_expense_view, parent, false);
-        return new ExpenseHolder(view);
+        return new ExpenseHolder(view, listener);
     }
 
     /**
@@ -68,20 +71,32 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
     /**
      * The class holds the information about the view object in the custom layout
      */
-    public class ExpenseHolder extends RecyclerView.ViewHolder {
+    public class ExpenseHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView price, name, date;
         ImageView categoryImage;
+        onExpenseClickListener listener;
 
-        public ExpenseHolder(@NonNull View itemView) {
+        public ExpenseHolder(@NonNull View itemView, onExpenseClickListener listener) {
             super(itemView);
 
             price = itemView.findViewById(R.id.txv_expensePrice);
             name = itemView.findViewById(R.id.txv_expenseName);
             categoryImage = itemView.findViewById(R.id.img_categoryImage);
             date = itemView.findViewById(R.id.txv_dateExpense);
+            this.listener = listener;
 
-
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            Log.e("Listener", "Jag körs");
+            listener.onExpenseClick(expenses.get(getAdapterPosition()));
+        }
+    }
+
+    public interface onExpenseClickListener{
+        void onExpenseClick(Expense expense);
     }
 }
