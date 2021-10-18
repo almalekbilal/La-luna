@@ -247,7 +247,7 @@ public class ExampleInstrumentedTest {
         db.addExpense("Disco", 200,new Date(121,5,15),c2);
         db.addExpense("prostitution", 500,new Date(121,5,22),c2);
 
-        List<Expense> expenses = db.getCategoryExpense(c1);
+        List<Expense> expenses = db.getCategoryExpense(c1.get_id());
 
         assertEquals(4,expenses.size());
 
@@ -269,7 +269,7 @@ public class ExampleInstrumentedTest {
         assertEquals(3500,db.getCategoryLimit(new Date(121,6,1),c1));
     }
 
-    @Test
+    /*@Test
     public void ViewThings(){
         Category c1 = db.addCategory("Food",3000,R.drawable.categorycar,null,new Date(121,9,2));
         Category c2 = db.addCategory("entertainment",2000,R.drawable.food,null,new Date(121,9,2));
@@ -316,7 +316,7 @@ public class ExampleInstrumentedTest {
         db.setCategoriesPreviousLimits(new Date(121,8,1));
 
         assertEquals(3000,3000);
-    }
+    }*/
 }
 
 

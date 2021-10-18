@@ -80,11 +80,11 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
     /**
      * A method for getting all the expenses of a a specific category.
-     * @param category represents the category that the method will get all its related expenses.
+     * @param categoryID represents the category that the method will get all its related expenses.
      */
-    public List<Expense> getCategoryExpenseDB(Category category){
+    public List<Expense> getCategoryExpenseDB(int categoryID){
         List <Expense> expensesList = new ArrayList<Expense>();
-        int categoryID=category.get_id();
+
         String query = "SELECT *  FROM " + TABLE_EXPENSE + " WHERE category_id = "
                 + categoryID + ";";
 

@@ -1,14 +1,21 @@
-package com.example.laluna;
+package com.example.laluna.ui.analys.categoryExpensesActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.laluna.Model.Expense;
+import com.example.laluna.R;
+import com.example.laluna.ui.analys.AnalysisViewModel;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -24,21 +31,30 @@ public class CategoryExpensesActivity extends AppCompatActivity {
     private double spent = 150;
     private double budget = 300;
 
+    private AnalysisViewModel analysisViewModel;
 
     private PieChart clickedCategoryPieCh;
     private TextView categoryNameAndBudget;
     private TextView categorySpent;
+    private ImageButton backButton;
+    private ListView categoryExpensesListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_expenses);
+        analysisViewModel =
+                ViewModelProviders.of(this).get(AnalysisViewModel.class);
 
-
+        analysisViewModel.init(this);
 
         clickedCategoryPieCh = findViewById(R.id.clickedCategoryPieCh);
         categoryNameAndBudget = findViewById(R.id.categoryNameAndBudget);
         categorySpent = findViewById(R.id.categorySpent);
+
+        backButton = findViewById(R.id.backButton);
+        categoryExpensesListView = findViewById(R.id.categoryExpensesListView);
+
 
 
         Intent intent = getIntent();
@@ -61,6 +77,44 @@ public class CategoryExpensesActivity extends AppCompatActivity {
             categorySpent.setText(spentToString + " KR");
 
             makeCategoryPieCh(clickedCategoryPieCh);
+
+
+            backButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.navigation_analysis,new Fragment()).commit();
+
+                }
+            });
+
+
+
+
+            final int id = intent.getIntExtra("id",0);
+            int year = intent.getIntExtra("categoryYear",5);
+            int month = intent.getIntExtra("categoryMonth",9);
+
+
+
+
+            final ListViewAdapter listAdapter = new ListViewAdapter
+                    (new ArrayList<Expense>(), this,id);
+
+            categoryExpensesListView.setAdapter(listAdapter);
+
+            analysisViewModel.updateCategoryExpenses(id,year,month);
+
+            analysisViewModel.getCategoryExpenses().observe(this, new Observer<List<Expense>>() {
+                @Override
+                public void onChanged(List<Expense> expenses) {
+
+
+                    listAdapter.clear();
+                    listAdapter.addAll(expenses);
+
+                }
+            });
+
         }
 
     }

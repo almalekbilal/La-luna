@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.laluna.Model.Category;
 import com.example.laluna.Model.DBHandler;
+import com.example.laluna.Model.Expense;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,6 +28,7 @@ public class AnalysisViewModel extends ViewModel {
     private MutableLiveData<List<CategoryWithMoney>> categoriesLiveData;
     private DBHandler dbHandler;
     private MutableLiveData<Date> viewMonthDate = new MutableLiveData<>();
+    private MutableLiveData<List<Expense>> categoryExpenses;
 
     public AnalysisViewModel() {
     }
@@ -45,7 +47,30 @@ public class AnalysisViewModel extends ViewModel {
         viewMonthDate.setValue(new Date());
 
         categoriesLiveData = new MutableLiveData<>();
+        categoryExpenses = new MutableLiveData<>();
+
         updateView();
+    }
+
+
+
+
+
+    public void updateCategoryExpenses(int categoryId,int year,int month){
+
+        List<Expense> expenses = new ArrayList<>();
+
+        List<Expense> categoryEx = dbHandler.getCategoryExpense(categoryId);
+
+
+
+        for(Expense expense: categoryEx){
+            if(expense.get_date().getYear() == year &&
+                    expense.get_date().getMonth() == month){
+                expenses.add(expense);
+            }
+        }
+        categoryExpenses.postValue(expenses);
     }
 
     /**
@@ -181,4 +206,8 @@ public class AnalysisViewModel extends ViewModel {
      * Its responsible for the communication with the view
      */
     public LiveData<Date> getDate(){return viewMonthDate;}
+
+    public LiveData<List<Expense>> getCategoryExpenses() {
+        return categoryExpenses;
+    }
 }
