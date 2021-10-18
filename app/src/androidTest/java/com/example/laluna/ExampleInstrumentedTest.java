@@ -351,18 +351,3 @@ public class ExampleInstrumentedTest {
 
 
 
-/*
-    //not DONE!!!!!!!
-    @Test
-    public void getTotalBudgetTest(){
-        db.addCategoryDB("food",100,"pic1", "blue",new Date(120,05,01));
-        db.addCategoryDB("car",500,"pic2", "red",new Date(120,05,01));
-        db.addCategoryDB("clothes",100,"pic3", "blue",new Date(120,04,01));
-        db.addCategoryDB("other",500,"pic4", "red",new Date(120,05,01));
-
-        int totalBudget= db.getTotalBudgetDB(new Date(120,05,01));
-        assertEquals(totalBudget,1100);
-
-    }
-}
-*/
