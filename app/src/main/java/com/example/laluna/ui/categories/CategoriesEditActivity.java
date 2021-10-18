@@ -60,6 +60,13 @@ public class CategoriesEditActivity extends AppCompatActivity {
                 }
             });
 
+            editCategoryCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    finish();
+                }
+            });
+
 
             editCategorySave.setOnClickListener(new View.OnClickListener() {
                 @Override
