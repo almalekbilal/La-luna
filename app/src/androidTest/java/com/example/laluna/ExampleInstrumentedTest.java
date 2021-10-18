@@ -103,6 +103,11 @@ public class ExampleInstrumentedTest {
         db.addExpense("swish",500,new Date(120,01,04), category1);
         db.addExpense("swish",500,new Date(120,01,04), category2);
         db.addExpense("swish",500,new Date(120,01,04), category1);
+        db.addExpense("swish",500,new Date(119,01,04), category1); //does not count
+        db.addExpense("swish",500,new Date(121,01,04), category1); //does not count
+        db.addExpense("swish",500,new Date(120,02,04), category1); //does not count
+        db.addExpense("swish",500,new Date(120,03,04), category1); //does not count
+        db.addExpense("swish",500,new Date(121,01,04), category1); //does not count
         Expense expense =  db.addExpense("swish",500,new Date(120,01,04), category2);
 
 
@@ -160,16 +165,34 @@ public class ExampleInstrumentedTest {
 
 
         db.addExpense("KFC", 45, new Date(120,5,1), c1);
-        db.addExpense("Book", 150, new Date(120, 5, 6), c2);
-        db.addExpense("Internet", 120, new Date(120, 5, 6), c2);
-        db.addExpense("Ice cream", 19, new Date(121, 5, 6), c2); // does not count
+        db.addExpense("Book", 150, new Date(120, 5, 13), c2);
+        db.addExpense("Internet", 120, new Date(120, 5, 19), c2);
+        db.addExpense("Ice cream", 19, new Date(121, 5, 4), c2); // does not count
         db.addExpense("Book", 98, new Date(120, 1, 6), c2); //does not count
+        db.addExpense("Book", 98, new Date(120, 1, 6), c2); //does not count
+        db.addExpense("Calculus", 100, new Date(120, 5, 6), c2);
+        db.addExpense("Book3", 98, new Date(120, 5, 23), c2);
+        db.addExpense("Book4", 98, new Date(120, 1, 9), c2); //does not count
+        db.addExpense("Book5", 20, new Date(120, 5, 6), c2);
+        db.addExpense("Book6", 30, new Date(120, 5, 29), c2);
+        db.addExpense("Book7", 98, new Date(120, 1, 6), c2); //does not count
+        db.addExpense("Book8", 98, new Date(120, 1, 6), c2); //does not count
+        db.addExpense("Book9", 98, new Date(120, 1, 6), c2); //does not count
+        db.addExpense("Book10", 98, new Date(120, 1, 6), c2); //does not count
+        db.addExpense("Book11", 15, new Date(120, 5, 22), c2); //does not count
+        db.addExpense("Book12", 98, new Date(120, 1, 6), c2); //does not count
+        db.addExpense("Book13", 1000, new Date(120, 5, 30), c2);
+        db.addExpense("Book14", 20, new Date(120, 5, 9), c2);
+        db.addExpense("Book15", 98, new Date(120, 1, 6), c2); //does not count
+        db.addExpense("Book16", 98, new Date(120, 1, 6), c2); //does not count
+        db.addExpense("Book17", 69, new Date(120, 5, 30), c2);
+
         Expense expense = db.addExpense("Clothes", 90, new Date(120, 5, 6), c2); // does not count
         db.deleteExpense(expense);
 
 
-        int totalMoney = db.getTotalMoneySpent(new Date(2020,5,1));
-        assertEquals(totalMoney,315);
+        int totalMoney = db.getTotalMoneySpent(new Date(120,5,1));
+        assertEquals(1667,totalMoney);
 
     }
 
@@ -187,6 +210,11 @@ public class ExampleInstrumentedTest {
         db.addExpense("Pen", 12, new Date(121, 5, 15), c2);//does not count
         db.addExpense("Oil", 20, new Date(121, 5, 10), c2);//does not count
         db.addExpense("Window", 200, new Date(121, 5, 10), c2);//does not count
+        db.addExpense("Water", 12, new Date(), c1);
+        db.addExpense("Cola", 25, new Date(), c1);
+        db.addExpense("Cake", 40, new Date(), c1);
+        db.addExpense("Burger", 12, new Date(121, 5, 15), c2);//does not count
+        db.addExpense("Pizza", 12, new Date(121, 5, 15), c2);//does not count
 
         Expense e = db.addExpense("rer", 30, new Date(121, 5, 3), c1);
         db.deleteExpense(e);
@@ -195,7 +223,7 @@ public class ExampleInstrumentedTest {
 
         int totalMoney = db.getTotalSpentByCategory(new Date(), c1);
 
-        assertEquals(totalMoney, 110);
+        assertEquals(187, totalMoney);
     }
 
     @Test
