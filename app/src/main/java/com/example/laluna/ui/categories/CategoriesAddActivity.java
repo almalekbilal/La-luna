@@ -46,7 +46,7 @@ public class CategoriesAddActivity extends AppCompatActivity {
             addCategoryCancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                  //.......TODO
+                  finish();
 
                 }
             });
@@ -56,18 +56,14 @@ public class CategoriesAddActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                      if(!addCategoryBudget.getText().toString().equals(null) &&
-                           !addCategoryBudget.getText().toString().equals(null)) {
+                         !addCategoryBudget.getText().toString().equals(null)) {
                          String name = addCategoryName.getText().toString();
                          int limit = Integer.parseInt(addCategoryBudget.getText().toString());
 
-
                          viewModel.addCategory(name, limit, R.drawable.food, null, new Date());
-                         Toast.makeText(getBaseContext(), "hi", Toast.LENGTH_LONG).show();
+                         Toast.makeText(getBaseContext(), "Category is added!", Toast.LENGTH_LONG).show();
 
-                         CategoriesFragment categoriesFragment = new CategoriesFragment();
-
-                         getSupportFragmentManager().beginTransaction().
-                                 replace(R.id.navigation_categories, categoriesFragment).commit();
+                         finish();
                      }
 
                 }
