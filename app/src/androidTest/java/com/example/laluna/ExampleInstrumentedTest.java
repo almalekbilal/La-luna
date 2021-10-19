@@ -29,9 +29,9 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
 
-    Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+    private Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-    DBHandler db = new DBHandler(appContext);
+    private DBHandler db = new DBHandler(appContext);
 
 
     @Before
@@ -269,7 +269,6 @@ public class ExampleInstrumentedTest {
         db.addExpense("Coca cola", 20,new Date(121,5,22),c1);
 
         //does not count
-
         db.addExpense("Counter", 80,new Date(121,5,1),c2);
         db.addExpense("Liseberg", 500,new Date(121,5,5),c2);
         db.addExpense("Disco", 200,new Date(121,5,15),c2);
