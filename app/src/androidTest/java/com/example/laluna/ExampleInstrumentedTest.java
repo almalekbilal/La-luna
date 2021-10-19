@@ -125,12 +125,29 @@ public class ExampleInstrumentedTest {
 
     }
 
-    /*@Test
+
+    @Test
     public void deactivateCategoryInTheSameDayTest() {
+
+        Category category1 = db.addCategory("cat1", 100, 0, "blue", new Date(121, 03, 27));
+
+        Category category2 = db.addCategory("cat2", 400, 0, "green", new Date(121, 04, 15));
+
+        Category category3 = db.addCategory("cat3", 1050, 0, "blue", new Date(121, 05, 9));
+
+        db.deactivateCategory(category1, new Date(121, 06, 4));
+
+        db.deactivateCategory(category2, new Date(121, 06, 5));
+
+        db.deactivateCategory(category3, new Date(121, 06, 4));
+
+        List<Category> testCategoryList = db.getCategories(new Date(121, 06, 4));
+
+        assertEquals(3, testCategoryList.size());
+
 
     }
 
-     */
 
     @Test
     public void deactivateCategoryMoreConditionsTest() {
