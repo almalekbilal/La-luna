@@ -61,9 +61,13 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void getCategoriesTest() {
+
         db.addCategory("food", 100, 0, "blue", new Date(120, 05, 01));
+
         db.addCategory("car", 500, 0, "red", new Date(120, 05, 01));
+
         db.addCategory("clothes", 100, 0, "blue", new Date(120, 04, 01));
+
         db.addCategory("other", 500, 0, "red", new Date(120, 05, 01));
 
         List<Category> categories = db.getCategories(new Date(120, 7, 03));
@@ -72,18 +76,61 @@ public class ExampleInstrumentedTest {
 
 
     @Test
-    public void deactiveCategoryTest() {
+    public void deactivateCategoryTest() {
+
         Category category1 = db.addCategory("food", 100, 0, "blue", new Date(121, 01, 01));
-        Category category2 = db.addCategory("car", 500, 0, "red", new Date(120, 01, 01));
+
+        Category category2 = db.addCategory("car", 500, 0, "green", new Date(120, 01, 01));
 
         db.deactivateCategory(category1, new Date(121, 02, 01));
-        List<Category> categories = db.getCategories(new Date(121, 03, 01));
-        assertEquals(categories.size(), 1);
 
         db.deactivateCategory(category2, new Date(121, 02, 01));
+
         List<Category> categories2 = db.getCategories(new Date(120, 9, 01));
 
-        assertEquals(categories2.size(), 1);
+        assertEquals(categories2.size(), 3);
+
+    }
+
+    @Test
+    public void deactivateCategoryTestMoreConditions() {
+
+        Category category1 = db.addCategory("food", 100, 0, "blue", new Date(121, 01, 01)); // does not count
+
+        Category category2 = db.addCategory("car", 500, 0, "green", new Date(120, 01, 01));
+
+        Category category3 = db.addCategory("truck", 1000, 0, "red", new Date(120, 05, 01));
+
+        Category category4 = db.addCategory("pizza", 52, 0, "black", new Date(120, 10, 01)); // does not count
+
+        Category category5 = db.addCategory("Other", 1000, 0, "white", new Date(120, 05, 01));
+
+        Category category6 = db.addCategory("Drinks", 400, 0, "red", new Date(120, 12, 01)); // does not count
+
+        Category category7 = db.addCategory("Uni", 350, 0, "green", new Date(120, 9, 02)); // does not count
+
+        Category category8 = db.addCategory("Clothes", 900, 0, "blue", new Date(120, 8, 01));
+
+        Category category9 = db.addCategory("House", 1200, 0, "red", new Date(120, 07, 01));
+
+        Category category10 = db.addCategory("Night out", 1000, 0, "black", new Date(120, 01, 01));
+
+
+        db.deactivateCategory(category1, new Date(121, 02, 01)); // will be counted
+
+        db.deactivateCategory(category2, new Date(121, 02, 01)); // will be counted
+
+        db.deactivateCategory(category5, new Date(120, 10, 30)); // will be counted
+
+        db.deactivateCategory(category3, new Date(120, 9, 30)); // will be counted
+
+        db.deactivateCategory(category9, new Date(120, 8, 30)); //will not be counted
+
+        db.deactivateCategory(category10, new Date(120, 8, 01)); //will not be counted
+
+        List<Category> categories2 = db.getCategories(new Date(120, 9, 01));
+
+        assertEquals(categories2.size(), 5);
 
     }
 
