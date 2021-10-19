@@ -15,12 +15,14 @@ import com.example.laluna.R;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+/**
+ * This class is responsible to place the expenses of a specific category in a listView
+ */
 public class ListViewAdapter extends ArrayAdapter {
 
 
     private List<Expense> expenses;
 
-    private int categoryId;
 
     private Context context;
     private LayoutInflater layoutInflater;
@@ -33,15 +35,26 @@ public class ListViewAdapter extends ArrayAdapter {
     private TextView txv_dateExpense;
 
 
-    public ListViewAdapter(List<Expense> expenses, Context context, int categoryId) {
+    /**
+     * The class constructor
+     * @param expenses the expenses who will places in list view
+     * @param context the view context
+     */
+    public ListViewAdapter(List<Expense> expenses, Context context) {
         super(context, R.layout.custom_expense_view,expenses);
         this.expenses= expenses;
         this.context = context;
-        this.categoryId = categoryId;
+
     }
 
 
-
+    /**
+     * The method to create expense view
+     * @param position item position
+     * @param convertView the view
+     * @param parent
+     * @return an expense view
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -61,6 +74,10 @@ public class ListViewAdapter extends ArrayAdapter {
     }
 
 
+    /**
+     * This method initializes the class's attributes that are not initialized in constructor or in getView method
+     * @param convertView expense view
+     */
     private void initExpenseInformation(View convertView){
         txv_expensePrice = convertView.findViewById(R.id.txv_expensePrice);
         txv_expenseName = convertView.findViewById(R.id.txv_expenseName);
@@ -69,17 +86,16 @@ public class ListViewAdapter extends ArrayAdapter {
     }
 
 
+    /**
+     * This method is responsible to set expenses information in view
+     * @param position expense position
+     */
     private void showExpenseInformation(int position){
-        if(checkCategoryId(position)){
-            txv_expensePrice.setText(Integer.toString(expenses.get(position).get_value()));
-            txv_expenseName.setText(expenses.get(position).get_name());
-            img_categoryImage.setImageResource(expenses.get(position).get_category().get_pictureName());
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            txv_dateExpense.setText(sdf.format(expenses.get(position).get_date()));
-        }
+        txv_expensePrice.setText(Integer.toString(expenses.get(position).get_value()));
+        txv_expenseName.setText(expenses.get(position).get_name());
+        img_categoryImage.setImageResource(expenses.get(position).get_category().get_pictureName());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        txv_dateExpense.setText(sdf.format(expenses.get(position).get_date()));
     }
 
-    private boolean checkCategoryId(int position){
-        return expenses.get(position).get_category().get_id() == categoryId;
-    }
 }
