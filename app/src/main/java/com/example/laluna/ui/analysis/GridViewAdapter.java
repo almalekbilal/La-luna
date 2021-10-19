@@ -30,16 +30,20 @@ public class GridViewAdapter extends ArrayAdapter {
 
 
 
-    private List<CategoryWithMoney> categoryWithMoneyList;
+    private List<CategoryWithMoney> categoryWithMoneyList; // a list of categories that will be placed in gridView
 
 
 
-    private double total = 300;
-    private double spent = 150;
+    private double total;   // category budget
+    private double spent;   // category spent money
 
 
-    Context context;
-    LayoutInflater layoutInflater;
+    public Context context;
+    public LayoutInflater layoutInflater;
+
+
+    private TextView categoryAnalysisBudget;
+    private PieChart categoryPieCh;
 
     public GridViewAdapter(List<CategoryWithMoney> categoryWithMoneyList,Context context) {
         super(context, R.layout.customcategoryanalysis_analysis,categoryWithMoneyList);
@@ -65,25 +69,61 @@ public class GridViewAdapter extends ArrayAdapter {
             view = layoutInflater.inflate(R.layout.customcategoryanalysis_analysis,null);
         }
 
-
-        TextView categorySpentMoney = (TextView) view.findViewById(R.id.categorySpentMoney);
-        categorySpentMoney.setText(categoryWithMoneyList.get(i).limit + " Kr");
-
-        PieChart categoryPieCh =(PieChart) view.findViewById(R.id.categoryPieCh);
-
-
-        spent = categoryWithMoneyList.get(i).spent;
-        total = categoryWithMoneyList.get(i).limit;
-
-        categoryPieCh.setCenterText(categoryWithMoneyList.get(i).category.get_name() + " \n" + spent + " Kr");
-
-
-
-
+        init(view);
+        showCategoryBudget(i);
+        spent = getSpent(i);
+        total = getTotal(i);
+        showCategoryNameAndSpentMoney(i);
         makeCategoryPie(categoryPieCh);
 
         return view;
     }
+
+
+    /**
+     * This method initializes the class's attributes that are not initialized in constructor or in getView method
+     * @param view a category view in analysis fragment
+     */
+    private void init(View view){
+        categoryAnalysisBudget = view.findViewById(R.id.categoryAnalysisBudget);
+        categoryPieCh = view.findViewById(R.id.categoryPieCh);
+    }
+
+    /**
+     * A method to show the category budget in grid view
+     * @param position category poistion in the list
+     */
+    private void showCategoryBudget(int position){
+
+        categoryAnalysisBudget.setText(categoryWithMoneyList.get(position).limit + " Kr");
+    }
+
+    /**
+     * A method to get a category spent money
+     * @param i category position in the list
+     * @return category spent money
+     */
+    private double getSpent(int i){
+       return categoryWithMoneyList.get(i).spent;
+    }
+
+    /**
+     * A method to get a category budget
+     * @param i category position in the list
+     * @return category budget
+     */
+    private double getTotal(int i){
+        return categoryWithMoneyList.get(i).limit;
+    }
+
+    /**
+     * A method to show the spent money and name to a specific category in the center of the pie chart
+     * @param i category position in the list
+     */
+    private void showCategoryNameAndSpentMoney(int i){
+        categoryPieCh.setCenterText(categoryWithMoneyList.get(i).category.get_name() + " \n" + spent + " Kr");
+    }
+
 
     /**
      * The method makes the circle diagram for the category and puts the information in it
