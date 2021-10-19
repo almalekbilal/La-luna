@@ -53,6 +53,12 @@ public class CategoriesEditActivity extends AppCompatActivity {
 
 
 
+        final String oldName=editCategoryName.getText().toString();
+        final int oldBudget=Integer.parseInt(editCategoryBudget.getText().toString());
+
+
+
+
             editCategoryImageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -67,12 +73,17 @@ public class CategoriesEditActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     finish();
                 }
-            });
+            }
+
+
+
+            );
 
 
             editCategorySave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
 
                     String newName = editCategoryName.getText().toString();
                     int newLimit = Integer.parseInt(editCategoryBudget.getText().toString());
@@ -84,7 +95,9 @@ public class CategoriesEditActivity extends AppCompatActivity {
 
 
                     viewModel.editCategory(newName,id,newLimit,date,picture,color);
-                    Toast.makeText(getBaseContext(),picture+"",Toast.LENGTH_LONG).show();
+                    if (! oldName.equals(newName) || newLimit !=oldBudget) {
+                        Toast.makeText(getBaseContext(),"The category has been edited", Toast.LENGTH_LONG).show();
+                    }
                     finish();
                 }
 
