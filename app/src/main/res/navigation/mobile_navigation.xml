@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_analysis"
-        android:name="com.example.laluna.ui.analys.AnalysisFragment"
+        android:name="com.example.laluna.ui.analysis.AnalysisFragment"
         android:label="@string/title_analysis"
         tools:layout="@layout/fragment_analysis" />
 

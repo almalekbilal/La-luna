@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ui.analys.categoryExpensesActivity.CategoryExpensesActivity"
+            android:name=".ui.analysis.categoryExpensesActivity.CategoryExpensesActivity"
             android:exported="true" />
         <activity
             android:name=".ui.addudateexpense.UpdateExpenseActivity"

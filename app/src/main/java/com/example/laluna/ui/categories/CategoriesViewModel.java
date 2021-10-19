@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.laluna.Model.Category;
 import com.example.laluna.Model.DBHandler;
-import com.example.laluna.ui.analys.CategoryWithMoney;
 
 import java.util.ArrayList;
 import java.util.Date;
