@@ -1,7 +1,6 @@
 package com.example.laluna.ui.analysis.categoryExpensesActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -28,8 +27,8 @@ import java.util.Locale;
 public class CategoryExpensesActivity extends AppCompatActivity {
 
 
-    private double spent = 150;
-    private double budget = 300;
+    private double spent;
+    private double budget;
 
     private AnalysisViewModel analysisViewModel;
 
@@ -39,89 +38,130 @@ public class CategoryExpensesActivity extends AppCompatActivity {
     private ImageButton backButton;
     private ListView categoryExpensesListView;
 
+    private Intent intent;
+
+    private int categoryId;
+    private int categoryYear;
+    private int categoryMonth;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category_expenses);
-        analysisViewModel =
-                ViewModelProviders.of(this).get(AnalysisViewModel.class);
-
-        analysisViewModel.init(this);
-
-        clickedCategoryPieCh = findViewById(R.id.clickedCategoryPieCh);
-        categoryNameAndBudget = findViewById(R.id.categoryNameAndBudget);
-        categorySpent = findViewById(R.id.categorySpent);
-
-        backButton = findViewById(R.id.backButton);
-        categoryExpensesListView = findViewById(R.id.categoryExpensesListView);
-
-
-
-        Intent intent = getIntent();
+        init();
 
         if(intent.getExtras() != null){
-
-
-            String selectedCategoryName = intent.getStringExtra("name");
-
-            clickedCategoryPieCh.setCenterText(selectedCategoryName);
-            spent = intent.getDoubleExtra("spent",0);
-            budget = intent.getDoubleExtra("budget",0);
-
-
-
-            String budgetToString = Double.toString(budget);
-            String spentToString = Double.toString(spent);
-            categoryNameAndBudget.setText(selectedCategoryName.toUpperCase(Locale.ROOT) + " " + "BUDGET" + " " + budgetToString + " KR");
-
-            categorySpent.setText(spentToString + " KR");
-
-            makeCategoryPieCh(clickedCategoryPieCh);
-
-
-            backButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.navigation_analysis,new Fragment()).commit();
-
-                }
-            });
-
-
-
-
-            final int id = intent.getIntExtra("id",0);
-            int year = intent.getIntExtra("categoryYear",5);
-            int month = intent.getIntExtra("categoryMonth",9);
-
-
-
-
-            final ListViewAdapter listAdapter = new ListViewAdapter
-                    (new ArrayList<Expense>(), this,id);
-
-            categoryExpensesListView.setAdapter(listAdapter);
-
-            analysisViewModel.updateCategoryExpenses(id,year,month);
-
-            analysisViewModel.getCategoryExpenses().observe(this, new Observer<List<Expense>>() {
-                @Override
-                public void onChanged(List<Expense> expenses) {
-
-
-                    listAdapter.clear();
-                    listAdapter.addAll(expenses);
-
-                }
-            });
-
+            showAllCategoryInformation();
         }
 
     }
 
 
 
+    private void showAllCategoryInformation(){
+        spent = getSpent();
+        budget = getBudget();
+        showCategoryNameAndBudget();
+        showCategorySpentMoney();
+        makeCategoryPieCh(clickedCategoryPieCh);
+        backButtonToAnalysisFragment();
 
+
+        categoryId = getSelectedCategoryId();
+        categoryYear = getSelectedCategoryYear();
+        categoryMonth = getSelectedCategoryMonth();
+
+        getCategoryExpenses(categoryId, categoryYear, categoryMonth);
+
+        showCategoryExpensesInListView();
+    }
+
+
+    private void init(){
+        setContentView(R.layout.activity_category_expenses);
+
+        analysisViewModel = ViewModelProviders.of(this).get(AnalysisViewModel.class);
+        analysisViewModel.init(this);
+
+        clickedCategoryPieCh = findViewById(R.id.clickedCategoryPieCh);
+        categoryNameAndBudget = findViewById(R.id.categoryNameAndBudget);
+        categorySpent = findViewById(R.id.categorySpent);
+        backButton = findViewById(R.id.backButton);
+        categoryExpensesListView = findViewById(R.id.categoryExpensesListView);
+
+        intent = getIntent();
+
+    }
+
+    private void showCategoryNameAndBudget(){
+        String selectedCategoryName = intent.getStringExtra("name");
+        clickedCategoryPieCh.setCenterText(selectedCategoryName);   //Category name in pie chart
+        String budgetToString = Double.toString(budget);
+        categoryNameAndBudget.setText(selectedCategoryName.toUpperCase(Locale.ROOT) + " " + "BUDGET" + " " + budgetToString + " KR");
+    }
+
+
+    private double getSpent(){
+        return intent.getDoubleExtra("spent",0);
+    }
+
+    private double getBudget(){
+        return intent.getDoubleExtra("budget",0);
+    }
+
+
+    private void showCategorySpentMoney(){
+        String spentToString = Double.toString(getSpent());
+        categorySpent.setText(spentToString + " KR");
+    }
+
+
+    private void backButtonToAnalysisFragment(){
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
+    private int getSelectedCategoryId(){
+        return intent.getIntExtra("id",0);
+    }
+
+    private int getSelectedCategoryYear(){
+        return intent.getIntExtra("categoryYear",5);
+    }
+
+    private int getSelectedCategoryMonth(){
+        return intent.getIntExtra("categoryMonth",9);
+    }
+
+
+    private void getCategoryExpenses(int categoryId, int categoryYear, int categoryMonth){
+        analysisViewModel.updateCategoryExpenses(categoryId, categoryYear, categoryMonth);
+    }
+
+
+    private void showCategoryExpensesInListView(){
+        final ListViewAdapter listAdapter = new ListViewAdapter
+                (new ArrayList<Expense>(), this, categoryId);
+
+        categoryExpensesListView.setAdapter(listAdapter);
+
+
+        analysisViewModel.getCategoryExpenses().observe(this, new Observer<List<Expense>>() {
+            @Override
+            public void onChanged(List<Expense> expenses) {
+
+
+                listAdapter.clear();
+                listAdapter.addAll(expenses);
+
+            }
+        });
+
+    }
 
     private void makeCategoryPieCh(PieChart piechart) {
         piechart.setUsePercentValues(true);
