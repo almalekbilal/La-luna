@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModel;
 import com.example.laluna.Model.Category;
 import com.example.laluna.Model.DBHandler;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -54,11 +56,31 @@ public class CategoriesViewModel extends ViewModel {
 
     public void addCategory(String name, int limit, int pictureName, String color, Date dateCreation) {
         db.addCategory(name, limit, pictureName, color, dateCreation);
+    }
 
+    public void editCategory(String name,int id, int budget,String date, int picture, String color){
+
+
+        Category category = new Category(id,budget,name,picture,color,stringToDate(date),null);
+        db.updateCategory(category);
+        updateCategories();
+    }
+   private Date stringToDate(String dateString){
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            if(dateString != null) {
+                date = sdf.parse(dateString);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 
 
-     public void editCategory(String name,int limit,int categoryId){
+     /*public void editCategory(String name,int limit,int categoryId){
         List <Category> categories = db.getCategories(new Date());
          for(int i=0; i<db.getCategories(new Date()).size(); i++){
              if(categories.get(i).get_id() == categoryId){
@@ -68,6 +90,8 @@ public class CategoriesViewModel extends ViewModel {
          }
          categoryMutableLive.postValue(categories);
      }
+     /
+      */
 
 }
 
