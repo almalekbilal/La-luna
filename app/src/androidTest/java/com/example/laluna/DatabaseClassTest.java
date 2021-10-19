@@ -22,7 +22,11 @@ import static org.junit.Assert.*;
 
 
 /**
- * Instrumented test, which will execute on an Android device.
+ * A (unit)test class for testing the database.
+ *
+ * @author Ali Alkhaled
+ *
+ * @author Deaa Khankan
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
