@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * This class is responsible to place the expenses of a specific category in a listView
+ * @author Ali Malla
  */
 public class ListViewAdapter extends ArrayAdapter {
 
@@ -49,7 +50,7 @@ public class ListViewAdapter extends ArrayAdapter {
 
 
     /**
-     * The method to create expense view
+     * The method to create an expense view
      * @param position item position
      * @param convertView the view
      * @param parent
@@ -76,7 +77,7 @@ public class ListViewAdapter extends ArrayAdapter {
 
     /**
      * This method initializes the class's attributes that are not initialized in constructor or in getView method
-     * @param convertView expense view
+     * @param convertView an expense view
      */
     private void initExpenseInformation(View convertView){
         txv_expensePrice = convertView.findViewById(R.id.txv_expensePrice);
@@ -87,7 +88,7 @@ public class ListViewAdapter extends ArrayAdapter {
 
 
     /**
-     * This method is responsible to set expenses information in view
+     * This method is responsible to set expense information in an expense view
      * @param position expense position
      */
     private void showExpenseInformation(int position){
