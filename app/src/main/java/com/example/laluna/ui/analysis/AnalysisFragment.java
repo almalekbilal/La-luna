@@ -1,4 +1,4 @@
-package com.example.laluna.ui.analys;
+package com.example.laluna.ui.analysis;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,7 +16,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.laluna.R;
-import com.example.laluna.ui.analys.categoryExpensesActivity.CategoryExpensesActivity;
+import com.example.laluna.ui.analysis.categoryExpensesActivity.CategoryExpensesActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;

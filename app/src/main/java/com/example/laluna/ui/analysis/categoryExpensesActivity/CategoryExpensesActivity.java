@@ -1,4 +1,4 @@
-package com.example.laluna.ui.analys.categoryExpensesActivity;
+package com.example.laluna.ui.analysis.categoryExpensesActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.example.laluna.Model.Expense;
 import com.example.laluna.R;
-import com.example.laluna.ui.analys.AnalysisViewModel;
+import com.example.laluna.ui.analysis.AnalysisViewModel;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;

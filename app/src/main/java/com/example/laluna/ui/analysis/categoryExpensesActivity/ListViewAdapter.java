@@ -1,4 +1,4 @@
-package com.example.laluna.ui.analys.categoryExpensesActivity;
+package com.example.laluna.ui.analysis.categoryExpensesActivity;
 
 import android.content.Context;
 import android.view.LayoutInflater;
