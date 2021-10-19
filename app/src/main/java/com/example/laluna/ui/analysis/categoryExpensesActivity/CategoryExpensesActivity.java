@@ -200,7 +200,7 @@ public class CategoryExpensesActivity extends AppCompatActivity {
      */
     private void showCategoryExpensesInListView(){
         final ListViewAdapter listAdapter = new ListViewAdapter
-                (new ArrayList<Expense>(), this, categoryId);
+                (new ArrayList<Expense>(), this);
 
         categoryExpensesListView.setAdapter(listAdapter);
 
