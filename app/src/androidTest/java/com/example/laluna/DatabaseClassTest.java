@@ -309,7 +309,20 @@ public class DatabaseClassTest {
     }
 
     @Test
-    public void getTotalMoneySpentTest(){
+    public void getTotalMoneySpentGeneralTest(){
+
+        Category category = db.addCategory("cat", 1500, 5, null, new Date(121, 4, 1));
+
+        db.addExpense("test", 500, new Date(121, 4, 1), category);
+
+        int totalMoneySpent = db.getTotalMoneySpent(new Date(121, 4, 1));
+
+        assertEquals(500, totalMoneySpent);
+    }
+
+
+    @Test
+    public void getTotalMoneySpentMoreConditionsTest(){
 
         Category c1 = db.addCategory("food",100,0, "blue",new Date(120,5,1));
         Category c2 = db.addCategory("car",500,0, "red",new Date(2020,05,01));
