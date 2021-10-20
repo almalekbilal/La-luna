@@ -44,7 +44,7 @@ public class CategoriesViewModel extends ViewModel {
 
 
     //Helper
-    private void updateCategories(){
+    public void updateCategories(){
         List<Category> cat = new ArrayList<>();
 
         List<Category> categories = db.getCategories(new Date());
@@ -105,6 +105,16 @@ public class CategoriesViewModel extends ViewModel {
         Category category = new Category(id,budget,name,picture,color,stringToDate(date),null);
         db.updateCategory(category);
         updateCategories();
+    }
+
+    public void deleteCategory(int categoryId) {
+        List<Category> categoryList = db.getCategories(new Date());
+
+        for (Category category : categoryList) {
+            if (category.get_id() == categoryId) {
+                db.deactivateCategory(category, new Date());
+            }
+        }
     }
 
 
