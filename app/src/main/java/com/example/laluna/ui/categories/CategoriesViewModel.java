@@ -77,7 +77,7 @@ public class CategoriesViewModel extends ViewModel {
     }
 
     /**
-     * A method for adding a new category from the view. (By user)
+     * A method for adding a new category (communicates with the view).
      * It communicates with the data base
      * @param name Name of the new category
      * @param limit Limit of the new category
@@ -90,7 +90,7 @@ public class CategoriesViewModel extends ViewModel {
     }
 
     /**
-     * A method for editing an existing category from the view. (By user)
+     * A method for editing an existing category. (communicates with the view).
      * It communicates with the data base.
      * @param name The new name of the category
      * @param id The id of the category that will be edited
@@ -101,14 +101,18 @@ public class CategoriesViewModel extends ViewModel {
      */
     public void editCategory(String name,int id, int budget,String date, int picture, String color){
 
-
         Category category = new Category(id,budget,name,picture,color,stringToDate(date),null);
         db.updateCategory(category);
         updateCategories();
     }
 
+
+    /**
+     * A method for deleting an existing category (communicates with the view).
+     * @param categoryId ID of the category that will be deleted
+     */
     public void deleteCategory(int categoryId) {
-        List<Category> categoryList = db.getCategories(new Date());
+        List<Category> categoryList = categoryMutableLive.getValue();
 
         for (Category category : categoryList) {
             if (category.get_id() == categoryId) {
