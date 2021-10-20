@@ -336,7 +336,19 @@ public class DatabaseClassTest {
     }
 
     @Test
-    public void getTotalBudgetTest(){
+    public void getTotalBudgetGeneralTest(){
+
+        Category c1 = db.addCategory("Food", 1500, 0, null, new Date(121, 5,1));
+
+        db.setCategoriesPreviousLimits(new Date(121, 5, 4));
+
+        assertEquals(db.getTotalBudget(new Date(121, 5, 4)), 1500);
+
+
+    }
+
+    @Test
+    public void getTotalBudgetMoreConditionsTest(){
 
         Category c1 = db.addCategory("Mat",2000,0,null,new Date(121,5,1));
 
@@ -405,7 +417,7 @@ public class DatabaseClassTest {
         assertEquals(3500,db.getCategoryLimit(new Date(121,6,1),c1));
     }
 
-    /*@Test
+    @Test
     public void ViewThings(){
         Category c1 = db.addCategory("Food",3000,R.drawable.categorycar,null,new Date(121,9,2));
         Category c2 = db.addCategory("entertainment",2000,R.drawable.food,null,new Date(121,9,2));
@@ -452,7 +464,7 @@ public class DatabaseClassTest {
         db.setCategoriesPreviousLimits(new Date(121,8,1));
 
         assertEquals(3000,3000);
-    }*/
+    }
 }
 
 
