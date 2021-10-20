@@ -89,6 +89,16 @@ public class CategoriesViewModel extends ViewModel {
         db.addCategory(name, limit, pictureName, color, dateCreation);
     }
 
+    /**
+     * A method for editing an existing category from the view. (By user)
+     * It communicates with the data base.
+     * @param name The new name of the category
+     * @param id The id of the category that will be edited
+     * @param budget The new limit of the category
+     * @param date The date of the category
+     * @param picture The new picture of the category
+     * @param color The new color of the category
+     */
     public void editCategory(String name,int id, int budget,String date, int picture, String color){
 
 
@@ -98,6 +108,7 @@ public class CategoriesViewModel extends ViewModel {
     }
 
 
+    //Helper
    private Date stringToDate(String dateString){
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
