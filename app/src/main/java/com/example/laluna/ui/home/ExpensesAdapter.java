@@ -26,9 +26,10 @@ import java.util.List;
  */
 public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ExpenseHolder> {
 
-    List<Expense> expenses;
-    Context context;
-    onExpenseClickListener listener;
+    private List<Expense> expenses;
+    private Context context;
+    private onExpenseClickListener listener;
+
     public ExpensesAdapter(Context context, List<Expense> expenses, onExpenseClickListener listener){
         this.expenses = expenses;
         this.context = context;
