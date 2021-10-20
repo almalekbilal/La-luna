@@ -478,12 +478,12 @@ public class DatabaseClassTest {
 
         db.setCategoriesPreviousLimits(new Date(121,5,1));
 
-        int limit = db.getCategoryLimit(new Date(121, 5, 1), c1); ///THE SAME DATE!!
+        int limit = db.getCategoryLimit(new Date(121, 5, 2), c1); ///THE SAME DATE!!
 
         assertEquals(3000, limit);
     }
 
-    /*
+
     @Test
     public void getCategoryLimitMoreConditionsTest(){
 
@@ -506,7 +506,7 @@ public class DatabaseClassTest {
         db.setCategoriesPreviousLimits(new Date(120,8,10));
 
 
-        int limit1 = db.getCategoryLimit(new Date(120, 8, 10), c1);
+        int limit1 = db.getCategoryLimit(new Date(120, 8, 26), c1);
        // int limit2 = db.getCategoryLimit(new Date(121, 3, 1), c2);
         //int limit3 = db.getCategoryLimit(new Date(121, 5, 1), c3);
 
@@ -516,7 +516,7 @@ public class DatabaseClassTest {
         assertEquals(true, limitsChanged);
     }
 
-     */
+
 
     /*@Test
     public void ViewThings(){

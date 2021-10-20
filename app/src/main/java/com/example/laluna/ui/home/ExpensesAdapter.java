@@ -1,6 +1,7 @@
 package com.example.laluna.ui.home;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,6 +87,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
             price = itemView.findViewById(R.id.txv_expensePrice);
             name = itemView.findViewById(R.id.txv_expenseName);
             categoryImage = itemView.findViewById(R.id.img_categoryImage);
+            categoryImage.setBackgroundColor(Color.CYAN);
             date = itemView.findViewById(R.id.txv_dateExpense);
             this.listener = listener;
 

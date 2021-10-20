@@ -487,6 +487,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
      */
     public int getCategoryLimitDB(Date date, Category category){
 
+        date.setDate(1);
         String query = "SELECT limitt FROM " + TABLE_LIMITS + " WHERE category_id = " + category.get_id() + " AND month = '" + dateToString(date) + "' ;";
 
         SQLiteDatabase db = getWritableDatabase();

@@ -29,10 +29,24 @@ public class CategoriesFragment extends Fragment {
 
 
     private CategoriesViewModel categoriesViewModel;
+// Food
+// Clothes
+// House
+// Entertainemt
+// Health
+// Other
 
 
-    Button addCategoryButton;
+    private Button addCategoryButton;
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(categoriesViewModel != null){
+            categoriesViewModel.init(getContext());
+        }
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
