@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.example.laluna.Model.Expense;
 import com.example.laluna.R;
-import com.example.laluna.ui.analysis.AnalysisViewModel;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -34,10 +33,13 @@ public class CategoryExpensesActivity extends AppCompatActivity {
     private double spent;          // category spent money
     private double budget;         // category budget
 
-    private AnalysisViewModel analysisViewModel;
+
+
+    private CategoryExpensesViewModel categoryExpensesViewModel;
+
+
 
     private PieChart clickedCategoryPieCh;   // category pie chart to show spent and left money
-
     private TextView categoryNameAndBudget;
     private TextView categorySpent;
     private ImageButton backButton;
@@ -67,6 +69,26 @@ public class CategoryExpensesActivity extends AppCompatActivity {
 
 
     /**
+     * This method initializes most of the class's attributes
+     */
+    private void init(){
+        setContentView(R.layout.activity_category_expenses);
+
+        categoryExpensesViewModel = ViewModelProviders.of(this).get(CategoryExpensesViewModel.class);
+        categoryExpensesViewModel.init(this);
+
+        clickedCategoryPieCh = findViewById(R.id.clickedCategoryPieCh);
+        categoryNameAndBudget = findViewById(R.id.categoryNameAndBudget);
+        categorySpent = findViewById(R.id.categorySpent);
+        backButton = findViewById(R.id.backButton);
+        categoryExpensesListView = findViewById(R.id.categoryExpensesListView);
+
+        intent = getIntent();
+
+    }
+
+
+    /**
      * this method gets all the items that will shows in the activity
      */
     private void showAllCategoryInformation(){
@@ -87,25 +109,6 @@ public class CategoryExpensesActivity extends AppCompatActivity {
         showCategoryExpensesInListView();
     }
 
-
-    /**
-     * This method initializes most of the class's attributes
-     */
-    private void init(){
-        setContentView(R.layout.activity_category_expenses);
-
-        analysisViewModel = ViewModelProviders.of(this).get(AnalysisViewModel.class);
-        analysisViewModel.init(this);
-
-        clickedCategoryPieCh = findViewById(R.id.clickedCategoryPieCh);
-        categoryNameAndBudget = findViewById(R.id.categoryNameAndBudget);
-        categorySpent = findViewById(R.id.categorySpent);
-        backButton = findViewById(R.id.backButton);
-        categoryExpensesListView = findViewById(R.id.categoryExpensesListView);
-
-        intent = getIntent();
-
-    }
 
 
     /**
@@ -190,7 +193,7 @@ public class CategoryExpensesActivity extends AppCompatActivity {
      * @param categoryMonth Category month for the specific category
      */
     private void getCategoryExpenses(int categoryId, int categoryYear, int categoryMonth){
-        analysisViewModel.updateCategoryExpenses(categoryId, categoryYear, categoryMonth);
+        categoryExpensesViewModel.updateCategoryExpenses(categoryId, categoryYear, categoryMonth);
     }
 
 
@@ -205,7 +208,7 @@ public class CategoryExpensesActivity extends AppCompatActivity {
         categoryExpensesListView.setAdapter(listAdapter);
 
 
-        analysisViewModel.getCategoryExpenses().observe(this, new Observer<List<Expense>>() {
+        categoryExpensesViewModel.getCategoryExpenses().observe(this, new Observer<List<Expense>>() {
             @Override
             public void onChanged(List<Expense> expenses) {
 
