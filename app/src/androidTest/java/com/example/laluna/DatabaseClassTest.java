@@ -255,17 +255,35 @@ public class DatabaseClassTest {
         Category category1 = db.addCategory("food", 100, 0, "blue", new Date(121, 01, 01));
         Category category2 = db.addCategory("car", 500, 0, "red", new Date(120, 01, 01));
 
-        Expense expense = db.addExpense("swish",500,new Date(120,01,01), category1);
-        Expense expense1 =  db.addExpense("swish",500,new Date(120,01,01), category2);
+        Expense expense1 = db.addExpense("ex1",100,new Date(121,01,01), category1);
+
+        Expense expense2 =  db.addExpense("ex2",150,new Date(121,01,01), category1);
+
+        Expense expense3 =  db.addExpense("ex3",280,new Date(120,01,01), category2);
+
+        Expense expense4 =  db.addExpense("ex4",500,new Date(120,01,01), category2);
+
+        Expense expense5 =  db.addExpense("ex5",130,new Date(120,01,01), category2);
+
+        Expense expense6 =  db.addExpense("ex6",500,new Date(121,01,01), category1);
 
 
-        db.deleteExpense(expense);
+
+        db.deleteExpense(expense1);
+        db.deleteExpense(expense2);
+        db.deleteExpense(expense3);
+        db.deleteExpense(expense4);
+        db.deleteExpense(expense5);
 
 
-        List<Expense> expenses = db.getExpenses(0, 10);
+        List<Expense> expenses1 = db.getCategoryExpense(category1.get_id());
 
-        assertEquals(1, expenses.size());
-        assertEquals(false ,expenses.contains(expense) );
+        List<Expense> expenses2 = db.getCategoryExpense(category2.get_id());
+
+        boolean result = expenses1.size()==1 && expenses2.size()==0;
+
+        assertTrue(result);
+
 
     }
 
