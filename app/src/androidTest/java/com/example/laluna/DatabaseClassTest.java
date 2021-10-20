@@ -227,9 +227,31 @@ public class DatabaseClassTest {
 
     }
 
+    @Test
+    public void deleteExpenseGeneralTest() {
+
+        Category category1 = db.addCategory("food", 500, 0, "blue", new Date(121, 01, 01));
+
+        Expense expense = db.addExpense("Burger", 120, new Date(121, 01, 29), category1);
+
+        List<Expense> expenses = db.getExpenses(0, 10);
+
+        boolean hasBeenAdded = expenses.contains(expense);
+
+        db.deleteExpense(expense);
+
+        expenses = db.getExpenses(0, 10);
+
+        boolean hasBeenDeleted = hasBeenAdded && !expenses.contains(expense);
+
+        assertTrue(hasBeenDeleted);
+
+    }
+
 
     @Test
-    public void deleteExpenseTest() {
+    public void deleteExpenseMoreConditionsTest() {
+
         Category category1 = db.addCategory("food", 100, 0, "blue", new Date(121, 01, 01));
         Category category2 = db.addCategory("car", 500, 0, "red", new Date(120, 01, 01));
 
@@ -250,6 +272,7 @@ public class DatabaseClassTest {
 
     @Test
     public void updateExpensesTest(){
+
         Category category1 = db.addCategory("food", 100, 0, "blue", new Date(121, 01, 01));
         Category category2 = db.addCategory("car", 500, 0, "red", new Date(120, 01, 01));
 
@@ -269,6 +292,7 @@ public class DatabaseClassTest {
 
     @Test
     public void getTotalMoneySpentTest(){
+
         Category c1 = db.addCategory("food",100,0, "blue",new Date(120,5,1));
         Category c2 = db.addCategory("car",500,0, "red",new Date(2020,05,01));
 
