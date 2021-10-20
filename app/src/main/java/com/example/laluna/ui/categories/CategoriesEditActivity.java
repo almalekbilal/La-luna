@@ -14,15 +14,14 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.laluna.R;
 
-import java.sql.Date;
-
 
 public class CategoriesEditActivity extends AppCompatActivity {
 
     private CategoriesViewModel viewModel;
-    private EditText editCategoryName, editCategoryBudget;
-    private Button editCategorySave, editCategoryCancel;
-    private ImageButton editCategoryImageButton;
+    private EditText editTextName, editTextLimit;
+    private Button buttonSave, buttonCancel, buttonDelete;
+    private ImageButton imageButtonEdit;
+    private Intent intent;
 
 
     @Override
@@ -33,77 +32,106 @@ public class CategoriesEditActivity extends AppCompatActivity {
         viewModel = ViewModelProviders.of(this).get(CategoriesViewModel.class);
         viewModel.init(this);
 
-        editCategoryName = findViewById(R.id.editCategoryName);
-        editCategoryBudget = findViewById(R.id.editCategoryBudget);
-        editCategorySave = findViewById(R.id.editCategorySave);
-        editCategoryCancel = findViewById(R.id.editCategoryCancel);
-        editCategoryImageButton = findViewById(R.id.editCategoryImageButton);
+        initComponents();
+        intent = getIntent();
+
+        setDefaultNameForEditTexts();
 
 
-        final Intent intent = getIntent();
-
-        if (intent.getExtras() != null) {
-            editCategoryName.setText(intent.getStringExtra("categoryName"));
-            int selectedCategoryIntBudget = intent.getIntExtra("categoryBudget", 1);
-
-            editCategoryName.setEnabled(false);
-             editCategoryBudget.setEnabled(false);
-            editCategoryBudget.setText(Integer.toString(selectedCategoryIntBudget));
-        }
+        final String oldName = editTextName.getText().toString();
+        final int oldLimit = Integer.parseInt(editTextLimit.getText().toString());
 
 
 
-        final String oldName=editCategoryName.getText().toString();
-        final int oldBudget=Integer.parseInt(editCategoryBudget.getText().toString());
-
-
-
-
-            editCategoryImageButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    editCategoryName.setEnabled(true);
-                    editCategoryBudget.setEnabled(true);
-
-                }
-            });
-
-            editCategoryCancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    finish();
-                }
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteCategory();
+                Toast.makeText(getBaseContext(), "The category is deleted", Toast.LENGTH_SHORT).show();
+                finish();
             }
+        });
 
 
-
-            );
-
-
-            editCategorySave.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-
-                    String newName = editCategoryName.getText().toString();
-                    int newLimit = Integer.parseInt(editCategoryBudget.getText().toString());
-                    int id =  intent.getIntExtra("categoryId", 0);
-                    String color = intent.getStringExtra("categoryColor");
-                    String date = intent.getStringExtra("categoryDate");
-                    int picture = intent.getIntExtra("categoryPicture",0);
+        imageButtonEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                enableEditCategory();
+            }
+        });
 
 
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
-                    viewModel.editCategory(newName,id,newLimit,date,picture,color);
-                    if (! oldName.equals(newName) || newLimit !=oldBudget) {
-                        Toast.makeText(getBaseContext(),"The category has been edited", Toast.LENGTH_LONG).show();
-                    }
-                    finish();
-                }
 
-
-            });
-
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateSaveChanges(oldName, oldLimit);
+                finish();
+            }
+        });
 
     }
+
+    private void initComponents () {
+
+        editTextName = findViewById(R.id.editCategoryName);
+        editTextLimit = findViewById(R.id.editCategoryBudget);
+        buttonSave = findViewById(R.id.editCategorySave);
+        buttonCancel = findViewById(R.id.editCategoryCancel);
+        imageButtonEdit = findViewById(R.id.editCategoryImageButton);
+        buttonDelete = findViewById(R.id.editCategoryDelete);
+    }
+
+
+    private void deleteCategory() {
+
+        int id = intent.getIntExtra("categoryId", 0);
+        viewModel.deleteCategory(id);
+    }
+
+    private void updateSaveChanges(String oldName, int oldLimit){
+
+        String newName = editTextName.getText().toString();
+        int newLimit = Integer.parseInt(editTextLimit.getText().toString());
+
+        int id =  intent.getIntExtra("categoryId", 0);
+        String color = intent.getStringExtra("categoryColor");
+        String date = intent.getStringExtra("categoryDate");
+        int picture = intent.getIntExtra("categoryPicture",0);
+
+        viewModel.editCategory(newName,id,newLimit,date,picture,color);
+
+        if (!oldName.equals(newName) || newLimit != oldLimit) {
+            Toast.makeText(getBaseContext(),"The category has been edited", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private void enableEditCategory() {
+        if (editTextName.isEnabled() && editTextLimit.isEnabled()) {
+            editTextName.setEnabled(false);
+            editTextLimit.setEnabled(false);
+        }
+        else {
+            editTextName.setEnabled(true);
+            editTextLimit.setEnabled(true);
+        }
+
+    }
+
+    private void setDefaultNameForEditTexts() {
+        String selectedCategoryName = intent.getStringExtra("categoryName");
+        String selectedCategoryLimit = Integer.toString(intent.getIntExtra("categoryBudget", 1));
+
+        editTextName.setText(selectedCategoryName);
+        editTextLimit.setText(selectedCategoryLimit);
+    }
+
 }
