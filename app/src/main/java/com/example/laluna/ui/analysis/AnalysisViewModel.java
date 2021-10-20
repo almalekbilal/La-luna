@@ -53,9 +53,12 @@ public class AnalysisViewModel extends ViewModel {
     }
 
 
-
-
-
+    /**
+     *  The method gets the expenses of a specific category and sends them to the view
+     * @param categoryId  id of the specific category
+     * @param year Expenses year
+     * @param month Expenses month
+     */
     public void updateCategoryExpenses(int categoryId,int year,int month){
 
         List<Expense> expenses = new ArrayList<>();
