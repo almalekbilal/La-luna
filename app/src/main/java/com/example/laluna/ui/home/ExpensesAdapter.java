@@ -87,7 +87,6 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
             price = itemView.findViewById(R.id.txv_expensePrice);
             name = itemView.findViewById(R.id.txv_expenseName);
             categoryImage = itemView.findViewById(R.id.img_categoryImage);
-            categoryImage.setBackgroundColor(Color.CYAN);
             date = itemView.findViewById(R.id.txv_dateExpense);
             this.listener = listener;
 

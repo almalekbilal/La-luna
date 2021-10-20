@@ -204,8 +204,8 @@ public class AnalysisFragment extends Fragment {
      * @param date the date that will be displayed
      */
     private void showDate(Date date){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        dateText.setText(sdf.format(date));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+        dateText.setText(sdf.format(date) + "-01");
     }
 
 
