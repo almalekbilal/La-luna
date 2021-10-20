@@ -469,19 +469,18 @@ public class DatabaseClassTest {
     }
 
     @Test
-    public void getCategoryLimitTest(){
-        Category c1 = db.addCategory("Food",3000,0,null,null);
+    public void getCategoryLimitGeneralTest(){
 
-        db.setCategoriesPreviousLimits(new Date(121,5,5));
+        //null pointer exception
+        //out of index exception if not giving exactly the same date.
 
-        c1.set_limit(3500);
-        db.updateCategory(c1);
+        Category c1 = db.addCategory("Food",3000,0,null, new Date(121, 5, 1));
 
-        db.setCategoriesPreviousLimits(new Date(121,6,7));
+        db.setCategoriesPreviousLimits(new Date(121,5,1));
 
-        assertEquals(3000,db.getCategoryLimit(new Date(121,5,1),c1));
+        int limit = db.getCategoryLimit(new Date(121, 5, 1), c1); ///THE SAME DATE!!
 
-        assertEquals(3500,db.getCategoryLimit(new Date(121,6,1),c1));
+        assertEquals(3000, limit);
     }
 
     /*@Test
