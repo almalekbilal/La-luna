@@ -54,7 +54,7 @@ public class DatabaseClassTest {
     }
 
     @Test
-    public void addCategoryTest() {
+    public void addCategoryGeneralTest() {
         Category c1 = db.addCategory("food", 100, 0, null, new Date(121, 01, 01));
         db.addCategory("car", 500, 0, "red", new Date(120, 01, 01));
 
@@ -338,14 +338,14 @@ public class DatabaseClassTest {
     @Test
     public void getTotalBudgetGeneralTest(){
 
-        Category c1 = db.addCategory("Food", 1500, 0, null, new Date(121, 5,1));
+        db.addCategory("Food", 1500, 0, null, new Date(121, 5,1));
 
         db.setCategoriesPreviousLimits(new Date(121, 5, 4));
 
         assertEquals(db.getTotalBudget(new Date(121, 5, 4)), 1500);
 
-
     }
+
 
     @Test
     public void getTotalBudgetMoreConditionsTest(){
@@ -378,10 +378,11 @@ public class DatabaseClassTest {
 
 
     @Test
-    public void getCategoryExpensesTest() {
+    public void getCategoryExpensesMoreConditionsTest() {
 
-        Category c1 = db.addCategory("Food",3000,0,null,null);
-        Category c2 = db.addCategory("entertainment",700,0,null,null);
+        Category c1 = db.addCategory("Food",3000,0,null,new Date());
+
+        Category c2 = db.addCategory("entertainment",700,0,null,new Date());
 
         //will count
         db.addExpense("Burger", 80,new Date(121,5,1),c1);
