@@ -28,7 +28,6 @@ public class AnalysisViewModel extends ViewModel {
     private MutableLiveData<List<CategoryWithMoney>> categoriesLiveData;
     private DBHandler dbHandler;
     private MutableLiveData<Date> viewMonthDate = new MutableLiveData<>();
-    private MutableLiveData<List<Expense>> categoryExpenses;
 
     public AnalysisViewModel() {
     }
@@ -47,34 +46,11 @@ public class AnalysisViewModel extends ViewModel {
         viewMonthDate.setValue(new Date());
 
         categoriesLiveData = new MutableLiveData<>();
-        categoryExpenses = new MutableLiveData<>();
 
         updateView();
     }
 
 
-    /**
-     *  The method gets the expenses of a specific category and sends them to the view
-     * @param categoryId  id of the specific category
-     * @param year Expenses year
-     * @param month Expenses month
-     */
-    public void updateCategoryExpenses(int categoryId,int year,int month){
-
-        List<Expense> expenses = new ArrayList<>();
-
-        List<Expense> categoryEx = dbHandler.getCategoryExpense(categoryId);
-
-
-
-        for(Expense expense: categoryEx){
-            if(expense.get_date().getYear() == year &&
-                    expense.get_date().getMonth() == month){
-                expenses.add(expense);
-            }
-        }
-        categoryExpenses.postValue(expenses);
-    }
 
     /**
      * The method gets the categories of a specific month and sends them to the view
@@ -210,7 +186,5 @@ public class AnalysisViewModel extends ViewModel {
      */
     public LiveData<Date> getDate(){return viewMonthDate;}
 
-    public LiveData<List<Expense>> getCategoryExpenses() {
-        return categoryExpenses;
-    }
+
 }
