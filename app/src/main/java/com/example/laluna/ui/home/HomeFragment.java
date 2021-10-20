@@ -19,8 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.laluna.Model.Expense;
 import com.example.laluna.R;
-import com.example.laluna.ui.addudateexpense.AddExpenseActivity;
-import com.example.laluna.ui.addudateexpense.UpdateExpenseActivity;
+import com.example.laluna.ui.home.addudateexpense.AddExpenseActivity;
+import com.example.laluna.ui.home.addudateexpense.UpdateExpenseActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -36,11 +36,20 @@ import java.util.List;
  *   @auther (Deaa Khankan)
  *   @auther (Ali Al Khaled)
  */
-public class HomeFragment extends Fragment implements ExpensesAdapter.onExpenseClickListener {
+public class HomeFragment extends Fragment implements ExpensesAdapter.recycleListener {
 
     private HomeViewModel homeViewModel;
     final ArrayList<Expense> expenseArrayList = new ArrayList<Expense>();
     private double total = 300, spent= 150;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(homeViewModel != null) {
+            expenseArrayList.clear();
+            homeViewModel.init(getContext());
+        }
+    }
 
     /**
      * This method creates the view and handle the widgets in it
@@ -172,5 +181,10 @@ public class HomeFragment extends Fragment implements ExpensesAdapter.onExpenseC
         i.putExtra("expense", expense);
 
         startActivity(i);
+    }
+
+    @Override
+    public void onScroll(int position) {
+        homeViewModel.getMoreExpenses(position);
     }
 }

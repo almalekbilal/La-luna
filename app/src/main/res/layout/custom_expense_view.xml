@@ -13,7 +13,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#282B33">
+            android:background="#282B33"
+            >
+
 
             <TextView
                 android:id="@+id/txv_expensePrice"
@@ -45,7 +47,7 @@
                 android:layout_width="102dp"
                 android:layout_height="112dp"
                 android:layout_marginStart="4dp"
-                android:background="#FFF1F1"
+                android:background="#282B33"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:drawable/ic_menu_camera" />

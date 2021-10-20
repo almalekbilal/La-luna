@@ -64,10 +64,14 @@ public class CategoriesAddActivity extends AppCompatActivity {
                          viewModel.addCategory(name, limit, R.drawable.food, null, new Date());
                          Toast.makeText(getBaseContext(), "hi", Toast.LENGTH_LONG).show();
 
+                         finish();
+                         /*
                          CategoriesFragment categoriesFragment = new CategoriesFragment();
 
                          getSupportFragmentManager().beginTransaction().
                                  replace(R.id.navigation_categories, categoriesFragment).commit();
+
+                          */
                      }
 
                 }

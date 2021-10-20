@@ -22,7 +22,7 @@
     <ListView
         android:id="@+id/categoryListView"
         android:layout_width="413dp"
-        android:layout_height="560dp"
+        android:layout_height="435dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="47dp"
         android:layout_marginEnd="1dp"

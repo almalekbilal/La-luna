@@ -46,7 +46,7 @@ public class HomeViewModel extends ViewModel {
 
         totalAndSpent.postValue(ts);
 
-
+        start = 0;
         sendExpenses();
     }
 
@@ -59,6 +59,12 @@ public class HomeViewModel extends ViewModel {
         start = start + 10;
         expenses.postValue(ex);
 
+    }
+
+    public void getMoreExpenses(int position){
+        if(position+1 == start){
+            sendExpenses();
+        }
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.example.laluna.ui.addudateexpense;
+package com.example.laluna.ui.home.addudateexpense;
 
 import android.content.Context;
 
@@ -52,6 +52,18 @@ public class UpdateExpenseViewModel extends ViewModel {
         return names;
     }
 
+    public void setSelectedCategory(int position){
+        selectedCategory = categories.get(position);
+    }
+
+
+    public void updateExp(String name, int value){
+        thisExpense.set_name(name);
+        thisExpense.set_value(value);
+        thisExpense.set_category(selectedCategory);
+
+        dbHandler.updateExpense(thisExpense);
+    }
     public LiveData<String[]> getcategoriesNames(){return categoriesNames;}
 
 

@@ -28,8 +28,8 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
 
     List<Expense> expenses;
     Context context;
-    onExpenseClickListener listener;
-    public ExpensesAdapter(Context context, List<Expense> expenses, onExpenseClickListener listener){
+    recycleListener listener;
+    public ExpensesAdapter(Context context, List<Expense> expenses, recycleListener listener){
         this.expenses = expenses;
         this.context = context;
         this.listener = listener;
@@ -61,6 +61,9 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         holder.date.setText(sdf.format(expenses.get(position).get_date()));
         holder.categoryImage.setImageResource(expenses.get(position).get_category().get_pictureName());
+        listener.onScroll(position);
+
+        Log.i("Roro",expenses.size()+"");
     }
 
     @Override
@@ -75,9 +78,9 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
 
         TextView price, name, date;
         ImageView categoryImage;
-        onExpenseClickListener listener;
+        recycleListener listener;
 
-        public ExpenseHolder(@NonNull View itemView, onExpenseClickListener listener) {
+        public ExpenseHolder(@NonNull View itemView, recycleListener listener) {
             super(itemView);
 
             price = itemView.findViewById(R.id.txv_expensePrice);
@@ -96,7 +99,10 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
         }
     }
 
-    public interface onExpenseClickListener{
+    public interface recycleListener {
         void onExpenseClick(Expense expense);
+        void onScroll(int position);
     }
+
+
 }

@@ -133,8 +133,8 @@ public class AnalysisFragment extends Fragment {
         analysisViewModel.getDate().observe(this, new Observer<Date>() {
             @Override
             public void onChanged(Date date) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                dateText.setText(sdf.format(date));
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+                dateText.setText(sdf.format(date) + "-01");
             }
         });
 

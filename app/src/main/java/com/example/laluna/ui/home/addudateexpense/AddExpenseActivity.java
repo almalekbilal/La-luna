@@ -1,4 +1,4 @@
-package com.example.laluna.ui.addudateexpense;
+package com.example.laluna.ui.home.addudateexpense;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -17,21 +17,21 @@ import com.example.laluna.R;
 
 public class AddExpenseActivity extends AppCompatActivity {
 
-    AddExpenseViewModel addUpdateExpenseViewModel;
+    AddExpenseViewModel addExpenseViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_update_expense);
 
-        addUpdateExpenseViewModel =
+        addExpenseViewModel =
                 ViewModelProviders.of(this).get(AddExpenseViewModel.class);
 
-        addUpdateExpenseViewModel.init(this);
+        addExpenseViewModel.init(this);
 
         final Spinner spn = findViewById(R.id.spn_category);
         final Context context = this;
 
-        addUpdateExpenseViewModel.getcategoriesNames().observe(this, new Observer<String[]>() {
+        addExpenseViewModel.getcategoriesNames().observe(this, new Observer<String[]>() {
             @Override
             public void onChanged(String[] strings) {
                 ArrayAdapter<CharSequence> ad  = new ArrayAdapter(context, android.R.layout.simple_spinner_item, strings);
@@ -45,7 +45,7 @@ public class AddExpenseActivity extends AppCompatActivity {
         spn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                addUpdateExpenseViewModel.setSelectedCategory(position);
+                addExpenseViewModel.setSelectedCategory(position);
             }
 
             @Override
@@ -60,7 +60,8 @@ public class AddExpenseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String expenseName = ((EditText)findViewById(R.id.edt_expenseName)).getText().toString();
                 int expenseValue = Integer.parseInt(((EditText)findViewById(R.id.edt_expenseValue)).getText().toString());
-                addUpdateExpenseViewModel.addExp(expenseName,expenseValue);
+                addExpenseViewModel.addExp(expenseName,expenseValue);
+                finish();
             }
         });
     }
