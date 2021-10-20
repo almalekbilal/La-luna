@@ -65,6 +65,8 @@ public class CategoriesViewModel extends ViewModel {
         db.updateCategory(category);
         updateCategories();
     }
+
+
    private Date stringToDate(String dateString){
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -78,20 +80,5 @@ public class CategoriesViewModel extends ViewModel {
         }
         return date;
     }
-
-
-     /*public void editCategory(String name,int limit,int categoryId){
-        List <Category> categories = db.getCategories(new Date());
-         for(int i=0; i<db.getCategories(new Date()).size(); i++){
-             if(categories.get(i).get_id() == categoryId){
-                categories.get(i).set_name(name);
-                 categories.get(i).set_limit(limit);
-             }
-         }
-         categoryMutableLive.postValue(categories);
-     }
-     /
-      */
-
 }
 
