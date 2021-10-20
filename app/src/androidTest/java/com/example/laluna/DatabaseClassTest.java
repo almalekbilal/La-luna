@@ -376,6 +376,17 @@ public class DatabaseClassTest {
 
     }
 
+    @Test
+    public void getCategoryExpensesGeneralTest(){
+
+        Category c1 = db.addCategory("Cat1", 2000, 0, null, new Date(121, 01, 01));
+
+        db.addExpense("Expense1", 700, new Date(121, 05, 1), c1);
+
+        List<Expense> expenses = db.getCategoryExpense(c1.get_id());
+
+        assertEquals(1, expenses.size());
+    }
 
     @Test
     public void getCategoryExpensesMoreConditionsTest() {
