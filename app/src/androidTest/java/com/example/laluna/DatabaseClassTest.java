@@ -483,6 +483,41 @@ public class DatabaseClassTest {
         assertEquals(3000, limit);
     }
 
+    /*
+    @Test
+    public void getCategoryLimitMoreConditionsTest(){
+
+        Category c1 = db.addCategory("Cat1",1000,0,null, new Date(120, 8, 10));
+
+       // Category c2 = db.addCategory("Cat2",2000,1,null, new Date(121, 3, 1));
+
+     //   Category c3 = db.addCategory("Cat3",3000,2,null, new Date(121, 5, 1));
+
+
+
+        c1.set_limit(1500);
+       // c2.set_limit(2500);
+       // c3.set_limit(3500);
+
+
+        db.updateCategory(c1);
+      //  db.updateCategory(c2);
+     //   db.updateCategory(c3);
+        db.setCategoriesPreviousLimits(new Date(120,8,10));
+
+
+        int limit1 = db.getCategoryLimit(new Date(120, 8, 10), c1);
+       // int limit2 = db.getCategoryLimit(new Date(121, 3, 1), c2);
+        //int limit3 = db.getCategoryLimit(new Date(121, 5, 1), c3);
+
+        boolean limitsChanged = limit1==1500; //&& limit2==2500 && limit3==3500;
+
+
+        assertEquals(true, limitsChanged);
+    }
+
+     */
+
     /*@Test
     public void ViewThings(){
         Category c1 = db.addCategory("Food",3000,R.drawable.categorycar,null,new Date(121,9,2));

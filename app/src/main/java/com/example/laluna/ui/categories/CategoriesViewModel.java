@@ -15,6 +15,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ *  ViewModel class that is responsible for the communication with the data base handler
+ *  and the logic (related to Category fragment) behind the scene.
+ *
+ * @author Ali Alkhaled
+ * @author Deaa Khankan
+ */
 
 public class CategoriesViewModel extends ViewModel {
 
@@ -23,6 +30,12 @@ public class CategoriesViewModel extends ViewModel {
     private DBHandler db;
 
 
+    /**
+     * The method starts running once the class is running for the first time.
+     * The DBHandler data field is initialized here.
+     * It updates the data och sends it to the view
+     * @param context The android component that has to be connected to the database
+     */
     public void init(Context context) {
         db = new DBHandler(context);
         categoryMutableLive.postValue(db.getCategories(new Date()));
@@ -30,6 +43,7 @@ public class CategoriesViewModel extends ViewModel {
     }
 
 
+    //Helper
     private void updateCategories(){
         List<Category> cat = new ArrayList<>();
 
@@ -46,14 +60,31 @@ public class CategoriesViewModel extends ViewModel {
 
     }
 
+    /**
+     * A getter method
+     * @return List of category
+     */
     public List<Category> getCategoryList() {
         return categoryList;
     }
 
+    /**
+     * A getter method
+     * @return List of category (Live Data)
+     */
     public LiveData <List<Category>> getCategory() {
         return categoryMutableLive;
     }
 
+    /**
+     * A method for adding a new category from the view. (By user)
+     * It communicates with the data base
+     * @param name Name of the new category
+     * @param limit Limit of the new category
+     * @param pictureName picture code of the new category
+     * @param color color code of the new category
+     * @param dateCreation the date when the new category will be created
+     */
     public void addCategory(String name, int limit, int pictureName, String color, Date dateCreation) {
         db.addCategory(name, limit, pictureName, color, dateCreation);
     }
