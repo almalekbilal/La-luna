@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/46707/Desktop/LaLunaSpec/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/46707/Desktop/LaLunaSpec/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/46707/Desktop/LaLunaSpec/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/46707/Desktop/LaLunaSpec/app/src/main/res/layout/activity_category_add.xml" value="0.1793478260869565" />
         <entry key="..\:/Users/46707/Desktop/LaLunaSpec/app/src/main/res/layout/activity_category_edit.xml" value="0.1793478260869565" />
         <entry key="..\:/Users/Bilal Almalek/AndroidStudioProjects/Laluna/app/src/main/res/layout/activity_add_update_expense.xml" value="0.19746376811594202" />

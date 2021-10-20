@@ -3,13 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
 
     <androidx.cardview.widget.CardView
         android:id="@+id/categoryListItem"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_width="412dp"
+        android:layout_height="99dp"
         android:layout_marginTop="1dp"
+        android:background="#282B33"
+        app:cardBackgroundColor="#282B33"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="120dp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="@android:color/white" />
 
         <TextView
             android:id="@+id/categoryBudget"
@@ -35,6 +39,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="250dp"
-            android:text="TextView" />
+            android:lineSpacingExtra="34sp"
+            android:text="TextView"
+            android:textColor="@android:color/white" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

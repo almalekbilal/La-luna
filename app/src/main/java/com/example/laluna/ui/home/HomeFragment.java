@@ -39,7 +39,7 @@ import java.util.List;
 public class HomeFragment extends Fragment implements ExpensesAdapter.recycleListener {
 
     private HomeViewModel homeViewModel;
-    final ArrayList<Expense> expenseArrayList = new ArrayList<Expense>();
+    private final ArrayList<Expense> expenseArrayList = new ArrayList<Expense>();
     private double total = 300, spent= 150;
 
     @Override

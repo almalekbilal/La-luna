@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.laluna.R;
 
+import java.sql.Date;
+
 
 public class CategoriesEditActivity extends AppCompatActivity {
 
@@ -45,11 +47,17 @@ public class CategoriesEditActivity extends AppCompatActivity {
             int selectedCategoryIntBudget = intent.getIntExtra("categoryBudget", 1);
 
             editCategoryName.setEnabled(false);
-            editCategoryBudget.setEnabled(false);
+             editCategoryBudget.setEnabled(false);
             editCategoryBudget.setText(Integer.toString(selectedCategoryIntBudget));
         }
 
-            intent.getIntExtra("categoryId", 0);
+
+
+        final String oldName=editCategoryName.getText().toString();
+        final int oldBudget=Integer.parseInt(editCategoryBudget.getText().toString());
+
+
+
 
             editCategoryImageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -60,14 +68,37 @@ public class CategoriesEditActivity extends AppCompatActivity {
                 }
             });
 
+            editCategoryCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    finish();
+                }
+            }
+
+
+
+            );
+
 
             editCategorySave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
+
                     String newName = editCategoryName.getText().toString();
                     int newLimit = Integer.parseInt(editCategoryBudget.getText().toString());
-                    viewModel.editCategory("test", 25, (intent.getIntExtra("categoryId", 0)));
+                    int id =  intent.getIntExtra("categoryId", 0);
+                    String color = intent.getStringExtra("categoryColor");
+                    String date = intent.getStringExtra("categoryDate");
+                    int picture = intent.getIntExtra("categoryPicture",0);
+
+
+
+                    viewModel.editCategory(newName,id,newLimit,date,picture,color);
+                    if (! oldName.equals(newName) || newLimit !=oldBudget) {
+                        Toast.makeText(getBaseContext(),"The category has been edited", Toast.LENGTH_LONG).show();
+                    }
+                    finish();
                 }
 
 

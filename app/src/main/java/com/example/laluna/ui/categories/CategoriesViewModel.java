@@ -8,12 +8,20 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.laluna.Model.Category;
 import com.example.laluna.Model.DBHandler;
-import com.example.laluna.ui.analys.CategoryWithMoney;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ *  ViewModel class that is responsible for the communication with the data base handler
+ *  and the logic (related to Category fragment) behind the scene.
+ *
+ * @author Ali Alkhaled
+ * @author Deaa Khankan
+ */
 
 public class CategoriesViewModel extends ViewModel {
 
@@ -22,6 +30,12 @@ public class CategoriesViewModel extends ViewModel {
     private DBHandler db;
 
 
+    /**
+     * The method starts running once the class is running for the first time.
+     * The DBHandler data field is initialized here.
+     * It updates the data och sends it to the view
+     * @param context The android component that has to be connected to the database
+     */
     public void init(Context context) {
         db = new DBHandler(context);
         categoryMutableLive.postValue(db.getCategories(new Date()));
@@ -29,6 +43,7 @@ public class CategoriesViewModel extends ViewModel {
     }
 
 
+    //Helper
     private void updateCategories(){
         List<Category> cat = new ArrayList<>();
 
@@ -45,30 +60,67 @@ public class CategoriesViewModel extends ViewModel {
 
     }
 
+    /**
+     * A getter method
+     * @return List of category
+     */
     public List<Category> getCategoryList() {
         return categoryList;
     }
 
+    /**
+     * A getter method
+     * @return List of category (Live Data)
+     */
     public LiveData <List<Category>> getCategory() {
         return categoryMutableLive;
     }
 
+    /**
+     * A method for adding a new category from the view. (By user)
+     * It communicates with the data base
+     * @param name Name of the new category
+     * @param limit Limit of the new category
+     * @param pictureName picture code of the new category
+     * @param color color code of the new category
+     * @param dateCreation the date when the new category will be created
+     */
     public void addCategory(String name, int limit, int pictureName, String color, Date dateCreation) {
         db.addCategory(name, limit, pictureName, color, dateCreation);
+    }
 
+    /**
+     * A method for editing an existing category from the view. (By user)
+     * It communicates with the data base.
+     * @param name The new name of the category
+     * @param id The id of the category that will be edited
+     * @param budget The new limit of the category
+     * @param date The date of the category
+     * @param picture The new picture of the category
+     * @param color The new color of the category
+     */
+    public void editCategory(String name,int id, int budget,String date, int picture, String color){
+
+
+        Category category = new Category(id,budget,name,picture,color,stringToDate(date),null);
+        db.updateCategory(category);
+        updateCategories();
     }
 
 
-     public void editCategory(String name,int limit,int categoryId){
-        List <Category> categories = db.getCategories(new Date());
-         for(int i=0; i<db.getCategories(new Date()).size(); i++){
-             if(categories.get(i).get_id() == categoryId){
-                categories.get(i).set_name(name);
-                 categories.get(i).set_limit(limit);
-             }
-         }
-         categoryMutableLive.postValue(categories);
-     }
+    //Helper
+   private Date stringToDate(String dateString){
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            if(dateString != null) {
+                date = sdf.parse(dateString);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
 }
 

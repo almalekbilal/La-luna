@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.analys.categoryExpensesActivity.CategoryExpensesActivity"
+    tools:context=".ui.analysis.categoryExpensesActivity.CategoryExpensesActivity"
     android:background="#282B33">
 
 
@@ -73,10 +73,22 @@
 
     <ListView
         android:id="@+id/categoryExpensesListView"
-        android:layout_width="match_parent"
-        android:layout_height="306dp"
+        android:layout_width="412dp"
+        android:layout_height="417dp"
+        android:layout_alignTop="@+id/divider4"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="12dp"
         android:layout_marginBottom="-3dp" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="305dp"
+        android:background="#FFFFFF" />
+
 </RelativeLayout>

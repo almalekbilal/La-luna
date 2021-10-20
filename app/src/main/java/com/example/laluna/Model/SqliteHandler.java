@@ -549,20 +549,3 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     }
 }
 
-
-
-
- /*try {
-final Date stringToDate = new SimpleDateFormat("yyyy-mm-dd").parse(strDate);
-final String monthFormat = Integer.toString(stringToDate.getMonth());
-final String yearFormat = Integer.toString(stringToDate.getYear());
-
-        if (year.equals(yearFormat) && month.equals(monthFormat)) {
-        totalMoneySpent += cursor.getInt(2);
-
-        }
-        } catch (ParseException e) {
-        e.printStackTrace();
-        }
-
-  */

@@ -21,6 +21,7 @@ import com.example.laluna.Model.Category;
 import com.example.laluna.R;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -54,9 +55,18 @@ public class CategoriesFragment extends Fragment {
                         String selectedCategoryName = categoriesViewModel.getCategory().getValue().get(i).get_name();
                         int selectedCategoryBudget = categoriesViewModel.getCategory().getValue().get(i).get_limit();
                         int selectedCategoryId = categoriesViewModel.getCategory().getValue().get(i).get_id();
+                        String selectedCategoryDate = categoriesViewModel.getCategory().getValue().get(i).getCreationDate().toString();
+
+                        int selectedCategoryPicture= categoriesViewModel.getCategoryList().get(i).get_pictureName();
+
+                        String selectedCategoryColor= categoriesViewModel.getCategory().getValue().get(i).get_color();
                         intent.putExtra("categoryName",selectedCategoryName);
                         intent.putExtra("categoryBudget",selectedCategoryBudget);
                         intent.putExtra("categoryId",selectedCategoryId);
+
+                        intent.putExtra("categoryDate",selectedCategoryDate);
+                        intent.putExtra("categoryPicture",selectedCategoryPicture);
+                        intent.putExtra("categoryColor",selectedCategoryColor);
                         startActivity(intent);
 
                     }

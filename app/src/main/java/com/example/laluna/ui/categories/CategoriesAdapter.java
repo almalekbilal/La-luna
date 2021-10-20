@@ -19,6 +19,15 @@ import com.example.laluna.R;
 
 import java.util.List;
 
+/**
+ * Adapter class that controls the listview in the view.
+ * Data is taken by this class that will convert it into a list form
+ * This class inherits from the existing class ArrayAdapter
+ *
+ * @author Ali Alkhaled
+ * @author Deaa Khankan
+ *
+ */
 public class CategoriesAdapter extends ArrayAdapter<Category> {
 
 
@@ -41,12 +50,10 @@ public class CategoriesAdapter extends ArrayAdapter<Category> {
 
         categoryName.setText(singleCategoryItem.get_name());
         categoryBudget.setText(singleCategoryItem.get_limit()+"");
-     // categoryImage.setImageResource(singleCategoryItem.get_pictureName());
+        //categoryImage.setImageResource(singleCategoryItem.get_pictureName());
 
 
         return customCategory;
-
-
 
     }
 }
