@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * The adapter that controls the recyclerview in the view
- *Its take the data and place them in the recyclerview in a list form
+ * It takes the data and place in the recyclerview in a list form
  *
  *   @auther (Deaa Khankan)
  *   @auther (Ali Al Khaled)
@@ -37,7 +37,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
     }
 
     /**
-     * The methods is responsible for creating the view for an item
+     * The method is responsible for creating the view for an item
      * @param parent
      * @param viewType
      * @return ExpenseHolder object
@@ -51,7 +51,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
     }
 
     /**
-     * This is responsible for taking the data from the list and putting them into the view
+     * This is responsible for taking the data from the list and putting them in the view
      * @param holder
      * @param position
      */
