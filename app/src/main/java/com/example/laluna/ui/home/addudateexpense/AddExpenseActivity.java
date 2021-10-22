@@ -17,7 +17,8 @@ import com.example.laluna.R;
 
 public class AddExpenseActivity extends AppCompatActivity {
 
-    AddExpenseViewModel addExpenseViewModel;
+    private AddExpenseViewModel addExpenseViewModel;
+    private EditText expenseName, expenseValue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +28,9 @@ public class AddExpenseActivity extends AppCompatActivity {
                 ViewModelProviders.of(this).get(AddExpenseViewModel.class);
 
         addExpenseViewModel.init(this);
+
+        expenseName = findViewById(R.id.edt_expenseName);
+        expenseValue = findViewById(R.id.edt_expenseValue);
 
         final Spinner spn = findViewById(R.id.spn_category);
         final Context context = this;
@@ -58,9 +62,15 @@ public class AddExpenseActivity extends AppCompatActivity {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String expenseName = ((EditText)findViewById(R.id.edt_expenseName)).getText().toString();
-                int expenseValue = Integer.parseInt(((EditText)findViewById(R.id.edt_expenseValue)).getText().toString());
-                addExpenseViewModel.addExp(expenseName,expenseValue);
+                boolean editTextsAreFilled = expenseName.getText()!=null && expenseValue !=null;
+
+                if (editTextsAreFilled) {
+
+                    String expenseNameStr = expenseName.getText().toString();
+                    String expenseValueInt = expenseValue.getText().toString();
+
+                    addExpenseViewModel.addExp(expenseNameStr, Integer.valueOf(expenseValueInt));
+                }
                 finish();
             }
         });

@@ -44,7 +44,7 @@ public class CategoriesViewModel extends ViewModel {
 
 
     //Helper
-    public void updateCategories(){
+    private void updateCategories(){
         List<Category> cat = new ArrayList<>();
 
         List<Category> categories = db.getCategories(new Date());

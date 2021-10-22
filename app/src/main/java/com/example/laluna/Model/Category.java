@@ -78,7 +78,7 @@ public class Category implements Serializable {
     }
 
     /**
-     * The method compairs the id of two categories and return true if they match
+     * The method compares the id of two categories and return true if they match
      * @param o the other category
      * @return true if ids equals
      */

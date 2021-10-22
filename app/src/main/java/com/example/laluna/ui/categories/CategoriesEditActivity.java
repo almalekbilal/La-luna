@@ -14,7 +14,12 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.laluna.R;
 
-
+/**
+ * This class is responsible for showing information about the page where the user can edit or delete an existing category.
+ *
+ * @author Ali ALkhaled
+ * @author Deaa Khankan
+ */
 public class CategoriesEditActivity extends AppCompatActivity {
 
     private CategoriesViewModel viewModel;
@@ -24,6 +29,10 @@ public class CategoriesEditActivity extends AppCompatActivity {
     private Intent intent;
 
 
+    /**
+     * This method is responsible for showing all components i this activity and update them
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,50 +41,20 @@ public class CategoriesEditActivity extends AppCompatActivity {
         viewModel = ViewModelProviders.of(this).get(CategoriesViewModel.class);
         viewModel.init(this);
 
+
         initComponents();
         intent = getIntent();
-
         setDefaultNameForEditTexts();
 
 
         final String oldName = editTextName.getText().toString();
         final int oldLimit = Integer.parseInt(editTextLimit.getText().toString());
 
+        onClickDeleteButton();
+        onClickEditButton();
+        onClickCancelButton();
+        onClickSaveButton(oldName, oldLimit);
 
-
-        buttonDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deleteCategory();
-                Toast.makeText(getBaseContext(), "The category is deleted", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
-
-
-        imageButtonEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                enableEditCategory();
-            }
-        });
-
-
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-
-        buttonSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateSaveChanges(oldName, oldLimit);
-                finish();
-            }
-        });
 
     }
 
@@ -90,6 +69,7 @@ public class CategoriesEditActivity extends AppCompatActivity {
     }
 
 
+    // VIEW LOGIC METHODS
     private void deleteCategory() {
 
         int id = intent.getIntExtra("categoryId", 0);
@@ -133,5 +113,49 @@ public class CategoriesEditActivity extends AppCompatActivity {
         editTextName.setText(selectedCategoryName);
         editTextLimit.setText(selectedCategoryLimit);
     }
+
+
+    // ON CLICK METHODS
+
+    private void onClickDeleteButton(){
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteCategory();
+                Toast.makeText(getBaseContext(), "The category is deleted", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+    }
+
+    private void onClickEditButton(){
+        imageButtonEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                enableEditCategory();
+            }
+        });
+    }
+
+    private void onClickCancelButton(){
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
+
+    private void onClickSaveButton(final String oldName, final int oldLimit){
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateSaveChanges(oldName, oldLimit);
+                finish();
+            }
+        });
+    }
+
 
 }

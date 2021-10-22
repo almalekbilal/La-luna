@@ -15,7 +15,11 @@ import com.example.laluna.R;
 
 import java.util.Date;
 
-
+/**
+ * This class is responsible for showing information about the page where the user can add a new category.
+ *
+ * @author Ali Alkhaled
+ */
 
 public class CategoriesAddActivity extends AppCompatActivity {
 
@@ -33,13 +37,9 @@ public class CategoriesAddActivity extends AppCompatActivity {
 
 
         viewModel.init(this);
+        initComponents();
 
 
-
-        addCategoryName = findViewById(R.id.addCategoryName);
-        addCategoryBudget = findViewById(R.id.addCategoryBudget);
-        addCategoryAdd = findViewById(R.id.addCategoryAdd);
-        addCategoryCancel = findViewById(R.id.addCategoryCancel);
 
 
 
@@ -71,5 +71,13 @@ public class CategoriesAddActivity extends AppCompatActivity {
 
             });
 
+    }
+
+    private void initComponents() {
+
+        addCategoryName = findViewById(R.id.addCategoryName);
+        addCategoryBudget = findViewById(R.id.addCategoryBudget);
+        addCategoryAdd = findViewById(R.id.addCategoryAdd);
+        addCategoryCancel = findViewById(R.id.addCategoryCancel);
     }
 }
