@@ -74,7 +74,7 @@ public class GridViewAdapter extends ArrayAdapter {
         spent = getSpent(i);
         total = getTotal(i);
         showCategoryNameAndSpentMoney(i);
-        makeCategoryPie(categoryPieCh);
+        makeCategoryPie(categoryPieCh,i);
 
         return view;
     }
@@ -129,7 +129,7 @@ public class GridViewAdapter extends ArrayAdapter {
      * The method makes the circle diagram for the category and puts the information in it
      * @param piechart
      */
-    private void makeCategoryPie(PieChart piechart) {
+    private void makeCategoryPie(PieChart piechart, int i) {
         piechart.setUsePercentValues(true);
 
         piechart.setHoleRadius(85f);
@@ -146,7 +146,9 @@ public class GridViewAdapter extends ArrayAdapter {
         PieData pieData = new PieData(dataSet);
 
         List<Integer> colors = new ArrayList<>();
-        colors.add(Color.rgb(3, 169, 241));
+        colors.add(Integer.parseInt(categoryWithMoneyList.get(i).category.get_color()));
+        //colors.add(Color.rgb(3, 169, 241));
+        //colors.add(Color.parseColor(categoryWithMoneyList.get(i).category.get_color()));
         colors.add(Color.rgb(203, 204, 196));
 
 

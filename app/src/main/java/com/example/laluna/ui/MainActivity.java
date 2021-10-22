@@ -1,5 +1,6 @@
 package com.example.laluna.ui;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.example.laluna.Model.Category;
@@ -47,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
         this.deleteDatabase("laluna.db");
 
 
-        Category c1 = db.addCategory("Food",3000,R.drawable.categorycar,null,new Date(121,9,2));
+        Category c1 = db.addCategory("Food",3000,R.drawable.categorycar, Integer.toString(Color.MAGENTA) ,new Date(121,9,2));
 
-        Category c18 = db.addCategory("Car",1000,R.drawable.food,null,new Date(121,8,1));
-        Category c28 = db.addCategory("Drinks",3000,R.drawable.ic_home_black_24dp,null,new Date(121,8,1));
+        Category c18 = db.addCategory("Car",1000,R.drawable.food,Integer.toString(Color.rgb(3, 169, 241)),new Date(121,8,1));
+        Category c28 = db.addCategory("Drinks",3000,R.drawable.ic_home_black_24dp,Integer.toString(Color.rgb(9, 249, 191)),new Date(121,8,1));
 
 
         db.addExpense("Pizza", 80,new Date(),c1);

@@ -132,6 +132,8 @@ public class AnalysisFragment extends Fragment {
         int selectedCategoryId= analysisViewModel.getCategories().getValue().get(i).category.get_id();
         int selectedCategoryMonth = analysisViewModel.getDate().getValue().getMonth();
         int selectedCategoryYear = analysisViewModel.getDate().getValue().getYear();
+        int selectedCategoryColor = Integer.parseInt(analysisViewModel.getCategories().getValue().get(i).category.get_color());
+
 
 
         intent.putExtra("spent",selectedSpent);
@@ -140,6 +142,7 @@ public class AnalysisFragment extends Fragment {
         intent.putExtra("id",selectedCategoryId);
         intent.putExtra("categoryMonth",selectedCategoryMonth);
         intent.putExtra("categoryYear",selectedCategoryYear);
+        intent.putExtra("categoryColor",selectedCategoryColor);
     }
 
 
@@ -259,6 +262,12 @@ public class AnalysisFragment extends Fragment {
         colors.add(Color.rgb(228, 44, 100));
         colors.add(Color.rgb(203, 204, 196));
 
+        //colors.add(getColorByName(analysisViewModel.getCategories().getValue().get(i).category.get_color()));
+        //colors.add(Color.rgb(203, 204, 196));
+
+
+
+
 
         dataSet.setColors(colors);
         dataSet.setValueTextSize(0);
@@ -283,5 +292,21 @@ public class AnalysisFragment extends Fragment {
         //Log.i("PieInfo", value.get(0).getValue() + "");
 
     }
+
+
+
+   /* public int getColorByName(String name) {
+        int colorId = 0;
+
+        try {
+            Class res = R.color.class;
+            Field field = res.getField(name);
+            colorId = field.getInt(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return colorId;
+    }*/
 
 }
