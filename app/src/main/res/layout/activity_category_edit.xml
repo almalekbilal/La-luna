@@ -19,8 +19,7 @@
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#ffffff"
-        android:textSize="24sp"
-        >
+        android:textSize="24sp">
 
         >>
 
@@ -45,8 +44,8 @@
             android:layout_marginRight="20dp"
             android:layout_weight="2"
             android:text="Name"
-            android:textSize="20sp"
-            android:textColor="#ffffff">
+            android:textColor="#ffffff"
+            android:textSize="20sp">
 
         </TextView>
 
@@ -55,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:enabled="false"
             android:minHeight="48dp"
             android:textColor="#ffffff">
 
@@ -78,8 +78,8 @@
             android:layout_marginRight="20dp"
             android:layout_weight="2"
             android:text="Budget"
-            android:textSize="20sp"
-            android:textColor="#ffffff">>
+            android:textColor="#ffffff"
+            android:textSize="20sp">>
 
         </TextView>
 
@@ -89,9 +89,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:enabled="false"
             android:inputType="numberSigned"
             android:minHeight="48dp"
-            android:textColor="#ffffff"/>
+            android:textColor="#ffffff" />
 
 
     </LinearLayout>
@@ -121,8 +122,28 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/holo_red_light"
-            android:text="Cancle"
+            android:text="Cancel"
             android:textSize="20sp">>
+
+        </Button>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="25dp">
+
+        <Button
+            android:id="@+id/editCategoryDelete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#B80707"
+            android:text="Delete"
+            android:textSize="20sp">
+
 
         </Button>
 

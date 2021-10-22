@@ -29,13 +29,6 @@ public class CategoriesFragment extends Fragment {
 
 
     private CategoriesViewModel categoriesViewModel;
-// Food
-// Clothes
-// House
-// Entertainemt
-// Health
-// Other
-
 
     private Button addCategoryButton;
 
