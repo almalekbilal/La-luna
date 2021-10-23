@@ -43,21 +43,6 @@ public class CategoriesViewModel extends ViewModel {
     }
 
 
-    //Helper
-    private void updateCategories(){
-        List<Category> cat = new ArrayList<>();
-
-        List<Category> categories = db.getCategories(new Date());
-
-        for(Category category : categories){
-            cat.add(category);
-
-        }
-
-        categoryMutableLive.postValue(cat);
-
-    }
-
     /**
      * A getter method
      * @return List of category
@@ -110,17 +95,39 @@ public class CategoriesViewModel extends ViewModel {
      * A method for deleting an existing category (communicates with the view).
      * @param categoryId ID of the category that will be deleted
      */
-    public void deleteCategory(int categoryId) {
-        List<Category> categoryList = categoryMutableLive.getValue();
+    public boolean deleteCategory(int categoryId) {
+        if (!isDefaultCategory(categoryId)) {
 
-        for (Category category : categoryList) {
-            if (category.get_id() == categoryId) {
-                db.deactivateCategory(category, new Date());
+            List<Category> categoryList = categoryMutableLive.getValue();
+
+            for (Category category : categoryList) {
+                if (category.get_id() == categoryId) {
+                    db.deactivateCategory(category, new Date());
+                    updateCategories();
+                    return true;
+                }
             }
         }
-        updateCategories();
+
+        return false;
     }
 
+
+
+    //Helper
+    private void updateCategories(){
+        List<Category> cat = new ArrayList<>();
+
+        List<Category> categories = db.getCategories(new Date());
+
+        for(Category category : categories){
+            cat.add(category);
+
+        }
+
+        categoryMutableLive.postValue(cat);
+
+    }
 
     //Helper
    private Date stringToDate(String dateString){
@@ -135,6 +142,15 @@ public class CategoriesViewModel extends ViewModel {
             e.printStackTrace();
         }
         return date;
+    }
+
+    /**
+     * A method that checks if a certain category saved in the data base is default by ID
+     * @param categoryId The id of the category.
+     * @return true if the category is  default
+     */
+    public boolean isDefaultCategory(int categoryId) {
+        return categoryId<7;
     }
 }
 

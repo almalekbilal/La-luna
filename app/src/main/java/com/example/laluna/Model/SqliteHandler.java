@@ -449,6 +449,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     }
 
 
+
     /**
      * A method to deactivate a category
      * @param category Category that will be deactivated

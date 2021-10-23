@@ -20,6 +20,7 @@ import java.util.Date;
  * This class is responsible for showing information about the page where the user can add a new category.
  *
  * @author Ali Alkhaled
+ * @author Deaa Khankan
  */
 
 public class CategoriesAddActivity extends AppCompatActivity {
@@ -34,28 +35,18 @@ public class CategoriesAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_add);
 
-        viewModel = ViewModelProviders.of(this).get(CategoriesViewModel.class);
-        viewModel.init(this);
         initComponents();
 
-
-
-        //On Click Methods
         onClickAddCategory();
-
-        addCategoryCancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                  finish();
-
-                }
-            });
-
+        onClickCancel();
 
 
     }
 
     private void initComponents() {
+
+        viewModel = ViewModelProviders.of(this).get(CategoriesViewModel.class);
+        viewModel.init(this);
 
         addCategoryName = findViewById(R.id.addCategoryName);
         addCategoryBudget = findViewById(R.id.addCategoryBudget);
@@ -84,6 +75,17 @@ public class CategoriesAddActivity extends AppCompatActivity {
 
                     finish();
                 }
+            }
+        });
+
+    }
+
+    private void onClickCancel() {
+        addCategoryCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+
             }
         });
 

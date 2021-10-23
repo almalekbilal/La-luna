@@ -13,6 +13,12 @@ import com.example.laluna.Model.DBHandler;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * A ViewModel class that makes it possible for models and view (AddExpense view) to communicate with each other indirectly
+ *
+ * @author Bilal Al Malek
+ * @author Ali Malla
+ */
 public class AddExpenseViewModel extends ViewModel {
     private DBHandler dbHandler;
     private Context context;   /// whyyyyy
@@ -24,6 +30,10 @@ public class AddExpenseViewModel extends ViewModel {
 
     }
 
+    /**
+     * This method is responsible for initializing all data fields
+     * @param context
+     */
     public void init(Context context){
         this.context = context;
         dbHandler = new DBHandler(context);
@@ -31,12 +41,21 @@ public class AddExpenseViewModel extends ViewModel {
         categoriesNames.postValue(getCategoriesNames());
     }
 
-    //must modified
+
+    /**
+     * A method for adding a new expense. It communicates with the database.
+     * @param name The name of the new expense
+     * @param value The value of the new expense
+     */
     public void addExp(String name, int value){
         dbHandler.addExpense(name,value,new Date(),selectedCategory);
         Toast.makeText(context,"Expense is added", Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * A setter method
+     * @param position
+     */
     public void setSelectedCategory(int position){
         selectedCategory = categories.get(position);
     }
@@ -54,6 +73,10 @@ public class AddExpenseViewModel extends ViewModel {
         return names;
     }
 
+    /**
+     * A getter method
+     * @return LiveData that contains an array of strings (categories names)
+     */
     public LiveData<String[]> getcategoriesNames(){return categoriesNames;}
 
 }

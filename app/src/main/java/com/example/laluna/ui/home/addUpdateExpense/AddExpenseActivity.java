@@ -15,6 +15,13 @@ import android.widget.Spinner;
 
 import com.example.laluna.R;
 
+/**
+ * A class that is responsible for the view of the activity where the user can add a new expense
+ *
+ * @author Bilal Al Malek
+ * @author Ali Malla
+ */
+
 public class AddExpenseActivity extends AppCompatActivity {
 
     private AddExpenseViewModel addExpenseViewModel;
