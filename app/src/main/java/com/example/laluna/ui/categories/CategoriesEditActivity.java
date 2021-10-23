@@ -31,8 +31,7 @@ public class CategoriesEditActivity extends AppCompatActivity {
 
     /**
      * This method is responsible for showing all components i this activity and update them
-     * It initializes all the data fields and the components in this class
-     * It updates and activates all the components
+     * Through it all  data fields and components in this class are initialized, activated and updated
      * @param savedInstanceState
      */
     @Override

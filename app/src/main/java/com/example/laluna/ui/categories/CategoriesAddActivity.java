@@ -30,6 +30,11 @@ public class CategoriesAddActivity extends AppCompatActivity {
     private Button addCategoryAdd, addCategoryCancel;
 
 
+    /**
+     * This method is responsible for showing all components i this activity and update them
+     * Through it all data fields and components in this class are initialized, activated and updated
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
