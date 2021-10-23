@@ -1,0 +1,45 @@
+#Meeting Agenda 
+
+Group: La Luna 
+
+Date: 17/10/2021 
+
+Chair: Ali Alkhaled
+
+Participants: Ali Malla, Ali Alkhaled, Bilal Al Malek, Deaa Khankan 
+
+ 
+
+##Objectives 
+
+-Vi behöver diskutera vad vi har kommit fram till med andras kod.
+
+-Vi behöver skriva färdigt en feedbacktext (Peer review) som ska lämnas in.
+
+
+ 
+
+##Reports 
+
+I förra mötet diskuterade vi tester och code bugs och fixade till vissa av dem.
+ 
+
+##Discussion items 
+
+-Vad som är bra med deras kod.
+
+-Vad det är som kan förbättras.
+
+
+
+
+
+##Outcomes and assignments 
+
+-Vi tog fram gruppens samtliga tankar och skrev därmed färdigt inlämningen.
+
+
+
+##Wrap up 
+
+I nästa möte kommer vi att jobba med refactoring och förbättring av koden. Det ska vara den 22:e oktober 2021.
