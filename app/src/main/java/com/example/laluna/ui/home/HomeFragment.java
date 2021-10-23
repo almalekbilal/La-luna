@@ -19,8 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.laluna.Model.Expense;
 import com.example.laluna.R;
-import com.example.laluna.ui.home.addudateexpense.AddExpenseActivity;
-import com.example.laluna.ui.home.addudateexpense.UpdateExpenseActivity;
+import com.example.laluna.ui.home.addUpdateExpense.AddExpenseActivity;
+import com.example.laluna.ui.home.addUpdateExpense.UpdateExpenseActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;

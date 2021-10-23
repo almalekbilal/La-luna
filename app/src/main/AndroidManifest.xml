@@ -13,10 +13,10 @@
             android:name=".ui.analysis.categoryExpensesActivity.CategoryExpensesActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.home.addudateexpense.UpdateExpenseActivity"
+            android:name=".ui.home.addUpdateExpense.UpdateExpenseActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.home.addudateexpense.AddExpenseActivity"
+            android:name=".ui.home.addUpdateExpense.AddExpenseActivity"
             android:exported="false" />
         <activity android:name=".ui.categories.CategoriesAddActivity" />
         <activity android:name=".ui.categories.CategoriesEditActivity" />

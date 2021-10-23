@@ -166,6 +166,10 @@ public class DBHandler {
 
         return db.getTotalBudgetDB(date);
     }
+
+    public boolean thereIsCategories(Date date){
+        return db.thereIsCategoriesDB(date);
+    }
 }
 
 

@@ -1,4 +1,4 @@
-package com.example.laluna.ui.home.addudateexpense;
+package com.example.laluna.ui.home.addUpdateExpense;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -13,25 +13,38 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.laluna.Model.Expense;
 import com.example.laluna.R;
 
-public class AddExpenseActivity extends AppCompatActivity {
+public class UpdateExpenseActivity extends AppCompatActivity {
 
-    AddExpenseViewModel addExpenseViewModel;
+    UpdateExpenseViewModel updateExpenseViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_update_expense);
 
-        addExpenseViewModel =
-                ViewModelProviders.of(this).get(AddExpenseViewModel.class);
+        updateExpenseViewModel = ViewModelProviders.of(this).get(UpdateExpenseViewModel.class);
 
-        addExpenseViewModel.init(this);
+
+        Bundle data = getIntent().getExtras();
+        Expense e = (Expense) data.getSerializable("expense");
+
+        updateExpenseViewModel.init(this, e);
+
+
+        EditText ExpenseName = findViewById(R.id.edt_expenseName);
+        EditText ExpenseValue = findViewById(R.id.edt_expenseValue);
+
+
+
+        ExpenseName.setText(e.get_name());
+        ExpenseValue.setText(String.valueOf(e.get_value()));
 
         final Spinner spn = findViewById(R.id.spn_category);
         final Context context = this;
 
-        addExpenseViewModel.getcategoriesNames().observe(this, new Observer<String[]>() {
+        updateExpenseViewModel.getcategoriesNames().observe(this, new Observer<String[]>() {
             @Override
             public void onChanged(String[] strings) {
                 ArrayAdapter<CharSequence> ad  = new ArrayAdapter(context, android.R.layout.simple_spinner_item, strings);
@@ -41,11 +54,10 @@ public class AddExpenseActivity extends AppCompatActivity {
                 spn.setAdapter(ad);
             }
         });
-
         spn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                addExpenseViewModel.setSelectedCategory(position);
+                updateExpenseViewModel.setSelectedCategory(position);
             }
 
             @Override
@@ -54,15 +66,20 @@ public class AddExpenseActivity extends AppCompatActivity {
             }
         });
 
-        Button okButton = findViewById(R.id.btn_ok);
-        okButton.setOnClickListener(new View.OnClickListener() {
+        Button ok = findViewById(R.id.btn_ok);
+        ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String expenseName = ((EditText)findViewById(R.id.edt_expenseName)).getText().toString();
-                int expenseValue = Integer.parseInt(((EditText)findViewById(R.id.edt_expenseValue)).getText().toString());
-                addExpenseViewModel.addExp(expenseName,expenseValue);
+                try {
+                    String expenseName = ((EditText) findViewById(R.id.edt_expenseName)).getText().toString();
+                    int expenseValue = Integer.parseInt(((EditText) findViewById(R.id.edt_expenseValue)).getText().toString());
+                    updateExpenseViewModel.updateExp(expenseName, expenseValue);
+                }catch (Exception e){
+
+                }
                 finish();
             }
         });
+
     }
 }

@@ -64,7 +64,6 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
         holder.categoryImage.setImageResource(expenses.get(position).get_category().get_pictureName());
         listener.onScroll(position);
 
-        Log.i("Roro",expenses.size()+"");
     }
 
     @Override
@@ -95,7 +94,6 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
 
         @Override
         public void onClick(View v) {
-            Log.e("Listener", "Jag körs");
             listener.onExpenseClick(expenses.get(getAdapterPosition()));
         }
     }

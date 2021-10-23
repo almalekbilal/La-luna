@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class HomeViewModel extends ViewModel {
 
-    int start = 0;
+    int startExpensesIndex = 0;
     private MutableLiveData<List<Integer>> totalAndSpent = new MutableLiveData<>();
     private MutableLiveData<List<Expense>> expenses = new MutableLiveData<>();
     private DBHandler dbHandler;
@@ -41,28 +41,56 @@ public class HomeViewModel extends ViewModel {
         dbHandler = new DBHandler(context);
 
         List<Integer> ts = new ArrayList<>();
-        ts.add(dbHandler.getTotalMoneySpent(new Date()));
-        ts.add(dbHandler.getTotalBudget(new Date()));
+        Date date = new Date();
+        date.setDate(1);
+        ts.add(dbHandler.getTotalMoneySpent(date));
+        ts.add(dbHandler.getTotalBudget(date));
 
         totalAndSpent.postValue(ts);
 
-        start = 0;
+        startExpensesIndex = 0;
+        checkPrevious(date);
         sendExpenses();
+
+
     }
 
     /**
      * The gets the new expenses needed from the data base handler and send it to the view
      */
     private void sendExpenses(){
-        List<Expense> ex = dbHandler.getExpenses(start, start+10);
+        List<Expense> ex = dbHandler.getExpenses(startExpensesIndex, startExpensesIndex +10);
 
-        start = start + 10;
+        startExpensesIndex = startExpensesIndex + 10;
         expenses.postValue(ex);
 
     }
 
+    private void checkPrevious(Date date){
+        int totalMoneySpend = dbHandler.getTotalMoneySpent(date);
+        if(totalMoneySpend == 0){
+            decrementMonth(date);
+            if(dbHandler.thereIsCategories(date) && dbHandler.getTotalBudget(date) == 0) {
+                dbHandler.setCategoriesPreviousLimits(date);
+            }
+        }
+    }
+
+    private void decrementMonth(Date date){
+        int month = date.getMonth();
+
+        if(month == 0){
+            int year = date.getYear() -1;
+            date.setMonth(11);
+            date.setYear(year);
+        }else{
+            date.setMonth(month - 1);
+        }
+
+    }
+
     public void getMoreExpenses(int position){
-        if(position+1 == start){
+        if(position+1 == startExpensesIndex){
             sendExpenses();
         }
     }

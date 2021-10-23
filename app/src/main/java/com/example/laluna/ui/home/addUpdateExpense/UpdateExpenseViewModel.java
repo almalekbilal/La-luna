@@ -1,4 +1,4 @@
-package com.example.laluna.ui.home.addudateexpense;
+package com.example.laluna.ui.home.addUpdateExpense;
 
 import android.content.Context;
 
@@ -37,10 +37,7 @@ public class UpdateExpenseViewModel extends ViewModel {
     private String[] getCategoriesNames(){
 
         categories = dbHandler.getCategories(new Date());
-        if(categories.contains(thisExpense.get_category())){
-            categories.remove(thisExpense.get_category());
-        }
-        categories.add(0,thisExpense.get_category());
+        makeExpenseCategoryAsFirstCategory();
 
         selectedCategory = categories.get(0);
         String [] names = new String[categories.size()];
@@ -52,6 +49,13 @@ public class UpdateExpenseViewModel extends ViewModel {
         return names;
     }
 
+
+    private void makeExpenseCategoryAsFirstCategory(){
+        if(categories.contains(thisExpense.get_category())){
+            categories.remove(thisExpense.get_category());
+        }
+        categories.add(0,thisExpense.get_category());
+    }
     public void setSelectedCategory(int position){
         selectedCategory = categories.get(position);
     }

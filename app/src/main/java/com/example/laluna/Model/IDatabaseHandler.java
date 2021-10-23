@@ -78,4 +78,6 @@ public interface IDatabaseHandler {
     int getCategoryLimitDB(Date date, Category category);
 
     int getTotalBudgetDB(Date date);
+
+    boolean thereIsCategoriesDB(Date date);
 }

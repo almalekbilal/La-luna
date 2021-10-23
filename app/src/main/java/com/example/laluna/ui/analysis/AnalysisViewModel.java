@@ -42,8 +42,10 @@ public class AnalysisViewModel extends ViewModel {
     public void init(Context context){
         dbHandler = new DBHandler(context);
 
-        viewMonthDate.postValue(new Date());
-        viewMonthDate.setValue(new Date());
+        Date date = new Date();
+        date.setDate(1);
+        viewMonthDate.postValue(date);
+        viewMonthDate.setValue(date);
 
         categoriesLiveData = new MutableLiveData<>();
 
@@ -93,11 +95,12 @@ public class AnalysisViewModel extends ViewModel {
     public void leftArrowClick(){
         decrementMonth();
 
-        if(dbHandler.getCategories(viewMonthDate.getValue()).size() == 0){
-            incrementMonth();
-        }else {
+        if(dbHandler.thereIsCategories(viewMonthDate.getValue())){
 
             updateView();
+        }else {
+
+            incrementMonth();
         }
     }
 
@@ -109,10 +112,10 @@ public class AnalysisViewModel extends ViewModel {
 
         incrementMonth();
 
-        if(dbHandler.getCategories(viewMonthDate.getValue()).size() == 0){
-            decrementMonth();
-        }else {
+        if(dbHandler.thereIsCategories(viewMonthDate.getValue())){
             updateView();
+        }else {
+            decrementMonth();
         }
     }
 
@@ -122,8 +125,7 @@ public class AnalysisViewModel extends ViewModel {
 
     private void incrementMonth(){
         int month = viewMonthDate.getValue().getMonth();
-        Date date = new Date();
-        if(month == 12){
+        if(month == 11){
             int year = viewMonthDate.getValue().getYear() +1;
             viewMonthDate.getValue().setMonth(0);
             viewMonthDate.getValue().setYear(year);

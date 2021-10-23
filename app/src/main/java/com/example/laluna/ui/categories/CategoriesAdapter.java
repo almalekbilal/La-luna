@@ -50,7 +50,7 @@ public class CategoriesAdapter extends ArrayAdapter<Category> {
 
         categoryName.setText(singleCategoryItem.get_name());
         categoryBudget.setText(singleCategoryItem.get_limit()+"");
-        //categoryImage.setImageResource(singleCategoryItem.get_pictureName());
+        categoryImage.setImageResource(singleCategoryItem.get_pictureName());
 
 
         return customCategory;

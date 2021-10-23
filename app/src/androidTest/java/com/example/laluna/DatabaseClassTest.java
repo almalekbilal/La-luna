@@ -516,6 +516,19 @@ public class DatabaseClassTest {
         assertEquals(true, limitsChanged);
     }
 
+    @Test
+    public void isThereCategoriesTest(){
+        Category food = db.addCategory("Food",1500,R.drawable.food,null,new Date(121,7,1));
+        Category clothes = db.addCategory("Clothes",3000,R.drawable.clothes,null,new Date(121,7,1));
+        Category house = db.addCategory("House",2000,R.drawable.home,null,new Date(121,7,1));
+        Category entertainment = db.addCategory("Entertainment",3000,R.drawable.entertainment,null,new Date(121,7,1));
+        Category health = db.addCategory("Health",1000,R.drawable.health,null,new Date(121,7,1));
+        Category other = db.addCategory("Other",3000,R.drawable.other,null,new Date(121,7,1));
+
+
+        assertEquals(true, db.thereIsCategories(new Date(121,7,1)));
+        assertEquals(false, db.thereIsCategories(new Date(121,6,1)));
+    }
 
 
     /*@Test
