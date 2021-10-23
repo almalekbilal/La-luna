@@ -44,7 +44,7 @@ public class CategoriesFragment extends Fragment {
 
 
     /**
-     * Updating data  when resuming to the fragment
+     * Updating data directly when resuming to the fragment
      *
      */
     @Override
