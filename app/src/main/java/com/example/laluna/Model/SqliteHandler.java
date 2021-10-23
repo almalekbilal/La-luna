@@ -174,8 +174,9 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     public List<Category> getCategoriesDB(Date date){
         List <Category> categories = new ArrayList<>();
 
-        date.setDate(1);
+
         String query = "SELECT * FROM " + TABLE_CATEGORY + " ;";
+
         SQLiteDatabase db = getWritableDatabase();
 
         Cursor cursor = db.rawQuery(query, null);

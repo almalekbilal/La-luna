@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *  ViewModel class that is responsible for the communication with the data base handler
+ *  Category viewModel class that is responsible for the communication with the data base handler
  *  and the logic (related to Category fragment) behind the scene.
  *
  * @author Ali Alkhaled
@@ -50,9 +50,7 @@ public class CategoriesViewModel extends ViewModel {
         List<Category> categories = db.getCategories(new Date());
 
         for(Category category : categories){
-            cat.add(new Category(category.get_id(),category.get_limit(),category.get_name(),
-                    category.get_pictureName(),category.get_color(),category.getCreationDate(),
-                    category.getDestroyedDate()));
+            cat.add(category);
 
         }
 
@@ -68,6 +66,7 @@ public class CategoriesViewModel extends ViewModel {
         return categoryList;
     }
 
+
     /**
      * A getter method
      * @return List of category (Live Data)
@@ -77,7 +76,7 @@ public class CategoriesViewModel extends ViewModel {
     }
 
     /**
-     * A method for adding a new category from the view. (By user)
+     * A method for adding a new category (communicates with the view).
      * It communicates with the data base
      * @param name Name of the new category
      * @param limit Limit of the new category
@@ -90,7 +89,7 @@ public class CategoriesViewModel extends ViewModel {
     }
 
     /**
-     * A method for editing an existing category from the view. (By user)
+     * A method for editing an existing category. (communicates with the view).
      * It communicates with the data base.
      * @param name The new name of the category
      * @param id The id of the category that will be edited
@@ -101,9 +100,24 @@ public class CategoriesViewModel extends ViewModel {
      */
     public void editCategory(String name,int id, int budget,String date, int picture, String color){
 
-
         Category category = new Category(id,budget,name,picture,color,stringToDate(date),null);
         db.updateCategory(category);
+        updateCategories();
+    }
+
+
+    /**
+     * A method for deleting an existing category (communicates with the view).
+     * @param categoryId ID of the category that will be deleted
+     */
+    public void deleteCategory(int categoryId) {
+        List<Category> categoryList = categoryMutableLive.getValue();
+
+        for (Category category : categoryList) {
+            if (category.get_id() == categoryId) {
+                db.deactivateCategory(category, new Date());
+            }
+        }
         updateCategories();
     }
 
@@ -123,4 +137,5 @@ public class CategoriesViewModel extends ViewModel {
         return date;
     }
 }
+
 

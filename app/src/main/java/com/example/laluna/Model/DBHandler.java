@@ -13,7 +13,7 @@ import java.util.List;
  * @auther (Bilal Al Malek)
  * @auther (Deaa Khankan)
  * @auther (Ali Malla)
- * @auther (Ali Al Khaled)
+ * @auther (Ali AlKhaled)
  */
 public class DBHandler {
 
@@ -126,8 +126,8 @@ public class DBHandler {
     /**
      * A method to add a new category to the database.
      */
-    public Category addCategory(String name, int limit, int pitureName,String color, Date creation){
-        return db.addCategoryDB(name,limit,pitureName,color,creation);
+    public Category addCategory(String name, int limit, int pictureName,String color, Date creation){
+        return db.addCategoryDB(name,limit,pictureName,color,creation);
     }
 
 

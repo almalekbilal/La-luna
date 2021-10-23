@@ -17,7 +17,8 @@ import com.example.laluna.R;
 
 public class AddExpenseActivity extends AppCompatActivity {
 
-    AddExpenseViewModel addExpenseViewModel;
+    private AddExpenseViewModel addExpenseViewModel;
+    private EditText expenseName, expenseValue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +28,9 @@ public class AddExpenseActivity extends AppCompatActivity {
                 ViewModelProviders.of(this).get(AddExpenseViewModel.class);
 
         addExpenseViewModel.init(this);
+
+        expenseName = findViewById(R.id.edt_expenseName);
+        expenseValue = findViewById(R.id.edt_expenseValue);
 
         final Spinner spn = findViewById(R.id.spn_category);
         final Context context = this;

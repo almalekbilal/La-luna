@@ -221,6 +221,9 @@ public class CategoryExpensesActivity extends AppCompatActivity {
 
     }
 
+    private int getCategoryColor(){
+       return intent.getIntExtra("categoryColor",0);
+    }
 
     /**
      * A method to make a pie chart according to specific criteria for category to show spent category money
@@ -243,7 +246,7 @@ public class CategoryExpensesActivity extends AppCompatActivity {
         PieData pieData = new PieData(dataSet);
 
         List<Integer> colors = new ArrayList<>();
-        colors.add(Color.rgb(3, 169, 241));
+        colors.add(getCategoryColor());
         colors.add(Color.rgb(203, 204, 196));
 
 

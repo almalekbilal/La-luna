@@ -15,7 +15,7 @@ import java.util.List;
 
 public class AddExpenseViewModel extends ViewModel {
     private DBHandler dbHandler;
-    private Context context;
+    private Context context;   /// whyyyyy
     private List<Category> categories;
     private Category selectedCategory;
 
@@ -31,6 +31,7 @@ public class AddExpenseViewModel extends ViewModel {
         categoriesNames.postValue(getCategoriesNames());
     }
 
+    //must modified
     public void addExp(String name, int value){
         dbHandler.addExpense(name,value,new Date(),selectedCategory);
         Toast.makeText(context,"Expense is added", Toast.LENGTH_LONG).show();

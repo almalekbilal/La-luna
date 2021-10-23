@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -21,7 +20,6 @@ import com.example.laluna.Model.Category;
 import com.example.laluna.R;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -29,15 +27,12 @@ public class CategoriesFragment extends Fragment {
 
 
     private CategoriesViewModel categoriesViewModel;
-// Food
-// Clothes
-// House
-// Entertainemt
-// Health
-// Other
+    private CategoriesAdapter categoryAdapter;
 
+    private View root;
 
     private Button addCategoryButton;
+    private ListView categoryListView;
 
 
     @Override
@@ -50,50 +45,38 @@ public class CategoriesFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+        initComponents(inflater, container);
+
+        onClickCategoryListView();
+        onClickAddButton();
+
+        updateViewOfListView();
+
+
+        return root;
+
+    }
+
+    private void initComponents(@NonNull LayoutInflater inflater, ViewGroup container) {
+
+        root = inflater.inflate(R.layout.fragment_categories, container, false);
         categoriesViewModel =
                 ViewModelProviders.of(this).get(CategoriesViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_categories, container, false);
-
-        final CategoriesAdapter categoryAdapter = new CategoriesAdapter
-                (getContext(), categoriesViewModel.getCategoryList());
-        ListView categoryListView = (ListView)   root.findViewById(R.id.categoryListView);
-        categoryListView.setAdapter(categoryAdapter);
 
         categoriesViewModel.init(getContext());
 
-        categoryListView.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                        if(categoriesViewModel.getCategory().getValue().get(i).get_id() > 6) {
-                            Intent intent = new Intent(getContext(), CategoriesEditActivity.class);
-                            String selectedCategoryName = categoriesViewModel.getCategory().getValue().get(i).get_name();
-                            int selectedCategoryBudget = categoriesViewModel.getCategory().getValue().get(i).get_limit();
-                            int selectedCategoryId = categoriesViewModel.getCategory().getValue().get(i).get_id();
-                            String selectedCategoryDate = categoriesViewModel.getCategory().getValue().get(i).getCreationDate().toString();
+        categoryListView = root.findViewById(R.id.categoryListView);
+        addCategoryButton = root.findViewById(R.id.addCategoryButton);
 
-                            int selectedCategoryPicture = categoriesViewModel.getCategoryList().get(i).get_pictureName();
+        categoryAdapter = new CategoriesAdapter(getContext(), categoriesViewModel.getCategoryList());
+        categoryListView.setAdapter(categoryAdapter);
 
-                            String selectedCategoryColor = categoriesViewModel.getCategory().getValue().get(i).get_color();
-                            intent.putExtra("categoryName", selectedCategoryName);
-                            intent.putExtra("categoryBudget", selectedCategoryBudget);
-                            intent.putExtra("categoryId", selectedCategoryId);
 
-                            intent.putExtra("categoryDate", selectedCategoryDate);
-                            intent.putExtra("categoryPicture", selectedCategoryPicture);
-                            intent.putExtra("categoryColor", selectedCategoryColor);
-                            startActivity(intent);
-                        }
+    }
 
-                    }
-                }
-
-        );
-        addCategoryButton = (Button) root.findViewById(R.id.addCategoryButton);
-
-        addButtonClicked();
-
+    private void updateViewOfListView(){
 
         categoriesViewModel.getCategory().observe(this, new Observer<List<Category>>() {
             @Override
@@ -104,11 +87,10 @@ public class CategoriesFragment extends Fragment {
 
             }
         });
-
-        return root;
-
     }
-    private void addButtonClicked(){
+
+
+    private void onClickAddButton(){
 
         addCategoryButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -117,8 +99,41 @@ public class CategoriesFragment extends Fragment {
             }
         });
 
+    }
+
+    private void onClickCategoryListView() {
+
+        categoryListView.setOnItemClickListener(
+            new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    sendCategoryInformationToEditCategory(i);
+
+                }
+            });
+    }
 
 
+    private void sendCategoryInformationToEditCategory(int i){
+
+        Intent intent = new Intent(getContext(), CategoriesEditActivity.class);
+
+        String selectedCategoryName = categoriesViewModel.getCategory().getValue().get(i).get_name();
+        String selectedCategoryDate = categoriesViewModel.getCategory().getValue().get(i).getCreationDate().toString();
+        String selectedCategoryColor= categoriesViewModel.getCategory().getValue().get(i).get_color();
+
+        int selectedCategoryBudget = categoriesViewModel.getCategory().getValue().get(i).get_limit();
+        int selectedCategoryId = categoriesViewModel.getCategory().getValue().get(i).get_id();
+        int selectedCategoryPicture= categoriesViewModel.getCategory().getValue().get(i).get_pictureName();
+
+        intent.putExtra("categoryName",selectedCategoryName);
+        intent.putExtra("categoryBudget",selectedCategoryBudget);
+        intent.putExtra("categoryId",selectedCategoryId);
+        intent.putExtra("categoryDate",selectedCategoryDate);
+        intent.putExtra("categoryPicture",selectedCategoryPicture);
+        intent.putExtra("categoryColor",selectedCategoryColor);
+
+        startActivity(intent);
     }
 
 
