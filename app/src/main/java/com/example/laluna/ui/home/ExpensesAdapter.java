@@ -98,10 +98,15 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
         }
     }
 
+    /**
+     * An interface implemented by HomeFragment, that makes the recycle list clickable and scrollable
+     */
     public interface recycleListener {
         void onExpenseClick(Expense expense);
         void onScroll(int position);
     }
+
+
 
 
 }

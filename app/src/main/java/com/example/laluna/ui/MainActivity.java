@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * This class represents the main page of the application that includes three fragments.
+ */
 public class MainActivity extends AppCompatActivity {
 
 
@@ -43,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * A method for initializing the database object and adding the default categories that have been chosen by this application's developers.
+     * Its adds some expenses for the testing as well.
+     */
     public void insertToDB(){
         DBHandler db = new DBHandler(this);
 
@@ -56,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         Category entertainment = db.addCategory("Entertainment",3000,R.drawable.entertainment,"#dd68ca",new Date(121,7,1));
         Category health = db.addCategory("Health",1000,R.drawable.health,"#f30008",new Date(121,7,1));
         Category other = db.addCategory("Other",3000,R.drawable.other,"#737274",new Date(121,7,1));
+
 
         cat.add(food);
         cat.add(clothes);

@@ -23,6 +23,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * View class that is responsible for showing the information to the user
+ * It communicates with CategoriesViewModel
+ *
+ * @author Ali ALkhaled
+ * @author Deaa Khankan
+ */
+
 public class CategoriesFragment extends Fragment {
 
 
@@ -35,6 +43,10 @@ public class CategoriesFragment extends Fragment {
     private ListView categoryListView;
 
 
+    /**
+     * Updating data directly when resuming to the fragment
+     *
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -43,6 +55,11 @@ public class CategoriesFragment extends Fragment {
         }
     }
 
+
+    /**
+     * Runs first time to create the view and initiate it
+     *
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 

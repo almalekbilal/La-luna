@@ -31,6 +31,7 @@ public class CategoriesEditActivity extends AppCompatActivity {
 
     /**
      * This method is responsible for showing all components i this activity and update them
+     * Through it all  data fields and components in this class are initialized, activated and updated
      * @param savedInstanceState
      */
     @Override
@@ -38,14 +39,9 @@ public class CategoriesEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_edit);
 
-        viewModel = ViewModelProviders.of(this).get(CategoriesViewModel.class);
-        viewModel.init(this);
-
-
         initComponents();
-        intent = getIntent();
-        setDefaultNameForEditTexts();
 
+        setDefaultNameForEditTexts();
 
         final String oldName = editTextName.getText().toString();
         final int oldLimit = Integer.parseInt(editTextLimit.getText().toString());
@@ -58,7 +54,13 @@ public class CategoriesEditActivity extends AppCompatActivity {
 
     }
 
-    private void initComponents () {
+    private void initComponents() {
+
+        viewModel = ViewModelProviders.of(this).get(CategoriesViewModel.class);
+        viewModel.init(this);
+
+        intent = getIntent();
+
 
         editTextName = findViewById(R.id.editCategoryName);
         editTextLimit = findViewById(R.id.editCategoryBudget);
@@ -70,10 +72,12 @@ public class CategoriesEditActivity extends AppCompatActivity {
 
 
     // VIEW LOGIC METHODS
-    private void deleteCategory() {
+    private boolean deleteCategory() {
 
         int id = intent.getIntExtra("categoryId", 0);
-        viewModel.deleteCategory(id);
+        boolean isDeleted = viewModel.deleteCategory(id);
+
+        return isDeleted;
     }
 
     private void updateSaveChanges(String oldName, int oldLimit){
@@ -94,14 +98,29 @@ public class CategoriesEditActivity extends AppCompatActivity {
 
     }
 
-    private void enableEditCategory() {
-        if (editTextName.isEnabled() && editTextLimit.isEnabled()) {
-            editTextName.setEnabled(false);
-            editTextLimit.setEnabled(false);
+    private void enableEditCategoryButton() {
+
+        int categoryId = intent.getIntExtra("categoryId", 0);
+        boolean isDefault = viewModel.isDefaultCategory(categoryId);
+
+        if (isDefault) {
+
+            if (editTextName.isEnabled() && editTextLimit.isEnabled()) {
+                editTextName.setEnabled(false);
+                editTextLimit.setEnabled(false);
+            } else {
+                editTextLimit.setEnabled(true);
+            }
         }
+
         else {
-            editTextName.setEnabled(true);
-            editTextLimit.setEnabled(true);
+            if (editTextName.isEnabled() && editTextLimit.isEnabled()) {
+                editTextName.setEnabled(false);
+                editTextLimit.setEnabled(false);
+            } else {
+                editTextName.setEnabled(true);
+                editTextLimit.setEnabled(true);
+            }
         }
 
     }
@@ -121,9 +140,15 @@ public class CategoriesEditActivity extends AppCompatActivity {
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteCategory();
-                Toast.makeText(getBaseContext(), "The category is deleted", Toast.LENGTH_SHORT).show();
-                finish();
+                final boolean isDeleted = deleteCategory();
+
+                if (isDeleted) {
+                    Toast.makeText(getBaseContext(), "The category is deleted", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                else {
+                    Toast.makeText(getBaseContext(), "This category is default and can't be deleted", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -132,7 +157,7 @@ public class CategoriesEditActivity extends AppCompatActivity {
         imageButtonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                enableEditCategory();
+                enableEditCategoryButton();
             }
         });
     }

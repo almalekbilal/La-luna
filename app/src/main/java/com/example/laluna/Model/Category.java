@@ -22,6 +22,7 @@ public class Category implements Serializable {
     private int _pictureName;
     private String _color;
 
+
     public Category(int _id, int _limit, String _name, int _pictureName, String _color, Date creationDate, Date destroyedDate) {
         this._id = _id;
         this._limit = _limit;
@@ -88,6 +89,7 @@ public class Category implements Serializable {
 
         return this._id == c2.get_id();
     }
+
 
     /*public void set_color(String _color) {
         this._color = _color;

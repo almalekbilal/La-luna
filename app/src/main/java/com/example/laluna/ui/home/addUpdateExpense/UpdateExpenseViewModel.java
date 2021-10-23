@@ -13,6 +13,17 @@ import com.example.laluna.Model.Expense;
 import java.util.Date;
 import java.util.List;
 
+
+
+/**
+ * UpdateExpenseViewModel is a class which is responsible for the communication with the data base handler
+ *  and the logic (related to UpdateExpense Activity ) behind the scene.
+ *
+ *
+ *   @auther (Bilal Almalek)
+ *   @auther (Ali Malla)
+ */
+
 public class UpdateExpenseViewModel extends ViewModel {
     private DBHandler dbHandler;
     private Context context;
@@ -25,6 +36,12 @@ public class UpdateExpenseViewModel extends ViewModel {
 
     }
 
+
+/**
+ * The method starts running once the class is running for the first time.
+ * The DBHandler data field is initialized here.
+ * It updates the data och sends it to the view
+ */
 
     public void init(Context context, Expense thisExpense){
         this.context = context;
@@ -56,11 +73,17 @@ public class UpdateExpenseViewModel extends ViewModel {
         }
         categories.add(0,thisExpense.get_category());
     }
+
+
     public void setSelectedCategory(int position){
         selectedCategory = categories.get(position);
     }
 
 
+    /**
+     * Updates expenses in the database
+     *
+     * */
     public void updateExp(String name, int value){
         thisExpense.set_name(name);
         thisExpense.set_value(value);
@@ -68,6 +91,11 @@ public class UpdateExpenseViewModel extends ViewModel {
 
         dbHandler.updateExpense(thisExpense);
     }
+
+    /**
+     * A getter method
+     * @return LiveData that contains an array of strings (categories names)
+     */
     public LiveData<String[]> getcategoriesNames(){return categoriesNames;}
 
 

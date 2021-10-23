@@ -174,6 +174,10 @@ public class HomeFragment extends Fragment implements ExpensesAdapter.recycleLis
 
     }
 
+    /**
+     * A method that makes a special view when clicking on an expanse
+     * @param expense Expanse
+     */
     @Override
     public void onExpenseClick(Expense expense) {
         Toast.makeText(getContext(),expense.get_name(),Toast.LENGTH_LONG).show();
@@ -183,6 +187,10 @@ public class HomeFragment extends Fragment implements ExpensesAdapter.recycleLis
         startActivity(i);
     }
 
+    /**
+     * A method to make the recycle list scrollable
+     * @param position Position of the expanse in the list
+     */
     @Override
     public void onScroll(int position) {
         homeViewModel.getMoreExpenses(position);
