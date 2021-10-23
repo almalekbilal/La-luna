@@ -42,8 +42,10 @@ public class AnalysisViewModel extends ViewModel {
     public void init(Context context){
         dbHandler = new DBHandler(context);
 
-        viewMonthDate.postValue(new Date());
-        viewMonthDate.setValue(new Date());
+        Date date = new Date();
+        date.setDate(1);
+        viewMonthDate.postValue(date);
+        viewMonthDate.setValue(date);
 
         categoriesLiveData = new MutableLiveData<>();
 

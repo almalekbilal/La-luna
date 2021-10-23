@@ -1,5 +1,6 @@
 package com.example.laluna.ui.categories;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,16 +35,15 @@ public class CategoriesAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category_add);
 
         viewModel = ViewModelProviders.of(this).get(CategoriesViewModel.class);
-
-
         viewModel.init(this);
         initComponents();
 
 
 
+        //On Click Methods
+        onClickAddCategory();
 
-
-            addCategoryCancel.setOnClickListener(new View.OnClickListener() {
+        addCategoryCancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                   finish();
@@ -52,24 +52,6 @@ public class CategoriesAddActivity extends AppCompatActivity {
             });
 
 
-            addCategoryAdd.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                     if(!addCategoryBudget.getText().toString().equals(null) &&
-                         !addCategoryBudget.getText().toString().equals(null)) {
-                         String name = addCategoryName.getText().toString();
-                         int limit = Integer.parseInt(addCategoryBudget.getText().toString());
-
-                         viewModel.addCategory(name, limit, R.drawable.food, null, new Date());
-                         Toast.makeText(getBaseContext(), "Category is added!", Toast.LENGTH_LONG).show();
-
-                         finish();
-                     }
-
-                }
-
-
-            });
 
     }
 
@@ -80,4 +62,31 @@ public class CategoriesAddActivity extends AppCompatActivity {
         addCategoryAdd = findViewById(R.id.addCategoryAdd);
         addCategoryCancel = findViewById(R.id.addCategoryCancel);
     }
+
+    private void onClickAddCategory() {
+
+        addCategoryAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final boolean areNotFilled = addCategoryName.getText().toString().equals("") ||
+                        addCategoryBudget.getText().toString().equals("");
+                if (areNotFilled){
+                    Toast.makeText(getBaseContext(), "Name and Budget must be filled", Toast.LENGTH_LONG).show();
+                }
+
+                else {
+                    final String name = addCategoryName.getText().toString();
+                    final int limit = Integer.parseInt(addCategoryBudget.getText().toString());
+
+                    viewModel.addCategory(name, limit, R.drawable.food, Integer.toString(Color.BLUE), new Date());
+                    Toast.makeText(getBaseContext(), "Category is added!", Toast.LENGTH_LONG).show();
+
+                    finish();
+                }
+            }
+        });
+
+    }
+
 }

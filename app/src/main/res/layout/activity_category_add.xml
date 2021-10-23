@@ -101,6 +101,7 @@
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
+            android:enabled="true"
             android:text="ADD"
             android:textSize="20sp">
 

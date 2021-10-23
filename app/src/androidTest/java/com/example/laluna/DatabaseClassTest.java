@@ -45,6 +45,7 @@ public class DatabaseClassTest {
     }
 
 
+
     @Test
     public void useAppContext() {
         // Context of the app under test.
@@ -52,6 +53,7 @@ public class DatabaseClassTest {
 
         assertEquals("com.example.laluna", appContext.getPackageName());
     }
+
 
     @Test
     public void addCategoryGeneralTest() {
@@ -557,6 +559,7 @@ public class DatabaseClassTest {
     }
 
      */
+
 }
 
 

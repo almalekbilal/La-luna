@@ -174,6 +174,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     public List<Category> getCategoriesDB(Date date){
         List <Category> categories = new ArrayList<>();
 
+       // date.setDate(1);
 
         String query = "SELECT * FROM " + TABLE_CATEGORY + " ;";
 
@@ -262,8 +263,6 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
             setCategoryPreviousLimit(cat,date);
         }
     }
-
-
 
 
     private void setCategoryPreviousLimit(Category category, Date date){

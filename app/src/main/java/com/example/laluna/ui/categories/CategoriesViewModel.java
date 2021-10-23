@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *  ViewModel class that is responsible for the communication with the data base handler
+ *  Category viewModel class that is responsible for the communication with the data base handler
  *  and the logic (related to Category fragment) behind the scene.
  *
  * @author Ali Alkhaled
@@ -50,9 +50,7 @@ public class CategoriesViewModel extends ViewModel {
         List<Category> categories = db.getCategories(new Date());
 
         for(Category category : categories){
-            cat.add(new Category(category.get_id(),category.get_limit(),category.get_name(),
-                    category.get_pictureName(),category.get_color(),category.getCreationDate(),
-                    category.getDestroyedDate()));
+            cat.add(category);
 
         }
 
@@ -67,6 +65,7 @@ public class CategoriesViewModel extends ViewModel {
     public List<Category> getCategoryList() {
         return categoryList;
     }
+
 
     /**
      * A getter method
@@ -119,6 +118,7 @@ public class CategoriesViewModel extends ViewModel {
                 db.deactivateCategory(category, new Date());
             }
         }
+        updateCategories();
     }
 
 
