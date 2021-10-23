@@ -146,7 +146,7 @@ public class GridViewAdapter extends ArrayAdapter {
         PieData pieData = new PieData(dataSet);
 
         List<Integer> colors = new ArrayList<>();
-        colors.add(Integer.parseInt(categoryWithMoneyList.get(i).category.get_color()));
+        colors.add(Color.parseColor(categoryWithMoneyList.get(i).category.get_color()));
         //colors.add(Color.rgb(3, 169, 241));
         //colors.add(Color.parseColor(categoryWithMoneyList.get(i).category.get_color()));
         colors.add(Color.rgb(203, 204, 196));

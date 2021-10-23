@@ -221,8 +221,8 @@ public class CategoryExpensesActivity extends AppCompatActivity {
 
     }
 
-    private int getCategoryColor(){
-       return intent.getIntExtra("categoryColor",0);
+    private String getCategoryColor(){
+       return intent.getStringExtra("categoryColor");
     }
 
     /**
@@ -246,7 +246,7 @@ public class CategoryExpensesActivity extends AppCompatActivity {
         PieData pieData = new PieData(dataSet);
 
         List<Integer> colors = new ArrayList<>();
-        colors.add(getCategoryColor());
+        colors.add(Color.parseColor(getCategoryColor()));
         colors.add(Color.rgb(203, 204, 196));
 
 

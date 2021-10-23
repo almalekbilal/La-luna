@@ -132,7 +132,7 @@ public class AnalysisFragment extends Fragment {
         int selectedCategoryId= analysisViewModel.getCategories().getValue().get(i).category.get_id();
         int selectedCategoryMonth = analysisViewModel.getDate().getValue().getMonth();
         int selectedCategoryYear = analysisViewModel.getDate().getValue().getYear();
-        int selectedCategoryColor = Integer.parseInt(analysisViewModel.getCategories().getValue().get(i).category.get_color());
+        String selectedCategoryColor = analysisViewModel.getCategories().getValue().get(i).category.get_color();
 
 
 
