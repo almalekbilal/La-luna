@@ -1,0 +1,49 @@
+#Meeting Agenda 
+
+Group: La Luna 
+
+Date: 7/10/2021 
+
+Chair: Ali Alkhaled
+
+Participants: Ali Malla, Ali Alkhaled, Bilal Al Malek, Deaa Khankan 
+
+ 
+
+##Objectives 
+
+-Vi behöver skriva klart SDD och RDD.
+
+-Vi behöver göra sista ändringar innan vi lämnar in för Peer review
+
+ 
+
+##Reports 
+
+I förra mötet diskuterade vi MVVM och hur det skulle användas i applikationens mjukvaruarkitektur. Dessutom tog varje par en del av applikationen.
+ 
+
+##Discussion items 
+
+-Vilka förbättringar som skulle göras i både SDD och RAD.
+
+-Hur mycket av applikationen som skulle vara klar innan inlämningen.
+
+
+
+
+##Outcomes and assignments 
+
+-SDD och RAD är relativt färdiga. 
+
+-Vi har kommit med koden så mycket vi hann för att vi skulle få så mycket feedback på den som möjligt.
+
+
+
+
+
+##Wrap up 
+
+Nästa möte kommer vi att lägga till nya tester och fixa till eventuella kodbuggar (Code bugs). Det ska vara den 12:e oktober 2021.
+
+
