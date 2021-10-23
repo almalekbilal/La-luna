@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment implements ExpensesAdapter.recycleLis
                 spent = integers.get(0);
                 total = integers.get(1);
 
-                budgetText.setText("Your budget : " + total);
+                budgetText.setText("Your Budget : " + total + " Kr");
                 piechart.clear();
                 makePie(piechart);
             }
