@@ -1,5 +1,6 @@
 package com.example.laluna.Model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
  * @auther (Ali Malla)
  * @auther (Ali Al Khaled)
  */
-public class Category {
+public class Category implements Serializable {
 
     private int _id;
     private int _limit;
@@ -20,6 +21,7 @@ public class Category {
     private String _name;
     private int _pictureName;
     private String _color;
+
 
     public Category(int _id, int _limit, String _name, int _pictureName, String _color, Date creationDate, Date destroyedDate) {
         this._id = _id;
@@ -77,7 +79,7 @@ public class Category {
     }
 
     /**
-     * The method compairs the id of two categories and return true if they match
+     * The method compares the id of two categories and return true if they match
      * @param o the other category
      * @return true if ids equals
      */
@@ -87,6 +89,7 @@ public class Category {
 
         return this._id == c2.get_id();
     }
+
 
     /*public void set_color(String _color) {
         this._color = _color;

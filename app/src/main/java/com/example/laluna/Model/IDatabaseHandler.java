@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface IDatabaseHandler {
 
-    List<Expense> getCategoryExpenseDB(Category category);
+    List<Expense> getCategoryExpenseDB(int categoryId);
 
 
     // Adding an expense to Data Base
@@ -78,4 +78,6 @@ public interface IDatabaseHandler {
     int getCategoryLimitDB(Date date, Category category);
 
     int getTotalBudgetDB(Date date);
+
+    boolean thereIsCategoriesDB(Date date);
 }

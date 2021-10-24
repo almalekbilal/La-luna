@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9E9E9E"
+    android:background="#C4C4C4"
     android:orientation="vertical">
 
 
@@ -29,6 +29,7 @@
         android:id="@+id/editCategoryImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#2C2B2B"
         android:translationX="330dp"
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
@@ -43,7 +44,8 @@
             android:layout_height="match_parent"
             android:layout_marginRight="20dp"
             android:layout_weight="2"
-            android:text="Name"
+            android:text="Name:"
+            android:textColor="#000000"
             android:textSize="20sp">
 
         </TextView>
@@ -53,7 +55,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:minHeight="48dp">
+            android:enabled="false"
+            android:minHeight="48dp"
+            android:textColor="#000000">
 
         </EditText>
 
@@ -74,7 +78,8 @@
             android:layout_height="match_parent"
             android:layout_marginRight="20dp"
             android:layout_weight="2"
-            android:text="Budget"
+            android:text="Budget:"
+            android:textColor="#000000"
             android:textSize="20sp">>
 
         </TextView>
@@ -85,8 +90,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:enabled="false"
             android:inputType="numberSigned"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:textColor="#000000" />
 
 
     </LinearLayout>
@@ -116,8 +123,28 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/holo_red_light"
-            android:text="Cancle"
+            android:text="Cancel"
             android:textSize="20sp">>
+
+        </Button>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="25dp">
+
+        <Button
+            android:id="@+id/editCategoryDelete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#B80707"
+            android:text="Delete"
+            android:textSize="20sp">
+
 
         </Button>
 

@@ -27,7 +27,7 @@
         ></com.github.mikephil.charting.charts.PieChart>
 
     <TextView
-        android:id="@+id/categorySpentMoney"
+        android:id="@+id/categoryAnalysisBudget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="$500"

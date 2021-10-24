@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CategoryExpensesActivity">
+    tools:context=".ui.analysis.categoryExpensesActivity.CategoryExpensesActivity"
+    android:background="#282B33">
 
 
     <com.github.mikephil.charting.charts.PieChart
@@ -34,7 +35,8 @@
         android:layout_marginStart="144dp"
         android:layout_marginTop="253dp"
         android:text="MONEY SPENT"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"/>
 
     <TextView
         android:id="@+id/categoryNameAndBudget"
@@ -44,7 +46,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="22dp"
         android:text="TextView"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"/>
 
     <TextView
         android:id="@+id/categorySpent"
@@ -54,5 +57,38 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="219dp"
         android:text="TextView"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"/>
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="13dp"
+        android:backgroundTint="#635E4E"
+        android:translationY="12dp"
+        app:srcCompat="@drawable/back_button" />
+
+    <ListView
+        android:id="@+id/categoryExpensesListView"
+        android:layout_width="412dp"
+        android:layout_height="417dp"
+        android:layout_alignTop="@+id/divider4"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="-3dp" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="305dp"
+        android:background="#FFFFFF" />
+
 </RelativeLayout>

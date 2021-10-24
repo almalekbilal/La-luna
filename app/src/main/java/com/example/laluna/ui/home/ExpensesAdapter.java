@@ -1,6 +1,8 @@
 package com.example.laluna.ui.home;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,7 @@ import java.util.List;
 
 /**
  * The adapter that controls the recyclerview in the view
- *Its take the data and place them in the recyclerview in a list form
+ * It takes the data and place in the recyclerview in a list form
  *
  *   @auther (Deaa Khankan)
  *   @auther (Ali Al Khaled)
@@ -27,13 +29,15 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
 
     List<Expense> expenses;
     Context context;
-    public ExpensesAdapter(Context context, List<Expense> expenses){
+    recycleListener listener;
+    public ExpensesAdapter(Context context, List<Expense> expenses, recycleListener listener){
         this.expenses = expenses;
         this.context = context;
+        this.listener = listener;
     }
 
     /**
-     * The methods is responsible for creating the view for an item
+     * The method is responsible for creating the view for an item
      * @param parent
      * @param viewType
      * @return ExpenseHolder object
@@ -43,11 +47,11 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
     public ExpensesAdapter.ExpenseHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.custom_expense_view, parent, false);
-        return new ExpenseHolder(view);
+        return new ExpenseHolder(view, listener);
     }
 
     /**
-     * This is responsible for taking the data from the list and putting them into the view
+     * This is responsible for taking the data from the list and putting them in the view
      * @param holder
      * @param position
      */
@@ -58,6 +62,8 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         holder.date.setText(sdf.format(expenses.get(position).get_date()));
         holder.categoryImage.setImageResource(expenses.get(position).get_category().get_pictureName());
+        listener.onScroll(position);
+
     }
 
     @Override
@@ -68,20 +74,39 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
     /**
      * The class holds the information about the view object in the custom layout
      */
-    public class ExpenseHolder extends RecyclerView.ViewHolder {
+    public class ExpenseHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView price, name, date;
         ImageView categoryImage;
+        recycleListener listener;
 
-        public ExpenseHolder(@NonNull View itemView) {
+        public ExpenseHolder(@NonNull View itemView, recycleListener listener) {
             super(itemView);
 
             price = itemView.findViewById(R.id.txv_expensePrice);
             name = itemView.findViewById(R.id.txv_expenseName);
             categoryImage = itemView.findViewById(R.id.img_categoryImage);
             date = itemView.findViewById(R.id.txv_dateExpense);
+            this.listener = listener;
 
+            itemView.setOnClickListener(this);
+        }
 
+        @Override
+        public void onClick(View v) {
+            listener.onExpenseClick(expenses.get(getAdapterPosition()));
         }
     }
+
+    /**
+     * An interface implemented by HomeFragment, that makes the recycle list clickable and scrollable
+     */
+    public interface recycleListener {
+        void onExpenseClick(Expense expense);
+        void onScroll(int position);
+    }
+
+
+
+
 }

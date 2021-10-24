@@ -8,40 +8,43 @@
 
     <Button
         android:id="@+id/addCategoryButton"
-        android:layout_width="108dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="263dp"
-        android:backgroundTint="#63E969"
-        android:text="ADD CATEGORY"
+        android:layout_width="160dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="#12A481"
+        android:text="+ ADD CATEGORY"
+        app:layout_constraintBottom_toTopOf="@+id/categoryListView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
 
     <ListView
         android:id="@+id/categoryListView"
         android:layout_width="413dp"
-        android:layout_height="560dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="1dp"
+        android:layout_height="435dp"
+        android:layout_marginTop="80dp"
+        android:divider="@android:color/white"
+        android:dividerHeight="1dp"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addCategoryButton" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="93dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="5dp"
-        android:text="TextView"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="409dp"
+        android:layout_height="2dp"
+        android:background="#ffffff"
+        app:layout_constraintBottom_toTopOf="@+id/categoryListView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.922" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -80,11 +80,11 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
     /**
      * A method for getting all the expenses of a a specific category.
-     * @param category represents the category that the method will get all its related expenses.
+     * @param categoryID represents the category that the method will get all its related expenses.
      */
-    public List<Expense> getCategoryExpenseDB(Category category){
+    public List<Expense> getCategoryExpenseDB(int categoryID){
         List <Expense> expensesList = new ArrayList<Expense>();
-        int categoryID=category.get_id();
+
         String query = "SELECT *  FROM " + TABLE_EXPENSE + " WHERE category_id = "
                 + categoryID + ";";
 
@@ -449,6 +449,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     }
 
 
+
     /**
      * A method to deactivate a category
      * @param category Category that will be deactivated
@@ -487,6 +488,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
      */
     public int getCategoryLimitDB(Date date, Category category){
 
+        date.setDate(1);
         String query = "SELECT limitt FROM " + TABLE_LIMITS + " WHERE category_id = " + category.get_id() + " AND month = '" + dateToString(date) + "' ;";
 
         SQLiteDatabase db = getWritableDatabase();
@@ -547,22 +549,9 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
         return totalBudget;
     }
+
+    public boolean thereIsCategoriesDB(Date date){
+        return getCategoriesDB(date).size() != 0;
+    }
 }
 
-
-
-
- /*try {
-final Date stringToDate = new SimpleDateFormat("yyyy-mm-dd").parse(strDate);
-final String monthFormat = Integer.toString(stringToDate.getMonth());
-final String yearFormat = Integer.toString(stringToDate.getYear());
-
-        if (year.equals(yearFormat) && month.equals(monthFormat)) {
-        totalMoneySpent += cursor.getInt(2);
-
-        }
-        } catch (ParseException e) {
-        e.printStackTrace();
-        }
-
-  */

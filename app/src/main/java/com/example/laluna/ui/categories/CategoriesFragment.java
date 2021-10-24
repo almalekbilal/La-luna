@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -24,49 +23,77 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * View class that is responsible for showing the information to the user
+ * It communicates with CategoriesViewModel
+ *
+ * @author Ali ALkhaled
+ * @author Deaa Khankan
+ */
+
 public class CategoriesFragment extends Fragment {
 
 
     private CategoriesViewModel categoriesViewModel;
+    private CategoriesAdapter categoryAdapter;
+
+    private View root;
+
+    private Button addCategoryButton;
+    private ListView categoryListView;
 
 
-    Button addCategoryButton;
+    /**
+     * Updating data directly when resuming to the fragment
+     *
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(categoriesViewModel != null){
+            categoriesViewModel.init(getContext());
+        }
+    }
 
 
+    /**
+     * Runs first time to create the view and initiate it
+     *
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+        initComponents(inflater, container);
+
+        onClickCategoryListView();
+        onClickAddButton();
+
+        updateViewOfListView();
+
+
+        return root;
+
+    }
+
+    private void initComponents(@NonNull LayoutInflater inflater, ViewGroup container) {
+
+        root = inflater.inflate(R.layout.fragment_categories, container, false);
         categoriesViewModel =
                 ViewModelProviders.of(this).get(CategoriesViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_categories, container, false);
-
-        final CategoriesAdapter categoryAdapter = new CategoriesAdapter
-                (getContext(), categoriesViewModel.getCategoryList());
-        ListView categoryListView = (ListView)   root.findViewById(R.id.categoryListView);
-        categoryListView.setAdapter(categoryAdapter);
 
         categoriesViewModel.init(getContext());
 
-        categoryListView.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Intent intent = new Intent(getContext(), CategoriesEditActivity.class);
-                        String selectedCategoryName = categoriesViewModel.getCategory().getValue().get(i).get_name();
-                        int selectedCategoryBudget = categoriesViewModel.getCategory().getValue().get(i).get_limit();
-                        int selectedCategoryId = categoriesViewModel.getCategory().getValue().get(i).get_id();
-                        intent.putExtra("categoryName",selectedCategoryName);
-                        intent.putExtra("categoryBudget",selectedCategoryBudget);
-                        intent.putExtra("categoryId",selectedCategoryId);
-                        startActivity(intent);
 
-                    }
-                }
+        categoryListView = root.findViewById(R.id.categoryListView);
+        addCategoryButton = root.findViewById(R.id.addCategoryButton);
 
-        );
-        addCategoryButton = (Button) root.findViewById(R.id.addCategoryButton);
+        categoryAdapter = new CategoriesAdapter(getContext(), categoriesViewModel.getCategoryList());
+        categoryListView.setAdapter(categoryAdapter);
 
-        addButtonClicked();
 
+    }
+
+    private void updateViewOfListView(){
 
         categoriesViewModel.getCategory().observe(this, new Observer<List<Category>>() {
             @Override
@@ -77,11 +104,10 @@ public class CategoriesFragment extends Fragment {
 
             }
         });
-
-        return root;
-
     }
-    private void addButtonClicked(){
+
+
+    private void onClickAddButton(){
 
         addCategoryButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -90,8 +116,41 @@ public class CategoriesFragment extends Fragment {
             }
         });
 
+    }
+
+    private void onClickCategoryListView() {
+
+        categoryListView.setOnItemClickListener(
+            new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    sendCategoryInformationToEditCategory(i);
+
+                }
+            });
+    }
 
 
+    private void sendCategoryInformationToEditCategory(int i){
+
+        Intent intent = new Intent(getContext(), CategoriesEditActivity.class);
+
+        String selectedCategoryName = categoriesViewModel.getCategory().getValue().get(i).get_name();
+        String selectedCategoryDate = categoriesViewModel.getCategory().getValue().get(i).getCreationDate().toString();
+        String selectedCategoryColor= categoriesViewModel.getCategory().getValue().get(i).get_color();
+
+        int selectedCategoryBudget = categoriesViewModel.getCategory().getValue().get(i).get_limit();
+        int selectedCategoryId = categoriesViewModel.getCategory().getValue().get(i).get_id();
+        int selectedCategoryPicture= categoriesViewModel.getCategory().getValue().get(i).get_pictureName();
+
+        intent.putExtra("categoryName",selectedCategoryName);
+        intent.putExtra("categoryBudget",selectedCategoryBudget);
+        intent.putExtra("categoryId",selectedCategoryId);
+        intent.putExtra("categoryDate",selectedCategoryDate);
+        intent.putExtra("categoryPicture",selectedCategoryPicture);
+        intent.putExtra("categoryColor",selectedCategoryColor);
+
+        startActivity(intent);
     }
 
 

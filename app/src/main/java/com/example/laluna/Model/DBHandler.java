@@ -13,7 +13,7 @@ import java.util.List;
  * @auther (Bilal Al Malek)
  * @auther (Deaa Khankan)
  * @auther (Ali Malla)
- * @auther (Ali Al Khaled)
+ * @auther (Ali AlKhaled)
  */
 public class DBHandler {
 
@@ -31,10 +31,10 @@ public class DBHandler {
 
     /**
      * A method for getting all the expenses of a a specific category.
-     * @param category represents the category that the method will get all its related expenses.
+     * @param categoryId represents the category that the method will get all its related expenses.
      */
-    public List<Expense> getCategoryExpense (Category category){
-        return db.getCategoryExpenseDB(category);
+    public List<Expense> getCategoryExpense (int categoryId){
+        return db.getCategoryExpenseDB(categoryId);
     }
 
 
@@ -126,8 +126,8 @@ public class DBHandler {
     /**
      * A method to add a new category to the database.
      */
-    public Category addCategory(String name, int limit, int pitureName,String color, Date creation){
-        return db.addCategoryDB(name,limit,pitureName,color,creation);
+    public Category addCategory(String name, int limit, int pictureName,String color, Date creation){
+        return db.addCategoryDB(name,limit,pictureName,color,creation);
     }
 
 
@@ -165,6 +165,10 @@ public class DBHandler {
     public int getTotalBudget(Date date){
 
         return db.getTotalBudgetDB(date);
+    }
+
+    public boolean thereIsCategories(Date date){
+        return db.thereIsCategoriesDB(date);
     }
 }
 

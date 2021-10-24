@@ -1,11 +1,14 @@
 package com.example.laluna.ui.home;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.laluna.Model.Expense;
 import com.example.laluna.R;
+import com.example.laluna.ui.home.addUpdateExpense.AddExpenseActivity;
+import com.example.laluna.ui.home.addUpdateExpense.UpdateExpenseActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -31,11 +36,20 @@ import java.util.List;
  *   @auther (Deaa Khankan)
  *   @auther (Ali Al Khaled)
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements ExpensesAdapter.recycleListener {
 
     private HomeViewModel homeViewModel;
-    final ArrayList<Expense> expenseArrayList = new ArrayList<Expense>();
+    private final ArrayList<Expense> expenseArrayList = new ArrayList<Expense>();
     private double total = 300, spent= 150;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(homeViewModel != null) {
+            expenseArrayList.clear();
+            homeViewModel.init(getContext());
+        }
+    }
 
     /**
      * This method creates the view and handle the widgets in it
@@ -61,7 +75,7 @@ public class HomeFragment extends Fragment {
 
 
 
-        final ExpensesAdapter adapter =new ExpensesAdapter(getContext(), expenseArrayList);
+        final ExpensesAdapter adapter =new ExpensesAdapter(getContext(), expenseArrayList, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -74,7 +88,7 @@ public class HomeFragment extends Fragment {
                 spent = integers.get(0);
                 total = integers.get(1);
 
-                budgetText.setText("Your budget : " + total);
+                budgetText.setText("Your Budget : " + total + " Kr");
                 piechart.clear();
                 makePie(piechart);
             }
@@ -90,10 +104,25 @@ public class HomeFragment extends Fragment {
         });
 
 
+        Button add = root.findViewById(R.id.btn_add);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               Intent intent = new Intent(root.getContext(), AddExpenseActivity.class);
+               startActivity(intent);
+            }
+        });
+
+
+
 
 
         return root;
     }
+
+
 
     /**
      * The methods make the circle diagram (Pie chart) and sets the data and the color for it
@@ -145,4 +174,25 @@ public class HomeFragment extends Fragment {
 
     }
 
+    /**
+     * A method that makes a special view when clicking on an expanse
+     * @param expense Expanse
+     */
+    @Override
+    public void onExpenseClick(Expense expense) {
+        Toast.makeText(getContext(),expense.get_name(),Toast.LENGTH_LONG).show();
+        Intent i = new Intent(getContext(), UpdateExpenseActivity.class);
+        i.putExtra("expense", expense);
+
+        startActivity(i);
+    }
+
+    /**
+     * A method to make the recycle list scrollable
+     * @param position Position of the expanse in the list
+     */
+    @Override
+    public void onScroll(int position) {
+        homeViewModel.getMoreExpenses(position);
+    }
 }
