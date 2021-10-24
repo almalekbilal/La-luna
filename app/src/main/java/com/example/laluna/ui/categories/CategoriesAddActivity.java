@@ -19,7 +19,6 @@ import java.util.Date;
 /**
  * This class is responsible for showing information about the page where the user can add a new category.
  *
- * @author Ali Alkhaled
  * @author Deaa Khankan
  */
 
@@ -76,7 +75,7 @@ public class CategoriesAddActivity extends AppCompatActivity {
                     final int limit = Integer.parseInt(addCategoryBudget.getText().toString());
 
                     viewModel.addCategory(name, limit, R.drawable.food, "#ffff00", new Date());
-                    Toast.makeText(getBaseContext(), "Category is added!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "The category is added!", Toast.LENGTH_LONG).show();
 
                     finish();
                 }

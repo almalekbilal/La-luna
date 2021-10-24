@@ -113,8 +113,7 @@ public class CategoriesEditActivity extends AppCompatActivity {
 
         if (isDefault) {
 
-            if (editTextName.isEnabled() && editTextLimit.isEnabled()) {
-                editTextName.setEnabled(false);
+            if (editTextLimit.isEnabled()) {
                 editTextLimit.setEnabled(false);
             } else {
                 editTextLimit.setEnabled(true);
