@@ -26,7 +26,9 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -71,6 +73,10 @@ public class HomeFragment extends Fragment implements ExpensesAdapter.recycleLis
 
         RecyclerView recyclerView = root.findViewById(R.id.categoryListView);
         final TextView budgetText = root.findViewById(R.id.txv_budgetHome);
+
+        final TextView homeDate = root.findViewById(R.id.home_date);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+        homeDate.setText(sdf.format(new Date()) + "-01");
 
 
 
