@@ -98,7 +98,7 @@
         android:id="@+id/btn_ok"
         android:layout_width="265dp"
         android:layout_height="49dp"
-        android:backgroundTint="#63E969"
+        android:backgroundTint="#12A481"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
