@@ -17,6 +17,13 @@ import android.widget.Toast;
 import com.example.laluna.Model.Expense;
 import com.example.laluna.R;
 
+
+/**
+ * A class that is responsible for the view of the activity where the user can update an expense
+ *
+ * @author Bilal Al Malek
+ * @author Ali Malla
+ */
 public class UpdateExpenseActivity extends AppCompatActivity {
 
     UpdateExpenseViewModel updateExpenseViewModel;
