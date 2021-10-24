@@ -92,6 +92,9 @@ public class UpdateExpenseViewModel extends ViewModel {
         dbHandler.updateExpense(thisExpense);
     }
 
+    public void deleteExpense(){
+        dbHandler.deleteExpense(thisExpense);
+    }
     /**
      * A getter method
      * @return LiveData that contains an array of strings (categories names)

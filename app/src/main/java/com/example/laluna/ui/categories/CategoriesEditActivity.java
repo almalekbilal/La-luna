@@ -75,7 +75,11 @@ public class CategoriesEditActivity extends AppCompatActivity {
     private boolean deleteCategory() {
 
         int id = intent.getIntExtra("categoryId", 0);
-        boolean isDeleted = viewModel.deleteCategory(id);
+
+        boolean isDeleted = false;
+        if(!viewModel.isDefaultCategory(id)) {
+            isDeleted = viewModel.deleteCategory(id);
+        }
 
         return isDeleted;
     }
@@ -105,25 +109,17 @@ public class CategoriesEditActivity extends AppCompatActivity {
 
         if (isDefault) {
 
-            if (editTextName.isEnabled() && editTextLimit.isEnabled()) {
-                editTextName.setEnabled(false);
-                editTextLimit.setEnabled(false);
-            } else {
-                editTextLimit.setEnabled(true);
-            }
-        }
+            editTextName.setEnabled(false);
+            editTextLimit.setEnabled(true);
 
+        }
         else {
-            if (editTextName.isEnabled() && editTextLimit.isEnabled()) {
-                editTextName.setEnabled(false);
-                editTextLimit.setEnabled(false);
-            } else {
-                editTextName.setEnabled(true);
-                editTextLimit.setEnabled(true);
+            editTextName.setEnabled(true);
+            editTextLimit.setEnabled(true);
             }
         }
 
-    }
+
 
     private void setDefaultNameForEditTexts() {
         String selectedCategoryName = intent.getStringExtra("categoryName");

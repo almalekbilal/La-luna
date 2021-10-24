@@ -38,6 +38,7 @@ public class AddExpenseActivity extends AppCompatActivity {
 
         expenseName = findViewById(R.id.edt_expenseName);
         expenseValue = findViewById(R.id.edt_expenseValue);
+        findViewById(R.id.btn_delete).setVisibility(View.INVISIBLE);
 
         final Spinner spn = findViewById(R.id.spn_category);
         final Context context = this;
