@@ -18,7 +18,7 @@ import com.example.laluna.R;
  * This class is responsible for showing information about the page where the user can edit or delete an existing category.
  *
  * @author Ali ALkhaled
- * @author Deaa Khankan
+ *
  */
 public class CategoriesEditActivity extends AppCompatActivity {
 
@@ -27,11 +27,12 @@ public class CategoriesEditActivity extends AppCompatActivity {
     private Button buttonSave, buttonCancel, buttonDelete;
     private ImageButton imageButtonEdit;
     private Intent intent;
+    private String oldNameEditText;
+    private int oldLimitEditText;
 
 
     /**
-     * This method is responsible for showing all components i this activity and update them
-     * Through it all  data fields and components in this class are initialized, activated and updated
+     * This method is responsible for initializing and showing all components i this activity once the class runs
      * @param savedInstanceState
      */
     @Override
@@ -41,17 +42,19 @@ public class CategoriesEditActivity extends AppCompatActivity {
 
         initComponents();
 
-        setDefaultNameForEditTexts();
+    }
 
-        final String oldName = editTextName.getText().toString();
-        final int oldLimit = Integer.parseInt(editTextLimit.getText().toString());
+    /**
+     * This method is responsible for updating the view when the user clicks or does an action
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         onClickDeleteButton();
         onClickEditButton();
         onClickCancelButton();
-        onClickSaveButton(oldName, oldLimit);
-
-
+        onClickSaveButton(oldNameEditText, oldLimitEditText);
     }
 
     private void initComponents() {
@@ -68,14 +71,19 @@ public class CategoriesEditActivity extends AppCompatActivity {
         buttonCancel = findViewById(R.id.editCategoryCancel);
         imageButtonEdit = findViewById(R.id.editCategoryImageButton);
         buttonDelete = findViewById(R.id.editCategoryDelete);
+
+        setDefaultNameForEditTexts();
+
+        oldNameEditText = editTextName.getText().toString();
+        oldLimitEditText = Integer.parseInt(editTextLimit.getText().toString());
     }
 
 
     // VIEW LOGIC METHODS
     private boolean deleteCategory() {
 
-        int id = intent.getIntExtra("categoryId", 0);
-        boolean isDeleted = viewModel.deleteCategory(id);
+        final int id = intent.getIntExtra("categoryId", 0);
+        final boolean isDeleted = viewModel.deleteCategory(id);
 
         return isDeleted;
     }
@@ -100,8 +108,8 @@ public class CategoriesEditActivity extends AppCompatActivity {
 
     private void enableEditCategoryButton() {
 
-        int categoryId = intent.getIntExtra("categoryId", 0);
-        boolean isDefault = viewModel.isDefaultCategory(categoryId);
+        final int categoryId = intent.getIntExtra("categoryId", 0);
+        final boolean isDefault = viewModel.isDefaultCategory(categoryId);
 
         if (isDefault) {
 

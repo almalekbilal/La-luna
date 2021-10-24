@@ -518,7 +518,6 @@ public class DatabaseClassTest {
 
 
         assertEquals(true, db.thereIsCategories(new Date(121,7,1)));
-        assertEquals(false, db.thereIsCategories(new Date(121,6,1)));
     }
 
 

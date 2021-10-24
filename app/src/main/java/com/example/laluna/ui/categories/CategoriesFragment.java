@@ -24,8 +24,9 @@ import java.util.List;
 
 
 /**
- * View class that is responsible for showing the information to the user
+ * View class that is responsible for showing the category page information to the user
  * It communicates with CategoriesViewModel
+ *
  *
  * @author Ali ALkhaled
  * @author Deaa Khankan
@@ -53,6 +54,7 @@ public class CategoriesFragment extends Fragment {
         if(categoriesViewModel != null){
             categoriesViewModel.init(getContext());
         }
+
     }
 
 
@@ -65,11 +67,10 @@ public class CategoriesFragment extends Fragment {
 
         initComponents(inflater, container);
 
+
         onClickCategoryListView();
         onClickAddButton();
-
         updateViewOfListView();
-
 
         return root;
 
@@ -100,7 +101,6 @@ public class CategoriesFragment extends Fragment {
             public void onChanged(List<Category> categories) {
                 categoryAdapter.clear();
                 categoryAdapter.addAll(categories);
-
 
             }
         });
