@@ -111,7 +111,7 @@ public class CategoriesEditActivity extends AppCompatActivity {
         final int categoryId = intent.getIntExtra("categoryId", 0);
         final boolean isDefault = viewModel.isDefaultCategory(categoryId);
 
-        if (isDefault) {
+        if(isDefault) {
 
             editTextName.setEnabled(false);
             editTextLimit.setEnabled(true);
