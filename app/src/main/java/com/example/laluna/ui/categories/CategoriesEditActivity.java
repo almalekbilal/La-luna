@@ -90,13 +90,13 @@ public class CategoriesEditActivity extends AppCompatActivity {
 
     private void updateSaveChanges(String oldName, int oldLimit){
 
-        String newName = editTextName.getText().toString();
-        int newLimit = Integer.parseInt(editTextLimit.getText().toString());
+        final String newName = editTextName.getText().toString();
+        final int newLimit = Integer.parseInt(editTextLimit.getText().toString());
 
-        int id =  intent.getIntExtra("categoryId", 0);
-        String color = intent.getStringExtra("categoryColor");
-        String date = intent.getStringExtra("categoryDate");
-        int picture = intent.getIntExtra("categoryPicture",0);
+        final int id =  intent.getIntExtra("categoryId", 0);
+        final int picture = intent.getIntExtra("categoryPicture",0);
+        final String color = intent.getStringExtra("categoryColor");
+        final String date = intent.getStringExtra("categoryDate");
 
         viewModel.editCategory(newName,id,newLimit,date,picture,color);
 
