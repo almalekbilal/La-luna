@@ -35,7 +35,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginEnd="263dp"
         android:layout_marginBottom="4dp"
-        android:backgroundTint="#63E969"
+        android:backgroundTint="#12A481"
         android:text="@string/addNewButton"
         app:layout_constraintBottom_toBottomOf="@+id/dividerHome"
         app:layout_constraintEnd_toEndOf="parent"
