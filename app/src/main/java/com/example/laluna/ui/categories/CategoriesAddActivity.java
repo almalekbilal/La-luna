@@ -74,7 +74,7 @@ public class CategoriesAddActivity extends AppCompatActivity {
                     final String name = addCategoryName.getText().toString();
                     final int limit = Integer.parseInt(addCategoryBudget.getText().toString());
 
-                    viewModel.addCategory(name, limit, R.drawable.food, "#ffff00", new Date());
+                    viewModel.addCategory(name, limit, R.drawable.other, "#ffff00", new Date());
                     Toast.makeText(getBaseContext(), "The category is added!", Toast.LENGTH_LONG).show();
 
                     finish();
