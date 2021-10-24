@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_analysis,R.id.navigation_categories, R.id.navigation_notifications)
+                R.id.navigation_home, R.id.navigation_analysis,R.id.navigation_categories, R.id.navigation_help)
                 .build();
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         Category food = db.addCategory("Food",1500,R.drawable.food,"#09F9BF",new Date(121,7,1));
         Category clothes = db.addCategory("Clothes",3000,R.drawable.clothes,"#03A9F1",new Date(121,7,1));
         Category house = db.addCategory("House",2000,R.drawable.home,"#dd6800",new Date(121,7,1));
-        Category entertainment = db.addCategory("Entertainment",3000,R.drawable.entertainment,"#dd68ca",new Date(121,7,1));
+        Category entertainment = db.addCategory("Entertainment",3000,R.drawable.entertainment,"#B2378E",new Date(121,7,1));
         Category health = db.addCategory("Health",1000,R.drawable.health,"#f30008",new Date(121,7,1));
         Category other = db.addCategory("Other",3000,R.drawable.other,"#737274",new Date(121,7,1));
 
