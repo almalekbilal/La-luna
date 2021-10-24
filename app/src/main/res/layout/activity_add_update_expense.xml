@@ -7,6 +7,18 @@
     android:background="#C4C4C4"
     tools:context=".ui.home.addUpdateExpense.AddExpenseActivity">
 
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="265dp"
+        android:layout_height="49dp"
+        android:backgroundTint="#FF0057"
+        android:text="Delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.793" />
+
     <TextView
         android:id="@+id/txv_addExpenseCategory"
         android:layout_width="wrap_content"

@@ -12,10 +12,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.laluna.Model.Expense;
 import com.example.laluna.R;
 
+
+/**
+ * A class that is responsible for the view of the activity where the user can update an expense
+ *
+ * @author Bilal Al Malek
+ * @author Ali Malla
+ */
 public class UpdateExpenseActivity extends AppCompatActivity {
 
     UpdateExpenseViewModel updateExpenseViewModel;
@@ -35,6 +43,16 @@ public class UpdateExpenseActivity extends AppCompatActivity {
 
         EditText ExpenseName = findViewById(R.id.edt_expenseName);
         EditText ExpenseValue = findViewById(R.id.edt_expenseValue);
+        Button deleteButton = findViewById(R.id.btn_delete);
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateExpenseViewModel.deleteExpense();
+                Toast.makeText(getBaseContext(), "Expense has been deleted", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
 
 
 
