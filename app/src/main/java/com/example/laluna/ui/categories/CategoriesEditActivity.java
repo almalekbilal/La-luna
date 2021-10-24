@@ -113,24 +113,17 @@ public class CategoriesEditActivity extends AppCompatActivity {
 
         if (isDefault) {
 
-            if (editTextLimit.isEnabled()) {
-                editTextLimit.setEnabled(false);
-            } else {
-                editTextLimit.setEnabled(true);
-            }
-        }
+            editTextName.setEnabled(false);
+            editTextLimit.setEnabled(true);
 
+        }
         else {
-            if (editTextName.isEnabled() && editTextLimit.isEnabled()) {
-                editTextName.setEnabled(false);
-                editTextLimit.setEnabled(false);
-            } else {
-                editTextName.setEnabled(true);
-                editTextLimit.setEnabled(true);
+            editTextName.setEnabled(true);
+            editTextLimit.setEnabled(true);
             }
         }
 
-    }
+
 
     private void setDefaultNameForEditTexts() {
         String selectedCategoryName = intent.getStringExtra("categoryName");

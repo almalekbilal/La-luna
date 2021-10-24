@@ -186,7 +186,6 @@ public class HomeFragment extends Fragment implements ExpensesAdapter.recycleLis
      */
     @Override
     public void onExpenseClick(Expense expense) {
-        Toast.makeText(getContext(),expense.get_name(),Toast.LENGTH_LONG).show();
         Intent i = new Intent(getContext(), UpdateExpenseActivity.class);
         i.putExtra("expense", expense);
 

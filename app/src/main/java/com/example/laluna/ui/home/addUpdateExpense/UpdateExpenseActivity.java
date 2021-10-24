@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.laluna.Model.Expense;
 import com.example.laluna.R;
@@ -35,6 +36,16 @@ public class UpdateExpenseActivity extends AppCompatActivity {
 
         EditText ExpenseName = findViewById(R.id.edt_expenseName);
         EditText ExpenseValue = findViewById(R.id.edt_expenseValue);
+        Button deleteButton = findViewById(R.id.btn_delete);
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateExpenseViewModel.deleteExpense();
+                Toast.makeText(getBaseContext(), "Expense has been deleted", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
 
 
 
