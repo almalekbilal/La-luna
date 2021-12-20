@@ -80,4 +80,5 @@ public interface IDatabaseHandler {
     int getTotalBudgetDB(Date date);
 
     boolean thereIsCategoriesDB(Date date);
+    boolean thereIsCategoriesDB();
 }

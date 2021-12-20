@@ -170,6 +170,10 @@ public class DBHandler {
     public boolean thereIsCategories(Date date){
         return db.thereIsCategoriesDB(date);
     }
+
+    public boolean thereIsCategories(){
+        return db.thereIsCategoriesDB();
+    }
 }
 
 

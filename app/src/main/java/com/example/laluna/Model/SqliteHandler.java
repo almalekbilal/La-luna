@@ -183,6 +183,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
         cursor.moveToFirst();
 
 
+
         while(!cursor.isAfterLast()){
 
             if(isBetween(date,cursor)){
@@ -204,6 +205,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
         db.close();
         return categories;
     }
+
 
 
     /**
@@ -552,6 +554,22 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
     public boolean thereIsCategoriesDB(Date date){
         return getCategoriesDB(date).size() != 0;
+    }
+
+    public boolean thereIsCategoriesDB(){
+
+        String query = "SELECT * FROM " + TABLE_CATEGORY + " ;";
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.getCount() != 0){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 }
 
