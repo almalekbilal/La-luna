@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * The interface represent the classes that is responsible for handling a database
  */
-public interface IDatabaseHandler {
+public interface ISQLiteHandler {
 
     List<Expense> getCategoryExpenseDB(int categoryId);
 
@@ -43,7 +43,7 @@ public interface IDatabaseHandler {
      *             The days in the given date have no significance in the result in this case.
      * @return Amount money spent in the whole month in the given date.
      */
-    int getTotalMoneySpentDB(Date date);
+
     /**
      * A method for calculating all money spent so far in a certain month within a specific category.
      * @param date represents the date in which the money was spent.
@@ -51,7 +51,6 @@ public interface IDatabaseHandler {
      * @param category represents the category within which the money was spent.
      * @return Amount money spent within the given category during the given month.
      */
-    int getTotalSpentByCategoryDB(Date date, Category category);
 
 
 
@@ -74,10 +73,24 @@ public interface IDatabaseHandler {
     void updateCategoryDB(Category category);
 
 
-
-    int getCategoryLimitDB(Date date, Category category);
+/////////////////////////////////////////////////////
+   int getCategoryLimitDB(Date date, Category category);
 
     int getTotalBudgetDB(Date date);
 
     boolean thereIsCategoriesDB(Date date);
+    int getTotalSpentByCategoryDB(Date date, Category category);
+    int getTotalMoneySpentDB(Date date);
+
+
+
+
+/////////////////////////////////////////////////////////////////
+
+
+
+
+    void addExpenseDB(Expense expense);
+
+    int getAvailableExpenseId();
 }

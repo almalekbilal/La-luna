@@ -19,8 +19,8 @@ public class DBHandler {
 
 
     private Context context;
-    // It contains an object of the interface IDatabaseHandler, in this case its SqliteHandler
-    private IDatabaseHandler db;
+    // It contains an object of the interface ISQLiteHandler, in this case its SqliteHandler
+    private ISQLiteHandler db;
 
 
     public DBHandler(Context context) {
@@ -100,28 +100,6 @@ public class DBHandler {
     }
 
 
-    /**
-     * A method for calculating all money spent so far in a certain month.
-     * @param date represents the date in which the money was spent.
-     *             The days in the given date have no significance in the result in this case.
-     * @return Amount money spent in the whole month in the given date.
-     */
-    public int getTotalMoneySpent(Date date){
-        return db.getTotalMoneySpentDB(date);
-    }
-
-    /**
-     * A method for calculating all money spent so far in a certain month within a specific category.
-     * @param date represents the date in which the money was spent.
-     *             The days in the given date have no significance in the result in this case.
-     * @param category represents the category within which the money was spent.
-     * @return Amount money spent within the given category during the given month.
-     */
-    public int getTotalSpentByCategory(Date date, Category category){
-     return db.getTotalSpentByCategoryDB(date, category);
-    }
-
-
 
     /**
      * A method to add a new category to the database.
@@ -148,27 +126,35 @@ public class DBHandler {
     }
 
 
-    /**
-     * A method for getting a limit of a specific category in a past month from the limits table in the database
-     * @param date represent the month
-     * @param category represent the category which limit will gets
-     */
-    public int getCategoryLimit(Date date, Category category){
 
-        return db.getCategoryLimitDB(date,category);
+
+
+    ///////////////////////////////////////////////////////////////////////////////////
+    public int getTotalMoneySpent(Date date) {
+        return db.getTotalMoneySpentDB(date);
     }
 
-    /**
-     * A method for getting the budget of a specific month, it gets all the category limits of the month and adding them
-     * @param date represent the month
-     */
-    public int getTotalBudget(Date date){
-
-        return db.getTotalBudgetDB(date);
+    public int getTotalBudget(Date date) {
+        return db.getTotalMoneySpentDB(date);
     }
 
-    public boolean thereIsCategories(Date date){
+    public boolean thereIsCategories(Date date) {
         return db.thereIsCategoriesDB(date);
+    }
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+    public void addExpense(Expense expense) {
+        db.addExpenseDB(expense);
+    }
+
+    public int getAvailableExpenseId(){
+        return db.getAvailableExpenseId();
     }
 }
 
