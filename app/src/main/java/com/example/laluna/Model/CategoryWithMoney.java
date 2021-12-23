@@ -1,4 +1,4 @@
-package com.example.laluna.ui.analysis;
+package com.example.laluna.Model;
 
 import com.example.laluna.Model.Category;
 
@@ -11,13 +11,15 @@ import com.example.laluna.Model.Category;
  */
 public class CategoryWithMoney {
 
-    Category category;
-    int limit;
-    int spent;
+    public Category category;
+    public int limit;
+    public int spent;
 
     public CategoryWithMoney(Category category, int limit, int spent) {
         this.category = category;
         this.limit = limit;
         this.spent = spent;
     }
+
+
 }
