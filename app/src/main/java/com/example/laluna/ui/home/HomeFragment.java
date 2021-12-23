@@ -3,6 +3,7 @@ package com.example.laluna.ui.home;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -198,6 +199,7 @@ public class HomeFragment extends Fragment implements ExpensesAdapter.recycleLis
      */
     @Override
     public void onScroll(int position) {
+        Log.i("roror",position+"");
         homeViewModel.getMoreExpenses(position);
     }
 }

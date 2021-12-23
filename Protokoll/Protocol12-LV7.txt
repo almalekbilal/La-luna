@@ -1,0 +1,50 @@
+#Meeting Agenda 
+
+Group: La Luna 
+
+Date: 12/10/2021 
+
+Chair: Ali Alkhaled
+
+Participants: Ali Malla, Ali Alkhaled, Bilal Al Malek, Deaa Khankan 
+
+ 
+
+##Objectives 
+
+-Vi behöver testa koden.
+
+-Vi behöver fixa Code bugs.
+
+-Vi behöver titta lite på andras kod och planera inför det.
+
+ 
+
+##Reports 
+
+I förra mötet diskuterade vi samtliga små ändringar (förbättringar) som borde göras i både koden och dokumentationen (RAD, SDD) samt gjorde färdigt dem.
+ 
+
+##Discussion items 
+
+-Vilka metoder i databaser som inte beter sig som förväntat.
+
+-Skriva om algoritmerna i de databasmetoder som inte fungerar.
+
+-Skriva nya tester och testa (Coverage funktionen)
+
+
+
+
+##Outcomes and assignments 
+
+-Vissa code bugs fixades. (Vissa är inte klara än dock)
+
+-Nya tester lades till.
+
+
+
+
+##Wrap up 
+
+I nästa möte kommer vi att ägna oss helt åt peer review och analys av andras kod. Det ska vara den 17:e oktober 2021.

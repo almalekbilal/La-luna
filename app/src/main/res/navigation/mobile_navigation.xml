@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/navigation_help"
-        android:name="com.example.laluna.ui.notifications.HelpFragment"
+        android:name="com.example.laluna.ui.statistic.StatsticFragment"
         android:label="@string/title_help" />
 
 </navigation>

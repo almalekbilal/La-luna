@@ -1,0 +1,48 @@
+#Meeting Agenda 
+
+Group: La Luna 
+
+Date: 22/10/2021 
+
+Chair: Ali Alkhaled
+
+Participants: Ali Malla, Ali Alkhaled, Bilal Al Malek, Deaa Khankan 
+
+ 
+
+##Objectives 
+
+-Vi behöver göra en övergrippande koll på hela koden.
+
+-Vi behöver göra omfattande refactoring till koden. 
+
+-Vi behöver skriva Javadoc till alla klasser och metoder som inte än har det.
+
+
+ 
+
+##Reports 
+
+I förra mötet diskuterade vi andras kod och skrev färdigt peer review.
+ 
+
+##Discussion items 
+
+-Hur vi ska förbättra koden utifrån god objektorienterad design.
+
+-Vilka klasser/metoder som kan designas om.
+
+
+
+
+##Outcomes and assignments 
+
+-Vi började med refactoring.
+
+-Vi lade till javadoc.
+
+
+
+##Wrap up 
+
+I nästa möte kommer vi att fortsätta jobba med refactoring och förbättring av koden samt göra förberedelser inför presentationen. Det kommer att vara den 23:e oktober 2021.
