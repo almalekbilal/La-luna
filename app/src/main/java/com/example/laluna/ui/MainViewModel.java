@@ -18,22 +18,24 @@ public class MainViewModel extends ViewModel {
     public void init(Context context){
 
         this.context = context;
+
+
         insertToDB();
     }
     private void insertToDB() {
         DBHandler db = new DBHandler(context);
 
 
-        if (!db.thereIsCategories(new Date())) {
+        if (!db.thereIsCategories()) {
 
             List<Category> cat = new ArrayList<>();
 
-            Category food = db.addCategory("Food", 1500, R.drawable.food, "#09F9BF", new Date(121, 7, 1));
-            Category clothes = db.addCategory("Clothes", 3000, R.drawable.clothes, "#03A9F1", new Date(121, 7, 1));
-            Category house = db.addCategory("House", 2000, R.drawable.home, "#dd6800", new Date(121, 7, 1));
-            Category entertainment = db.addCategory("Entertainment", 3000, R.drawable.entertainment, "#B2378E", new Date(121, 7, 1));
-            Category health = db.addCategory("Health", 1000, R.drawable.health, "#f30008", new Date(121, 7, 1));
-            Category other = db.addCategory("Other", 3000, R.drawable.other, "#737274", new Date(121, 7, 1));
+            Category food = db.addCategory("Food", 1000, R.drawable.food, "#09F9BF", new Date());
+            Category clothes = db.addCategory("Clothes", 1000, R.drawable.clothes, "#03A9F1", new Date());
+            Category house = db.addCategory("House", 1000, R.drawable.home, "#dd6800", new Date());
+            Category entertainment = db.addCategory("Entertainment", 1000, R.drawable.entertainment, "#B2378E", new Date());
+            Category health = db.addCategory("Health", 1000, R.drawable.health, "#f30008", new Date());
+            Category other = db.addCategory("Other", 1000, R.drawable.other, "#737274", new Date());
 
 
             cat.add(food);
@@ -44,11 +46,7 @@ public class MainViewModel extends ViewModel {
             cat.add(other);
 
 
-            addExpenses(cat, new Date(121, 7, 1), db);
-            db.setCategoriesPreviousLimits(new Date(121, 7, 1));
-            addExpenses(cat, new Date(121, 8, 1), db);
-            // db.setCategoriesPreviousLimits(new Date(121,8,1));
-            // addExpenses(cat,new Date(121,9,1), db);
+
         }
 
     }

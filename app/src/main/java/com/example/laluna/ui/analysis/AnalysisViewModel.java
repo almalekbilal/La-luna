@@ -30,6 +30,7 @@ public class AnalysisViewModel extends ViewModel {
     private MutableLiveData<Date> viewMonthDate = new MutableLiveData<>();
 
     public AnalysisViewModel() {
+
     }
 
     /**
