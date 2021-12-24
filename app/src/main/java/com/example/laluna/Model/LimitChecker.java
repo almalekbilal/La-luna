@@ -15,8 +15,9 @@ public class LimitChecker{
         return false;
     }
 
+
     public boolean totalBudgetOverLimit(List<CategoryWithExpenses> categories){
-        int totalBudget = Arithmetic.calculateTotalBudget(categories);
+        int totalBudget = Arithmetic.calculateTotalBudget(categories);  // Fel med beräkning av totalbudget, jag skrev det i Aritmetic
 
         int totalSpentMoney = 0;
         for(CategoryWithExpenses categoryWithExpenses : categories){
