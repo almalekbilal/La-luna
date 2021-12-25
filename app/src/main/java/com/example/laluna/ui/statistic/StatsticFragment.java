@@ -15,9 +15,12 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.laluna.R;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,18 +41,69 @@ public class StatsticFragment extends Fragment {
         barChart = (BarChart) root.findViewById(R.id.bargraph);
 
         ArrayList<BarEntry> barEntries = new ArrayList<>();
-        barEntries.add(new BarEntry(44,3));
-        barEntries.add(new BarEntry(60,1));
-        barEntries.add(new BarEntry(20,2));
-        barEntries.add(new BarEntry(22,3));
-        barEntries.add(new BarEntry(52,4));
-        barEntries.add(new BarEntry(33,5));
+        ArrayList<String> barLabelNames = new ArrayList<>();
+
+
+        ArrayList<monthBarGraph> dataArray = new ArrayList<>();
+        dataArray.add(new monthBarGraph("Jen",10));
+        dataArray.add(new monthBarGraph("feb",20));
+        dataArray.add(new monthBarGraph("mar",30));
+
+        dataArray.add(new monthBarGraph("apr",40));
+        dataArray.add(new monthBarGraph("may",30));
+
+        dataArray.add(new monthBarGraph("jun",50));
+        dataArray.add(new monthBarGraph("jul",60));
+        dataArray.add(new monthBarGraph("aug",30));
+        dataArray.add(new monthBarGraph("sep",70));
+        dataArray.add(new monthBarGraph("oct",80));
+        dataArray.add(new monthBarGraph("nov",90));
+        dataArray.add(new monthBarGraph("des",100));
+
+        for (int i = 0; i< dataArray.size(); i++){
+            String month = dataArray.get(i).getMonth();
+            int expense = dataArray.get(i).getExpenses();
+            barEntries.add(new BarEntry(i,expense));
+            barLabelNames.add(month);
+
+        }
+
         BarDataSet barDataSet = new BarDataSet(barEntries,"Spending");
+        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        barDataSet.setBarBorderColor(Color.rgb(203,203,203));
+
+
 
         BarData barData = new BarData(barDataSet);
+        barData.setBarWidth(0.9f);
         barChart.setData(barData);
+
+        barChart.setDrawBorders(true);
+        barChart.setBorderColor(Color.RED);
+        barChart.getDescription().setEnabled(false);
+        barChart.getXAxis().setDrawGridLines(false);
+        barChart.getAxisRight().setEnabled(false);
+        barChart.getAxisLeft().setEnabled(false);
+
+
+
+
+
         barChart.setTouchEnabled(true);
         barChart.setBackgroundColor(Color.WHITE);
+        barChart.invalidate();
+        barChart.animateY(500);
+
+        barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(barLabelNames));
+
+        xAxis.setLabelCount(barLabelNames.size());
+
+        barChart.invalidate();
+        barChart.animateY(500);
+
 
         return root;
     }
