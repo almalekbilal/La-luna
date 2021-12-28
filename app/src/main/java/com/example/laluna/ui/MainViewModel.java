@@ -68,7 +68,7 @@ public class MainViewModel extends ViewModel {
         handler.addExpense("Lampor", 100, date, cat.get(2));
 
 
-        handler.addExpense("Cs", 500, date, cat.get(3));
+
         handler.addExpense("Skarasommarland", 500, date, cat.get(3));
         handler.addExpense("Liseberg", 500, date, cat.get(3));
 

@@ -1,4 +1,4 @@
-package com.example.laluna.Model.avarage.times;
+package com.example.laluna.Model.average.times;
 
 import java.util.Calendar;
 

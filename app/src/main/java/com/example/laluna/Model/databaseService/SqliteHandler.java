@@ -1,13 +1,16 @@
 package com.example.laluna.Model.databaseService;
 
 import static com.example.laluna.Model.DateConverter.dateToString;
+import static com.example.laluna.Model.DateConverter.datetimeToString;
 import static com.example.laluna.Model.DateConverter.stringToDate;
+import static com.example.laluna.Model.DateConverter.stringToDateTime;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -104,7 +107,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
                         cursor.getColumnIndex("value") );
 
 
-            Date expenseDate = stringToDate(cursor.getString(cursor.getColumnIndex("date")));
+            Date expenseDate = stringToDateTime(cursor.getString(cursor.getColumnIndex("date")));
 
             Category expenseCategory = getCategory(cursor.getInt(cursor.getColumnIndex("category_id")));
 
@@ -131,7 +134,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
         values.put("name", name);
         values.put("value", value);
 
-        values.put("date",dateToString(date));
+        values.put("date",datetimeToString(date));
 
         values.put("category_id", category.get_id());
 
@@ -226,7 +229,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
         ContentValues contentValues = new ContentValues();
         contentValues.put("name",expense.get_name() );
 
-        contentValues.put("date",dateToString(expense.get_date()));
+        contentValues.put("date",datetimeToString(expense.get_date()));
         contentValues.put("category_id",expense.get_category().get_id());
         contentValues.put("value",expense.get_value());
 
@@ -403,7 +406,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
         creation.setDate(1);
         if(creation != null) {
-            values.put("creation_date", dateToString(creation).split(" ")[0]);
+            values.put("creation_date", dateToString(creation));
         }
 
         SQLiteDatabase db = getWritableDatabase();
@@ -570,7 +573,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
             int id = c.getInt(c.getColumnIndex("_id"));
             int value = c.getInt(c.getColumnIndex("value"));
             String name = c.getString(c.getColumnIndex("name"));
-            Date date = stringToDate(c.getString(c.getColumnIndex("date")));
+            Date date = stringToDateTime(c.getString(c.getColumnIndex("date")));
             Category cat = getCategory(c.getInt(c.getColumnIndex("category_id")));
 
             Expense exp = new Expense(id,name,value,date,cat);

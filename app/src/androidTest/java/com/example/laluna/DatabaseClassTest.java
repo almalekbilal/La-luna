@@ -10,6 +10,7 @@ import com.example.laluna.Model.repository.DBHandler;
 import com.example.laluna.Model.Expense;
 
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,7 +45,10 @@ public class DatabaseClassTest {
         appContext.deleteDatabase("laluna.db");
     }
 
-
+    @After
+    public void destroyDataBase2() {
+        appContext.deleteDatabase("laluna.db");
+    }
 
     @Test
     public void useAppContext() {

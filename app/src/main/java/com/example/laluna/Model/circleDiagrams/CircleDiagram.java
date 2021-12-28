@@ -37,11 +37,11 @@ public class CircleDiagram {
     }
 
     public float getSpentRate(){
-        return (spent/total) * 100;
+        return ((float)spent/(float)total) * (float)100;
     }
 
     public float getTotalRate(){
-        return 100 - getSpentRate();
+        return (float)100 - getSpentRate();
     }
 
     public String getCenterText(){
