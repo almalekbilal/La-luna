@@ -11,6 +11,7 @@ import java.util.List;
 public class CategoryCircleDiagram extends CircleDiagram{
 
     private CategoryWithExpenses categoryWithExpenses;
+
     public CategoryCircleDiagram(CategoryWithExpenses categoryWithExpenses) {
 
         super(categoryWithExpenses.getSpentMoney(), categoryWithExpenses.getCategoryLimit(), Color.parseColor(categoryWithExpenses.getCategory().get_color()));
@@ -18,7 +19,7 @@ public class CategoryCircleDiagram extends CircleDiagram{
 
     }
 
-    public String getCategoryName(){
+    private String getCategoryName(){
         return categoryWithExpenses.getCategory().get_name();
     }
 
@@ -34,5 +35,10 @@ public class CategoryCircleDiagram extends CircleDiagram{
         }
 
         return diagrams;
+    }
+
+    @Override
+    public String getCenterText(){
+        return getCategoryName() + " \n" + getSpent() + " Kr";
     }
 }

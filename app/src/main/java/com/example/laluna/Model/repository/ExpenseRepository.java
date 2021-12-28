@@ -2,7 +2,9 @@ package com.example.laluna.Model.repository;
 
 import android.content.Context;
 
+import com.example.laluna.Model.Arithmetic;
 import com.example.laluna.Model.Category;
+import com.example.laluna.Model.DateConverter;
 import com.example.laluna.Model.Expense;
 
 import java.util.ArrayList;
@@ -24,6 +26,15 @@ public class ExpenseRepository {
         List<Expense> expenses = db.getExpenses(start, end);
 
         return expenses;
+    }
+
+    public int getTotalMoneySpend(Date date){
+        return Arithmetic.calculateTotalMoneySpent(getExpensesByDate(date));
+    }
+
+    public List<Expense> getExpensesByDate(Date date){
+        date.setDate(1);
+        return getExpensesByStartAndEnd(date, DateConverter.incrementMonth(date));
     }
 
 
@@ -48,4 +59,5 @@ public class ExpenseRepository {
 
         return repo;
     }
+
 }

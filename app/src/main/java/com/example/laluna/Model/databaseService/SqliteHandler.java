@@ -403,7 +403,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
 
         creation.setDate(1);
         if(creation != null) {
-            values.put("creation_date", dateToString(creation));
+            values.put("creation_date", dateToString(creation).split(" ")[0]);
         }
 
         SQLiteDatabase db = getWritableDatabase();

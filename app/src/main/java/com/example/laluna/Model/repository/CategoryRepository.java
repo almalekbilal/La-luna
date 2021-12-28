@@ -2,6 +2,7 @@ package com.example.laluna.Model.repository;
 
 import android.content.Context;
 
+import com.example.laluna.Model.Arithmetic;
 import com.example.laluna.Model.Category;
 import com.example.laluna.Model.CategoryWithExpenses;
 import com.example.laluna.Model.DateConverter;
@@ -23,6 +24,10 @@ public class CategoryRepository {
         List<Category> categories = db.getCategories(date);
 
         return categories;
+    }
+
+    public int getTotalBudget(Date date){
+        return Arithmetic.calculateTotalBudget(getCategoriesWithExpenses(date));
     }
 
     public List<CategoryWithExpenses> getCategoriesWithExpenses(Date date){
@@ -51,7 +56,6 @@ public class CategoryRepository {
         return categoryLimit;
     }
 
-	// Fix this
     public boolean thereIsCategories(Date date){
         return db.getCategories(date).size() != 0;
     }
@@ -64,10 +68,17 @@ public class CategoryRepository {
        db.addCategory(name, limit, pictureName, color, creation);
     }
 
+    public void updateCategory(Category cat){
+        db.updateCategory(cat);
+    }
+
     public void deactivateCategory(Category category, Date date) {
         db.deactivateCategory(category, date);
     }
 
+    public void setCategoriesPreviousLimits(Date date){
+        db.setCategoriesPreviousLimits(date);
+    }
     public static CategoryRepository getInstance(Context context){
         if(repo == null){
             repo = new CategoryRepository(context);
@@ -75,5 +86,7 @@ public class CategoryRepository {
 
         return repo;
     }
+
+
 
 }

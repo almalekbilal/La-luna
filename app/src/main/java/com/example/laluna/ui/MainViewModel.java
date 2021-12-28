@@ -45,7 +45,7 @@ public class MainViewModel extends ViewModel {
             cat.add(health);
             cat.add(other);
 
-
+            addExpenses(cat, new Date(), db);
 
         }
 

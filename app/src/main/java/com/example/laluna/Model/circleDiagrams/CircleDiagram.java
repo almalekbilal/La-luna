@@ -12,7 +12,11 @@ public class CircleDiagram {
 
     public CircleDiagram(int spent, int total, int color){
 
-        this.spent = spent;
+        if(spent > total){
+            this.spent = spent - total;
+        }else{
+            this.spent = spent;
+        }
         this.total = total;
 
         colors = new ArrayList<>();
@@ -40,5 +44,8 @@ public class CircleDiagram {
         return 100 - getSpentRate();
     }
 
+    public String getCenterText(){
+        return spent + " Kr";
+    }
 
 }
