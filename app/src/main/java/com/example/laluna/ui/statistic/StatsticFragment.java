@@ -43,7 +43,7 @@ public class StatsticFragment extends Fragment {
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         ArrayList<String> barLabelNames = new ArrayList<>();
 
-
+/*
         ArrayList<monthBarGraph> dataArray = new ArrayList<>();
         dataArray.add(new monthBarGraph("Jen",10));
         dataArray.add(new monthBarGraph("feb",20));
@@ -54,7 +54,7 @@ public class StatsticFragment extends Fragment {
 
         dataArray.add(new monthBarGraph("jun",50));
         dataArray.add(new monthBarGraph("jul",60));
-        dataArray.add(new monthBarGraph("aug",30));
+        dataArray.add(new monthBarGraph("may",30));
         dataArray.add(new monthBarGraph("sep",70));
         dataArray.add(new monthBarGraph("oct",80));
         dataArray.add(new monthBarGraph("nov",90));
@@ -67,15 +67,13 @@ public class StatsticFragment extends Fragment {
             barLabelNames.add(month);
 
         }
-
+*/
         BarDataSet barDataSet = new BarDataSet(barEntries,"Spending");
         barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
         barDataSet.setBarBorderColor(Color.rgb(203,203,203));
 
-
-
         BarData barData = new BarData(barDataSet);
-        barData.setBarWidth(0.9f);
+        barData.setBarWidth(2.9f);
         barChart.setData(barData);
 
         barChart.setDrawBorders(true);
@@ -84,72 +82,23 @@ public class StatsticFragment extends Fragment {
         barChart.getXAxis().setDrawGridLines(false);
         barChart.getAxisRight().setEnabled(false);
         barChart.getAxisLeft().setEnabled(false);
-
-
-
-
-
         barChart.setTouchEnabled(true);
         barChart.setBackgroundColor(Color.WHITE);
         barChart.invalidate();
         barChart.animateY(500);
-
         barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
 
         XAxis xAxis = barChart.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(barLabelNames));
-
         xAxis.setLabelCount(barLabelNames.size());
 
         barChart.invalidate();
         barChart.animateY(500);
 
-
         return root;
     }
 
 
-    public ArrayList <String> getList (Calendar startDate, Calendar endDate) {
-        ArrayList<String> list = new ArrayList<>();
-        while (startDate.compareTo(endDate) <= 0){
-            list.add(getDate (startDate) );
-            startDate.add(Calendar.MONTH,1);
-
-
-        }
-
-        return list;
-    }
-
-    public String getDate(Calendar calender){
-        String curDate = calender.get(Calendar.YEAR) + "/"+
-                (calender.get(Calendar.MONTH) +1)+ "/" + calender.get(Calendar.DAY_OF_MONTH);
-        try{
-            Date date = new SimpleDateFormat("yyyy/MM/dd").parse(curDate);
-            curDate = new SimpleDateFormat("yyyy/MM/dd").format(date);
-        }catch (ParseException e){
-            e.printStackTrace();
-        }
-
-        return curDate;
-
-    }
-
 
 }
 
-
-
-
-
-
-
-
-
-/*final TextView textView = root.findViewById(R.id.text_help);
-        statsticViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        }); */

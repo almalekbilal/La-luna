@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-class MonthAvarage extends Avarage{
+    class MonthAvarage extends Avarage{
 
     public MonthAvarage(Calendar start, Calendar end, ExpenseRepository expenseRepository) {
         super(start, end, expenseRepository);
