@@ -10,14 +10,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-class WeekAvarage extends Avarage {
+ class WeekAvarage extends Avarage {
 
     public WeekAvarage(Calendar start, Calendar end, ExpenseRepository expenseRepository) {
         super(start, end, expenseRepository);
     }
 
     @Override
-    List<TimeObject> makeTimesList() {
+    public List<TimeObject> makeTimesList() {
         List<TimeObject> list = new ArrayList<>();
         end.add(Calendar.DAY_OF_MONTH, -7);
         while(end.after(start)){

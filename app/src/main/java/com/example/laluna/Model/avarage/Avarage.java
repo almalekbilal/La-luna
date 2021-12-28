@@ -6,7 +6,7 @@ import com.example.laluna.Model.repository.ExpenseRepository;
 import java.util.Calendar;
 import java.util.List;
 
-abstract class Avarage {
+abstract public class Avarage {
 
     protected Calendar start, end;
     private List<TimeObject> timesList;
