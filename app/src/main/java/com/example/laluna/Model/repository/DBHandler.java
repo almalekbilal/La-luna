@@ -1,6 +1,11 @@
-package com.example.laluna.Model;
+package com.example.laluna.Model.repository;
 
 import android.content.Context;
+
+import com.example.laluna.Model.Category;
+import com.example.laluna.Model.Expense;
+import com.example.laluna.Model.databaseService.IDatabaseHandler;
+import com.example.laluna.Model.databaseService.SqliteHandler;
 
 import java.util.Date;
 import java.util.List;
@@ -174,6 +179,10 @@ public class DBHandler {
     public boolean thereIsCategories(){
         return db.thereIsCategoriesDB();
     }
+
+    public List<Expense> getExpensesByDates(Date start, Date end) {return db.getExpensesByDatesDB(start, end);}
+
+    public List<Expense> getCategoryExpensesByDate(Date start, Date end, Category category) {return db.getCategoryExpensesByDateDB(start, end, category);}
 }
 
 

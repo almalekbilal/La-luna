@@ -1,15 +1,19 @@
 package com.example.laluna.Model.avarage;
 
+import com.example.laluna.Model.Arithmetic;
 import com.example.laluna.Model.avarage.times.TimeFactory;
 import com.example.laluna.Model.avarage.times.TimeObject;
+import com.example.laluna.Model.repository.ExpenseRepository;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 class MonthAvarage extends Avarage{
-    public MonthAvarage(Calendar start, Calendar end) {
-        super(start, end);
+
+    public MonthAvarage(Calendar start, Calendar end, ExpenseRepository expenseRepository) {
+        super(start, end, expenseRepository);
     }
 
     @Override
@@ -25,10 +29,26 @@ class MonthAvarage extends Avarage{
             endCalculationDate.add(Calendar.DAY_OF_MONTH, -endCalculationDate.get(Calendar.DAY_OF_MONTH));
 
 
-            TimeObject week = TimeFactory.getWeekObject(end, 300);      // Use start and end date to calculate the value instead of 300
+            TimeObject week = TimeFactory.getWeekObject(end, calculateMonthValue(startCalculationDate, endCalculationDate));      // Use start and end date to calculate the value instead of 300
             list.add(week);
             end.add(Calendar.MONTH, -1);
         }
         return list;
+    }
+
+    private int calculateMonthValue(Calendar start, Calendar end){
+        Date s = start.getTime();
+        Date e = end.getTime();
+
+        s.setHours(0);
+        s.setMinutes(0);
+        s.setSeconds(0);
+
+        e.setHours(23);
+        e.setMinutes(59);
+        e.setSeconds(59);
+
+        return Arithmetic.calculateTotalMoneySpent(expenseRepository.getExpensesByStartAndEnd(s,e));
+
     }
 }

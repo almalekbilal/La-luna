@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.laluna.Model.Category;
-import com.example.laluna.Model.DBHandler;
+import com.example.laluna.Model.repository.DBHandler;
 
 import java.util.Date;
 import java.util.List;

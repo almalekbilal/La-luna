@@ -1,6 +1,7 @@
 package com.example.laluna.Model.avarage;
 
 import com.example.laluna.Model.avarage.times.TimeObject;
+import com.example.laluna.Model.repository.ExpenseRepository;
 
 import java.util.Calendar;
 import java.util.List;
@@ -10,10 +11,12 @@ abstract class Avarage {
     protected Calendar start, end;
     private List<TimeObject> timesList;
     private double avarage;
+    protected ExpenseRepository expenseRepository;
 
-    public Avarage(Calendar start, Calendar end){
+    public Avarage(Calendar start, Calendar end, ExpenseRepository expenseRepository){
         this.start = start;
         this.end = end;
+        this.expenseRepository = expenseRepository;
         timesList = makeTimesList();
         calculateAvarage();
     }

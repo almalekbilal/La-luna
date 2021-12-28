@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.laluna.Model.DBHandler;
+import com.example.laluna.Model.repository.DBHandler;
 import com.example.laluna.Model.Expense;
 
 import java.util.ArrayList;

@@ -6,7 +6,7 @@ import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.example.laluna.Model.Category;
-import com.example.laluna.Model.DBHandler;
+import com.example.laluna.Model.repository.DBHandler;
 import com.example.laluna.Model.Expense;
 
 
@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
 
 
 /**
@@ -518,6 +518,65 @@ public class DatabaseClassTest {
 
         assertEquals(true, db.thereIsCategories(new Date(121,7,1)));
     }
+
+    @Test
+    public void getExpensesByDatesTest(){
+
+        Category c1 = db.addCategory("food",100,0, "blue",new Date(121,5,1));
+        Category c2 = db.addCategory("car",100,0, "blue",new Date(121,5,1));
+
+        db.addExpense("Book", 21, new Date(), c1);
+        db.addExpense("Notebook", 9, new Date(), c1);
+        db.addExpense("Pizza", 80, new Date(), c1);
+        db.addExpense("Water", 12, new Date(), c1);
+        db.addExpense("Cola", 25, new Date(), c1);
+        db.addExpense("Cake", 40, new Date(), c1);
+
+        db.addExpense("Burger", 22, new Date(121, 6, 4), c1);
+        db.addExpense("Calculus", 9, new Date(121, 6, 15), c1);
+        db.addExpense("Pen", 12, new Date(121, 6, 20), c1);
+        db.addExpense("Pen", 12, new Date(121, 7, 2), c2);
+        db.addExpense("Oil", 20, new Date(121, 7, 5), c2);
+        db.addExpense("Window", 200, new Date(121, 8, 2), c2);
+
+        db.addExpense("Burger", 12, new Date(121, 8, 7), c2);
+        db.addExpense("Pizza", 12, new Date(121, 8, 10), c2);
+
+        List<Expense> expenses = db.getExpensesByDates(new Date(121, 6, 4), new Date(121, 8, 11));
+
+        assertEquals(8, expenses.size());
+    }
+
+    @Test
+    public void getCategoryExpensesByDateTest(){
+
+        Category c1 = db.addCategory("food",100,0, "blue",new Date(121,5,1));
+        Category c2 = db.addCategory("car",100,0, "blue",new Date(121,5,1));
+
+        db.addExpense("Book", 21, new Date(), c1);
+        db.addExpense("Notebook", 9, new Date(), c1);
+        db.addExpense("Pizza", 80, new Date(), c1);
+        db.addExpense("Water", 12, new Date(), c1);
+        db.addExpense("Cola", 25, new Date(), c1);
+        db.addExpense("Cake", 40, new Date(), c1);
+
+        db.addExpense("Burger", 22, new Date(121, 6, 4), c1);
+        db.addExpense("Calculus", 9, new Date(121, 6, 15), c1);
+        db.addExpense("Pen", 12, new Date(121, 6, 20), c1);
+        db.addExpense("Pen", 12, new Date(121, 7, 2), c2);
+        db.addExpense("Oil", 20, new Date(121, 7, 5), c2);
+        db.addExpense("Window", 200, new Date(121, 8, 2), c2);
+
+        db.addExpense("Burger", 12, new Date(121, 8, 7), c1);
+        db.addExpense("Pizza", 12, new Date(121, 8, 10), c1);
+
+        List<Expense> expenses = db.getCategoryExpensesByDate(new Date(121, 6, 1), new Date(121, 8, 11), c1);
+
+        assertEquals(5, expenses.size());
+    }
+
+
+
 }
 
 

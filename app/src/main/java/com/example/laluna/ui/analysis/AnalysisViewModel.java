@@ -7,8 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.laluna.Model.Category;
-import com.example.laluna.Model.DBHandler;
-import com.example.laluna.Model.Expense;
+import com.example.laluna.Model.repository.DBHandler;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,6 +44,9 @@ public class AnalysisViewModel extends ViewModel {
 
         Date date = new Date();
         date.setDate(1);
+        date.setHours(0);
+        date.setMinutes(0);
+        date.setSeconds(0);
         viewMonthDate.postValue(date);
         viewMonthDate.setValue(date);
 

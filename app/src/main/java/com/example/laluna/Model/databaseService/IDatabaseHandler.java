@@ -1,4 +1,4 @@
-package com.example.laluna.Model;
+package com.example.laluna.Model.databaseService;
 
 import com.example.laluna.Model.Category;
 import com.example.laluna.Model.Expense;
@@ -81,4 +81,8 @@ public interface IDatabaseHandler {
 
     boolean thereIsCategoriesDB(Date date);
     boolean thereIsCategoriesDB();
+
+    List<Expense> getExpensesByDatesDB(Date start, Date end);
+
+    List<Expense> getCategoryExpensesByDateDB(Date start, Date end, Category category);
 }

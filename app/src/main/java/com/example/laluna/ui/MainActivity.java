@@ -1,12 +1,8 @@
 package com.example.laluna.ui;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
-import com.example.laluna.Model.Category;
-import com.example.laluna.Model.DBHandler;
 import com.example.laluna.R;
-import com.example.laluna.ui.home.addUpdateExpense.AddExpenseViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,10 +11,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * This class represents the main page of the application that includes three fragments.
