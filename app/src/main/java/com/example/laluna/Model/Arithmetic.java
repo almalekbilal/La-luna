@@ -1,7 +1,5 @@
 package com.example.laluna.Model;
 
-import com.example.laluna.Model.repository.DBHandler;
-
 import java.util.List;
 
 public class Arithmetic {

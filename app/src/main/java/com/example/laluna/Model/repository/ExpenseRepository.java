@@ -2,8 +2,12 @@ package com.example.laluna.Model.repository;
 
 import android.content.Context;
 
+import com.example.laluna.Model.Arithmetic;
 import com.example.laluna.Model.Category;
+import com.example.laluna.Model.DateConverter;
 import com.example.laluna.Model.Expense;
+import com.example.laluna.Model.databaseService.IDatabaseHandler;
+import com.example.laluna.Model.databaseService.SqliteHandler;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,18 +16,27 @@ import java.util.List;
 public class ExpenseRepository {
 	
      // Use IDatabaseHandler instead
-     private DBHandler db;
+     private IDatabaseHandler db;
      private static ExpenseRepository repo = null;
     //private List<Expense> expenses;
 
     private ExpenseRepository(Context context) {
-        db = new DBHandler(context);
+        db = db = new SqliteHandler(context, null, null, 0);
     }
 
     public List<Expense> getExpenses(int start, int end) {
         List<Expense> expenses = db.getExpenses(start, end);
 
         return expenses;
+    }
+
+    public int getTotalMoneySpend(Date date){
+        return Arithmetic.calculateTotalMoneySpent(getExpensesByDate(date));
+    }
+
+    public List<Expense> getExpensesByDate(Date date){
+        date.setDate(1);
+        return getExpensesByStartAndEnd(date, DateConverter.incrementMonth(date));
     }
 
 
@@ -36,6 +49,9 @@ public class ExpenseRepository {
         db.addExpense(name,value,date,category);
     }
 
+    public void updateExpense(Expense expense){
+        db.updateExpense(expense);
+    }
 
     public void deleteExpense(Expense expense) {
         db.deleteExpense(expense);
@@ -48,4 +64,5 @@ public class ExpenseRepository {
 
         return repo;
     }
+
 }

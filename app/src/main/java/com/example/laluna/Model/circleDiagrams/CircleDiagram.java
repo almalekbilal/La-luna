@@ -8,12 +8,23 @@ import java.util.List;
 public class CircleDiagram {
 
     private int spent,total;
+    private float spentRate, totalRate;
     private List<Integer> colors;
+    private int warning;
 
     public CircleDiagram(int spent, int total, int color){
 
-        this.spent = spent;
+        if(spent > total){
+            warning = Color.RED;
+            spentRate = ((float)(spent-total)/(float)total) * (float)100;
+        }else{
+            warning = Color.WHITE;
+            spentRate = ((float)(spent)/(float)total) * (float)100;
+        }
+        totalRate = (float)100 - spentRate;
+
         this.total = total;
+        this.spent = spent;
 
         colors = new ArrayList<>();
         colors.add(color);
@@ -33,12 +44,18 @@ public class CircleDiagram {
     }
 
     public float getSpentRate(){
-        return (spent/total) * 100;
+        return spentRate;
     }
 
     public float getTotalRate(){
-        return 100 - getSpentRate();
+        return totalRate;
     }
 
+    public String getCenterText(){
+        return spent + " Kr";
+    }
 
+    public int getWarningColor(){
+        return warning;
+    }
 }

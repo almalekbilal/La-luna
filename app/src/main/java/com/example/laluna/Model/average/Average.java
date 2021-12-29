@@ -1,19 +1,19 @@
-package com.example.laluna.Model.avarage;
+package com.example.laluna.Model.average;
 
-import com.example.laluna.Model.avarage.times.TimeObject;
+import com.example.laluna.Model.average.times.TimeObject;
 import com.example.laluna.Model.repository.ExpenseRepository;
 
 import java.util.Calendar;
 import java.util.List;
 
-abstract public class Avarage {
+abstract public class Average {
 
     protected Calendar start, end;
     private List<TimeObject> timesList;
     private double avarage;
     protected ExpenseRepository expenseRepository;
 
-    public Avarage(Calendar start, Calendar end, ExpenseRepository expenseRepository){
+    public Average(Calendar start, Calendar end, ExpenseRepository expenseRepository){
         this.start = start;
         this.end = end;
         this.expenseRepository = expenseRepository;
@@ -33,9 +33,6 @@ abstract public class Avarage {
         return avarage;
     }
 
-    public void setAvarage(double avarage) {
-        this.avarage = avarage;
-    }
 
     abstract List<TimeObject> makeTimesList();
 

@@ -10,7 +10,7 @@ public class DateConverter {
     /**
      * A method that takes a string and converts it to date object
      */
-    public static Date stringToDate(String dateString) {
+    public static Date stringToDateTime(String dateString) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = null;
@@ -27,10 +27,33 @@ public class DateConverter {
     /**
      * A method that takes a date object and converts it to a string value
      */
-    public static String dateToString(Date date) {
+    public static String datetimeToString(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(date);
     }
+
+    public static Date stringToDate(String dateString) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            if (dateString != null) {
+                date = sdf.parse(dateString);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
+    /**
+     * A method that takes a date object and converts it to a string value
+     */
+    public static String dateToString(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(date);
+    }
+
 
     public static Date incrementMonth(Date date){
         Date d = new Date();

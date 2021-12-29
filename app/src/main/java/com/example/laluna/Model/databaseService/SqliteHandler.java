@@ -1,13 +1,16 @@
 package com.example.laluna.Model.databaseService;
 
 import static com.example.laluna.Model.DateConverter.dateToString;
+import static com.example.laluna.Model.DateConverter.datetimeToString;
 import static com.example.laluna.Model.DateConverter.stringToDate;
+import static com.example.laluna.Model.DateConverter.stringToDateTime;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -80,40 +83,6 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     }
 
 
-    /**
-     * A method for getting all the expenses of a a specific category.
-     * @param categoryID represents the category that the method will get all its related expenses.
-     */
-
-    // Modify so it take a date
-    public List<Expense> getCategoryExpenseDB(int categoryID){
-        List <Expense> expensesList = new ArrayList<Expense>();
-
-        String query = "SELECT *  FROM " + TABLE_EXPENSE + " WHERE category_id = "
-                + categoryID + ";";
-
-        SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.rawQuery(query,null);
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()){
-
-            int id = cursor.getInt(cursor.getColumnIndex("_id"));
-            String name = cursor.getString(cursor.getColumnIndex("name"));
-
-            int expenseValue = cursor.getInt(
-                        cursor.getColumnIndex("value") );
-
-
-            Date expenseDate = stringToDate(cursor.getString(cursor.getColumnIndex("date")));
-
-            Category expenseCategory = getCategory(cursor.getInt(cursor.getColumnIndex("category_id")));
-
-                expensesList.add(new Expense(id,name,expenseValue, expenseDate, expenseCategory));
-                cursor.moveToNext();
-        }
-        db.close();
-        return expensesList;
-    }
 
 
 
@@ -126,12 +95,12 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
      * @param date that represent the creation date of the expense
      * @param category that represent the category which the expense will belong to
      */
-    public Expense addExpenseDB(String name, int value, Date date, Category category){
+    public Expense addExpense(String name, int value, Date date, Category category){
         ContentValues values = new ContentValues();
         values.put("name", name);
         values.put("value", value);
 
-        values.put("date",dateToString(date));
+        values.put("date",datetimeToString(date));
 
         values.put("category_id", category.get_id());
 
@@ -155,7 +124,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
      * A method for getting all the active categories in a specific month
      * @param date represent the month date.
      */
-    public List<Category> getCategoriesDB(Date date){
+    public List<Category> getCategories(Date date){
         List <Category> categories = new ArrayList<>();
 
 
@@ -222,11 +191,11 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
      * A method for updating an expense in the database
      * @param expense is the expense object that contains new values that will be updated
      */
-    public void updateExpenseDB(Expense expense){
+    public void updateExpense(Expense expense){
         ContentValues contentValues = new ContentValues();
         contentValues.put("name",expense.get_name() );
 
-        contentValues.put("date",dateToString(expense.get_date()));
+        contentValues.put("date",datetimeToString(expense.get_date()));
         contentValues.put("category_id",expense.get_category().get_id());
         contentValues.put("value",expense.get_value());
 
@@ -241,8 +210,8 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
      * A method for saving the limits of the active categories for the past month
      * @param date represent the month
      */
-    public void setCategoriesPreviousLimitsDB(Date date){
-        List<Category> categories = getCategoriesDB(date);
+    public void setCategoriesPreviousLimits(Date date){
+        List<Category> categories = getCategories(date);
 
         for(Category cat : categories){
             setCategoryPreviousLimit(cat,date);
@@ -272,7 +241,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
      * @param start represent the row number of the Expenses table in database that the algorithm will start slicing
      * @param end represent the row number of the Expenses table in database that the algorithm will finish slicing
      */
-    public List<Expense> getExpensesDB(int start, int end){
+    public List<Expense> getExpenses(int start, int end){
 
 
         int limit = end - start;
@@ -321,7 +290,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
      * A method for deleting an existing expense from the database.
      * @param expense represents the expense that will be deleted.
      */
-    public void deleteExpenseDB(Expense expense) {
+    public void deleteExpense(Expense expense) {
         final int id = expense.get_id();
         SQLiteDatabase db = getWritableDatabase();
 
@@ -330,71 +299,12 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     }
 
 
-    /**
-     * A method for calculating all money spent so far in a certain month.
-     * @param date represents the date in which the money was spent.
-     *             The days in the given date have no significance in the result in this case.
-     * @return Amount money spent in the whole month in the given date.
-     */
-    // Delete
-    public int getTotalMoneySpentDB(Date date){
-        String query = "SELECT value, date FROM " + TABLE_EXPENSE + " ;";
-        final int totalMoney = getTotalMoney(date, query);
-        return totalMoney;
-    }
-
-    /**
-     * A method for calculating all money spent so far in a certain month within a specific category.
-     * @param date represents the date in which the money was spent.
-     *             The days in the given date have no significance in the result in this case.
-     * @param category represents the category within which the money was spent.
-     * @return Amount money spent within the given category during the given month.
-     */
-    // Delete
-    public int getTotalSpentByCategoryDB(Date date, Category category){
-        String query = "SELECT value, date FROM " + TABLE_EXPENSE +
-                " WHERE category_id = "+ category.get_id() + " ;";
-        final int totalMoney = getTotalMoney(date, query);
-        return totalMoney;
-    }
-
-    //Helper
-    // Delete
-    private int getTotalMoney(Date date, String query) {
-
-        int totalMoneySpent = 0;
-
-
-        final int month = date.getMonth();
-        final int year = date.getYear() + 1900;
-
-        SQLiteDatabase db = getWritableDatabase();
-
-        Cursor cursor = db.rawQuery(query,null);
-
-        cursor.moveToFirst();
-
-        while (!cursor.isAfterLast()) {
-
-            String strDate = cursor.getString(cursor.getColumnIndex("date"));
-            String [] splitDate = strDate.split("-");
-            if (year == Integer.parseInt(splitDate[0]) && month == Integer.parseInt(splitDate[1])-1) {
-                totalMoneySpent += cursor.getInt(cursor.getColumnIndex("value"));
-            }
-
-            cursor.moveToNext();
-        }
-
-        db.close();
-
-        return totalMoneySpent;
-    }
 
 
     /**
      * A method to add a new category to the database.
      */
-    public Category addCategoryDB(String name, int limit, int pitureName, String color, Date creation){
+    public Category addCategory(String name, int limit, int pitureName, String color, Date creation){
         ContentValues values = new ContentValues();
         values.put("name", name);
         values.put("limitt", limit);
@@ -424,16 +334,16 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
      * @param category Category that will be deactivated
      */
 
-    public void deactivateCategoryDB(Category category, Date date){
+    public void deactivateCategory(Category category, Date date){
 
         category.setDestroyedDate(date);
-        updateCategoryDB(category);
+        updateCategory(category);
     }
     /**
      * A method to update category in database
      * @param category Category that will be updating
      */
-    public void updateCategoryDB(Category category){
+    public void updateCategory(Category category){
         ContentValues values = new ContentValues();
         values.put("name", category.get_name());
         values.put("limitt", category.get_limit());
@@ -455,7 +365,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
      * @param date represent the month
      * @param category represent the category which limit will gets
      */
-    public int getCategoryLimitDB(Date date, Category category){
+    public int getCategoryLimit(Date date, Category category){
 
         date.setDate(1);
         String query = "SELECT limitt FROM " + TABLE_LIMITS + " WHERE category_id = " + category.get_id() + " AND month = '" + dateToString(date) + "' ;";
@@ -471,61 +381,8 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
         return limit;
     }
 
-    /**
-     * A method for getting the budget of a specific month, it gets all the category limits of the month and adding them
-     * @param date represent the month
-     */
-    // Delete
-    public int getTotalBudgetDB(Date date){
 
-        Date thisDate = new Date();
-        if(thisDate.getYear() == date.getYear() && thisDate.getMonth() == date.getMonth()){
-            return getTotalBudgetThisMonth(date);
-        }else{
-            return getTotalBudgetPreviousMonth(date);
-        }
-
-    }
-
-    // Delete
-    private int getTotalBudgetThisMonth(Date date){
-        int totalBudget = 0;
-
-        List<Category> categories = getCategoriesDB(date);
-
-        for(Category category : categories){
-            totalBudget += category.get_limit();
-        }
-        return totalBudget;
-    }
-
-    // Delete
-    private int getTotalBudgetPreviousMonth(Date date){
-        int totalBudget = 0;
-        date.setDate(1);
-        String query = "SELECT limitt FROM " + TABLE_LIMITS + " WHERE month = '" + dateToString(date) + "' ;";
-
-        SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery(query,null);
-        c.moveToFirst();
-
-        while(!c.isAfterLast()){
-            int limit = c.getInt(c.getColumnIndex("limitt"));
-            totalBudget += limit;
-            c.moveToNext();
-        }
-
-        db.close();
-
-
-        return totalBudget;
-    }
-
-    public boolean thereIsCategoriesDB(Date date){
-        return getCategoriesDB(date).size() != 0;
-    }
-
-    public boolean thereIsCategoriesDB(){
+    public boolean thereIsCategories(){
 
         String query = "SELECT * FROM " + TABLE_CATEGORY + " ;";
 
@@ -542,14 +399,14 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     }
 
 
-    public List<Expense> getExpensesByDatesDB(Date start, Date end){
+    public List<Expense> getExpensesByDates(Date start, Date end){
 
         String query = "SELECT *  FROM " + TABLE_EXPENSE + " WHERE date BETWEEN '"
                 + dateToString(start) + "' AND '" + dateToString(end) + "';";
         return getExpenses(query);
     }
 
-    public List<Expense> getCategoryExpensesByDateDB(Date start, Date end, Category category){
+    public List<Expense> getCategoryExpensesByDate(Date start, Date end, Category category){
 
         String query = "SELECT *  FROM " + TABLE_EXPENSE + " WHERE date BETWEEN '"
                 + dateToString(start) + "' AND '" + dateToString(end) + "' AND category_id = " + category.get_id() + " ;";
@@ -570,7 +427,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
             int id = c.getInt(c.getColumnIndex("_id"));
             int value = c.getInt(c.getColumnIndex("value"));
             String name = c.getString(c.getColumnIndex("name"));
-            Date date = stringToDate(c.getString(c.getColumnIndex("date")));
+            Date date = stringToDateTime(c.getString(c.getColumnIndex("date")));
             Category cat = getCategory(c.getInt(c.getColumnIndex("category_id")));
 
             Expense exp = new Expense(id,name,value,date,cat);

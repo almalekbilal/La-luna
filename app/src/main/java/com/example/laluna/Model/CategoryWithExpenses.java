@@ -1,11 +1,9 @@
 package com.example.laluna.Model;
 
-import com.example.laluna.Model.repository.DBHandler;
-
-import java.util.Date;
+import java.io.Serializable;
 import java.util.List;
 
-public class CategoryWithExpenses {
+public class CategoryWithExpenses implements Serializable {
 
     private Category category;
     private int limit;

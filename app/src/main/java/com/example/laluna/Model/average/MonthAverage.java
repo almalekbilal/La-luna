@@ -1,8 +1,8 @@
-package com.example.laluna.Model.avarage;
+package com.example.laluna.Model.average;
 
 import com.example.laluna.Model.Arithmetic;
-import com.example.laluna.Model.avarage.times.TimeFactory;
-import com.example.laluna.Model.avarage.times.TimeObject;
+import com.example.laluna.Model.average.times.TimeFactory;
+import com.example.laluna.Model.average.times.TimeObject;
 import com.example.laluna.Model.repository.ExpenseRepository;
 
 import java.util.ArrayList;
@@ -10,9 +10,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-    class MonthAvarage extends Avarage{
+    class MonthAverage extends Average {
 
-    public MonthAvarage(Calendar start, Calendar end, ExpenseRepository expenseRepository) {
+    public MonthAverage(Calendar start, Calendar end, ExpenseRepository expenseRepository) {
         super(start, end, expenseRepository);
     }
 
