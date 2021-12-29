@@ -14,7 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.laluna.Model.Category;
-import com.example.laluna.Model.avarage.times.TimeObject;
+import com.example.laluna.Model.average.times.TimeObject;
 import com.example.laluna.Model.repository.ExpenseRepository;
 import com.example.laluna.R;
 import com.github.mikephil.charting.charts.BarChart;
@@ -84,28 +84,22 @@ public class StatsticFragment extends Fragment {
 
     public void dayOnClick() {
 
-        statsticViewModel.getTimeData().observe(this, new Observer<List<TimeObject>>() {
-            @Override
-            public void onChanged(List<TimeObject> timeObjects) {
 
                 Calendar start = Calendar.getInstance();
                 Calendar end = (Calendar) start.clone();
 
                 end.add(Calendar.DAY_OF_MONTH, -14);
                 statsticViewModel.getDayData(start, end, expenseRepository);
-                dataArray = timeObjects;
 
 
-            }
-        });
+
+
 
 
     }
 
     public void weekOnClick() {
-        statsticViewModel.getTimeData().observe(this, new Observer<List<TimeObject>>() {
-            @Override
-            public void onChanged(List<TimeObject> timeObjects) {
+
 
                 Calendar start = Calendar.getInstance();
                 Calendar end = (Calendar) start.clone();
@@ -114,17 +108,12 @@ public class StatsticFragment extends Fragment {
 
 
                 statsticViewModel.getWeekData(start, end, expenseRepository);
-                dataArray = timeObjects;
 
-            }
-        });
 
     }
 
     public void monthOnClick() {
-        statsticViewModel.getTimeData().observe(this, new Observer<List<TimeObject>>() {
-            @Override
-            public void onChanged(List<TimeObject> timeObjects) {
+
 
 
                 Calendar start = Calendar.getInstance();
@@ -133,10 +122,8 @@ public class StatsticFragment extends Fragment {
                 end.add(Calendar.MONTH, -12);
 
                 statsticViewModel.getMonthData(start, end, expenseRepository);
-                dataArray = timeObjects;
 
-            }
-        });
+
 
 
     }
@@ -170,3 +157,5 @@ public class StatsticFragment extends Fragment {
             barLabelNames.add(month);
 
         }
+
+ */
