@@ -9,11 +9,43 @@
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/bargraph"
-        android:layout_width="381dp"
-        android:layout_height="213dp"
+        android:layout_width="382dp"
+        android:layout_height="514dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </com.github.mikephil.charting.charts.BarChart>
+
+    <Button
+        android:id="@+id/dayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:text="Day"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bargraph" />
+
+    <Button
+        android:id="@+id/weekButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="48dp"
+        android:text="Week"
+        app:layout_constraintStart_toEndOf="@+id/dayButton"
+        app:layout_constraintTop_toBottomOf="@+id/bargraph" />
+
+    <Button
+        android:id="@+id/monthButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="48dp"
+        android:text="Month"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/weekButton"
+        app:layout_constraintTop_toBottomOf="@+id/bargraph" />
 </androidx.constraintlayout.widget.ConstraintLayout>
