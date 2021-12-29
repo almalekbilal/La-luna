@@ -8,7 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.laluna.Model.Category;
-import com.example.laluna.Model.repository.DBHandler;
+import com.example.laluna.Model.repository.CategoryRepository;
+import com.example.laluna.Model.repository.ExpenseRepository;
 
 import java.util.Date;
 import java.util.List;
@@ -20,7 +21,8 @@ import java.util.List;
  * @author Ali Malla
  */
 public class AddExpenseViewModel extends ViewModel {
-    private DBHandler dbHandler;
+    private ExpenseRepository expenseRepository;
+    private CategoryRepository categoryRepository;
     private Context context;   /// whyyyyy
     private List<Category> categories;
     private Category selectedCategory;
@@ -36,7 +38,8 @@ public class AddExpenseViewModel extends ViewModel {
      */
     public void init(Context context){
         this.context = context;
-        dbHandler = new DBHandler(context);
+        expenseRepository = ExpenseRepository.getInstance(context);
+        categoryRepository = CategoryRepository.getInstance(context);
         categoriesNames = new MutableLiveData<>();
         categoriesNames.postValue(getCategoriesNames());
     }
@@ -48,7 +51,7 @@ public class AddExpenseViewModel extends ViewModel {
      * @param value The value of the new expense
      */
     public void addExp(String name, int value){
-        dbHandler.addExpense(name,value,new Date(),selectedCategory);
+        expenseRepository.addExpense(name,value,new Date(),selectedCategory);
         Toast.makeText(context,"Expense is added", Toast.LENGTH_LONG).show();
     }
 
@@ -62,7 +65,7 @@ public class AddExpenseViewModel extends ViewModel {
 
     private String[] getCategoriesNames(){
 
-        categories = dbHandler.getCategories(new Date());
+        categories = categoryRepository.getCategories(new Date());
         selectedCategory = categories.get(0);
         String [] names = new String[categories.size()];
 

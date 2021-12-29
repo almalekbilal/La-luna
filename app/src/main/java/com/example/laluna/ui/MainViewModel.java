@@ -5,7 +5,8 @@ import android.content.Context;
 import androidx.lifecycle.ViewModel;
 
 import com.example.laluna.Model.Category;
-import com.example.laluna.Model.repository.DBHandler;
+import com.example.laluna.Model.repository.CategoryRepository;
+import com.example.laluna.Model.repository.ExpenseRepository;
 import com.example.laluna.R;
 
 import java.util.ArrayList;
@@ -23,19 +24,21 @@ public class MainViewModel extends ViewModel {
         insertToDB();
     }
     private void insertToDB() {
-        DBHandler db = new DBHandler(context);
+
+        CategoryRepository categoryRepository = CategoryRepository.getInstance(context);
+        ExpenseRepository expenseRepository = ExpenseRepository.getInstance(context);
 
 
-        if (!db.thereIsCategories()) {
+        if (!categoryRepository.thereIsCategories()) {
 
             List<Category> cat = new ArrayList<>();
 
-            Category food = db.addCategory("Food", 1000, R.drawable.food, "#09F9BF", new Date());
-            Category clothes = db.addCategory("Clothes", 1000, R.drawable.clothes, "#03A9F1", new Date());
-            Category house = db.addCategory("House", 1000, R.drawable.home, "#dd6800", new Date());
-            Category entertainment = db.addCategory("Entertainment", 1000, R.drawable.entertainment, "#B2378E", new Date());
-            Category health = db.addCategory("Health", 1000, R.drawable.health, "#f30008", new Date());
-            Category other = db.addCategory("Other", 1000, R.drawable.other, "#737274", new Date());
+            Category food = categoryRepository.addCategory("Food", 1000, R.drawable.food, "#09F9BF", new Date());
+            Category clothes = categoryRepository.addCategory("Clothes", 1000, R.drawable.clothes, "#03A9F1", new Date());
+            Category house = categoryRepository.addCategory("House", 1000, R.drawable.home, "#dd6800", new Date());
+            Category entertainment = categoryRepository.addCategory("Entertainment", 1000, R.drawable.entertainment, "#B2378E", new Date());
+            Category health = categoryRepository.addCategory("Health", 1000, R.drawable.health, "#f30008", new Date());
+            Category other = categoryRepository.addCategory("Other", 1000, R.drawable.other, "#737274", new Date());
 
 
             cat.add(food);
@@ -45,40 +48,40 @@ public class MainViewModel extends ViewModel {
             cat.add(health);
             cat.add(other);
 
-            addExpenses(cat, new Date(), db);
+            addExpenses(cat, new Date(), expenseRepository);
 
         }
 
     }
 
-    private void addExpenses(List<Category> cat, Date date, DBHandler handler) {
+    private void addExpenses(List<Category> cat, Date date, ExpenseRepository expenseRepository) {
 
-        handler.addExpense("MAX Burger", 100, date, cat.get(0));
-        handler.addExpense("Pizza", 100, date, cat.get(0));
-        handler.addExpense("Tikka masala", 100, date, cat.get(0));
-        handler.addExpense("Godis", 100, date, cat.get(0));
+        expenseRepository.addExpense("MAX Burger", 100, date, cat.get(0));
+        expenseRepository.addExpense("Pizza", 100, date, cat.get(0));
+        expenseRepository.addExpense("Tikka masala", 100, date, cat.get(0));
+        expenseRepository.addExpense("Godis", 100, date, cat.get(0));
 
-        handler.addExpense("T shirt", 100, date, cat.get(1));
-        handler.addExpense("Skor", 100, date, cat.get(1));
-        handler.addExpense("Tröja", 100, date, cat.get(1));
-
-
-        handler.addExpense("Lampor", 100, date, cat.get(2));
-        handler.addExpense("Lampor", 100, date, cat.get(2));
-        handler.addExpense("Lampor", 100, date, cat.get(2));
+        expenseRepository.addExpense("T shirt", 100, date, cat.get(1));
+        expenseRepository.addExpense("Skor", 100, date, cat.get(1));
+        expenseRepository.addExpense("Tröja", 100, date, cat.get(1));
 
 
+        expenseRepository.addExpense("Lampor", 100, date, cat.get(2));
+        expenseRepository.addExpense("Lampor", 100, date, cat.get(2));
+        expenseRepository.addExpense("Lampor", 100, date, cat.get(2));
 
-        handler.addExpense("Skarasommarland", 500, date, cat.get(3));
-        handler.addExpense("Liseberg", 500, date, cat.get(3));
 
 
-        handler.addExpense("Bil olja", 2000, date, cat.get(5));
-        handler.addExpense("Tandläkare", 700, date, cat.get(4));
-        handler.addExpense("Liseberg", 500, date, cat.get(3));
-        handler.addExpense("Lampor", 100, date, cat.get(2));
-        handler.addExpense("Jacka", 100, date, cat.get(1));
-        handler.addExpense("Fisk", 100, date, cat.get(0));
+        expenseRepository.addExpense("Skarasommarland", 500, date, cat.get(3));
+        expenseRepository.addExpense("Liseberg", 500, date, cat.get(3));
+
+
+        expenseRepository.addExpense("Bil olja", 2000, date, cat.get(5));
+        expenseRepository.addExpense("Tandläkare", 700, date, cat.get(4));
+        expenseRepository.addExpense("Liseberg", 500, date, cat.get(3));
+        expenseRepository.addExpense("Lampor", 100, date, cat.get(2));
+        expenseRepository.addExpense("Jacka", 100, date, cat.get(1));
+        expenseRepository.addExpense("Fisk", 100, date, cat.get(0));
 
     }
 }

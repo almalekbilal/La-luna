@@ -9,10 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.laluna.Model.Category;
 import com.example.laluna.Model.DateConverter;
 import com.example.laluna.Model.repository.CategoryRepository;
-import com.example.laluna.Model.repository.DBHandler;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
