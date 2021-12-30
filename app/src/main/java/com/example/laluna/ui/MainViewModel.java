@@ -48,7 +48,22 @@ public class MainViewModel extends ViewModel {
             cat.add(health);
             cat.add(other);
 
+
             addExpenses(cat, new Date(), expenseRepository);
+            /*
+            addExpenses(cat, new Date(121, 2, 15), expenseRepository);
+            addExpenses(cat, new Date(121, 3, 15), expenseRepository);
+            addExpenses(cat, new Date(121, 4, 15), expenseRepository);
+            addExpenses(cat, new Date(121, 5, 15), expenseRepository);
+            addExpenses(cat, new Date(121, 6, 15), expenseRepository);
+            addExpenses(cat, new Date(121, 7, 15), expenseRepository);
+            addExpenses(cat, new Date(121, 8, 15), expenseRepository);
+            addExpenses(cat, new Date(121, 9, 15), expenseRepository);
+            addExpenses(cat, new Date(121, 10, 15), expenseRepository);
+            addExpenses(cat, new Date(121, 0, 15), expenseRepository);
+            addExpenses(cat, new Date(121, 11, 15), expenseRepository);
+
+*/
 
         }
 
@@ -82,6 +97,7 @@ public class MainViewModel extends ViewModel {
         expenseRepository.addExpense("Lampor", 100, date, cat.get(2));
         expenseRepository.addExpense("Jacka", 100, date, cat.get(1));
         expenseRepository.addExpense("Fisk", 100, date, cat.get(0));
+
 
     }
 }

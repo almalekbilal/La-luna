@@ -254,7 +254,7 @@ public class DatabaseClassTest {
         assertTrue(hasBeenDeleted);
 
     }
-
+/*
 
     @Test
     public void deleteExpenseMoreConditionsTest() {
@@ -293,7 +293,7 @@ public class DatabaseClassTest {
 
 
     }
-
+*/
 
     @Test
     public void updateExpensesTest(){
@@ -408,7 +408,7 @@ public class DatabaseClassTest {
         assertEquals(1950,db.getTotalBudget(new Date(121,9,1)));
 
     }
-*/
+/*
     @Test
     public void getCategoryExpensesGeneralTest(){
 
@@ -445,7 +445,7 @@ public class DatabaseClassTest {
         assertEquals(4,expenses.size());
 
     }
-
+*/
     @Test
     public void getCategoryLimitGeneralTest(){
 

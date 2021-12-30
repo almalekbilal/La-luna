@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.laluna.Model.DateConverter;
 import com.example.laluna.Model.Expense;
 import com.example.laluna.R;
 
@@ -60,8 +61,8 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
     public void onBindViewHolder(@NonNull ExpensesAdapter.ExpenseHolder holder, int position) {
         holder.price.setText(expenses.get(position).get_value() + " Kr");
         holder.name.setText(expenses.get(position).get_name());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        holder.date.setText(sdf.format(expenses.get(position).get_date()));
+
+        holder.date.setText(DateConverter.dateToString(expenses.get(position).get_date()));
         holder.categoryImage.setImageResource(expenses.get(position).get_category().get_pictureName());
         listener.onScroll(position);
 
