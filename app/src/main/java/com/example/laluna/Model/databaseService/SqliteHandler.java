@@ -402,14 +402,14 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
     public List<Expense> getExpensesByDates(Date start, Date end){
 
         String query = "SELECT *  FROM " + TABLE_EXPENSE + " WHERE date BETWEEN '"
-                + dateToString(start) + "' AND '" + dateToString(end) + "';";
+                + datetimeToString(start) + "' AND '" + datetimeToString(end) + "';";
         return getExpenses(query);
     }
 
     public List<Expense> getCategoryExpensesByDate(Date start, Date end, Category category){
 
         String query = "SELECT *  FROM " + TABLE_EXPENSE + " WHERE date BETWEEN '"
-                + dateToString(start) + "' AND '" + dateToString(end) + "' AND category_id = " + category.get_id() + " ;";
+                + datetimeToString(start) + "' AND '" + datetimeToString(end) + "' AND category_id = " + category.get_id() + " ;";
         return getExpenses(query);
     }
 

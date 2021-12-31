@@ -4,6 +4,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import com.example.laluna.Model.average.Average;
+import com.example.laluna.Model.average.AverageFactory;
+
+import java.util.Calendar;
+
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -19,5 +24,6 @@ public class ExampleUnitTest {
     @Test
     public void addExpenses(){
     }
+
 
 }

@@ -2,13 +2,18 @@
 package com.example.laluna;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.example.laluna.Model.Category;
+import com.example.laluna.Model.DateConverter;
 import com.example.laluna.Model.Expense;
+import com.example.laluna.Model.average.Average;
+import com.example.laluna.Model.average.AverageFactory;
 import com.example.laluna.Model.databaseService.IDatabaseHandler;
 import com.example.laluna.Model.databaseService.SqliteHandler;
+import com.example.laluna.Model.repository.ExpenseRepository;
 
 
 import org.junit.After;
@@ -16,8 +21,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
@@ -254,8 +261,8 @@ public class DatabaseClassTest {
         assertTrue(hasBeenDeleted);
 
     }
-/*
 
+/*
     @Test
     public void deleteExpenseMoreConditionsTest() {
 
@@ -293,7 +300,9 @@ public class DatabaseClassTest {
 
 
     }
-*/
+
+    */
+
 
     @Test
     public void updateExpensesTest(){
@@ -408,7 +417,7 @@ public class DatabaseClassTest {
         assertEquals(1950,db.getTotalBudget(new Date(121,9,1)));
 
     }
-/*
+
     @Test
     public void getCategoryExpensesGeneralTest(){
 
@@ -445,7 +454,9 @@ public class DatabaseClassTest {
         assertEquals(4,expenses.size());
 
     }
-*/
+
+     */
+
     @Test
     public void getCategoryLimitGeneralTest(){
 
@@ -551,6 +562,7 @@ public class DatabaseClassTest {
 
         assertEquals(5, expenses.size());
     }
+
 
 
 
