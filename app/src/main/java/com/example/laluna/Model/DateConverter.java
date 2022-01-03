@@ -2,7 +2,6 @@ package com.example.laluna.Model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class DateConverter {
@@ -98,14 +97,12 @@ public class DateConverter {
     }
 
     public static boolean isThisMonth(Date date){
-        Date nowdate = new Date();
+        Date nowDate = new Date();
 
-        if(nowdate.getYear() == date.getYear() && nowdate.getMonth() == date.getMonth()){
+        if(nowDate.getYear() == date.getYear() && nowDate.getMonth() == date.getMonth()){
             return true;
         }else{
             return false;
         }
     }
-
-
 }

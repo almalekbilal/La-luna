@@ -45,8 +45,8 @@ public class ExpenseRepository {
     }
 
 
-    public void addExpense(String name, int value, Date date, Category category) {
-        db.addExpense(name,value,date,category);
+    public Expense addExpense(String name, int value, Date date, Category category) {
+        return db.addExpense(name,value,date,category);
     }
 
     public void updateExpense(Expense expense){
