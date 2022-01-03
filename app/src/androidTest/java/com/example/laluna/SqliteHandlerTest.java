@@ -34,11 +34,12 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(AndroidJUnit4.class)
 
-public class DatabaseClassTest {
+public class SqliteHandlerTest {
 
     private Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
     private IDatabaseHandler db = new SqliteHandler(appContext, null, null, 0);
+
 
 
     @Before
@@ -62,6 +63,7 @@ public class DatabaseClassTest {
 
     @Test
     public void addCategoryGeneralTest() {
+
         Category c1 = db.addCategory("food", 100, 0, null, new Date(121, 01, 01));
         db.addCategory("car", 500, 0, "red", new Date(120, 01, 01));
 
@@ -283,9 +285,9 @@ public class DatabaseClassTest {
         db.deleteExpense(expense5);
 
 
-        List<Expense> expenses1 = db.getCategoryExpense(category1.get_id());
+        List<Expense> expenses1 = db.getCategoryExpensesByDate(new Date(120, 01, 01),new Date(),category1);
 
-        List<Expense> expenses2 = db.getCategoryExpense(category2.get_id());
+        List<Expense> expenses2 = db.getCategoryExpensesByDate(new Date(121, 01, 01), new Date(),category2);
 
         boolean result = expenses1.size()==1 && expenses2.size()==0;
 
@@ -416,7 +418,7 @@ public class DatabaseClassTest {
 
         db.addExpense("Expense1", 700, new Date(121, 05, 1), c1);
 
-        List<Expense> expenses = db.getCategoryExpense(c1.get_id());
+        List<Expense> expenses = db.getCategoryExpensesByDate(new Date(121, 02, 01),new Date(),c1);
 
         assertEquals(1, expenses.size());
     }
@@ -440,7 +442,7 @@ public class DatabaseClassTest {
         db.addExpense("Disco", 200,new Date(121,5,15),c2);
         db.addExpense("prostitution", 500,new Date(121,5,22),c2);
 
-        List<Expense> expenses = db.getCategoryExpense(c1.get_id());
+        List<Expense> expenses = db.getCategoryExpensesByDate(new Date(121,5,1),new Date(),c1);
 
         assertEquals(4,expenses.size());
 
@@ -483,7 +485,7 @@ public class DatabaseClassTest {
         assertEquals(true, limitsChanged);
     }
 
-    /*
+
     @Test
     public void isThereCategoriesTest(){
         Category food = db.addCategory("Food",1500,R.drawable.food,null,new Date(121,7,1));
@@ -493,9 +495,9 @@ public class DatabaseClassTest {
         Category health = db.addCategory("Health",1000,R.drawable.health,null,new Date(121,7,1));
         Category other = db.addCategory("Other",3000,R.drawable.other,null,new Date(121,7,1));
 
-        assertEquals(true, db.thereIsCategories(new Date(121,7,1)));
+        assertEquals(true, db.thereIsCategories());
     }
-*/
+
     @Test
     public void getExpensesByDatesTest(){
 
