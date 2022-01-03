@@ -1,5 +1,7 @@
 package com.example.laluna.Model.average;
 
+import android.util.Log;
+
 import com.example.laluna.Model.Arithmetic;
 import com.example.laluna.Model.average.times.TimeFactory;
 import com.example.laluna.Model.average.times.TimeObject;
@@ -29,8 +31,8 @@ import java.util.List;
             endCalculationDate.add(Calendar.DAY_OF_MONTH, -endCalculationDate.get(Calendar.DAY_OF_MONTH));
 
 
-            TimeObject week = TimeFactory.getWeekObject(end, calculateMonthValue(startCalculationDate, endCalculationDate));      // Use start and end date to calculate the value instead of 300
-            list.add(week);
+            TimeObject month = TimeFactory.getMonthObject(end, calculateMonthValue(startCalculationDate, endCalculationDate));      // Use start and end date to calculate the value instead of 300
+            list.add(month);
             end.add(Calendar.MONTH, -1);
         }
         return list;

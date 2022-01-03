@@ -1,6 +1,9 @@
 package com.example.laluna.Model.average;
 
+import android.util.Log;
+
 import com.example.laluna.Model.Arithmetic;
+import com.example.laluna.Model.DateConverter;
 import com.example.laluna.Model.average.times.TimeFactory;
 import com.example.laluna.Model.average.times.TimeObject;
 import com.example.laluna.Model.repository.ExpenseRepository;
@@ -19,9 +22,11 @@ import java.util.List;
     @Override
     List<TimeObject> makeTimesList() {
         List<TimeObject> list = new ArrayList<>();
+
         while(end.after(start)){
             end.add(Calendar.DAY_OF_MONTH, -1);
             TimeObject day = TimeFactory.getDayObject(end, calculateDayValue(end.getTime()));    // calculate the value and pup it instead of 200
+
             list.add(day);
         }
         return list;
@@ -34,9 +39,9 @@ import java.util.List;
         start.setSeconds(0);
 
         Date end = (Date)date.clone();
-        start.setHours(23);
-        start.setMinutes(59);
-        start.setSeconds(59);
+        end.setHours(23);
+        end.setMinutes(59);
+        end.setSeconds(59);
 
         return Arithmetic.calculateTotalMoneySpent(expenseRepository.getExpensesByStartAndEnd(start,end));
 
