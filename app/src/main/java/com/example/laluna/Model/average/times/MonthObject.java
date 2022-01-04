@@ -12,6 +12,6 @@ class MonthObject extends TimeObject{
     @NonNull
     @Override
     public String toString() {
-        return String.valueOf(date.get(Calendar.MONTH));
+        return String.valueOf(date.get(Calendar.MONTH) + 1);
     }
 }
