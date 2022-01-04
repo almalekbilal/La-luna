@@ -13,7 +13,7 @@ class DayObject extends TimeObject{
     @NonNull
     @Override
     public String toString() {
-        String text = date.get(Calendar.DAY_OF_MONTH) + "/" + date.get(Calendar.MONTH);
+        String text = date.get(Calendar.DAY_OF_MONTH) + "/" + (date.get(Calendar.MONTH)+1);
         return text;
     }
 }
