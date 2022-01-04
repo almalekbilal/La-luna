@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.laluna.Model.Arithmetic;
 import com.example.laluna.Model.Category;
 import com.example.laluna.Model.CategoryWithExpenses;
 import com.example.laluna.Model.Expense;
@@ -102,7 +103,11 @@ public class CategoryExpensesActivity extends AppCompatActivity {
         categoryExpensesListView.setAdapter(listAdapter);
 
 
+        TextView spent = findViewById(R.id.categorySpent);
+        TextView budgetView = findViewById(R.id.categoryNameAndBudget);
 
+        spent.setText(Arithmetic.calculateTotalMoneySpent(expenses) + " kr");
+        budgetView.setText(cat.get_name() + " budget " + budget + " kr");
         backButtonToAnalysisFragment();
 
 

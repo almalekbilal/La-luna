@@ -60,7 +60,7 @@ public class MainViewModel extends ViewModel {
             addExpense(cat, new Date(121, 10, 18), expenseRepository, 1000);
             addExpense(cat, new Date(121, 10, 11), expenseRepository, 2000);
             addExpense(cat, new Date(121, 10, 4), expenseRepository, 3000);
-            addExpense(cat, new Date(121, 9, 28), expenseRepository, 4500);
+            addExpense(cat, new Date(121, 9, 2), expenseRepository, 4500);
          //   addExpenses(cat, new Date(121, 11, 24), expenseRepository);
 
 

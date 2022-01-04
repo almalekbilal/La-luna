@@ -27,6 +27,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class StatsticFragment extends Fragment {
     ExpenseRepository expenseRepository;
     private StatsticViewModel statsticViewModel;
     List<TimeObject> dataArray = new ArrayList<>();
-    double average;
+    double averageValue;
     BarChart barChart;
     ArrayList<BarEntry> barEntries;
     ArrayList<String> barLabelNames;
@@ -56,7 +57,7 @@ public class StatsticFragment extends Fragment {
         timeObjectsList=new ArrayList<>();
         barEntries = new ArrayList<>();
         barLabelNames = new ArrayList<>();
-
+        averageValue = 0;
 
 
         timeObjectsList.add(TimeFactory.getMonthObject(Calendar.getInstance(),44));
@@ -69,6 +70,16 @@ public class StatsticFragment extends Fragment {
         timeObjectsList.add(TimeFactory.getMonthObject(Calendar.getInstance(),12));
         timeObjectsList.add(TimeFactory.getMonthObject(Calendar.getInstance(),2));
 
+        statsticViewModel.getAverageData().observe(this, new Observer<Double>() {
+
+            @Override
+            public void onChanged(Double average) {
+                averageValue = average;
+                barChartSettings();
+
+            }
+        });
+
 
 
 
@@ -76,8 +87,10 @@ public class StatsticFragment extends Fragment {
         statsticViewModel.getTimeData().observe(this, new Observer<List<TimeObject>>() {
             @Override
             public void onChanged(List<TimeObject> timeObjects) {
+
                 timeObjectsList =timeObjects;
                 drawBarChart(timeObjects);
+                barChartSettings();
 
             }
         });
@@ -91,11 +104,12 @@ public class StatsticFragment extends Fragment {
 
     public void drawBarChart( List<TimeObject> timeObjects){
 
-        String label = "";
-        for (int i = 0; i< timeObjects.size(); i++){
-            label = timeObjects.get(i).toString();
+
+        for (int i = timeObjects.size()-1; i>= 0; i--){
+            String label = timeObjects.get(i).toString();
+            System.out.println(label);
             int value = (int)timeObjects.get(i).getValue();
-            barEntries.add(new BarEntry(i,value));
+            barEntries.add(new BarEntry(timeObjects.size()-i-1,value));
             barLabelNames.add(label);
         }
 
@@ -103,6 +117,11 @@ public class StatsticFragment extends Fragment {
         BarDataSet barDataSet = new BarDataSet(barEntries, "Spending");
         barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
         barDataSet.setBarBorderColor(Color.rgb(203, 203, 203));
+
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(barLabelNames));
+        xAxis.setLabelCount(barLabelNames.size());
+
 
         BarData barData = new BarData(barDataSet);
         barData.setBarWidth(0.7f);
@@ -116,7 +135,6 @@ public class StatsticFragment extends Fragment {
 
         barChart.setDrawBorders(true);
         barChart.setBorderColor(Color.RED);
-        barChart.getDescription().setEnabled(false);
         barChart.getXAxis().setDrawGridLines(false);
         barChart.getAxisRight().setEnabled(false);
         barChart.getAxisLeft().setEnabled(false);
@@ -124,10 +142,6 @@ public class StatsticFragment extends Fragment {
         barChart.setBackgroundColor(Color.WHITE);
         barChart.animateY(500);
         barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-        XAxis xAxis = barChart.getXAxis();
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(barLabelNames));
-        xAxis.setLabelCount(barLabelNames.size());
-
         barChart.invalidate();
 
     }

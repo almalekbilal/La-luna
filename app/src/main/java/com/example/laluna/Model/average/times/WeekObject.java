@@ -14,6 +14,6 @@ class WeekObject extends TimeObject{
     @Override
     public String toString() {
 
-        return String.valueOf(date.get(Calendar.WEEK_OF_YEAR));
+        return "v."+ String.valueOf(date.get(Calendar.WEEK_OF_YEAR));
     }
 }

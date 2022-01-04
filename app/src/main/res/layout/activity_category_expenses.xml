@@ -35,8 +35,8 @@
         android:layout_marginStart="144dp"
         android:layout_marginTop="253dp"
         android:text="MONEY SPENT"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/categoryNameAndBudget"
@@ -46,8 +46,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="22dp"
         android:text="TextView"
-        android:textSize="20sp"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/categorySpent"
@@ -57,8 +57,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="219dp"
         android:text="TextView"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
 
     <ImageButton
         android:id="@+id/backButton"
