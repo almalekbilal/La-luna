@@ -21,6 +21,7 @@ import java.util.List;
     @Override
     List<TimeObject> makeTimesList() {
         List<TimeObject> list = new ArrayList<>();
+        end.add(Calendar.DAY_OF_MONTH, 1);
         end.add(Calendar.MONTH, -1);
         while(end.after(start)){
             Calendar startCalculationDate = (Calendar) end.clone();
@@ -31,7 +32,7 @@ import java.util.List;
             endCalculationDate.add(Calendar.DAY_OF_MONTH, -endCalculationDate.get(Calendar.DAY_OF_MONTH));
 
 
-            TimeObject month = TimeFactory.getMonthObject(end, calculateMonthValue(startCalculationDate, endCalculationDate));      // Use start and end date to calculate the value instead of 300
+            TimeObject month = TimeFactory.getMonthObject((Calendar)end.clone(), calculateMonthValue(startCalculationDate, endCalculationDate));      // Use start and end date to calculate the value instead of 300
             list.add(month);
             end.add(Calendar.MONTH, -1);
         }

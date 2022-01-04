@@ -32,7 +32,7 @@ import java.util.List;
             endCalculationDate.add(Calendar.DAY_OF_MONTH, (7 - end.get(Calendar.DAY_OF_WEEK)) );
 
 
-            TimeObject week = TimeFactory.getWeekObject(end, calculateWeekValue(startCalculationDate,endCalculationDate));      // Use start and end date to calculate the value instead of 300
+            TimeObject week = TimeFactory.getWeekObject((Calendar) end.clone(), calculateWeekValue(startCalculationDate,endCalculationDate));      // Use start and end date to calculate the value instead of 300
             list.add(week);
 
             end.add(Calendar.WEEK_OF_YEAR, -1);

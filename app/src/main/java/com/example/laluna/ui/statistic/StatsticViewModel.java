@@ -22,7 +22,6 @@ import com.example.laluna.Model.average.times.TimeObject;
 import com.example.laluna.Model.repository.ExpenseRepository;
 import com.example.laluna.R;
 import com.example.laluna.ui.analysis.AnalysisViewModel;
-import com.example.laluna.ui.analysis.CategoryWithMoney;
 import com.example.laluna.ui.analysis.GridViewAdapter;
 import com.example.laluna.ui.analysis.categoryExpensesActivity.CategoryExpensesActivity;
 
@@ -46,7 +45,7 @@ public class StatsticViewModel extends ViewModel {
     }
 
     public void init (Calendar start, Calendar end, ExpenseRepository expenseRepository){
-        getDayData(start, end, expenseRepository);
+        getMonthData(start, end, expenseRepository);
 
     }
 
@@ -60,7 +59,6 @@ public class StatsticViewModel extends ViewModel {
 
        entriesArray = avarage.getTimesList();
        average = avarage.getAvarage();
-        System.out.println(entriesArray.size()+"im here dont worry");
        averageMutableData.postValue(average);
        timeObjectMutableData.postValue(entriesArray);
 

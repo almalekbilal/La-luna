@@ -25,7 +25,7 @@ import java.util.List;
 
         while(end.after(start)){
             end.add(Calendar.DAY_OF_MONTH, -1);
-            TimeObject day = TimeFactory.getDayObject(end, calculateDayValue(end.getTime()));    // calculate the value and pup it instead of 200
+            TimeObject day = TimeFactory.getDayObject((Calendar) end.clone(), calculateDayValue(end.getTime()));    // calculate the value and pup it instead of 200
 
             list.add(day);
         }

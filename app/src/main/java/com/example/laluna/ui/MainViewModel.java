@@ -49,24 +49,29 @@ public class MainViewModel extends ViewModel {
             cat.add(other);
 
 
-            addExpenses(cat, new Date(), expenseRepository);
-            /*
-            addExpenses(cat, new Date(121, 2, 15), expenseRepository);
-            addExpenses(cat, new Date(121, 3, 15), expenseRepository);
-            addExpenses(cat, new Date(121, 4, 15), expenseRepository);
-            addExpenses(cat, new Date(121, 5, 15), expenseRepository);
-            addExpenses(cat, new Date(121, 6, 15), expenseRepository);
-            addExpenses(cat, new Date(121, 7, 15), expenseRepository);
-            addExpenses(cat, new Date(121, 8, 15), expenseRepository);
-            addExpenses(cat, new Date(121, 9, 15), expenseRepository);
-            addExpenses(cat, new Date(121, 10, 15), expenseRepository);
-            addExpenses(cat, new Date(121, 0, 15), expenseRepository);
-            addExpenses(cat, new Date(121, 11, 15), expenseRepository);
+         //   addExpenses(cat, new Date(), expenseRepository);
 
-*/
+            addExpense(cat, new Date(121, 11, 30), expenseRepository, 2567);
+            addExpense(cat, new Date(121, 11, 23), expenseRepository, 2000);
+            addExpense(cat, new Date(121, 11, 16), expenseRepository, 1400);
+            addExpense(cat, new Date(121, 11, 9), expenseRepository, 4000);
+            addExpense(cat, new Date(121, 11, 2), expenseRepository, 2999);
+            addExpense(cat, new Date(121, 10, 25), expenseRepository, 4500);
+            addExpense(cat, new Date(121, 10, 18), expenseRepository, 1000);
+            addExpense(cat, new Date(121, 10, 11), expenseRepository, 2000);
+            addExpense(cat, new Date(121, 10, 4), expenseRepository, 3000);
+            addExpense(cat, new Date(121, 9, 28), expenseRepository, 4500);
+         //   addExpenses(cat, new Date(121, 11, 24), expenseRepository);
+
+
+
 
         }
 
+    }
+
+    private void addExpense(List<Category> cat, Date date, ExpenseRepository expenseRepository, int value){
+        expenseRepository.addExpense("MAX Burger", value, date, cat.get(0));
     }
 
     private void addExpenses(List<Category> cat, Date date, ExpenseRepository expenseRepository) {

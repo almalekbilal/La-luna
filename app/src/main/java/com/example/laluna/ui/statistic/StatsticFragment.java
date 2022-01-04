@@ -2,6 +2,7 @@ package com.example.laluna.ui.statistic;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,12 +72,11 @@ public class StatsticFragment extends Fragment {
 
 
 
-        monthOnClick();
+        weekOnClick();
         statsticViewModel.getTimeData().observe(this, new Observer<List<TimeObject>>() {
             @Override
             public void onChanged(List<TimeObject> timeObjects) {
                 timeObjectsList =timeObjects;
-                System.out.println("helloooooooooooooooooooooo");
                 drawBarChart(timeObjects);
 
             }
@@ -91,11 +91,10 @@ public class StatsticFragment extends Fragment {
 
     public void drawBarChart( List<TimeObject> timeObjects){
 
-        System.out.println(timeObjects.size());
+        String label = "";
         for (int i = 0; i< timeObjects.size(); i++){
-            String label = "test";
+            label = timeObjects.get(i).toString();
             int value = (int)timeObjects.get(i).getValue();
-            System.out.println(value+" ok");
             barEntries.add(new BarEntry(i,value));
             barLabelNames.add(label);
         }
@@ -135,18 +134,18 @@ public class StatsticFragment extends Fragment {
 
     public void dayOnClick() {
 
+                Calendar end = Calendar.getInstance();
                 Calendar start = Calendar.getInstance();
-                Calendar end = (Calendar) start.clone();
 
-                end.add(Calendar.DAY_OF_MONTH, -14);
+                start.add(Calendar.DAY_OF_MONTH, -14);
                 statsticViewModel.getDayData(start, end, expenseRepository);
     }
 
     public void weekOnClick() {
-                Calendar start = Calendar.getInstance();
-                Calendar end = (Calendar) start.clone();
+               Calendar end = Calendar.getInstance();
+              Calendar start = Calendar.getInstance();
 
-                end.add(Calendar.WEEK_OF_YEAR, -12);
+                start.add(Calendar.WEEK_OF_YEAR, -12);
                 statsticViewModel.getWeekData(start, end, expenseRepository);
             }
 
@@ -154,10 +153,10 @@ public class StatsticFragment extends Fragment {
 
 
     public void monthOnClick() {
+                Calendar end = Calendar.getInstance();
                 Calendar start = Calendar.getInstance();
-                Calendar end = (Calendar) start.clone();
 
-                end.add(Calendar.MONTH, -12);
+                start.add(Calendar.MONTH, -12);
                 statsticViewModel.getMonthData(start, end, expenseRepository);
 
             }
