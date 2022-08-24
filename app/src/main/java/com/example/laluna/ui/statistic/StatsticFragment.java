@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -63,11 +64,13 @@ public class StatsticFragment extends Fragment {
         timeObjectsList.add(TimeFactory.getMonthObject(Calendar.getInstance(),12));
         timeObjectsList.add(TimeFactory.getMonthObject(Calendar.getInstance(),2));
 
+        final TextView averageText = root.findViewById(R.id.txt_average);
         statsticViewModel.getAverageData().observe(this, new Observer<Double>() {
 
             @Override
             public void onChanged(Double average) {
                 averageValue = average;
+                averageText.setText("Average: " + averageValue + " Kr");
                 barChartSettings();
 
             }
