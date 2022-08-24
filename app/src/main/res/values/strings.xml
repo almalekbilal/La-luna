@@ -3,7 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_analysis">Analysis</string>
     <string name="title_categories">Categories</string>
-    <string name="title_help">Help</string>
+    <string name="title_help">Statistic</string>
     <string name="leftArrow"><![CDATA[<---]]></string>
     <string name="rightArrow"><![CDATA[--->]]></string>
     <string name="addNewButton">+ Add new expense</string>

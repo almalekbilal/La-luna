@@ -6,8 +6,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.laluna.Model.DBHandler;
-import com.example.laluna.Model.Expense;
+import com.example.laluna.Model.repository.CategoryRepository;
+import com.example.laluna.Model.categoryAndExpense.Expense;
+import com.example.laluna.Model.repository.ExpenseRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +26,9 @@ public class HomeViewModel extends ViewModel {
     int startExpensesIndex = 0;
     private MutableLiveData<List<Integer>> totalAndSpent = new MutableLiveData<>();
     private MutableLiveData<List<Expense>> expenses = new MutableLiveData<>();
-    private DBHandler dbHandler;
+    private ExpenseRepository expenseRepository;
+    private CategoryRepository categoryRepository;
+
 
     public HomeViewModel() {
 
@@ -38,13 +41,14 @@ public class HomeViewModel extends ViewModel {
      * @param context the android information that is needen for the database
      */
     public void init(Context context){
-        dbHandler = new DBHandler(context);
+        expenseRepository = ExpenseRepository.getInstance(context);
+        categoryRepository = CategoryRepository.getInstance(context);
 
         List<Integer> ts = new ArrayList<>();
         Date date = new Date();
         date.setDate(1);
-        ts.add(dbHandler.getTotalMoneySpent(date));
-        ts.add(dbHandler.getTotalBudget(date));
+        ts.add(expenseRepository.getTotalMoneySpend(date));
+        ts.add(categoryRepository.getTotalBudget(date));
 
         totalAndSpent.postValue(ts);
 
@@ -59,7 +63,7 @@ public class HomeViewModel extends ViewModel {
      * The gets the new expenses needed from the data base handler and send it to the view
      */
     private void sendExpenses(){
-        List<Expense> ex = dbHandler.getExpenses(startExpensesIndex, startExpensesIndex +10);
+        List<Expense> ex = expenseRepository.getExpenses(startExpensesIndex, startExpensesIndex +10);
 
         startExpensesIndex = startExpensesIndex + 10;
         expenses.postValue(ex);
@@ -67,11 +71,11 @@ public class HomeViewModel extends ViewModel {
     }
 
     private void checkPrevious(Date date){
-        int totalMoneySpend = dbHandler.getTotalMoneySpent(date);
+        int totalMoneySpend = expenseRepository.getTotalMoneySpend(date);
         if(totalMoneySpend == 0){
             decrementMonth(date);
-            if(dbHandler.thereIsCategories(date) && dbHandler.getTotalBudget(date) == 0) {
-                dbHandler.setCategoriesPreviousLimits(date);
+            if(categoryRepository.thereIsCategories(date) && categoryRepository.getTotalBudget(date) == 0) {
+                categoryRepository.setCategoriesPreviousLimits(date);
             }
         }
     }

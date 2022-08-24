@@ -6,11 +6,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.laluna.Model.Category;
-import com.example.laluna.Model.DBHandler;
+import com.example.laluna.Model.categoryAndExpense.Category;
+import com.example.laluna.Model.DateConverter;
+import com.example.laluna.Model.repository.CategoryRepository;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +26,7 @@ public class CategoriesViewModel extends ViewModel {
 
     private List<Category> categoryList = new ArrayList<>();
     private MutableLiveData <List<Category>> categoryMutableLive= new MutableLiveData<>();
-    private DBHandler db;
+    private CategoryRepository categoryRepository;
 
 
     /**
@@ -37,8 +36,8 @@ public class CategoriesViewModel extends ViewModel {
      * @param context The android component that has to be connected to the database
      */
     public void init(Context context) {
-        db = new DBHandler(context);
-        categoryMutableLive.postValue(db.getCategories(new Date()));
+        categoryRepository = CategoryRepository.getInstance(context);
+        categoryMutableLive.postValue(categoryRepository.getCategories(new Date()));
         updateCategories();
     }
 
@@ -70,7 +69,7 @@ public class CategoriesViewModel extends ViewModel {
      * @param dateCreation the date when the new category will be created
      */
     public void addCategory(String name, int limit, int pictureName, String color, Date dateCreation) {
-        db.addCategory(name, limit, pictureName, color, dateCreation);
+        categoryRepository.addCategory(name, limit, pictureName, color, dateCreation);
     }
 
     /**
@@ -85,8 +84,8 @@ public class CategoriesViewModel extends ViewModel {
      */
     public void editCategory(String name,int id, int budget,String date, int picture, String color){
 
-        Category category = new Category(id,budget,name,picture,color,stringToDate(date),null);
-        db.updateCategory(category);
+        Category category = new Category(id,budget,name,picture,color, DateConverter.stringToDate(date),null);
+        categoryRepository.updateCategory(category);
         updateCategories();
     }
 
@@ -102,7 +101,7 @@ public class CategoriesViewModel extends ViewModel {
 
             for (Category category : categoryList) {
                 if (category.get_id() == categoryId) {
-                    db.deactivateCategory(category, new Date());
+                    categoryRepository.deactivateCategory(category, new Date());
                     updateCategories();
                     return true;
                 }
@@ -118,7 +117,7 @@ public class CategoriesViewModel extends ViewModel {
     private void updateCategories(){
         List<Category> cat = new ArrayList<>();
 
-        List<Category> categories = db.getCategories(new Date());
+        List<Category> categories = categoryRepository.getCategories(new Date());
 
         for(Category category : categories){
             cat.add(category);
@@ -129,20 +128,7 @@ public class CategoriesViewModel extends ViewModel {
 
     }
 
-    //Helper
-   private Date stringToDate(String dateString){
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = null;
-        try {
-            if(dateString != null) {
-                date = sdf.parse(dateString);
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date;
-    }
 
     /**
      * A method that checks if a certain category saved in the data base is default by ID

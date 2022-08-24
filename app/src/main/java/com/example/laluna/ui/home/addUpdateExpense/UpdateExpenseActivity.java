@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.laluna.Model.Expense;
+import com.example.laluna.Model.categoryAndExpense.Expense;
 import com.example.laluna.R;
 
 

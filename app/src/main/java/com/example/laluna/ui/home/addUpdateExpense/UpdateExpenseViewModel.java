@@ -6,9 +6,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.laluna.Model.Category;
-import com.example.laluna.Model.DBHandler;
-import com.example.laluna.Model.Expense;
+import com.example.laluna.Model.categoryAndExpense.Category;
+import com.example.laluna.Model.repository.CategoryRepository;
+import com.example.laluna.Model.categoryAndExpense.Expense;
+import com.example.laluna.Model.repository.ExpenseRepository;
 
 import java.util.Date;
 import java.util.List;
@@ -25,7 +26,8 @@ import java.util.List;
  */
 
 public class UpdateExpenseViewModel extends ViewModel {
-    private DBHandler dbHandler;
+    private ExpenseRepository expenseRepository;
+    private CategoryRepository categoryRepository;
     private Context context;
     private List<Category> categories;
     private Category selectedCategory;
@@ -45,15 +47,17 @@ public class UpdateExpenseViewModel extends ViewModel {
 
     public void init(Context context, Expense thisExpense){
         this.context = context;
+        expenseRepository = ExpenseRepository.getInstance(context);
+        categoryRepository = CategoryRepository.getInstance(context);
         this.thisExpense = thisExpense;
-        dbHandler = new DBHandler(context);
         categoriesNames = new MutableLiveData<>();
         categoriesNames.postValue(getCategoriesNames());
+
     }
 
     private String[] getCategoriesNames(){
 
-        categories = dbHandler.getCategories(new Date());
+        categories = categoryRepository.getCategories(new Date());
         makeExpenseCategoryAsFirstCategory();
 
         selectedCategory = categories.get(0);
@@ -89,11 +93,11 @@ public class UpdateExpenseViewModel extends ViewModel {
         thisExpense.set_value(value);
         thisExpense.set_category(selectedCategory);
 
-        dbHandler.updateExpense(thisExpense);
+        expenseRepository.updateExpense(thisExpense);
     }
 
     public void deleteExpense(){
-        dbHandler.deleteExpense(thisExpense);
+        expenseRepository.deleteExpense(thisExpense);
     }
     /**
      * A getter method

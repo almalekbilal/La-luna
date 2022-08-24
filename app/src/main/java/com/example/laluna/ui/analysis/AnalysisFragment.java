@@ -15,13 +15,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.laluna.Model.categoryAndExpense.CategoryWithExpenses;
+import com.example.laluna.Model.circleDiagrams.CircleDiagram;
 import com.example.laluna.R;
+import com.example.laluna.ui.PieChartMaker;
 import com.example.laluna.ui.analysis.categoryExpensesActivity.CategoryExpensesActivity;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -62,7 +63,7 @@ public class AnalysisFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         init(inflater,container);
-        makePie(piechart);
+        PieChartMaker.makePie(piechart,new CircleDiagram((int)spent, (int)total,Color.rgb(228, 44, 100)));
         openCategoryExpensesActivity();
         updateCategories();
         updateBigPieChart();
@@ -92,7 +93,7 @@ public class AnalysisFragment extends Fragment {
         rightArrow = root.findViewById(R.id.txv_rightArrow);
         piechart = root.findViewById(R.id.pc_categorySpent);
 
-        gridViewAdapter = new GridViewAdapter(new ArrayList<CategoryWithMoney>(),root.getContext());
+        gridViewAdapter = new GridViewAdapter(new ArrayList<CategoryWithExpenses>(),root.getContext());
 
         gridViewAnalysis.setAdapter(gridViewAdapter);
 
@@ -126,13 +127,14 @@ public class AnalysisFragment extends Fragment {
     private void sendSelectedCategoryInformationToActivity(int i){
 
 
-        String selectedName = analysisViewModel.getCategories().getValue().get(i).category.get_name();
-        double selectedSpent = analysisViewModel.getCategories().getValue().get(i).spent;
-        double selectedBudget = analysisViewModel.getCategories().getValue().get(i).limit;
-        int selectedCategoryId= analysisViewModel.getCategories().getValue().get(i).category.get_id();
+        /*
+        String selectedName = analysisViewModel.getCategories().getValue().get(i).getCategory().get_name();
+        double selectedSpent = analysisViewModel.getCategories().getValue().get(i).getSpentMoney();
+        double selectedBudget = analysisViewModel.getCategories().getValue().get(i).getCategoryLimit();
+        int selectedCategoryId= analysisViewModel.getCategories().getValue().get(i).getCategory().get_id();
         int selectedCategoryMonth = analysisViewModel.getDate().getValue().getMonth();
         int selectedCategoryYear = analysisViewModel.getDate().getValue().getYear();
-        String selectedCategoryColor = analysisViewModel.getCategories().getValue().get(i).category.get_color();
+        String selectedCategoryColor = analysisViewModel.getCategories().getValue().get(i).getCategory().get_color();
 
 
 
@@ -143,6 +145,15 @@ public class AnalysisFragment extends Fragment {
         intent.putExtra("categoryMonth",selectedCategoryMonth);
         intent.putExtra("categoryYear",selectedCategoryYear);
         intent.putExtra("categoryColor",selectedCategoryColor);
+
+         */
+
+        intent.putExtra("expenses", (Serializable) analysisViewModel.getCategories().getValue().get(i).getCategoryExpenses());
+        intent.putExtra("category",analysisViewModel.getCategories().getValue().get(i).getCategory());
+        intent.putExtra("budget",analysisViewModel.getCategories().getValue().get(i).getCategoryLimit());
+
+      //    intent.putExtra("catWithExp",(Serializable) analysisViewModel.getCategories().getValue());
+
     }
 
 
@@ -150,11 +161,11 @@ public class AnalysisFragment extends Fragment {
      * A method to update categories in grid view.
      */
     private void updateCategories() {
-        analysisViewModel.getCategories().observe(this, new Observer<List<CategoryWithMoney>>() {
+        analysisViewModel.getCategories().observe(this, new Observer<List<CategoryWithExpenses>>() {
             @Override
-            public void onChanged(List<CategoryWithMoney> categoryWithMonies) {
+            public void onChanged(List<CategoryWithExpenses> categoryWithExpenses) {
                 gridViewAdapter.clear();
-                gridViewAdapter.addAll(categoryWithMonies);
+                gridViewAdapter.addAll(categoryWithExpenses);
 
             }
         });
@@ -175,7 +186,7 @@ public class AnalysisFragment extends Fragment {
                 budgetText.setText("Your budget : " + total);
 
                 piechart.clear();
-                makePie(piechart);
+                PieChartMaker.makePie(piechart,new CircleDiagram((int)spent, (int)total,Color.rgb(228, 44, 100)));
             }
         });
     }
@@ -237,61 +248,7 @@ public class AnalysisFragment extends Fragment {
         });
     }
 
-    /**
-     * The methods make the circle diagram (Pie chart) and sets the data and the color for it
-     * @param piechart the piechart view object
-     */
 
-    private void makePie(PieChart piechart){
-        piechart.setUsePercentValues(true);
-
-        piechart.setHoleRadius(80f);
-        piechart.setTransparentCircleRadius(80f);
-
-        double precent = (spent/total) * 100;
-        List<PieEntry> value = new ArrayList<>();
-        value.add(new PieEntry( (float)precent,"Spent"));
-        value.add(new PieEntry((float)(100-precent),"Left"));
-
-        PieDataSet dataSet = new PieDataSet(value,null);
-
-
-        PieData pieData = new PieData(dataSet);
-
-        List<Integer> colors = new ArrayList<>();
-        colors.add(Color.rgb(228, 44, 100));
-        colors.add(Color.rgb(203, 204, 196));
-
-        //colors.add(getColorByName(analysisViewModel.getCategories().getValue().get(i).category.get_color()));
-        //colors.add(Color.rgb(203, 204, 196));
-
-
-
-
-
-        dataSet.setColors(colors);
-        dataSet.setValueTextSize(0);
-        piechart.setData(pieData);
-
-        piechart.setCenterText(spent + " Kr");
-        piechart.setCenterTextColor(Color.rgb(255, 255, 255));
-        piechart.setHoleColor(Color.rgb(40, 43, 51));
-        piechart.setDescription(null);
-
-
-        piechart.setDrawEntryLabels(false);
-        piechart.setCenterTextSize(18);
-
-        piechart.getLegend().setEnabled(false);
-
-
-
-
-
-       // piechart.setCenterText(analysisViewModel.getTotalAndSpent().getValue().get());
-        //Log.i("PieInfo", value.get(0).getValue() + "");
-
-    }
 
 
 

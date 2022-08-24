@@ -3,12 +3,12 @@ package com.example.laluna.ui.home;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,14 +17,13 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.laluna.Model.Expense;
+import com.example.laluna.Model.categoryAndExpense.Expense;
+import com.example.laluna.Model.circleDiagrams.CircleDiagram;
 import com.example.laluna.R;
+import com.example.laluna.ui.PieChartMaker;
 import com.example.laluna.ui.home.addUpdateExpense.AddExpenseActivity;
 import com.example.laluna.ui.home.addUpdateExpense.UpdateExpenseActivity;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class HomeFragment extends Fragment implements ExpensesAdapter.recycleLis
 
     private HomeViewModel homeViewModel;
     private final ArrayList<Expense> expenseArrayList = new ArrayList<Expense>();
-    private double total = 300, spent= 150;
+    private int total = 300, spent= 150;
 
     @Override
     public void onResume() {
@@ -69,7 +68,7 @@ public class HomeFragment extends Fragment implements ExpensesAdapter.recycleLis
 
         final PieChart piechart = root.findViewById(R.id.pc_categorySpent);
 
-        makePie(piechart);
+        PieChartMaker.makePie(piechart, new CircleDiagram(spent, total,Color.rgb(228, 44, 100) ));
 
         RecyclerView recyclerView = root.findViewById(R.id.categoryListView);
         final TextView budgetText = root.findViewById(R.id.txv_budgetHome);
@@ -96,7 +95,7 @@ public class HomeFragment extends Fragment implements ExpensesAdapter.recycleLis
 
                 budgetText.setText("Your Budget : " + total + " Kr");
                 piechart.clear();
-                makePie(piechart);
+                PieChartMaker.makePie(piechart, new CircleDiagram(spent, total,Color.rgb(228, 44, 100) ));
             }
         });
 
@@ -134,7 +133,7 @@ public class HomeFragment extends Fragment implements ExpensesAdapter.recycleLis
      * The methods make the circle diagram (Pie chart) and sets the data and the color for it
      * @param piechart the piechart view object
      */
-
+/*
     private void makePie(PieChart piechart){
         piechart.setUsePercentValues(true);
 
@@ -179,7 +178,7 @@ public class HomeFragment extends Fragment implements ExpensesAdapter.recycleLis
         //Log.i("PieInfo", value.get(0).getValue() + "");
 
     }
-
+*/
     /**
      * A method that makes a special view when clicking on an expanse
      * @param expense Expanse
@@ -198,6 +197,7 @@ public class HomeFragment extends Fragment implements ExpensesAdapter.recycleLis
      */
     @Override
     public void onScroll(int position) {
+        Log.i("roror",position+"");
         homeViewModel.getMoreExpenses(position);
     }
 }

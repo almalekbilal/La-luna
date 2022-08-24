@@ -14,8 +14,25 @@
         <entry key="..\:/Users/46707/Desktop/LaLunaSpec/app/src/main/res/layout/fragment_analysis.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/46707/Desktop/LaLunaSpec/app/src/main/res/layout/fragment_categories.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Bilal Almalek/AndroidStudioProjects/Laluna/app/src/main/res/layout/activity_add_update_expense.xml" value="0.19427083333333334" />
+        <entry key="..\:/Users/Bilal Almalek/AndroidStudioProjects/Laluna/app/src/main/res/layout/activity_category_add.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/Bilal Almalek/AndroidStudioProjects/Laluna/app/src/main/res/layout/activity_category_edit.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/Bilal Almalek/AndroidStudioProjects/Laluna/app/src/main/res/layout/activity_category_expenses.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/Bilal Almalek/AndroidStudioProjects/Laluna/app/src/main/res/layout/activity_main.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/Bilal Almalek/AndroidStudioProjects/Laluna/app/src/main/res/layout/custom_expense_view.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/Bilal Almalek/AndroidStudioProjects/Laluna/app/src/main/res/layout/customcategoryanalysis_analysis.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/Bilal Almalek/AndroidStudioProjects/Laluna/app/src/main/res/layout/fragment_home.xml" value="0.18432971014492755" />
+        <entry key="..\:/Users/Bilal Almalek/AndroidStudioProjects/Laluna/app/src/main/res/layout/fragment_statstic.xml" value="0.30978260869565216" />
+        <entry key="..\:/Users/Bilal Almalek/AndroidStudioProjects/Laluna/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/deaa2/AndroidStudioProjects/La-luna/app/src/main/res/layout/activity_category_expenses.xml" value="0.3338541666666667" />
+        <entry key="..\:/Users/deaa2/AndroidStudioProjects/La-luna/app/src/main/res/layout/custom_expense_view.xml" value="0.3338541666666667" />
+        <entry key="..\:/Users/deaa2/AndroidStudioProjects/La-luna/app/src/main/res/layout/fragment_analysis.xml" value="0.3338541666666667" />
+        <entry key="..\:/Users/deaa2/AndroidStudioProjects/La-luna/app/src/main/res/layout/fragment_statstic.xml" value="0.22" />
+        <entry key="..\:/Users/deaa2/AndroidStudioProjects/La-luna/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.17592592592592593" />
       </map>
     </option>
+  </component>
+  <component name="PDMPlugin">
+    <option name="skipTestSources" value="false" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
