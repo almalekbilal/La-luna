@@ -16,10 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.laluna.Model.Category;
+import com.example.laluna.Model.categoryAndExpense.Category;
 import com.example.laluna.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

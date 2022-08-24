@@ -15,15 +15,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.laluna.Model.CategoryWithExpenses;
+import com.example.laluna.Model.categoryAndExpense.CategoryWithExpenses;
 import com.example.laluna.Model.circleDiagrams.CircleDiagram;
 import com.example.laluna.R;
 import com.example.laluna.ui.PieChartMaker;
 import com.example.laluna.ui.analysis.categoryExpensesActivity.CategoryExpensesActivity;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;

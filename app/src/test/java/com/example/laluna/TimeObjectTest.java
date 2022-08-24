@@ -35,7 +35,7 @@ public class TimeObjectTest {
 
         String actual = object.toString();
         int week = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR); // Why does this return 2 since we are in week 1?????
-        String expected = week + "";
+        String expected = "v." +week;
 
         assertEquals(expected, actual);
     }

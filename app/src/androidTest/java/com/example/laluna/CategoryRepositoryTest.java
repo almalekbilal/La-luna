@@ -8,8 +8,8 @@ import android.content.Context;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.example.laluna.Model.Category;
-import com.example.laluna.Model.CategoryWithExpenses;
+import com.example.laluna.Model.categoryAndExpense.Category;
+import com.example.laluna.Model.categoryAndExpense.CategoryWithExpenses;
 import com.example.laluna.Model.repository.CategoryRepository;
 import com.example.laluna.Model.repository.ExpenseRepository;
 

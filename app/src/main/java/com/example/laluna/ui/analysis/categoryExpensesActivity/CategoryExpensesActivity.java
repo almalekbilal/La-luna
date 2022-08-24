@@ -1,33 +1,24 @@
 package com.example.laluna.ui.analysis.categoryExpensesActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.laluna.Model.Arithmetic;
-import com.example.laluna.Model.Category;
-import com.example.laluna.Model.CategoryWithExpenses;
-import com.example.laluna.Model.Expense;
+import com.example.laluna.Model.calculations.Arithmetic;
+import com.example.laluna.Model.categoryAndExpense.Category;
+import com.example.laluna.Model.categoryAndExpense.CategoryWithExpenses;
+import com.example.laluna.Model.categoryAndExpense.Expense;
 import com.example.laluna.Model.circleDiagrams.CategoryCircleDiagram;
 import com.example.laluna.R;
 import com.example.laluna.ui.PieChartMaker;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
 
 /**
  * This class is responsible for showing information about the category and its expenses to the user

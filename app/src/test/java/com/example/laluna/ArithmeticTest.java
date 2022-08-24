@@ -4,10 +4,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import com.example.laluna.Model.Arithmetic;
-import com.example.laluna.Model.Category;
-import com.example.laluna.Model.CategoryWithExpenses;
-import com.example.laluna.Model.Expense;
+import com.example.laluna.Model.calculations.Arithmetic;
+import com.example.laluna.Model.categoryAndExpense.Category;
+import com.example.laluna.Model.categoryAndExpense.CategoryWithExpenses;
+import com.example.laluna.Model.categoryAndExpense.Expense;
 
 import java.util.ArrayList;
 import java.util.Date;

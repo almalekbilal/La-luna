@@ -1,4 +1,4 @@
-package com.example.laluna.Model;
+package com.example.laluna.Model.categoryAndExpense;
 
 import java.io.Serializable;
 import java.util.Date;

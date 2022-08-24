@@ -1,7 +1,8 @@
 package com.example.laluna.Model.databaseService;
 
-import com.example.laluna.Model.Category;
-import com.example.laluna.Model.Expense;
+import com.example.laluna.Model.categoryAndExpense.Category;
+import com.example.laluna.Model.categoryAndExpense.Expense;
+import com.example.laluna.Model.exceptions.NoLimitExistingException;
 
 import java.util.Date;
 import java.util.List;
@@ -61,7 +62,7 @@ public interface IDatabaseHandler {
 
 
 
-    int getCategoryLimit(Date date, Category category);
+    int getCategoryLimit(Date date, Category category) throws NoLimitExistingException;
 
 
 

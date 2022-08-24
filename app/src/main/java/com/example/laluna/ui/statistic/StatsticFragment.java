@@ -2,19 +2,16 @@ package com.example.laluna.ui.statistic;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.laluna.Model.Category;
 import com.example.laluna.Model.average.times.TimeFactory;
 import com.example.laluna.Model.average.times.TimeObject;
 import com.example.laluna.Model.repository.ExpenseRepository;
@@ -27,12 +24,8 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-import java.sql.SQLOutput;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class StatsticFragment extends Fragment {
@@ -83,19 +76,45 @@ public class StatsticFragment extends Fragment {
 
 
 
-        weekOnClick();
+        monthOnClick();
         statsticViewModel.getTimeData().observe(this, new Observer<List<TimeObject>>() {
             @Override
             public void onChanged(List<TimeObject> timeObjects) {
 
                 timeObjectsList =timeObjects;
-                drawBarChart(timeObjects);
+                drawBarChart(timeObjectsList);
                 barChartSettings();
 
             }
         });
 
         barChartSettings();
+
+        Button dayButton = root.findViewById(R.id.dayButton);
+        Button weekButton = root.findViewById(R.id.weekButton);
+        Button monthButton = root.findViewById(R.id.monthButton);
+
+        dayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dayOnClick();
+            }
+        });
+        weekButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                weekOnClick();
+            }
+        });
+        monthButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                monthOnClick();
+            }
+        });
 
 
         return root;
@@ -104,7 +123,8 @@ public class StatsticFragment extends Fragment {
 
     public void drawBarChart( List<TimeObject> timeObjects){
 
-
+        barEntries.clear();
+        barLabelNames.clear();
         for (int i = timeObjects.size()-1; i>= 0; i--){
             String label = timeObjects.get(i).toString();
             System.out.println(label);
@@ -125,6 +145,7 @@ public class StatsticFragment extends Fragment {
 
         BarData barData = new BarData(barDataSet);
         barData.setBarWidth(0.7f);
+
         barChart.setData(barData);
         barChart.invalidate();
 
@@ -151,7 +172,7 @@ public class StatsticFragment extends Fragment {
                 Calendar end = Calendar.getInstance();
                 Calendar start = Calendar.getInstance();
 
-                start.add(Calendar.DAY_OF_MONTH, -14);
+        start.add(Calendar.DAY_OF_MONTH, -14);
                 statsticViewModel.getDayData(start, end, expenseRepository);
     }
 
@@ -171,7 +192,7 @@ public class StatsticFragment extends Fragment {
                 Calendar start = Calendar.getInstance();
 
                 start.add(Calendar.MONTH, -12);
-                statsticViewModel.getMonthData(start, end, expenseRepository);
+                    statsticViewModel.getMonthData(start, end, expenseRepository);
 
             }
 

@@ -2,8 +2,8 @@ package com.example.laluna.Model.circleDiagrams;
 
 import android.graphics.Color;
 
-import com.example.laluna.Model.CategoryWithExpenses;
-import com.example.laluna.Model.Expense;
+import com.example.laluna.Model.categoryAndExpense.CategoryWithExpenses;
+import com.example.laluna.Model.categoryAndExpense.Expense;
 
 import java.util.ArrayList;
 import java.util.List;

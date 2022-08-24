@@ -2,14 +2,15 @@ package com.example.laluna.Model.repository;
 
 import android.content.Context;
 
-import com.example.laluna.Model.Arithmetic;
-import com.example.laluna.Model.Category;
+import com.example.laluna.Model.calculations.Arithmetic;
+import com.example.laluna.Model.categoryAndExpense.Category;
 import com.example.laluna.Model.DateConverter;
-import com.example.laluna.Model.Expense;
+import com.example.laluna.Model.categoryAndExpense.Expense;
 import com.example.laluna.Model.databaseService.IDatabaseHandler;
 import com.example.laluna.Model.databaseService.SqliteHandler;
+import com.example.laluna.Model.exceptions.ExpenseIrrelevantNameException;
+import com.example.laluna.Model.exceptions.ExpenseIrrelevantValueException;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -46,6 +47,20 @@ public class ExpenseRepository {
 
 
     public Expense addExpense(String name, int value, Date date, Category category) {
+        try {
+            if(value < 0){
+                throw new ExpenseIrrelevantValueException();
+            }
+            if(name.equals("") || name == null){
+                throw new ExpenseIrrelevantNameException();
+            }
+        }catch (ExpenseIrrelevantValueException e) {
+            e.printStackTrace();
+        }catch (ExpenseIrrelevantNameException e) {
+            e.printStackTrace();
+        }
+
+
         return db.addExpense(name,value,date,category);
     }
 

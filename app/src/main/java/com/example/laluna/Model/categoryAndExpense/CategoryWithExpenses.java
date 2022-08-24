@@ -1,4 +1,6 @@
-package com.example.laluna.Model;
+package com.example.laluna.Model.categoryAndExpense;
+
+import com.example.laluna.Model.calculations.Arithmetic;
 
 import java.io.Serializable;
 import java.util.List;

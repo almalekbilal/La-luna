@@ -1,8 +1,6 @@
 package com.example.laluna.ui.home;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.laluna.Model.DateConverter;
-import com.example.laluna.Model.Expense;
+import com.example.laluna.Model.categoryAndExpense.Expense;
 import com.example.laluna.R;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**

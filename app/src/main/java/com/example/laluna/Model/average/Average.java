@@ -1,6 +1,7 @@
 package com.example.laluna.Model.average;
 
 import com.example.laluna.Model.average.times.TimeObject;
+import com.example.laluna.Model.exceptions.IrrelevantDateException;
 import com.example.laluna.Model.repository.ExpenseRepository;
 
 import java.util.Calendar;
@@ -13,12 +14,20 @@ abstract public class Average {
     private double avarage;
     protected ExpenseRepository expenseRepository;
 
-    public Average(Calendar start, Calendar end, ExpenseRepository expenseRepository){
+    public Average(Calendar start, Calendar end, ExpenseRepository expenseRepository) throws IrrelevantDateException {
+
+
         this.start = start;
         this.end = end;
+
+        if(start.after(end)){
+            throw new IrrelevantDateException();
+        }
         this.expenseRepository = expenseRepository;
         timesList = makeTimesList();
         calculateAvarage();
+
+
     }
 
     public List<TimeObject> getTimesList() {

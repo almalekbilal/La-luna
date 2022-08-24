@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.laluna.Model.CategoryWithExpenses;
+import com.example.laluna.Model.categoryAndExpense.CategoryWithExpenses;
 import com.example.laluna.Model.DateConverter;
 import com.example.laluna.Model.repository.CategoryRepository;
 import com.example.laluna.Model.repository.ExpenseRepository;

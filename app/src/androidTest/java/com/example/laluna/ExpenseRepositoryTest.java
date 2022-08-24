@@ -7,9 +7,9 @@ import android.content.Context;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.example.laluna.Model.Arithmetic;
-import com.example.laluna.Model.Category;
-import com.example.laluna.Model.Expense;
+import com.example.laluna.Model.calculations.Arithmetic;
+import com.example.laluna.Model.categoryAndExpense.Category;
+import com.example.laluna.Model.categoryAndExpense.Expense;
 import com.example.laluna.Model.repository.CategoryRepository;
 import com.example.laluna.Model.repository.ExpenseRepository;
 

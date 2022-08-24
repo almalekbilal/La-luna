@@ -2,9 +2,9 @@ package com.example.laluna;
 
 import static org.junit.Assert.*;
 
-import com.example.laluna.Model.Category;
-import com.example.laluna.Model.CategoryWithExpenses;
-import com.example.laluna.Model.Expense;
+import com.example.laluna.Model.categoryAndExpense.Category;
+import com.example.laluna.Model.categoryAndExpense.CategoryWithExpenses;
+import com.example.laluna.Model.categoryAndExpense.Expense;
 import com.example.laluna.Model.circleDiagrams.CategoryCircleDiagram;
 import com.example.laluna.Model.circleDiagrams.CircleDiagram;
 

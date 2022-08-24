@@ -1,27 +1,18 @@
 package com.example.laluna.ui.analysis;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
-import com.example.laluna.Model.CategoryWithExpenses;
+import com.example.laluna.Model.categoryAndExpense.CategoryWithExpenses;
 import com.example.laluna.Model.circleDiagrams.CategoryCircleDiagram;
-import com.example.laluna.Model.circleDiagrams.CircleDiagram;
 import com.example.laluna.R;
 import com.example.laluna.ui.PieChartMaker;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**

@@ -1,11 +1,9 @@
 package com.example.laluna.Model.average;
 
-import android.util.Log;
-
-import com.example.laluna.Model.Arithmetic;
-import com.example.laluna.Model.DateConverter;
+import com.example.laluna.Model.calculations.Arithmetic;
 import com.example.laluna.Model.average.times.TimeFactory;
 import com.example.laluna.Model.average.times.TimeObject;
+import com.example.laluna.Model.exceptions.IrrelevantDateException;
 import com.example.laluna.Model.repository.ExpenseRepository;
 
 import java.util.ArrayList;
@@ -15,7 +13,7 @@ import java.util.List;
 
  class WeekAverage extends Average {
 
-    public WeekAverage(Calendar start, Calendar end, ExpenseRepository expenseRepository) {
+    public WeekAverage(Calendar start, Calendar end, ExpenseRepository expenseRepository) throws IrrelevantDateException {
         super(start, end, expenseRepository);
     }
 

@@ -10,15 +10,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.example.laluna.Model.Category;
-import com.example.laluna.Model.Expense;
+import com.example.laluna.Model.categoryAndExpense.Category;
+import com.example.laluna.Model.categoryAndExpense.Expense;
+import com.example.laluna.Model.exceptions.NoLimitExistingException;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -365,7 +363,7 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
      * @param date represent the month
      * @param category represent the category which limit will gets
      */
-    public int getCategoryLimit(Date date, Category category){
+    public int getCategoryLimit(Date date, Category category) throws NoLimitExistingException {
 
         date.setDate(1);
         String query = "SELECT limitt FROM " + TABLE_LIMITS + " WHERE category_id = " + category.get_id() + " AND month = '" + dateToString(date) + "' ;";
@@ -374,6 +372,9 @@ public class SqliteHandler extends SQLiteOpenHelper implements IDatabaseHandler 
         Cursor c = db.rawQuery(query,null);
         c.moveToFirst();
 
+        if(c.getCount() == 0){
+            throw new NoLimitExistingException();
+        }
         int limit = c.getInt(c.getColumnIndex("limitt"));
 
         db.close();

@@ -2,12 +2,16 @@ package com.example.laluna.Model.repository;
 
 import android.content.Context;
 
-import com.example.laluna.Model.Arithmetic;
-import com.example.laluna.Model.Category;
-import com.example.laluna.Model.CategoryWithExpenses;
+import com.example.laluna.Model.calculations.Arithmetic;
+import com.example.laluna.Model.categoryAndExpense.Category;
+import com.example.laluna.Model.categoryAndExpense.CategoryWithExpenses;
 import com.example.laluna.Model.DateConverter;
 import com.example.laluna.Model.databaseService.IDatabaseHandler;
 import com.example.laluna.Model.databaseService.SqliteHandler;
+import com.example.laluna.Model.exceptions.CategoryIrrelevantLimitException;
+import com.example.laluna.Model.exceptions.CategoryIrrelevantNameException;
+import com.example.laluna.Model.exceptions.IrrelevantDateOfACategory;
+import com.example.laluna.Model.exceptions.NoLimitExistingException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,11 +53,24 @@ public class CategoryRepository {
 
     public int getCategoryLimit(Date date, Category category){ // Can use Exception
         int categoryLimit = -1;
+        try {
+        if(date.before(category.getCreationDate())){
+                throw new IrrelevantDateOfACategory("The date cannot be before the creation date of the category");
+        }
+        } catch (IrrelevantDateOfACategory irrelevantDateOfACategory) {
+            irrelevantDateOfACategory.printStackTrace();
+        }
+
 
         if(DateConverter.isThisMonth(date)){
             categoryLimit = category.get_limit();
         }else{
-            categoryLimit = db.getCategoryLimit(date, category);
+
+            try {
+                categoryLimit = db.getCategoryLimit(date, category);
+            } catch (NoLimitExistingException e) {
+                e.printStackTrace();
+            }
         }
         return categoryLimit;
     }
@@ -67,7 +84,20 @@ public class CategoryRepository {
     }
 
     public Category addCategory(String name, int limit, int pictureName,String color, Date creation) {
-       return db.addCategory(name, limit, pictureName, color, creation);
+        try {
+            if(limit < 0) {
+                throw new CategoryIrrelevantLimitException();
+            }
+
+            if(name.equals("") || name == null){
+                throw new CategoryIrrelevantNameException();
+            }
+        } catch (CategoryIrrelevantLimitException e) {
+            e.printStackTrace();
+        }catch (CategoryIrrelevantNameException e) {
+            e.printStackTrace();
+        }
+        return db.addCategory(name, limit, pictureName, color, creation);
     }
 
     public void updateCategory(Category cat){

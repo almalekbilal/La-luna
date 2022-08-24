@@ -1,4 +1,6 @@
-package com.example.laluna.Model;
+package com.example.laluna.Model.calculations;
+
+import com.example.laluna.Model.categoryAndExpense.CategoryWithExpenses;
 
 import java.util.List;
 
@@ -6,7 +8,7 @@ public class LimitChecker{
 
 	
     public boolean categoryOverLimit(CategoryWithExpenses categoryWithExpenses){
-        int categoryLimit = categoryWithExpenses.getCategoryLimit();		// Change this
+        int categoryLimit = categoryWithExpenses.getCategoryLimit();
         int categorySpentMoney = categoryWithExpenses.getSpentMoney();
 
         if(categorySpentMoney >= categoryLimit){

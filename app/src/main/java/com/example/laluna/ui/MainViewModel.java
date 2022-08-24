@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.lifecycle.ViewModel;
 
-import com.example.laluna.Model.Category;
+import com.example.laluna.Model.categoryAndExpense.Category;
 import com.example.laluna.Model.repository.CategoryRepository;
 import com.example.laluna.Model.repository.ExpenseRepository;
 import com.example.laluna.R;
@@ -49,20 +49,13 @@ public class MainViewModel extends ViewModel {
             cat.add(other);
 
 
-         //   addExpenses(cat, new Date(), expenseRepository);
 
-            addExpense(cat, new Date(121, 11, 30), expenseRepository, 2567);
-            addExpense(cat, new Date(121, 11, 23), expenseRepository, 2000);
-            addExpense(cat, new Date(121, 11, 16), expenseRepository, 1400);
-            addExpense(cat, new Date(121, 11, 9), expenseRepository, 4000);
-            addExpense(cat, new Date(121, 11, 2), expenseRepository, 2999);
-            addExpense(cat, new Date(121, 10, 25), expenseRepository, 4500);
-            addExpense(cat, new Date(121, 10, 18), expenseRepository, 1000);
-            addExpense(cat, new Date(121, 10, 11), expenseRepository, 2000);
-            addExpense(cat, new Date(121, 10, 4), expenseRepository, 3000);
-            addExpense(cat, new Date(121, 9, 2), expenseRepository, 4500);
-         //   addExpenses(cat, new Date(121, 11, 24), expenseRepository);
-
+// test data
+            expenseRepository.addExpense("MAX Burger", 400, new Date(122, 7, 22), food);
+            expenseRepository.addExpense("MAX Burger", 700, new Date(122, 6, 22), clothes);
+            expenseRepository.addExpense("MAX Burger", 600, new Date(122, 5, 22), house);
+            expenseRepository.addExpense("MAX Burger", 300, new Date(122, 4, 22), entertainment);
+            expenseRepository.addExpense("MAX Burger", 550, new Date(122, 3, 22), health);
 
 
 
@@ -70,39 +63,5 @@ public class MainViewModel extends ViewModel {
 
     }
 
-    private void addExpense(List<Category> cat, Date date, ExpenseRepository expenseRepository, int value){
-        expenseRepository.addExpense("MAX Burger", value, date, cat.get(0));
-    }
 
-    private void addExpenses(List<Category> cat, Date date, ExpenseRepository expenseRepository) {
-
-        expenseRepository.addExpense("MAX Burger", 100, date, cat.get(0));
-        expenseRepository.addExpense("Pizza", 100, date, cat.get(0));
-        expenseRepository.addExpense("Tikka masala", 100, date, cat.get(0));
-        expenseRepository.addExpense("Godis", 100, date, cat.get(0));
-
-        expenseRepository.addExpense("T shirt", 100, date, cat.get(1));
-        expenseRepository.addExpense("Skor", 100, date, cat.get(1));
-        expenseRepository.addExpense("Tröja", 100, date, cat.get(1));
-
-
-        expenseRepository.addExpense("Lampor", 100, date, cat.get(2));
-        expenseRepository.addExpense("Lampor", 100, date, cat.get(2));
-        expenseRepository.addExpense("Lampor", 100, date, cat.get(2));
-
-
-
-        expenseRepository.addExpense("Skarasommarland", 500, date, cat.get(3));
-        expenseRepository.addExpense("Liseberg", 500, date, cat.get(3));
-
-
-        expenseRepository.addExpense("Bil olja", 2000, date, cat.get(5));
-        expenseRepository.addExpense("Tandläkare", 700, date, cat.get(4));
-        expenseRepository.addExpense("Liseberg", 500, date, cat.get(3));
-        expenseRepository.addExpense("Lampor", 100, date, cat.get(2));
-        expenseRepository.addExpense("Jacka", 100, date, cat.get(1));
-        expenseRepository.addExpense("Fisk", 100, date, cat.get(0));
-
-
-    }
 }

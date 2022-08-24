@@ -2,18 +2,14 @@
 package com.example.laluna;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import com.example.laluna.Model.Category;
-import com.example.laluna.Model.DateConverter;
-import com.example.laluna.Model.Expense;
-import com.example.laluna.Model.average.Average;
-import com.example.laluna.Model.average.AverageFactory;
+import com.example.laluna.Model.categoryAndExpense.Category;
+import com.example.laluna.Model.categoryAndExpense.Expense;
 import com.example.laluna.Model.databaseService.IDatabaseHandler;
 import com.example.laluna.Model.databaseService.SqliteHandler;
-import com.example.laluna.Model.repository.ExpenseRepository;
+import com.example.laluna.Model.exceptions.NoLimitExistingException;
 
 
 import org.junit.After;
@@ -21,10 +17,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
@@ -469,7 +463,12 @@ public class SqliteHandlerTest {
 
         db.setCategoriesPreviousLimits(new Date(121,5,1));
 
-        int limit = db.getCategoryLimit(new Date(121, 5, 2), c1); ///THE SAME DATE!!
+        int limit = 0; ///THE SAME DATE!!
+        try {
+            limit = db.getCategoryLimit(new Date(121, 5, 2), c1);
+        } catch (NoLimitExistingException e) {
+            e.printStackTrace();
+        }
 
         assertEquals(3000, limit);
     }
@@ -488,8 +487,13 @@ public class SqliteHandlerTest {
         db.setCategoriesPreviousLimits(new Date(120,8,10));
 
 
-        int limit1 = db.getCategoryLimit(new Date(120, 8, 26), c1);
-     
+        int limit1 = 0;
+        try {
+            limit1 = db.getCategoryLimit(new Date(120, 8, 26), c1);
+        } catch (NoLimitExistingException e) {
+            e.printStackTrace();
+        }
+
         boolean limitsChanged = limit1==1500;
 
 

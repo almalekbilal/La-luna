@@ -8,11 +8,10 @@ import android.util.Log;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.example.laluna.Model.Category;
-import com.example.laluna.Model.CategoryWithExpenses;
+import com.example.laluna.Model.categoryAndExpense.Category;
 import com.example.laluna.Model.average.Average;
 import com.example.laluna.Model.average.AverageFactory;
-import com.example.laluna.Model.average.times.TimeObject;
+import com.example.laluna.Model.exceptions.IrrelevantDateException;
 import com.example.laluna.Model.repository.CategoryRepository;
 import com.example.laluna.Model.repository.ExpenseRepository;
 
@@ -23,7 +22,6 @@ import org.junit.runner.RunWith;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 
 /////////////////////////////////////////////////////NOT COMPLETED YET///////////////////////////////////////
@@ -60,18 +58,24 @@ public class AverageTest {
 
         Category c1 = categoryRepository.addCategory("food",100,0, "blue",new Date(121,5,1));
 
-        expenseRepository.addExpense("Book", 21, new Date(121, 11, 1), c1);
-        expenseRepository.addExpense("Notebook", 9, new Date(121, 11, 5), c1);
+        expenseRepository.addExpense("Book", 21, new Date(122, 6, 1), c1);
+        expenseRepository.addExpense("Notebook", 9, new Date(122, 6, 5), c1);
 
         Calendar start = Calendar.getInstance();
         Calendar end = (Calendar) start.clone();
 
 
-        end.add(Calendar.MONTH, -1);
-        average = AverageFactory.getMonthAvarage(end, start, expenseRepository);
+        start.add(Calendar.MONTH, -1);
+        try {
+            average = AverageFactory.getMonthAvarage(start, end, expenseRepository);
+        } catch (IrrelevantDateException e) {
+            e.printStackTrace();
+        }
 
         double actual = average.getAvarage();
         double expected = 15;
+
+        Log.e("testAvarage",average.getTimesList().size() + "");
 
         assertEquals(expected, actual, 0.001);
 
@@ -93,7 +97,11 @@ public class AverageTest {
 
 
         end.add(Calendar.MONTH, -3);
-        average = AverageFactory.getMonthAvarage(end, start, expenseRepository);
+        try {
+            average = AverageFactory.getMonthAvarage(end, start, expenseRepository);
+        } catch (IrrelevantDateException e) {
+            e.printStackTrace();
+        }
 
 
         assertEquals(30, (int)average.getTimesList().get(0).getValue());

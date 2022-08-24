@@ -1,20 +1,17 @@
 package com.example.laluna.ui.categories;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.laluna.Model.Category;
+import com.example.laluna.Model.categoryAndExpense.Category;
 import com.example.laluna.R;
 
 import java.util.List;

@@ -1,33 +1,18 @@
 package com.example.laluna.ui.statistic;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProviders;
 
 
-import com.example.laluna.Model.Category;
 import com.example.laluna.Model.average.Average;
 import com.example.laluna.Model.average.AverageFactory;
+import com.example.laluna.Model.exceptions.IrrelevantDateException;
 import com.example.laluna.Model.average.times.TimeObject;
 
 import com.example.laluna.Model.repository.ExpenseRepository;
-import com.example.laluna.R;
-import com.example.laluna.ui.analysis.AnalysisViewModel;
-import com.example.laluna.ui.analysis.GridViewAdapter;
-import com.example.laluna.ui.analysis.categoryExpensesActivity.CategoryExpensesActivity;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class StatsticViewModel extends ViewModel {
@@ -55,33 +40,54 @@ public class StatsticViewModel extends ViewModel {
 
     public void getMonthData(Calendar start, Calendar end, ExpenseRepository expenseRepository){
 
-        Average avarage = AverageFactory.getMonthAvarage(start, end, expenseRepository);
+        Average avarage = null;
+        try {
+            avarage = AverageFactory.getMonthAvarage(start, end, expenseRepository);
 
-       entriesArray = avarage.getTimesList();
-       average = avarage.getAvarage();
-       averageMutableData.postValue(average);
-       timeObjectMutableData.postValue(entriesArray);
+            entriesArray = avarage.getTimesList();
+            average = avarage.getAvarage();
+            averageMutableData.postValue(average);
+            timeObjectMutableData.postValue(entriesArray);
+        } catch (IrrelevantDateException e) {
+            e.printStackTrace();
+        }
+
+
 
     }
 
     public void getDayData(Calendar start, Calendar end, ExpenseRepository expenseRepository){
-        Average avarage = AverageFactory.getDayAvarage(start, end, expenseRepository);
+        Average avarage = null;
+        try {
+            avarage = AverageFactory.getDayAvarage(start, end, expenseRepository);
 
-        entriesArray = avarage.getTimesList();
-        average = avarage.getAvarage();
+            entriesArray = avarage.getTimesList();
+            average = avarage.getAvarage();
 
-        averageMutableData.postValue(average);
-        timeObjectMutableData.postValue(entriesArray);
+            averageMutableData.postValue(average);
+            timeObjectMutableData.postValue(entriesArray);
+        } catch (IrrelevantDateException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
     public void getWeekData(Calendar start, Calendar end, ExpenseRepository expenseRepository){
-        Average avarage = AverageFactory.getWeekAvarage(start, end, expenseRepository);
-        entriesArray = avarage.getTimesList();
-        average = avarage.getAvarage();
+        Average avarage = null;
+        try {
+            avarage = AverageFactory.getWeekAvarage(start, end, expenseRepository);
 
-        averageMutableData.postValue(average);
-        timeObjectMutableData.postValue(entriesArray);
+            entriesArray = avarage.getTimesList();
+            average = avarage.getAvarage();
+
+            averageMutableData.postValue(average);
+            timeObjectMutableData.postValue(entriesArray);
+        } catch (IrrelevantDateException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public LiveData <List<TimeObject>> getTimeData(){
